@@ -1,4 +1,4 @@
-NAME 		= wolf3d
+NAME 		= doom
 CC 			= gcc
 CFLAGS 		= -Wall -Wextra -Werror -g -O3 #-fsanitize=address
 
@@ -23,25 +23,31 @@ INC_PATH	+= /Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/ \
 			   /Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/$(TTF_NUM)/include/ \
 			   /Users/$(ID_UN)/.brew/Cellar/sdl2_image/$(IMG_NUM)/include/ \
 
-SRC_NAME 	= main.c \
-			  ft_get_map.c \
-			  ft_init_data.c \
-			  ft_get_events.c \
-			  ft_handle_events.c \
-			  ft_handle_movement.c \
-			  ft_handle_color.c \
-			  ft_raycast.c \
-			  ft_rc_wolfcalc.c \
-			  ft_minimap.c \
-			  ft_set_infos.c \
-			  ft_set_interface.c \
-			  ft_utils.c \
-			  ft_highlvl_graphics.c \
-			  ft_lowlvl_graphics.c \
-			  ft_exit.c \
+SRC_NAME = main.c \
+			get_map.c \
+			init_data.c \
+			get_events.c \
+			handle_events.c \
+			handle_movement.c \
+			handle_color.c \
+			raycast.c \
+			rc_wolfcalc.c \
+			minimap.c \
+			set_infos.c \
+			set_interface.c \
+			utils.c \
+			highlvl_graphics.c \
+			lowlvl_graphics.c \
+			exit.c \
+			jeu.c \
+			files.c \
+			editor.c \
+			init.c \
+			render.c \
+			input.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-LSDL2 	 = -L/Users/$(ID_UN)/.brew/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image
+	LSDL2 	 = -L/Users/$(ID_UN)/.brew/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))

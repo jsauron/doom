@@ -6,13 +6,11 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/21 19:53:15 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/22 20:02:43 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
-
-#include "../includes/sokoban.h"
+#include "doom.h"
 
 void	editor(t_win *wn, t_game *game)
 {
@@ -97,11 +95,11 @@ void	editor(t_win *wn, t_game *game)
 				pos.y = y * SIZE_BLOC;
 				if (game->map[y][x] == WALL)
 						SDL_BlitSurface(game->wall, NULL, wn->screen, &pos);
-				if else (game->map[y][x] == BLOC)
+				else if (game->map[y][x] == BLOC)
 						SDL_BlitSurface(game->bloc, NULL, wn->screen, &pos);
-				if else (game->map[y][x] == GOAL)
+				else if (game->map[y][x] == GOAL)
 						SDL_BlitSurface(game->goal, NULL, wn->screen, &pos);
-				if else (game->map[y][x] == PLAYER && c == 0)
+				else if (game->map[y][x] == PLAYER && c == 0)
 				{
 						SDL_BlitSurface(game->player, NULL, wn->screen, &pos);
 						c++;

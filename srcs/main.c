@@ -6,11 +6,11 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/21 20:14:29 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/22 19:57:58 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
 static void		ft_make_frame(t_data *data)
 {
@@ -26,7 +26,7 @@ static void		ft_make_frame(t_data *data)
 			data->sdl.renderer, data->surface);
 	lt_release(data->surface);
 	if ((SDL_RenderCopy(data->sdl.renderer, data->texture, 0, 0)) != 0)
-		ft_err_exit("wolf3d: error: RenderCopy failure", data);
+		ft_err_exit("doom: error: RenderCopy failure", data);
 	SDL_DestroyTexture(data->texture);
 	SDL_RenderPresent(data->sdl.renderer);
 }
@@ -39,37 +39,37 @@ static void		ft_game_loop(t_data *data)
 		if (ft_get_events(data))
 		{
 			if ((SDL_RenderClear(data->sdl.renderer)) != 0)
-				ft_err_exit("DOOM: error: RenderClear failure", data);
+				ft_err_exit("doom: error: RenderClear failure", data);
 			ft_make_frame(data);
 		}
 		SDL_FlushEvent(SDL_KEYDOWN | SDL_MOUSEMOTION);
 	}
 }
 
-int			ft_start(char **argv)
+int			ft_start(char **argv, t_data *data)
 {
-	t_wn			wn;
+	t_win			wn;
 	int				play;
 
 	play = 1;
-	//wn = init(wn);
-	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
+	wn = *init(&wn);
+	wn.state = (Uint8*)SDL_GetKeyboardState(NULL);
 	while (play)
 	{
-		SDL_WaitEvent(&(wn->event));
-		if (wn->event.type == SDL_QUIT || wn->state[SDL_SCANCODE_ESCAPE])
+		SDL_WaitEvent(&(wn.event));
+		if (wn.event.type == SDL_QUIT || wn.state[SDL_SCANCODE_ESCAPE])
 			play = 0;
-		else if (wn->state[SDL_SCANCODE_1] && argv[1])
+		else if (wn.state[SDL_SCANCODE_1] && argv[1])
 		{
-			ft_init_data(argv[1], &wn);
-			ft_game_loop(&wn);
+			ft_init_data(argv[1], data);
+			ft_game_loop(data);
 		}
-		else if (wn->state[SDL_SCANCODE_2])
-			editor(wn, wn->game);
-		SDL_BlitSurface(wn->menu, NULL, wn->screen, &(wn->pos_menu));
-		render(wn);
+		else if (wn.state[SDL_SCANCODE_2])
+			editor(&wn, wn.game);
+		SDL_BlitSurface(wn.menu, NULL, wn.screen, &(wn.pos_menu));
+		render(&wn);
 	}
-	free_game(wn, wn->game);
+	free_game(&wn, wn.game);
 	SDL_Quit();
 
 	return (0);
@@ -77,11 +77,13 @@ int			ft_start(char **argv)
 
 int				main(int argc, char **argv)
 {
+	t_data	data;
+
 	if (argc != 2 || argc != 1)
 	{
-		ft_putendl_fd("[->] usage: ./wolf3d [map]", 2);
+		ft_putendl_fd("[->] usage: ./doom [map]", 2);
 		ft_err_exit("[->] README for more informations", &data);
 	}
-	ft_start(argv)
+	ft_start(argv, &data);
 	return (0);
 }
