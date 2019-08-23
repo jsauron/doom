@@ -26,10 +26,10 @@ INC_PATH	+= /Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/ \
 SRC_NAME = main.c \
 			get_map.c \
 			init_data.c \
-			get_events.c \
+			get_event.c \
 			handle_events.c \
 			handle_movement.c \
-			handle_color.c \
+			color.c \
 			raycast.c \
 			rc_wolfcalc.c \
 			minimap.c \
@@ -39,12 +39,10 @@ SRC_NAME = main.c \
 			highlvl_graphics.c \
 			lowlvl_graphics.c \
 			exit.c \
-			jeu.c \
-			files.c \
 			editor.c \
-			init.c \
+			init_editor.c \
 			render.c \
-			input.c
+			files.c  
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 	LSDL2 	 = -L/Users/$(ID_UN)/.brew/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image

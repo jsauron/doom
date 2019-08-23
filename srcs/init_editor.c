@@ -23,7 +23,7 @@ int init_sdl(t_win *wn)
   SDL_Init(SDL_INIT_VIDEO);
 
   wn->window = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, XSCREEN, YSCREEN, 0);
-  wn->icon = IMG_Load("../ressources/mechant.png");
+  wn->icon = IMG_Load("ressources/mechant.png");
   SDL_SetWindowIcon(wn->window, wn->icon);
   wn->render = SDL_CreateRenderer(wn->window, -1, 0);
   wn->screen = SDL_CreateRGBSurface(0, XSCREEN, YSCREEN, 32,
@@ -40,7 +40,7 @@ int init_sdl(t_win *wn)
 
 int  init_structure(t_win *wn, t_game *game)
 {
-  wn->menu = IMG_Load("../ressources/menu_soko.jpg");
+  wn->menu = IMG_Load("ressources/menu_soko.jpg");
   wn->pos_menu.x = 0;
   wn->pos_menu.y = 0;
 
@@ -55,10 +55,10 @@ int  init_structure(t_win *wn, t_game *game)
   game->goal = NULL;
   game->current_player = NULL;
 
-  game->wall = IMG_Load("../ressources/img/stone.png");
-  game->bloc = IMG_Load("../ressources/img/BrownFloor.png");
-  game->bloc_OK = IMG_Load("../ressources/img/unnamed.png");
-  game->goal = IMG_Load("../ressources/img/crate.png");
+  game->wall = IMG_Load("ressources/img/stone.png");
+  game->bloc = IMG_Load("ressources/img/BrownFloor.png");
+  game->bloc_OK = IMG_Load("ressources/img/unnamed.png");
+  game->goal = IMG_Load("ressources/img/crate.png");
 /*  game->player_tab[LEFT] = IMG_Load("sprites_mario/mario_gauche.gif");
   game->player_tab[RIGHT] = IMG_Load("sprites_mario/mario_droite.gif");
   game->player_tab[DOWN] = IMG_Load("sprites_mario/mario_bas.gif");

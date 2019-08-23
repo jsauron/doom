@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 19:50:37 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/23 11:51:50 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define H_GREEN 0x00FF00FF
 # define H_RED 0xFF0000FF
-
 # define WIN_H 700
 # define WIN_W 1000
 # define BLOC_SIZE 200

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 20:02:43 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/23 12:42:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	editor(t_win *wn, t_game *game)
 	int x = 0;
 	int y = 0;
 
-	game->wall = IMG_Load("../ressources/img/stone.png");
-	game->bloc = IMG_Load("../ressources/mechant.png");
-	game->goal = IMG_Load("sprites_mario/objectif.png");
-	game->player = IMG_Load("sprites_mario/mario_bas.gif");
+	game->wall = IMG_Load("ressources/mechant.png");
+	game->bloc = IMG_Load("ressources/mechant.png");
+	game->goal = IMG_Load("ressources/mechant.png");
+	game->player = IMG_Load("ressources/mechant.png");
 
-	if(!upload_map(game->map))
-		exit(EXIT_FAILURE);
+//	if(!upload_map(game->map))
+//		exit(EXIT_FAILURE);
 
 	SDL_PumpEvents();
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
@@ -70,10 +70,6 @@ void	editor(t_win *wn, t_game *game)
 		{
 			if (wn->state[SDL_SCANCODE_ESCAPE])
 				play= 0;
-			else if (wn->state[SDL_SCANCODE_S])
-				save_level(game->map);
-			else if (wn->state[SDL_SCANCODE_C])
-				upload_map(game->map);
 			else if (wn->state[SDL_SCANCODE_1])
 				current_obj = WALL;
 			else if (wn->state[SDL_SCANCODE_2])
@@ -82,7 +78,11 @@ void	editor(t_win *wn, t_game *game)
 				current_obj = GOAL;
 			else if (wn->state[SDL_SCANCODE_4])
 				current_obj = PLAYER;
-		}
+			else if (wn->state[SDL_SCANCODE_S])
+				save_level(game->map);
+			else if (wn->state[SDL_SCANCODE_C])
+				upload_map(game->map);
+	}
 		SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 255, 255, 255));
 		y = 0;
 		int c = 0;
@@ -92,6 +92,7 @@ void	editor(t_win *wn, t_game *game)
 			while (x < YBLOC)
 			{
 				pos.x = x * SIZE_BLOC;
+				printf("x = %d, SIZE_BLOC = %d, x * SIZE_BLOC = %d\n", x, SIZE_BLOC, pos.x);
 				pos.y = y * SIZE_BLOC;
 				if (game->map[y][x] == WALL)
 						SDL_BlitSurface(game->wall, NULL, wn->screen, &pos);

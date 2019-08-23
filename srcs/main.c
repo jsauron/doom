@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 19:57:58 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/23 12:00:49 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,30 @@ static void		ft_game_loop(t_data *data)
 
 int			ft_start(char **argv, t_data *data)
 {
-	t_win			wn;
+	t_win			*wn;
 	int				play;
 
+	wn = NULL;
 	play = 1;
-	wn = *init(&wn);
-	wn.state = (Uint8*)SDL_GetKeyboardState(NULL);
+
+	wn = init(wn);
+	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
 	while (play)
 	{
-		SDL_WaitEvent(&(wn.event));
-		if (wn.event.type == SDL_QUIT || wn.state[SDL_SCANCODE_ESCAPE])
+		SDL_WaitEvent(&(wn->event));
+		if (wn->event.type == SDL_QUIT || wn->state[SDL_SCANCODE_ESCAPE])
 			play = 0;
-		else if (wn.state[SDL_SCANCODE_1] && argv[1])
+		else if (wn->state[SDL_SCANCODE_1] && argv[1])
 		{
 			ft_init_data(argv[1], data);
 			ft_game_loop(data);
 		}
-		else if (wn.state[SDL_SCANCODE_2])
-			editor(&wn, wn.game);
-		SDL_BlitSurface(wn.menu, NULL, wn.screen, &(wn.pos_menu));
-		render(&wn);
+		else if (wn->state[SDL_SCANCODE_2])
+			editor(wn, wn->game);
+		SDL_BlitSurface(wn->menu, NULL, wn->screen, &(wn->pos_menu));
+		render(wn);
 	}
-	free_game(&wn, wn.game);
+	free_game(wn, wn->game);
 	SDL_Quit();
 
 	return (0);
@@ -79,7 +81,7 @@ int				main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc != 2 || argc != 1)
+	if (argc != 2 && argc != 1)
 	{
 		ft_putendl_fd("[->] usage: ./doom [map]", 2);
 		ft_err_exit("[->] README for more informations", &data);
