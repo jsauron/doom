@@ -40,30 +40,30 @@ int init_sdl(t_win *wn)
 
 int  init_structure(t_win *wn, t_game *game)
 {
-	wn->menu = IMG_Load("ressources/menu_4.tga");
+	wn->menu = IMG_Load("ressources/menu/menu_4.tga");
 	wn->pos_menu.x = 0;
 	wn->pos_menu.y = 0;
 
 	wn->pos_menu_mov.x = 83;
 	wn->pos_menu_mov.y = 45;
 	game->nb_goal = 0;
-	game->menu[0] = IMG_Load("ressources/1.tga");
-	game->menu[1] = IMG_Load("ressources/2.tga");
-	game->menu[2] = IMG_Load("ressources/3.tga");
-	game->menu[3] = IMG_Load("ressources/4.tga");
-	game->menu[4] = IMG_Load("ressources/5.tga");
-	game->menu[5] = IMG_Load("ressources/6.tga");
-	game->menu[6] = IMG_Load("ressources/7.tga");
-	game->menu[7] = IMG_Load("ressources/8.tga");
-	game->menu[8] = IMG_Load("ressources/9.tga");
-	game->menu[9] = IMG_Load("ressources/10.tga");
-	game->wall = IMG_Load("ressources/wall3.tga");
-	game->mean = IMG_Load("ressources/mean_t.tga");
-	game->goal = IMG_Load("ressources/exit.tga");
-	game->player = IMG_Load("ressources/player.tga");
-	game->editor = IMG_Load("ressources/floor2.tga");
-	game->key = IMG_Load("ressources/key_t.tga");
-	game->door = IMG_Load("ressources/door_t.tga");
+	game->menu[0] = IMG_Load("ressources/menu/1.tga");
+	game->menu[1] = IMG_Load("ressources/menu/2.tga");
+	game->menu[2] = IMG_Load("ressources/menu/3.tga");
+	game->menu[3] = IMG_Load("ressources/menu/4.tga");
+	game->menu[4] = IMG_Load("ressources/menu/5.tga");
+	game->menu[5] = IMG_Load("ressources/menu/6.tga");
+	game->menu[6] = IMG_Load("ressources/menu/7.tga");
+	game->menu[7] = IMG_Load("ressources/menu/8.tga");
+	game->menu[8] = IMG_Load("ressources/menu/9.tga");
+	game->menu[9] = IMG_Load("ressources/menu/10.tga");
+	game->wall = IMG_Load("ressources/editor/wall3.tga");
+	game->mean = IMG_Load("ressources/editor/mean_t.tga");
+	game->goal = IMG_Load("ressources/editor/exit.tga");
+	game->player = IMG_Load("ressources/editor/player.tga");
+	game->editor = IMG_Load("ressources/editor/floor2.tga");
+	game->key = IMG_Load("ressources/editor/key_t.tga");
+	game->door = IMG_Load("ressources/editor/door_t.tga");
 
 	/*  game->player_tab[LEFT] = IMG_Load("sprites_mario/mario_gauche.gif");
 		game->player_tab[RIGHT] = IMG_Load("sprites_mario/mario_droite.gif");

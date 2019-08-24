@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:31 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 20:00:51 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 20:10:15 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				ft_is_inwall(t_pos *pos, t_data *data)
 
 	x2 = pos->x / BLOC_SIZE;
 	y2 = pos->y / BLOC_SIZE;
-	if (x2 < 0 || x2 >= data->map_sz.w || y2 < 0 || y2 >= data->map_sz.h)
+	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
 		return (0);
 	if (data->map[y2][x2] == 1 || data->map[y2][x2] == 3)
 		return (1);

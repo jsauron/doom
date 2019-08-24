@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:02:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 19:59:48 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 20:13:17 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static int		ft_is_inmap(t_pos *pos, t_data *data)
 {
-	return (pos->x > 0 && pos->x < data->map_sz.w * BLOC_SIZE
-	&& pos->y > 0 && pos->y < data->map_sz.h * BLOC_SIZE);
+	(void)data;
+	return (pos->x > 0 && pos->x < MAP_SIZE * BLOC_SIZE
+	&& pos->y > 0 && pos->y < MAP_SIZE * BLOC_SIZE);
 }
 
 int				ft_movement(double angle_r, int dir, t_data *data)
@@ -23,6 +24,7 @@ int				ft_movement(double angle_r, int dir, t_data *data)
 	t_pos		move;
 	t_pos		pos_h;
 	t_pos		pos_v;
+
 
 	move.y = sin(angle_r) * data->player.speed;
 	move.x = cos(angle_r) * data->player.speed;

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 14:36:42 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 20:06:19 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define WIN_W 1000
 # define BLOC_SIZE 200
 # define DIST_SCREEN 900
+# define MAP_SIZE 15
 
 # define ZOOM_P 1.1
 # define ZOOM_L 0.9

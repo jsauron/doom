@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 15:39:44 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 19:53:18 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ SDL_Surface		*ft_new_surface(int height, int width, t_data *data)
 	SDL_Surface		*surface;
 	Uint32			color[4];
 
-	color[0] = 0x000000ff;
+	color[0] = 0x00ff0000;
 	color[1] = 0x0000ff00;
-	color[2] = 0x00ff0000;
+	color[2] = 0x000000ff;
 	color[3] = 0xff000000;
 	if (!(surface = lt_push(SDL_CreateRGBSurface(
 	0, width, height, 32, color[0], color[1], color[2], color[3]), ft_srfdel)))

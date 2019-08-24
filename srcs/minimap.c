@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 20:00:39 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 20:12:10 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void		ft_init_minimap(t_data *data)
 	data->minimap.origin.y = 10;
 	data->minimap.centre.x = (WIN_W - (WIN_W / 4) / 2) - 10;
 	data->minimap.centre.y = (WIN_H / 4) / 2 + 10;
-	data->minimap.map_size.w = data->minimap.mnp_size * data->map_sz.w;
-	data->minimap.map_size.h = data->minimap.mnp_size * data->map_sz.h;
+	data->minimap.map_size.w = data->minimap.mnp_size * MAP_SIZE;
+	data->minimap.map_size.h = data->minimap.mnp_size * MAP_SIZE;
 	data->minimap.pos_play.x = data->player.position.x * data->minimap.mnp_size;
 	data->minimap.pos_play.y = data->player.position.y * data->minimap.mnp_size;
 	data->minimap.diff.x = data->minimap.centre.x - data->minimap.pos_play.x;
@@ -95,10 +95,10 @@ void			ft_minimap(t_data *data)
 	ft_init_minimap(data);
 	ft_draw_background(data);
 	i = 0;
-	while (i < data->map_sz.h)
+	while (i < MAP_SIZE)
 	{
 		j = 0;
-		while (j < data->map_sz.w)
+		while (j < MAP_SIZE)
 		{
 			rect = (SDL_Rect){data->minimap.diff.x
 			+ (j * data->minimap.mnp_size),

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:02:56 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 15:36:13 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 19:42:06 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ static void	ft_init_fonts(t_data *data)
 static void	ft_make_texture(t_data *data)
 {
 	if (!(data->object[0].img_srf =
-	lt_push(IMG_Load("ressources/img/crate.png"), ft_srfdel)))
+	lt_push(IMG_Load("ressources/wall/blue.tga"), ft_srfdel)))
 		ft_err_exit("doom: error: bad textures", data);
 	if (!(data->object[1].img_srf =
-	lt_push(IMG_Load("ressources/img/stone.png"), ft_srfdel)))
+	lt_push(IMG_Load("ressources/wall/pink.tga"), ft_srfdel)))
 		ft_err_exit("doom: error: bad textures", data);
 	if (!(data->object[2].img_srf =
-	lt_push(IMG_Load("ressources/img/BrownFloor.png"), ft_srfdel)))
+	lt_push(IMG_Load("ressources/wall/green.tga"), ft_srfdel)))
 		ft_err_exit("doom: error: bad textures", data);
 	if (!(data->object[3].img_srf =
-	lt_push(IMG_Load("ressources/img/unnamed.png"), ft_srfdel)))
+	lt_push(IMG_Load("ressources/wall/glue.tga"), ft_srfdel)))
 		ft_err_exit("doom: error: bad textures", data);
 }
 
