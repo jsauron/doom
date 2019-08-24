@@ -1,66 +1,64 @@
 #include "doom.h"
 
-int     upload_map(int **level)
+int     upload_map(int **map, char *input_map)
 {
-    FILE    *file = NULL;
-    char	line_file[XBLOC * YBLOC + 1] = {0};
+	FILE    *file = NULL;
+	char	line_file[XBLOC * YBLOC + 1] = {0};
 	int i = 0;
 	int j = 0;
+	char elem;
 
-	file = fopen("niveaux.lvl", "r");
+	file = fopen(input_map, "r");
 	if (file == NULL)
 		return (0);
 
 	fgets(line_file, XBLOC * YBLOC + 1, file);
 	while ( i < XBLOC)
 	{
-    j = 0;
+		j = 0;
 		while (j < YBLOC)
 		{
-			switch(line_file[(i * XBLOC) + j])
-			{
-				case '0':
-					level[i][j] = 0;
-					break;
-				case '1':
-					level[i][j] = 1;
-					break;
-				case '2':
-					level[i][j] = 2;
-					break;
-				case '3':
-					level[i][j] = 3;
-					break;
-				case '4':
-					level[i][j] = 4;
-					break;
-			}
-      j++;
+			elem = (line_file[(i * XBLOC) + j]);
+			if (elem ==  '0')
+				map[i][j] = 0;
+			if (elem == '1')
+				map[i][j] = 1;
+			if (elem ==  '2')
+				map[i][j] = 2;
+			if (elem == '3')
+				map[i][j] = 3;
+			if (elem ==  '4')
+				map[i][j] = 4;
+			if (elem ==  '5')
+				map[i][j] = 5;
+			if (elem ==  '6')
+				map[i][j] = 6;
+			j++;
 		}
-    i++;
+		i++;
 	}
 	fclose(file);
 	return (1);
 }
 
-int		save_level(int **level)
+int		save_map(int **map, char *input_map)
 {
 	FILE	*file = NULL;
 	int	 x = 0;
 	int y = 0;
 
-	file = fopen("niveau.lvl", "w");
+	file = fopen(input_map, "w");
 	if (file == NULL)
 		return (0);
 	while (y < YBLOC)
 	{
-    x = 0;
+		x = 0;
 		while (x < XBLOC)
 		{
-			fprintf(file,"%d",level[y][x]);
-		  x++;
-    }
-    y++;
+			fprintf(file,"%d", map[y][x]);
+			x++;
+		}
+		y++;
 	}
 	fclose(file);
 	return (1);

@@ -47,16 +47,16 @@ typedef struct		s_game
 /* render.c*/
 int     fill_screen(t_win *wn,t_game *game, SDL_Rect *pos, SDL_Rect *pos_player,int **map);
 int     render(t_win *wn);
-int     free_game(t_win *wn, t_game *game);  
+int     free_surface_editor(t_win *wn, t_game *game);  
 
 /* input.c */
 
 /* editor.c */
-void	editor(t_win *wn, t_game *game);
+void	editor(t_win *wn, t_game *game, char *map);
 
 /* file.c */
-int		upload_map(int **level);
-int		save_level(int **level);
+int		upload_map(int **map, char *input_map);
+int		save_map(int **map, char *input_map);
 
 /* jeu.c */
 void    move_bloc(int   *first_case, int *second_case);

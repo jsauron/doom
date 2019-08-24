@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 15:14:10 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 19:05:06 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			ft_start(char **argv, t_data *data)
 			ft_game_loop(data);
 		}
 		else if (wn->state[SDL_SCANCODE_2])
-			editor(wn, wn->game);
+			editor(wn, wn->game, argv[1]);
 		current_time = SDL_GetTicks();
 		if (current_time - old_time > 250)
 		{
@@ -91,7 +91,7 @@ int			ft_start(char **argv, t_data *data)
 		SDL_BlitSurface(wn->game->menu[i], NULL, wn->screen, &(wn->pos_menu_mov));
 			render(wn);
 	}
-	free_game(wn, wn->game);
+	free_surface_editor(wn, wn->game);
 	SDL_Quit();
 
 	return (0);

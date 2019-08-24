@@ -6,13 +6,13 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 18:49:31 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 19:20:05 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	editor(t_win *wn, t_game *game)
+void	editor(t_win *wn, t_game *game, char *map)
 {
 	SDL_Rect pos;
 
@@ -23,16 +23,8 @@ void	editor(t_win *wn, t_game *game)
 	int x = 0;
 	int y = 0;
 
-	game->wall = IMG_Load("ressources/wall3.tga");
-	game->mean = IMG_Load("ressources/mean_t.tga");
-	game->goal = IMG_Load("ressources/exit.tga");
-	game->player = IMG_Load("ressources/player.tga");
-	game->editor = IMG_Load("ressources/floor2.tga");
-	game->key = IMG_Load("ressources/key_t.tga");
-	game->door = IMG_Load("ressources/door_t.tga");
-
-//	if(!upload_map(game->map))
-//		exit(EXIT_FAILURE);
+	if(!upload_map(game->map, map))
+		exit(EXIT_FAILURE);
 
 	SDL_PumpEvents();
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
@@ -72,7 +64,7 @@ void	editor(t_win *wn, t_game *game)
 		if (wn->event.type == SDL_KEYDOWN)
 		{
 			if (wn->state[SDL_SCANCODE_ESCAPE])
-				play= 0;
+				play = 0;
 			else if (wn->state[SDL_SCANCODE_1])
 				current_obj = WALL;
 			else if (wn->state[SDL_SCANCODE_2])
@@ -86,9 +78,9 @@ void	editor(t_win *wn, t_game *game)
 			else if (wn->state[SDL_SCANCODE_6])
 				current_obj = DOOR;
 			else if (wn->state[SDL_SCANCODE_S])
-				save_level(game->map);
+				save_map(game->map, map);
 			else if (wn->state[SDL_SCANCODE_C])
-				upload_map(game->map);
+				upload_map(game->map, map );
 	}
 		pos.x = 0;
 		pos.y = 0;
@@ -128,11 +120,4 @@ void	editor(t_win *wn, t_game *game)
 		
 		SDL_RenderPresent(wn->render);
 		}
-		SDL_FreeSurface(game->wall);
-		SDL_FreeSurface(game->mean);
-		SDL_FreeSurface(game->door);
-		SDL_FreeSurface(game->key);
-		SDL_FreeSurface(game->goal);
-		SDL_FreeSurface(game->player);
-		SDL_FreeSurface(game->editor);
 }
