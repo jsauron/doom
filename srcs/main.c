@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/23 12:00:49 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 12:24:46 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc != 2 && argc != 1)
+	if (argc != 2)
 	{
 		ft_putendl_fd("[->] usage: ./doom [map]", 2);
 		ft_err_exit("[->] README for more informations", &data);

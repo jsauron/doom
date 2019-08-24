@@ -9,9 +9,9 @@
 
 /* constante */
 
-#define SIZE_BLOC	34
-#define XBLOC		24
-#define YBLOC		24
+#define SIZE_BLOC	50
+#define XBLOC		15
+#define YBLOC		15
 #define	XSCREEN		SIZE_BLOC * XBLOC
 #define YSCREEN		SIZE_BLOC * YBLOC
 

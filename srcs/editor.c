@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/23 12:42:03 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 12:23:00 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	editor(t_win *wn, t_game *game)
 			while (x < YBLOC)
 			{
 				pos.x = x * SIZE_BLOC;
-				printf("x = %d, SIZE_BLOC = %d, x * SIZE_BLOC = %d\n", x, SIZE_BLOC, pos.x);
 				pos.y = y * SIZE_BLOC;
 				if (game->map[y][x] == WALL)
 						SDL_BlitSurface(game->wall, NULL, wn->screen, &pos);

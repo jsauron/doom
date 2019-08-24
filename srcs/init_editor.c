@@ -40,7 +40,7 @@ int init_sdl(t_win *wn)
 
 int  init_structure(t_win *wn, t_game *game)
 {
-  wn->menu = IMG_Load("ressources/menu_soko.jpg");
+  wn->menu = IMG_Load("ressources/menu_4.tga");
   wn->pos_menu.x = 0;
   wn->pos_menu.y = 0;
 
