@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 12:24:46 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 15:14:10 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,23 @@ int			ft_start(char **argv, t_data *data)
 {
 	t_win			*wn;
 	int				play;
+	int				current_time;
+	int				old_time;
+	int				i;
+	int				c;
 
 	wn = NULL;
 	play = 1;
+	i = 0;
+	c = 0;
+	current_time = 0;
+	old_time = 0;
 
 	wn = init(wn);
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
 	while (play)
 	{
-		SDL_WaitEvent(&(wn->event));
+		SDL_PollEvent(&(wn->event));
 		if (wn->event.type == SDL_QUIT || wn->state[SDL_SCANCODE_ESCAPE])
 			play = 0;
 		else if (wn->state[SDL_SCANCODE_1] && argv[1])
@@ -68,8 +76,20 @@ int			ft_start(char **argv, t_data *data)
 		}
 		else if (wn->state[SDL_SCANCODE_2])
 			editor(wn, wn->game);
+		current_time = SDL_GetTicks();
+		if (current_time - old_time > 250)
+		{
+			if (i == 9 || i == 0)
+				c++;
+			if (c % 2 == 0)
+				i--;
+			else if (c % 2 != 0)
+				i++;
+			old_time = current_time;
+		}
 		SDL_BlitSurface(wn->menu, NULL, wn->screen, &(wn->pos_menu));
-		render(wn);
+		SDL_BlitSurface(wn->game->menu[i], NULL, wn->screen, &(wn->pos_menu_mov));
+			render(wn);
 	}
 	free_game(wn, wn->game);
 	SDL_Quit();

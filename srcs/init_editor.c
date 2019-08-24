@@ -44,11 +44,19 @@ int  init_structure(t_win *wn, t_game *game)
   wn->pos_menu.x = 0;
   wn->pos_menu.y = 0;
 
+  wn->pos_menu_mov.x = 83;
+  wn->pos_menu_mov.y = 45;
   game->nb_goal = 0;
- /* game->player_tab[0] = NULL;
-  game->player_tab[1] = NULL;
-  game->player_tab[2] = NULL;
-  game->player_tab[3] = NULL;*/
+  game->menu[0] = IMG_Load("ressources/1.tga");
+  game->menu[1] = IMG_Load("ressources/2.tga");
+  game->menu[2] = IMG_Load("ressources/3.tga");
+  game->menu[3] = IMG_Load("ressources/4.tga");
+  game->menu[4] = IMG_Load("ressources/5.tga");
+  game->menu[5] = IMG_Load("ressources/6.tga");
+  game->menu[6] = IMG_Load("ressources/7.tga");
+  game->menu[7] = IMG_Load("ressources/8.tga");
+  game->menu[8] = IMG_Load("ressources/9.tga");
+  game->menu[9] = IMG_Load("ressources/10.tga");
   game->wall = NULL;
   game->bloc = NULL;
   game->bloc_OK = NULL;

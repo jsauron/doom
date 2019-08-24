@@ -29,7 +29,7 @@ typedef	struct		s_mouse
 
 typedef struct		s_game
 {
-	SDL_Surface		*player_tab[4];
+	SDL_Surface		*menu[10];
 	SDL_Surface		*player;
 	SDL_Surface		*wall;
 	SDL_Surface		*bloc;

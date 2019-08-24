@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/23 11:51:50 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 14:36:42 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ struct						s_data
 	SDL_Surface			*menu;
 	SDL_Surface			*icon;
 	SDL_Rect			pos_menu;
+	SDL_Rect			pos_menu_mov;
 	SDL_Renderer		*render;
 	SDL_Texture			*texture;
 	SDL_Event			event;

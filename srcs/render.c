@@ -8,8 +8,8 @@ int     free_game(t_win *wn, t_game *game)
   SDL_FreeSurface(game->bloc_OK);
   SDL_FreeSurface(game->goal);
   int i = 0;
-  while (i < 4)
-    SDL_FreeSurface(game->player_tab[i++]);
+  while (i < 9)
+    SDL_FreeSurface(game->menu[i++]);
   return (1);
 }
 int     render(t_win *wn)
