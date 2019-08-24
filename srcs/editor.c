@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 12:23:00 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 16:56:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ void	editor(t_win *wn, t_game *game)
 	int x = 0;
 	int y = 0;
 
-	game->wall = IMG_Load("ressources/mechant.png");
-	game->bloc = IMG_Load("ressources/mechant.png");
-	game->goal = IMG_Load("ressources/mechant.png");
-	game->player = IMG_Load("ressources/mechant.png");
+	game->wall = IMG_Load("ressources/wall.tga");
+	game->bloc = IMG_Load("ressources/mean.tga");
+	game->goal = IMG_Load("ressources/exit.tga");
+	game->player = IMG_Load("ressources/player.tga");
+	game->editor = IMG_Load("ressources/floor_editor2.tga");
 
 //	if(!upload_map(game->map))
 //		exit(EXIT_FAILURE);
@@ -83,7 +84,10 @@ void	editor(t_win *wn, t_game *game)
 			else if (wn->state[SDL_SCANCODE_C])
 				upload_map(game->map);
 	}
-		SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 255, 255, 255));
+		pos.x = 0;
+		pos.y = 0;
+		SDL_BlitSurface(game->editor, NULL, wn->screen, &pos);
+		//SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 0, 255, 255));
 		y = 0;
 		int c = 0;
 		while (y < XBLOC)

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:02:56 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 20:00:05 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 15:36:13 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	ft_init_sdl(t_data *data)
 	if (TTF_Init() < 0)
 		ft_sdl_err_exit(0, data);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	if (!(data->sdl.window = SDL_CreateWindow("WOLF_3D",
+	if (!(data->sdl.window = SDL_CreateWindow("DOOM",
 	SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIN_W, WIN_H, 0)))
 		ft_sdl_err_exit(0, data);
 	if (!(data->sdl.renderer = SDL_CreateRenderer(data->sdl.window, -1,

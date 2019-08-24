@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:03 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 20:01:21 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 16:04:34 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	ft_set_config(t_data *data)
 {
 	SDL_Rect	rect;
-
 	rect = (SDL_Rect){200, 200, 560, 372};
 	ft_draw_rect(rect, 0x10000000, 0, data);
 	ft_draw_border(rect, 0xFFFFFFFF, data);

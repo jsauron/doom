@@ -63,10 +63,10 @@ int  init_structure(t_win *wn, t_game *game)
   game->goal = NULL;
   game->current_player = NULL;
 
-  game->wall = IMG_Load("ressources/img/stone.png");
-  game->bloc = IMG_Load("ressources/img/BrownFloor.png");
-  game->bloc_OK = IMG_Load("ressources/img/unnamed.png");
-  game->goal = IMG_Load("ressources/img/crate.png");
+  //game->wall = IMG_Load("ressources/wall.tga");
+  //game->bloc = IMG_Load("ressources/img/BrownFloor.png");
+  //game->bloc_OK = IMG_Load("ressources/img/unnamed.png");
+ // game->goal = IMG_Load("ressources/exit.tga");
 /*  game->player_tab[LEFT] = IMG_Load("sprites_mario/mario_gauche.gif");
   game->player_tab[RIGHT] = IMG_Load("sprites_mario/mario_droite.gif");
   game->player_tab[DOWN] = IMG_Load("sprites_mario/mario_bas.gif");

@@ -29,6 +29,8 @@ typedef	struct		s_mouse
 
 typedef struct		s_game
 {
+
+	SDL_Surface		*editor;
 	SDL_Surface		*menu[10];
 	SDL_Surface		*player;
 	SDL_Surface		*wall;
@@ -37,7 +39,7 @@ typedef struct		s_game
 	SDL_Surface		*goal;
 	SDL_Surface		*current_player;
 	int				**map;
-	int       nb_goal;
+	int				nb_goal;
 }					t_game;
 
 /* render.c*/
