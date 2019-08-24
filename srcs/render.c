@@ -4,8 +4,8 @@ int     free_game(t_win *wn, t_game *game)
 {
   SDL_FreeSurface(wn->menu);
   SDL_FreeSurface(game->wall);
-  SDL_FreeSurface(game->bloc);
-  SDL_FreeSurface(game->bloc_OK);
+  SDL_FreeSurface(game->key);
+  SDL_FreeSurface(game->mean);
   SDL_FreeSurface(game->goal);
   int i = 0;
   while (i < 9)

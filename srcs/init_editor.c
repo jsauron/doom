@@ -57,13 +57,7 @@ int  init_structure(t_win *wn, t_game *game)
   game->menu[7] = IMG_Load("ressources/8.tga");
   game->menu[8] = IMG_Load("ressources/9.tga");
   game->menu[9] = IMG_Load("ressources/10.tga");
-  game->wall = NULL;
-  game->bloc = NULL;
-  game->bloc_OK = NULL;
-  game->goal = NULL;
-  game->current_player = NULL;
-
-  //game->wall = IMG_Load("ressources/wall.tga");
+	//game->wall = IMG_Load("ressources/wall.tga");
   //game->bloc = IMG_Load("ressources/img/BrownFloor.png");
   //game->bloc_OK = IMG_Load("ressources/img/unnamed.png");
  // game->goal = IMG_Load("ressources/exit.tga");

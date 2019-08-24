@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 16:56:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/24 18:49:31 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ void	editor(t_win *wn, t_game *game)
 	int x = 0;
 	int y = 0;
 
-	game->wall = IMG_Load("ressources/wall.tga");
-	game->bloc = IMG_Load("ressources/mean.tga");
+	game->wall = IMG_Load("ressources/wall3.tga");
+	game->mean = IMG_Load("ressources/mean_t.tga");
 	game->goal = IMG_Load("ressources/exit.tga");
 	game->player = IMG_Load("ressources/player.tga");
-	game->editor = IMG_Load("ressources/floor_editor2.tga");
+	game->editor = IMG_Load("ressources/floor2.tga");
+	game->key = IMG_Load("ressources/key_t.tga");
+	game->door = IMG_Load("ressources/door_t.tga");
 
 //	if(!upload_map(game->map))
 //		exit(EXIT_FAILURE);
@@ -74,11 +76,15 @@ void	editor(t_win *wn, t_game *game)
 			else if (wn->state[SDL_SCANCODE_1])
 				current_obj = WALL;
 			else if (wn->state[SDL_SCANCODE_2])
-				current_obj = BLOC;
+				current_obj = MEAN;
 			else if (wn->state[SDL_SCANCODE_3])
 				current_obj = GOAL;
 			else if (wn->state[SDL_SCANCODE_4])
 				current_obj = PLAYER;
+			else if (wn->state[SDL_SCANCODE_5])
+				current_obj = KEY;
+			else if (wn->state[SDL_SCANCODE_6])
+				current_obj = DOOR;
 			else if (wn->state[SDL_SCANCODE_S])
 				save_level(game->map);
 			else if (wn->state[SDL_SCANCODE_C])
@@ -99,10 +105,14 @@ void	editor(t_win *wn, t_game *game)
 				pos.y = y * SIZE_BLOC;
 				if (game->map[y][x] == WALL)
 						SDL_BlitSurface(game->wall, NULL, wn->screen, &pos);
-				else if (game->map[y][x] == BLOC)
-						SDL_BlitSurface(game->bloc, NULL, wn->screen, &pos);
+				else if (game->map[y][x] == MEAN)
+						SDL_BlitSurface(game->mean, NULL, wn->screen, &pos);
 				else if (game->map[y][x] == GOAL)
 						SDL_BlitSurface(game->goal, NULL, wn->screen, &pos);
+				else if (game->map[y][x] == KEY)
+						SDL_BlitSurface(game->key, NULL, wn->screen, &pos);
+				else if (game->map[y][x] == DOOR)
+						SDL_BlitSurface(game->door, NULL, wn->screen, &pos);
 				else if (game->map[y][x] == PLAYER && c == 0)
 				{
 						SDL_BlitSurface(game->player, NULL, wn->screen, &pos);
@@ -119,7 +129,10 @@ void	editor(t_win *wn, t_game *game)
 		SDL_RenderPresent(wn->render);
 		}
 		SDL_FreeSurface(game->wall);
-		SDL_FreeSurface(game->bloc);
+		SDL_FreeSurface(game->mean);
+		SDL_FreeSurface(game->door);
+		SDL_FreeSurface(game->key);
 		SDL_FreeSurface(game->goal);
 		SDL_FreeSurface(game->player);
+		SDL_FreeSurface(game->editor);
 }
