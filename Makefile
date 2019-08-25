@@ -42,6 +42,12 @@ SRC_NAME = main.c \
 			editor.c \
 			init_editor.c \
 			render.c \
+			tga_reader_data.c \
+			tga_reader_fill_data.c \
+			tga_reader_createpxl.c \
+			tga_reader_uncompress.c \
+			tga_reader_rot.c \
+			tga_reader_main.c \
 			files.c  
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

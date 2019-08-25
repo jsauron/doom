@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 20:06:19 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 13:31:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <time.h>
 # include "editor.h"
+# include "tga_reader.h"
 
 # define H_GREEN 0x00FF00FF
 # define H_RED 0xFF0000FF
