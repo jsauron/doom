@@ -48,26 +48,26 @@ static void		*ft_calc_frame(void *arg)
 	pthread_exit(0);
 }
 
-void			ft_rc_wolfcalc(t_data *data)
+void			ft_rc_wolfcalc(t_game*game)
 {
 	int i;
 
 	i = 0;
-	data->surface = ft_new_surface(WIN_H, WIN_W, data);
+	game->surface = ft_new_surface(WIN_H, WIN_W, game);
 	while (i < 8)
 	{
-		data->thread[i].x_start = i;
-		data->thread[i].data = data;
-		ft_bzero(data->thread[i].ray, sizeof(t_ray) * (WIN_W / 8));
-		if ((pthread_create(&(data->thread[i].th), 0,
-		ft_calc_frame, (void *)&(data->thread[i]))) != 0)
-			ft_err_exit("wolf3d: error: pthread_create failed", data);
+		game->thread[i].x_start = i;
+		game->thread[i].game = game;
+		ft_bzero(game->thread[i].ray, sizeof(t_ray) * (WIN_W / 8));
+		if ((pthread_create(&(game->thread[i].th), 0,
+		ft_calc_frame, (void *)&(game->thread[i]))) != 0)
+			ft_err_exit("wolf3d: error: pthread_create failed", game);
 		i++;
 	}
 	i = 0;
 	while (i < 8)
 	{
-		if ((pthread_join(data->thread[i++].th, 0)) != 0)
-			ft_err_exit("wolf3d: error: pthread_create failed", data);
+		if ((pthread_join(game->thread[i++].th, 0)) != 0)
+			ft_err_exit("wolf3d: error: pthread_create failed", game);
 	}
 }

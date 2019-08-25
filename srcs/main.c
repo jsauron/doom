@@ -6,46 +6,46 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 16:04:25 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 17:52:15 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void		ft_make_frame(t_data *data)
+static void		ft_make_frame(t_game *game)
 {
-	data->nb_frame++;
-	data->time_last = clock();
+	game->nb_frame++;
+	game->time_last = clock();
 
-	ft_rc_wolfcalc(data);
-	ft_set_interface(data);
-	data->fps = 1000 / (clock() / 10000 - data->time_last / 10000);
-	ft_set_infos(data);
+	ft_rc_wolfcalc(game);
+	ft_set_interface(game);
+	game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
+	ft_set_infos(game);
 
-	data->texture = SDL_CreateTextureFromSurface(
-			data->sdl.renderer, data->surface);
-	if ((SDL_RenderCopy(data->sdl.renderer, data->texture, 0, 0)) != 0)
-		ft_err_exit("doom: error: RenderCopy failure", data);
-	SDL_DestroyTexture(data->texture);
-	SDL_RenderPresent(data->sdl.renderer);
+	game->texture = SDL_CreateTextureFromSurface(
+			game->sdl.renderer, game->surface);
+	if ((SDL_RenderCopy(game->sdl.renderer, game->texture, 0, 0)) != 0)
+		ft_err_exit("doom: error: RenderCopy failure", game);
+	SDL_DestroyTexture(game->texture);
+	SDL_RenderPresent(game->sdl.renderer);
 }
 
-static void		ft_game_loop(t_data *data)
+static void		ft_game_loop(t_game *game)
 {
-	ft_make_frame(data);
+	ft_make_frame(game);
 	while (1)
 	{
-		if (ft_get_events(data))
+		if (ft_get_events(game))
 		{
-			if ((SDL_RenderClear(data->sdl.renderer)) != 0)
-				ft_err_exit("doom: error: RenderClear failure", data);
-			ft_make_frame(data);
+			if ((SDL_RenderClear(game->sdl.renderer)) != 0)
+				ft_err_exit("doom: error: RenderClear failure", game);
+			ft_make_frame(game);
 		}
 		SDL_FlushEvent(SDL_KEYDOWN | SDL_MOUSEMOTION);
 	}
 }
 
-int			ft_start(char **argv, t_data *data)
+int			ft_start(char **argv, t_game *game)
 {
 	t_win			*wn;
 	int				play;
@@ -70,8 +70,9 @@ int			ft_start(char **argv, t_data *data)
 			play = 0;
 		else if (wn->state[SDL_SCANCODE_1] && argv[1])
 		{
-			ft_init_data(argv[1], data);
-			ft_game_loop(data);
+			ft_init_game(argv[1], game);
+			ft_game_loop(game);
+			SDL_WaitEvent(&(wn->event));
 		}
 		else if (wn->state[SDL_SCANCODE_2])
 		{
@@ -101,13 +102,13 @@ int			ft_start(char **argv, t_data *data)
 
 int				main(int argc, char **argv)
 {
-	t_data	data;
+	t_game	game;
 
 	if (argc != 2)
 	{
 		ft_putendl_fd("[->] usage: ./doom [map]", 2);
-		ft_err_exit("[->] README for more informations", &data);
+		ft_err_exit("[->] README for more informations", &game);
 	}
-	ft_start(argv, &data);
+	ft_start(argv, &game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:02:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 19:59:56 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 17:08:58 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		bresenham_tab(int *tab, t_pos p1, t_pos p2)
 	tab[4] = (tab[0] > tab[2] ? tab[0] : -tab[2]) / 2;
 }
 
-void			draw_line(t_data *data, t_vec vec,
+void			draw_line(t_game *game, t_vec vec,
 				Uint32 color, t_limit *limit)
 {
 	int e2;
@@ -43,7 +43,7 @@ void			draw_line(t_data *data, t_vec vec,
 	{
 		if (!limit || ((int)vec.p1.x > limit->l && (int)vec.p1.x < limit->r
 		&& (int)vec.p1.y > limit->t && (int)vec.p1.y < limit->b))
-			ft_setpixel(data->surface, (int)vec.p1.x, (int)vec.p1.y, color);
+			ft_setpixel(game->surface, (int)vec.p1.x, (int)vec.p1.y, color);
 		e2 = tab[4];
 		if (e2 > -tab[0] && (int)vec.p1.x != (int)vec.p2.x)
 		{
@@ -59,7 +59,7 @@ void			draw_line(t_data *data, t_vec vec,
 }
 
 void			ft_draw_rect(SDL_Rect rect, Uint32 color,
-				t_limit *limit, t_data *data)
+				t_limit *limit, t_game *game)
 {
 	int		i;
 	int		j;
@@ -72,14 +72,14 @@ void			ft_draw_rect(SDL_Rect rect, Uint32 color,
 		{
 			if (!limit || (rect.x + j > limit->l && rect.x + j < limit->r
 			&& rect.y + i > limit->t && rect.y + i < limit->b))
-				ft_setpixel(data->surface, rect.x + j, rect.y + i, color);
+				ft_setpixel(game->surface, rect.x + j, rect.y + i, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void			ft_draw_border(SDL_Rect rect, Uint32 color, t_data *data)
+void			ft_draw_border(SDL_Rect rect, Uint32 color, t_game *game)
 {
 	t_vec vec1;
 	t_vec vec2;
@@ -92,8 +92,8 @@ void			ft_draw_border(SDL_Rect rect, Uint32 color, t_data *data)
 	(t_pos){rect.x + rect.w, rect.y + rect.h}};
 	vec4 = (t_vec){(t_pos){rect.x, rect.y + rect.h},
 	(t_pos){rect.x + rect.w, rect.y + rect.h}};
-	draw_line(data, vec1, color, 0);
-	draw_line(data, vec2, color, 0);
-	draw_line(data, vec3, color, 0);
-	draw_line(data, vec4, color, 0);
+	draw_line(game, vec1, color, 0);
+	draw_line(game, vec2, color, 0);
+	draw_line(game, vec3, color, 0);
+	draw_line(game, vec4, color, 0);
 }

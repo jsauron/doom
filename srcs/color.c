@@ -15,8 +15,8 @@
 static SDL_Surface	*choose_texture(int i, t_thread *thread)
 {
 	SDL_Surface	*surface[4] = {
-	thread->data->object[0].img_srf, thread->data->object[1].img_srf,
-	thread->data->object[2].img_srf, thread->data->object[3].img_srf};
+	thread->game->object[0].img_srf, thread->game->object[1].img_srf,
+	thread->game->object[2].img_srf, thread->game->object[3].img_srf};
 
 	if (thread->ray[i].axis == VERTICAL_HIT)
 	{
@@ -48,7 +48,7 @@ static Uint32		ft_calc_col(int y, int i, t_thread *thread)
 	textr.y = h_txtr * ywall / h_wall;
 	color = ft_getpixel((SDL_Surface *)surface,
 	(int)textr.x % (int)surface->w,
-	(int)textr.y % (int)surface->w, thread->data) | 0xFF000000;
+	(int)textr.y % (int)surface->w, thread->game) | 0xFF000000;
 	return (color);
 }
 
@@ -70,15 +70,15 @@ void				ft_assign_color(int x, int y, int i, t_thread *thread)
 
 	color = 0x0;
 	if (y < thread->ray[i].wall_top)
-		color = (thread->data->lightshade) ? 0xFF46463B : 0xFFFFFED6;
+		color = (thread->game->lightshade) ? 0xFF46463B : 0xFFFFFED6;
 	else if (y >= thread->ray[i].wall_top && y <= thread->ray[i].wall_bot)
 	{
-		color = (thread->data->texturing) ? ft_calc_col(y, i, thread)
+		color = (thread->game->texturing) ? ft_calc_col(y, i, thread)
 		: ft_get_color(thread->ray[i].axis, thread->ray[i].angle_d);
 
 		// lightshading
-		if (thread->data->lightshade == 1)
+		if (thread->game->lightshade == 1)
 			color = ft_light_shade(thread->ray[i].distance, color);
 	}
-	ft_setpixel(thread->data->surface, x, y, color);
+	ft_setpixel(thread->game->surface, x, y, color);
 }

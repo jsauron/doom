@@ -6,41 +6,41 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 20:12:10 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 17:34:53 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void		ft_init_minimap(t_data *data)
+static void		ft_init_minimap(t_game *game)
 {
-	data->minimap.origin.x = WIN_W - (WIN_W / 4) - 10;
-	data->minimap.origin.y = 10;
-	data->minimap.centre.x = (WIN_W - (WIN_W / 4) / 2) - 10;
-	data->minimap.centre.y = (WIN_H / 4) / 2 + 10;
-	data->minimap.map_size.w = data->minimap.mnp_size * MAP_SIZE;
-	data->minimap.map_size.h = data->minimap.mnp_size * MAP_SIZE;
-	data->minimap.pos_play.x = data->player.position.x * data->minimap.mnp_size;
-	data->minimap.pos_play.y = data->player.position.y * data->minimap.mnp_size;
-	data->minimap.diff.x = data->minimap.centre.x - data->minimap.pos_play.x;
-	data->minimap.diff.y = data->minimap.centre.y - data->minimap.pos_play.y;
-	data->minimap.limit.l = data->minimap.origin.x;
-	data->minimap.limit.r = WIN_W - data->minimap.origin.y;
-	data->minimap.limit.t = 10;
-	data->minimap.limit.b = WIN_H / 4 + 10;
+	game->minimap.origin.x = WIN_W - (WIN_W / 4) - 10;
+	game->minimap.origin.y = 10;
+	game->minimap.centre.x = (WIN_W - (WIN_W / 4) / 2) - 10;
+	game->minimap.centre.y = (WIN_H / 4) / 2 + 10;
+	game->minimap.map_size.w = game->minimap.mnp_size * MAP_SIZE;
+	game->minimap.map_size.h = game->minimap.mnp_size * MAP_SIZE;
+	game->minimap.pos_play.x = game->player.position.x * game->minimap.mnp_size;
+	game->minimap.pos_play.y = game->player.position.y * game->minimap.mnp_size;
+	game->minimap.diff.x = game->minimap.centre.x - game->minimap.pos_play.x;
+	game->minimap.diff.y = game->minimap.centre.y - game->minimap.pos_play.y;
+	game->minimap.limit.l = game->minimap.origin.x;
+	game->minimap.limit.r = WIN_W - game->minimap.origin.y;
+	game->minimap.limit.t = 10;
+	game->minimap.limit.b = WIN_H / 4 + 10;
 }
 
-static void		ft_draw_background(t_data *data)
+static void		ft_draw_background(t_game*game)
 {
 	SDL_Rect	rect;
 
-	rect = (SDL_Rect){data->minimap.origin.x,
-	data->minimap.origin.y, WIN_W / 4, WIN_H / 4};
-	ft_draw_border(rect, 0xFFFFFFFF, data);
-	ft_draw_rect(rect, 0xFF000000, &(data->minimap.limit), data);
+	rect = (SDL_Rect){game->minimap.origin.x,
+	game->minimap.origin.y, WIN_W / 4, WIN_H / 4};
+	ft_draw_border(rect, 0xFFFFFFFF, game);
+	ft_draw_rect(rect, 0xFF000000, &(game->minimap.limit), game);
 }
 
-static void		ft_draw_ray(int i, int j, t_data *data)
+static void		ft_draw_ray(int i, int j, t_game*game)
 {
 	double		angle_r;
 	t_pos		step;
@@ -48,23 +48,23 @@ static void		ft_draw_ray(int i, int j, t_data *data)
 	t_pos		a;
 	t_pos		b;
 
-	angle_r = (data->thread[i].ray[j].angle_d) * M_PI / 180;
-	step.x = -cos(angle_r) * (data->thread[i].ray[j].dist_minimap)
-	* data->minimap.mnp_size / BLOC_SIZE;
-	step.y = -sin(angle_r) * (data->thread[i].ray[j].dist_minimap)
-	* data->minimap.mnp_size / BLOC_SIZE;
-	a = (t_pos){data->minimap.centre.x, data->minimap.centre.y};
-	b.x = data->minimap.centre.x + step.x;
-	b.y = data->minimap.centre.y + step.y;
+	angle_r = (game->thread[i].ray[j].angle_d) * M_PI / 180;
+	step.x = -cos(angle_r) * (game->thread[i].ray[j].dist_minimap)
+	* game->minimap.mnp_size / BLOC_SIZE;
+	step.y = -sin(angle_r) * (game->thread[i].ray[j].dist_minimap)
+	* game->minimap.mnp_size / BLOC_SIZE;
+	a = (t_pos){game->minimap.centre.x, game->minimap.centre.y};
+	b.x = game->minimap.centre.x + step.x;
+	b.y = game->minimap.centre.y + step.y;
 	vec = (t_vec){a, b};
-	if (data->dev_mode == 1)
-		draw_line(data, vec, ft_get_color(data->thread[i].ray[j].axis,
-		data->thread[i].ray[j].angle_d), &(data->minimap.limit));
+	if (game->dev_mode == 1)
+		draw_line(game, vec, ft_get_color(game->thread[i].ray[j].axis,
+		game->thread[i].ray[j].angle_d), &(game->minimap.limit));
 	else
-		draw_line(data, vec, 0xFFBFFCFF, &(data->minimap.limit));
+		draw_line(game, vec, 0xFFBFFCFF, &(game->minimap.limit));
 }
 
-static void		ft_draw_player(t_data *data)
+static void		ft_draw_player(t_game*game)
 {
 	SDL_Rect	player;
 	int			i;
@@ -76,41 +76,41 @@ static void		ft_draw_player(t_data *data)
 		j = 0;
 		while (j < WIN_W / 8)
 		{
-			ft_draw_ray(i, j, data);
+			ft_draw_ray(i, j, game);
 			j++;
 		}
 		i++;
 	}
-	player = (SDL_Rect){data->minimap.centre.x - 5,
-	data->minimap.centre.y - 5, 10, 10};
-	ft_draw_rect(player, 0x0, 0, data);
+	player = (SDL_Rect){game->minimap.centre.x - 5,
+	game->minimap.centre.y - 5, 10, 10};
+	ft_draw_rect(player, 0x0, 0, game);
 }
 
-void			ft_minimap(t_data *data)
+void			ft_minimap(t_game*game)
 {
 	SDL_Rect	rect;
 	int			i;
 	int			j;
 
-	ft_init_minimap(data);
-	ft_draw_background(data);
+	ft_init_minimap(game);
+	ft_draw_background(game);
 	i = 0;
 	while (i < MAP_SIZE)
 	{
 		j = 0;
 		while (j < MAP_SIZE)
 		{
-			rect = (SDL_Rect){data->minimap.diff.x
-			+ (j * data->minimap.mnp_size),
-			data->minimap.diff.y + (i * data->minimap.mnp_size),
-			data->minimap.mnp_size, data->minimap.mnp_size};
-			if (data->map[i][j] == 1)
-				ft_draw_rect(rect, 0xFF5C4424, &(data->minimap.limit), data);
-			else if (data->map[i][j] == 0 || data->map[i][j] == 2)
-				ft_draw_rect(rect, 0xFFADADAD, &(data->minimap.limit), data);
+			rect = (SDL_Rect){game->minimap.diff.x
+			+ (j * game->minimap.mnp_size),
+			game->minimap.diff.y + (i * game->minimap.mnp_size),
+			game->minimap.mnp_size, game->minimap.mnp_size};
+			if (game->map[i][j] == 1)
+				ft_draw_rect(rect, 0xFF5C4424, &(game->minimap.limit), game);
+			else if (game->map[i][j] == 0 || game->map[i][j] == 2)
+				ft_draw_rect(rect, 0xFFADADAD, &(game->minimap.limit), game);
 			j++;
 		}
 		i++;
 	}
-	ft_draw_player(data);
+	ft_draw_player(game);
 }
