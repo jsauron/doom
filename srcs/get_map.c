@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:01:36 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 14:32:52 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 14:36:21 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void			ft_get_map(char *file, t_data *data)
   lu = 0;
   if ((fd = open(file, O_RDONLY)) == -1)
     ft_parsing_exit(-1, "wolf3d: parsing error: can't open the map", data);
- // ft_get_mapsize(fd, data);
+  lu = read(fd, map, MAP_SIZE * MAP_SIZE);
+  // ft_get_mapsize(fd, data);
   //	while ((get_next_line(fd, &line)) > 0)
   //	if (i >= MAP_SIZE || ft_nbwords(line) != MAP_SIZE)
   //			ft_parsing_exit(fd, "wolf3d 6: parsing error: bad map format", data);

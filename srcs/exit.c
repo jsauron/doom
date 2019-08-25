@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:01:03 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 19:58:14 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 14:54:15 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void			ft_err_exit(char *msg, t_data *data)
 {
 	if (msg)
 		ft_putendl_fd(msg, 2);
-	lt_destroy();
 	if (data->endinitsdl)
 		ft_sdl_quit(data);
 	exit(EXIT_FAILURE);
@@ -33,7 +32,6 @@ void			ft_err_exit(char *msg, t_data *data)
 
 void			ft_exit(t_data *data)
 {
-	lt_destroy();
 	ft_sdl_quit(data);
 	exit(EXIT_SUCCESS);
 }

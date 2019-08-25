@@ -23,7 +23,7 @@ int init_sdl(t_win *wn)
 	SDL_Init(SDL_INIT_VIDEO);
 
 	wn->window = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, XSCREEN, YSCREEN, 0);
-	wn->icon =  load_tga("ressources/mechant.png");
+//	wn->icon =  load_tga("ressources/mechant.png");
 	SDL_SetWindowIcon(wn->window, wn->icon);
 	wn->render = SDL_CreateRenderer(wn->window, -1, 0);
 	wn->screen = SDL_CreateRGBSurface(0, XSCREEN, YSCREEN, 32,
