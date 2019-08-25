@@ -78,8 +78,8 @@ void			ft_calc_distance(int i, int x, t_thread *thread)
 	(thread->data->player.direction - 30) + (x * (60.0 / WIN_W));
 	pos.x = thread->data->player.position.x * BLOC_SIZE;
 	pos.y = thread->data->player.position.y * BLOC_SIZE;
-	while (pos.x > 0 && pos.x < thread->data->map_sz.w * BLOC_SIZE
-	&& pos.y > 0 && pos.y < thread->data->map_sz.h * BLOC_SIZE)
+	while (pos.x > 0 && pos.x < MAP_SIZE * BLOC_SIZE
+	&& pos.y > 0 && pos.y < MAP_SIZE * BLOC_SIZE)
 	{
 		if (!ft_iterate_ray(i, &pos, thread))
 			return ;

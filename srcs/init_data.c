@@ -71,6 +71,8 @@ static void	ft_make_texture(t_data *data)
 
 void		ft_init_data(char *map, t_data *data)
 {
+  int i = 0; 
+
 	ft_bzero(data, sizeof(t_data));
 	data->player.position.x = -1;
 	data->player.position.y = -1;
@@ -79,7 +81,11 @@ void		ft_init_data(char *map, t_data *data)
 	data->player.sensibility = 3;
 	data->player.speed = 0.12;
 	data->minimap.mnp_size = 20;
-	ft_get_map(map, data);
+  if (!(data->map = malloc(sizeof(int *) * XBLOC)))
+      exit (1);
+  while (i < XBLOC)
+        data->map[i++] = malloc(sizeof(int) * YBLOC);
+  ft_get_map(map, data);
 	ft_init_sdl(data);
 	data->endinitsdl = 1;
 	ft_init_fonts(data);
