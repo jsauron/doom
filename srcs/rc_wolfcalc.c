@@ -53,7 +53,7 @@ void			ft_rc_wolfcalc(t_game*game)
 	int i;
 
 	i = 0;
-	game->surface = ft_new_surface(WIN_H, WIN_W, game);
+	//game->screen = ft_new_surface(WIN_H, WIN_W, game);
 	while (i < 8)
 	{
 		game->thread[i].x_start = i;

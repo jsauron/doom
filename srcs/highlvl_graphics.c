@@ -43,7 +43,7 @@ void			draw_line(t_game *game, t_vec vec,
 	{
 		if (!limit || ((int)vec.p1.x > limit->l && (int)vec.p1.x < limit->r
 		&& (int)vec.p1.y > limit->t && (int)vec.p1.y < limit->b))
-			ft_setpixel(game->surface, (int)vec.p1.x, (int)vec.p1.y, color);
+			ft_setpixel(game->screen, (int)vec.p1.x, (int)vec.p1.y, color);
 		e2 = tab[4];
 		if (e2 > -tab[0] && (int)vec.p1.x != (int)vec.p2.x)
 		{
@@ -72,7 +72,7 @@ void			ft_draw_rect(SDL_Rect rect, Uint32 color,
 		{
 			if (!limit || (rect.x + j > limit->l && rect.x + j < limit->r
 			&& rect.y + i > limit->t && rect.y + i < limit->b))
-				ft_setpixel(game->surface, rect.x + j, rect.y + i, color);
+				ft_setpixel(game->screen, rect.x + j, rect.y + i, color);
 			j++;
 		}
 		i++;

@@ -43,7 +43,6 @@ typedef struct s_size		t_size;
 typedef struct s_coef		t_coef;
 typedef struct s_ray		t_ray;
 typedef struct s_thread		t_thread;
-typedef struct s_object		t_object;
 typedef struct s_sdl		t_sdl;
 typedef struct s_player		t_player;
 typedef struct s_minimap	t_minimap;
@@ -82,13 +81,6 @@ struct						s_coef
 	int					y;
 };
 
-struct						s_sdl
-{
-	SDL_Event			event;
-	SDL_Window			*window;
-	SDL_Renderer		*renderer;
-};
-
 struct						s_ray
 {
 	int					x;
@@ -109,10 +101,6 @@ struct						s_thread
 	t_ray				ray[WIN_W / 8];
 };
 
-struct						s_object
-{
-	SDL_Surface			*img_srf;
-};
 
 struct						s_player
 {
@@ -138,13 +126,15 @@ struct						s_minimap
 
 struct						s_game
 {
+	SDL_Window			*window;
+	SDL_Renderer		*renderer;
+	SDL_Surface			*screen;
 	SDL_Texture			*texture;
-	SDL_Surface			*surface;
+	SDL_Surface			*wall[4];
 	t_sdl				sdl;
 	int					endinitsdl;
 	TTF_Font			*font;
 	int					**map;
-	t_object			object[4];
 	t_size				map_sz;
 	t_player			player;
 	t_thread			thread[8];

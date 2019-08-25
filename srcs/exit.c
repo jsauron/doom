@@ -14,8 +14,8 @@
 
 static void		ft_sdl_quit(t_game *game)
 {
-	SDL_DestroyRenderer(game->sdl.renderer);
-	SDL_DestroyWindow(game->sdl.window);
+	SDL_DestroyRenderer(game->renderer);
+	SDL_DestroyWindow(game->window);
 	TTF_CloseFont(game->font);
 	TTF_Quit();
 	SDL_Quit();

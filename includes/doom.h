@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:33:24 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 17:58:10 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ struct						s_coef
 struct						s_sdl
 {
 	SDL_Event			event;
-	SDL_Window			*window;
-	SDL_Renderer		*renderer;
 };
 
 struct						s_ray
@@ -109,10 +107,6 @@ struct						s_thread
 	t_ray				ray[WIN_W / 8];
 };
 
-struct						s_object
-{
-	SDL_Surface			*img_srf;
-};
 
 struct						s_player
 {
@@ -138,13 +132,16 @@ struct						s_minimap
 
 struct						s_game
 {
+	SDL_Window			*window;
+	SDL_Renderer		*renderer;
 	SDL_Texture			*texture;
-	SDL_Surface			*surface;
+	SDL_Surface			*screen;
+//	SDL_Surface			*surface;
+	SDL_Surface			*wall[4];
 	t_sdl				sdl;
 	int					endinitsdl;
 	TTF_Font			*font;
 	int					**map;
-	t_object			object[4];
 	t_size				map_sz;
 	t_player			player;
 	t_thread			thread[8];
@@ -181,9 +178,10 @@ struct						s_game
 
 void						ft_exit(t_game *game);
 void						ft_err_exit(char *msg, t_game *game);
+void						ft_sdl_err_exit(char *msg, t_game *game);
 
 void						ft_get_map(char *map, t_game *game);
-void						ft_init_game(char *map, t_game *game);
+void						ft_init_game(t_game *game, char *map);
 
 int							ft_movement(double angle_r, int dir,t_game *game);
 int							ft_movement_gaming(const Uint8 *state,

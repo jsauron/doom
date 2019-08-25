@@ -6,20 +6,20 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:02:56 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:14:46 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 18:01:52 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	ft_sdl_err_exit(char *msg, t_game *game)
+ void	ft_sdl_err_exit(char *msg, t_game *game)
 {
 	ft_putendl(SDL_GetError());
 	ft_putendl(TTF_GetError());
-	if (game->sdl.renderer)
-		SDL_DestroyRenderer(game->sdl.renderer);
-	if (game->sdl.window)
-		SDL_DestroyWindow(game->sdl.window);
+	if (game->renderer)
+		SDL_DestroyRenderer(game->renderer);
+	if (game->window)
+		SDL_DestroyWindow(game->window);
 	if (game->font)
 		TTF_CloseFont(game->font);
 	TTF_Quit();
@@ -27,45 +27,60 @@ static void	ft_sdl_err_exit(char *msg, t_game *game)
 	ft_err_exit(msg, game);
 }
 
-static void	ft_init_sdl(t_game *game)
+static void	init_sdl_game(t_game *game)
 {
-	game->sdl.window = 0;
-	game->sdl.renderer = 0;
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-		ft_sdl_err_exit(0, game);
+	game->window = 0;
+	game->renderer = 0;
 	if (TTF_Init() < 0)
 		ft_sdl_err_exit(0, game);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-	if (!(game->sdl.window = SDL_CreateWindow("DOOM",
+
+//	SDL_SetRelativeMouseMode(SDL_TRUE);
+
+	if (!(game->window = SDL_CreateWindow("DOOM",
 	SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIN_W, WIN_H, 0)))
 		ft_sdl_err_exit(0, game);
-	if (!(game->sdl.renderer = SDL_CreateRenderer(game->sdl.window, -1,
-	SDL_RENDERER_TARGETTEXTURE | SDL_RENDERER_SOFTWARE)))
+
+	if (!(game->renderer = SDL_CreateRenderer(game->window, -1,
+	/*SDL_RENDERER_TARGETTEXTURE | SDL_RENDERER_SOFTWARE*/ 0)))
 		ft_sdl_err_exit(0, game);
-	if (SDL_SetRenderDrawBlendMode(game->sdl.renderer, SDL_BLENDMODE_BLEND) < 0)
+
+	if (!(game->screen = SDL_CreateRGBSurface(0, WIN_W, WIN_H, 32,
+			0x00FF0000,
+			0x0000FF00,
+			0x000000FF,
+			0xFF000000)))
 		ft_sdl_err_exit(0, game);
-	SDL_RaiseWindow(game->sdl.window);
+
+		if (!(game->texture = SDL_CreateTexture(game->renderer,
+			SDL_PIXELFORMAT_ARGB8888,
+			SDL_TEXTUREACCESS_STREAMING,
+			WIN_W, WIN_H)))
+		ft_sdl_err_exit(0, game);
+
+//	if (SDL_SetRenderDrawBlendMode(game->renderer, SDL_BLENDMODE_BLEND) < 0)
+	//	ft_sdl_err_exit(0, game);
+	//SDL_RaiseWindow(game->window);
 }
 
-static void	ft_init_fonts(t_game *game)
+static void	init_fonts(t_game *game)
 {
 	if (!(game->font = TTF_OpenFont("ressources/fonts/Arial.ttf", 100)))
 		ft_err_exit("wolf3d: error: font failure", game);
 }
 
-static void	ft_make_texture(t_game *game)
+static void	init_wall(t_game *game)
 {
-	if (!(game->object[0].img_srf = load_tga("ressources/wall/blue.tga")))
+	if (!(game->wall[0] = load_tga("ressources/wall/blue.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->object[1].img_srf = load_tga("ressources/wall/pink.tga")))
+	if (!(game->wall[1] = load_tga("ressources/wall/pink.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->object[2].img_srf = load_tga("ressources/wall/green.tga")))
+	if (!(game->wall[2] = load_tga("ressources/wall/green.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->object[3].img_srf = load_tga("ressources/wall/glue.tga")))
+	if (!(game->wall[3] = load_tga("ressources/wall/glue.tga")))
 		ft_err_exit("doom: error: bad textures", game);
 }
 
-void		ft_init_game(char *map, t_game *game)
+void		ft_init_game( t_game *game , char *map)
 {
   int i = 0; 
 
@@ -81,9 +96,9 @@ void		ft_init_game(char *map, t_game *game)
       exit (1);
   while (i < XBLOC)
         game->map[i++] = malloc(sizeof(int) * YBLOC);
-  ft_get_map(map, game);
-	ft_init_sdl(game);
+	ft_get_map(map, game);
+	init_sdl_game(game);
 	game->endinitsdl = 1;
-	ft_init_fonts(game);
-	ft_make_texture(game);
+	init_fonts(game);
+	init_wall(game);
 }

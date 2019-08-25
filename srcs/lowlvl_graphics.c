@@ -6,13 +6,13 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:16:30 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 17:53:35 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-SDL_Surface		*ft_new_surface(int height, int width, t_game *game)
+/*SDL_Surface		*ft_new_surface(int height, int width, t_game *game)
 {
 	SDL_Surface		*surface;
 	Uint32			color[4];
@@ -25,7 +25,7 @@ SDL_Surface		*ft_new_surface(int height, int width, t_game *game)
 	0, width, height, 32, color[0], color[1], color[2], color[3]), ft_srfdel)))
 		ft_err_exit("wolf3d: error: SDL_CreateRGBSurface() failed", game);
 	return (surface);
-}
+}*/
 
 void			ft_set_string(SDL_Rect rect, char *text,
 				SDL_Color color, t_game *game)
@@ -35,10 +35,10 @@ void			ft_set_string(SDL_Rect rect, char *text,
 
 	sdl_rect = (SDL_Rect){rect.x, rect.y, rect.w, rect.h};
 	if (!(surface = TTF_RenderText_Blended(game->font, text, color)))
-		ft_err_exit("Wolf3d: Error while making surface", game);
+		ft_err_exit("Doom: Error while making surface", game);
 	sdl_rect.w = (sdl_rect.h * surface->w) / surface->h;
-	if ((SDL_BlitScaled(surface, 0, game->surface, &sdl_rect)) == -1)
-		ft_err_exit("Wolf3d: Error can't blit surface", game);
+	if ((SDL_BlitScaled(surface, 0, game->screen, &sdl_rect)) == -1)
+		ft_err_exit("Doom: Error can't blit surface", game);
 	SDL_FreeSurface(surface);
 }
 

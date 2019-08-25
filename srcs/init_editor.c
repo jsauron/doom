@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_editor.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/25 18:04:16 by jsauron           #+#    #+#             */
+/*   Updated: 2019/08/25 18:05:09 by jsauron          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "doom.h"
 
 t_win   *init(t_win  *wn)
@@ -20,21 +32,30 @@ t_win   *init(t_win  *wn)
 
 int init_sdl(t_win *wn)
 {
-	SDL_Init(SDL_INIT_VIDEO);
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		ft_sdl_err_exit(0, wn->game);
 
-	wn->window = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, XSCREEN, YSCREEN, 0);
+	if (!(wn->window = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_UNDEFINED,
+	 SDL_WINDOWPOS_UNDEFINED, XSCREEN, YSCREEN, 0)))
+		ft_sdl_err_exit(0, wn->game);
+
 //	wn->icon =  load_tga("ressources/mechant.png");
-	SDL_SetWindowIcon(wn->window, wn->icon);
-	wn->render = SDL_CreateRenderer(wn->window, -1, 0);
-	wn->screen = SDL_CreateRGBSurface(0, XSCREEN, YSCREEN, 32,
+//	SDL_SetWindowIcon(wn->window, wn->icon);
+	if (!(wn->render = SDL_CreateRenderer(wn->window, -1, 0)))
+		ft_sdl_err_exit(0, wn->game);
+
+	if (!(wn->screen = SDL_CreateRGBSurface(0, XSCREEN, YSCREEN, 32,
 			0x00FF0000,
 			0x0000FF00,
 			0x000000FF,
-			0xFF000000);
-	wn->texture = SDL_CreateTexture(wn->render,
+			0xFF000000)))
+		ft_sdl_err_exit(0, wn->game);
+
+	if (!(wn->texture = SDL_CreateTexture(wn->render,
 			SDL_PIXELFORMAT_ARGB8888,
 			SDL_TEXTUREACCESS_STREAMING,
-			XSCREEN, YSCREEN);
+			XSCREEN, YSCREEN)))
+		ft_sdl_err_exit(0, wn->game);
 	return (1);
 }
 
@@ -65,10 +86,5 @@ int  init_structure(t_win *wn, t_editor *editor)
 	editor->key =  load_tga("ressources/editor/key_t.tga");
 	editor->door =  load_tga("ressources/editor/door_t.tga");
 
-	/*  game->player_tab[LEFT] = IMG_Load("sprites_mario/mario_gauche.gif");
-		game->player_tab[RIGHT] = IMG_Load("sprites_mario/mario_droite.gif");
-		game->player_tab[DOWN] = IMG_Load("sprites_mario/mario_bas.gif");
-		game->player_tab[UP] = IMG_Load("sprites_mario/mario_haut.gif");
-		game->current_player = game->player_tab[RIGHT];*/
 	return (1);
 }

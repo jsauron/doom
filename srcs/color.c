@@ -15,8 +15,8 @@
 static SDL_Surface	*choose_texture(int i, t_thread *thread)
 {
 	SDL_Surface	*surface[4] = {
-	thread->game->object[0].img_srf, thread->game->object[1].img_srf,
-	thread->game->object[2].img_srf, thread->game->object[3].img_srf};
+	thread->game->wall[0] , thread->game->wall[1] ,
+	thread->game->wall[2] , thread->game->wall[3] };
 
 	if (thread->ray[i].axis == VERTICAL_HIT)
 	{
@@ -80,5 +80,5 @@ void				ft_assign_color(int x, int y, int i, t_thread *thread)
 		if (thread->game->lightshade == 1)
 			color = ft_light_shade(thread->ray[i].distance, color);
 	}
-	ft_setpixel(thread->game->surface, x, y, color);
+	ft_setpixel(thread->game->screen, x, y, color);
 }

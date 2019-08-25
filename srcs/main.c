@@ -6,40 +6,41 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:52:15 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 18:00:32 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void		ft_make_frame(t_game *game)
+static void		ft_make_frame(t_win *wn, t_game *game)
 {
 	game->nb_frame++;
 	game->time_last = clock();
 
+	(void)wn;
 	ft_rc_wolfcalc(game);
 	ft_set_interface(game);
 	game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
 	ft_set_infos(game);
 
 	game->texture = SDL_CreateTextureFromSurface(
-			game->sdl.renderer, game->surface);
-	if ((SDL_RenderCopy(game->sdl.renderer, game->texture, 0, 0)) != 0)
+			game->renderer, game->screen);
+	if ((SDL_RenderCopy(game->renderer, game->texture, 0, 0)) != 0)
 		ft_err_exit("doom: error: RenderCopy failure", game);
 	SDL_DestroyTexture(game->texture);
-	SDL_RenderPresent(game->sdl.renderer);
+	SDL_RenderPresent(game->renderer);
 }
 
-static void		ft_game_loop(t_game *game)
+static void		ft_game_loop(t_win *wn, t_game *game)
 {
-	ft_make_frame(game);
+	ft_make_frame(wn, game);
 	while (1)
 	{
 		if (ft_get_events(game))
 		{
-			if ((SDL_RenderClear(game->sdl.renderer)) != 0)
+			if ((SDL_RenderClear(game->renderer)) != 0)
 				ft_err_exit("doom: error: RenderClear failure", game);
-			ft_make_frame(game);
+			ft_make_frame(wn, game);
 		}
 		SDL_FlushEvent(SDL_KEYDOWN | SDL_MOUSEMOTION);
 	}
@@ -70,8 +71,8 @@ int			ft_start(char **argv, t_game *game)
 			play = 0;
 		else if (wn->state[SDL_SCANCODE_1] && argv[1])
 		{
-			ft_init_game(argv[1], game);
-			ft_game_loop(game);
+			ft_init_game(game, argv[1]);
+			ft_game_loop(wn, game);
 			SDL_WaitEvent(&(wn->event));
 		}
 		else if (wn->state[SDL_SCANCODE_2])
