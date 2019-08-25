@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 13:31:03 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 15:58:16 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ struct						s_data
 	SDL_Event			event;
 	Uint8				*state;
 	t_mouse				input;
-	t_game				*game;
+	t_editor			*editor;
 };
 
 

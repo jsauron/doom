@@ -27,10 +27,10 @@ typedef	struct		s_mouse
 	int		y;
 }					t_mouse;
 
-typedef struct		s_game
+typedef struct		s_editor
 {
 
-	SDL_Surface		*editor;
+	SDL_Surface		*editor_surface;
 	SDL_Surface		*key;
 	SDL_Surface		*door;
 	SDL_Surface		*menu[10];
@@ -39,20 +39,20 @@ typedef struct		s_game
 	SDL_Surface		*wall;
 	SDL_Surface		*mean;
 	SDL_Surface		*goal;
-	SDL_Surface		*current_player;
+//	SDL_Surface		*current_player;
 	int				**map;
 	int				nb_goal;
-}					t_game;
+}					t_editor;
 
 /* render.c*/
-int     fill_screen(t_win *wn,t_game *game, SDL_Rect *pos, SDL_Rect *pos_player,int **map);
+int     fill_screen(t_win *wn, t_editor *editor, SDL_Rect *pos, SDL_Rect *pos_player,int **map);
 int     render(t_win *wn);
-int     free_surface_editor(t_win *wn, t_game *game);  
+int     free_surface_editor(t_win *wn, t_editor *editor);  
 
 /* input.c */
 
 /* editor.c */
-void	editor(t_win *wn, t_game *game, char *map);
+void	editor(t_win *wn, t_editor *editor, char *map);
 
 /* file.c */
 int		upload_map(int **map, char *input_map);
@@ -67,7 +67,7 @@ int     parse_map(int   **map, SDL_Rect *pos_player);
 t_win   *init(t_win  *wn);
 int			malloc_structure(t_win *wn);
 int   init_sdl(t_win *win);
-int   init_structure(t_win *wn, t_game *game);
+int   init_structure(t_win *wn, t_editor *editor);
 
 /* main.c */
 int		main();

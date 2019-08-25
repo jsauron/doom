@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 21:03:06 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 16:04:25 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void		ft_make_frame(t_data *data)
 
 	data->texture = SDL_CreateTextureFromSurface(
 			data->sdl.renderer, data->surface);
-	lt_release(data->surface);
 	if ((SDL_RenderCopy(data->sdl.renderer, data->texture, 0, 0)) != 0)
 		ft_err_exit("doom: error: RenderCopy failure", data);
 	SDL_DestroyTexture(data->texture);
@@ -75,7 +74,10 @@ int			ft_start(char **argv, t_data *data)
 			ft_game_loop(data);
 		}
 		else if (wn->state[SDL_SCANCODE_2])
-			editor(wn, wn->game, argv[1]);
+		{
+			editor(wn, wn->editor, argv[1]);
+			SDL_WaitEvent(&(wn->event));
+		}
 		current_time = SDL_GetTicks();
 		if (current_time - old_time > 200)
 		{
@@ -88,10 +90,10 @@ int			ft_start(char **argv, t_data *data)
 			old_time = current_time;
 		}
 		SDL_BlitSurface(wn->menu, NULL, wn->screen, &(wn->pos_menu));
-		SDL_BlitSurface(wn->game->menu[i], NULL, wn->screen, &(wn->pos_menu_mov));
+		SDL_BlitSurface(wn->editor->menu[i], NULL, wn->screen, &(wn->pos_menu_mov));
 			render(wn);
 	}
-	free_surface_editor(wn, wn->game);
+	free_surface_editor(wn, wn->editor);
 	SDL_Quit();
 
 	return (0);

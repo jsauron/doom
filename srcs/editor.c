@@ -6,13 +6,13 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 19:20:05 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/25 16:00:22 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	editor(t_win *wn, t_game *game, char *map)
+void	editor(t_win *wn, t_editor *editor, char *map)
 {
 	SDL_Rect pos;
 
@@ -23,7 +23,7 @@ void	editor(t_win *wn, t_game *game, char *map)
 	int x = 0;
 	int y = 0;
 
-	if(!upload_map(game->map, map))
+	if(!upload_map(editor->map, map))
 		exit(EXIT_FAILURE);
 
 	SDL_PumpEvents();
@@ -38,12 +38,12 @@ void	editor(t_win *wn, t_game *game, char *map)
 		{
 			if (wn->event.button.button == SDL_BUTTON_LEFT)
 			{
-				game->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = current_obj;
+				editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = current_obj;
 				left_click = 1;
 			}
 			if (wn->event.button.button == SDL_BUTTON_RIGHT)
 			{
-				game->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = VIDE;
+				editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = VIDE;
 				right_click = 1;
 			}
 		}
@@ -57,9 +57,9 @@ void	editor(t_win *wn, t_game *game, char *map)
 		if (wn->event.type ==  SDL_MOUSEMOTION)
 		{
 			if (left_click)
-				game->map[wn->event.motion.y / SIZE_BLOC][wn->event.motion.x / SIZE_BLOC] = current_obj;
+				editor->map[wn->event.motion.y / SIZE_BLOC][wn->event.motion.x / SIZE_BLOC] = current_obj;
 			else if (right_click)
-				game->map[wn->event.motion.y / SIZE_BLOC][wn->event.motion.x / SIZE_BLOC] = VIDE;
+				editor->map[wn->event.motion.y / SIZE_BLOC][wn->event.motion.x / SIZE_BLOC] = VIDE;
 		}
 		if (wn->event.type == SDL_KEYDOWN)
 		{
@@ -78,13 +78,13 @@ void	editor(t_win *wn, t_game *game, char *map)
 			else if (wn->state[SDL_SCANCODE_6])
 				current_obj = DOOR;
 			else if (wn->state[SDL_SCANCODE_S])
-				save_map(game->map, map);
+				save_map(editor->map, map);
 			else if (wn->state[SDL_SCANCODE_C])
-				upload_map(game->map, map );
+				upload_map(editor->map, map );
 	}
 		pos.x = 0;
 		pos.y = 0;
-		SDL_BlitSurface(game->editor, NULL, wn->screen, &pos);
+		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &pos);
 		//SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 0, 255, 255));
 		y = 0;
 		int c = 0;
@@ -95,19 +95,19 @@ void	editor(t_win *wn, t_game *game, char *map)
 			{
 				pos.x = x * SIZE_BLOC;
 				pos.y = y * SIZE_BLOC;
-				if (game->map[y][x] == WALL)
-						SDL_BlitSurface(game->wall, NULL, wn->screen, &pos);
-				else if (game->map[y][x] == MEAN)
-						SDL_BlitSurface(game->mean, NULL, wn->screen, &pos);
-				else if (game->map[y][x] == GOAL)
-						SDL_BlitSurface(game->goal, NULL, wn->screen, &pos);
-				else if (game->map[y][x] == KEY)
-						SDL_BlitSurface(game->key, NULL, wn->screen, &pos);
-				else if (game->map[y][x] == DOOR)
-						SDL_BlitSurface(game->door, NULL, wn->screen, &pos);
-				else if (game->map[y][x] == PLAYER && c == 0)
+				if (editor->map[y][x] == WALL)
+						SDL_BlitSurface(editor->wall, NULL, wn->screen, &pos);
+				else if (editor->map[y][x] == MEAN)
+						SDL_BlitSurface(editor->mean, NULL, wn->screen, &pos);
+				else if (editor->map[y][x] == GOAL)
+						SDL_BlitSurface(editor->goal, NULL, wn->screen, &pos);
+				else if (editor->map[y][x] == KEY)
+						SDL_BlitSurface(editor->key, NULL, wn->screen, &pos);
+				else if (editor->map[y][x] == DOOR)
+						SDL_BlitSurface(editor->door, NULL, wn->screen, &pos);
+				else if (editor->map[y][x] == PLAYER && c == 0)
 				{
-						SDL_BlitSurface(game->player, NULL, wn->screen, &pos);
+						SDL_BlitSurface(editor->player, NULL, wn->screen, &pos);
 						c++;
 				}
 				x++;

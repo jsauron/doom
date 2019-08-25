@@ -1,18 +1,18 @@
 #include "doom.h"
 
-int     free_surface_editor(t_win *wn, t_game *game)
+int     free_surface_editor(t_win *wn, t_editor *editor)
 {
 	(void)wn;
-	SDL_FreeSurface(game->wall);
-	SDL_FreeSurface(game->mean);
-	SDL_FreeSurface(game->door);
-	SDL_FreeSurface(game->key);
-	SDL_FreeSurface(game->goal);
-	SDL_FreeSurface(game->player);
-	SDL_FreeSurface(game->editor);
+	SDL_FreeSurface(editor->wall);
+	SDL_FreeSurface(editor->mean);
+	SDL_FreeSurface(editor->door);
+	SDL_FreeSurface(editor->key);
+	SDL_FreeSurface(editor->goal);
+	SDL_FreeSurface(editor->player);
+	SDL_FreeSurface(editor->editor_surface);
 	int i = 0;
 	while (i < 9)
-		SDL_FreeSurface(game->menu[i++]);
+		SDL_FreeSurface(editor->menu[i++]);
 	return (1);
 }
 int     render(t_win *wn)

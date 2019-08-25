@@ -7,13 +7,13 @@ t_win   *init(t_win  *wn)
 	i = 0;
 	if (!(wn = malloc(sizeof(t_win ))))
 		exit (1);
-	if (!(wn->game = malloc(sizeof(t_game ))))
+	if (!(wn->editor = malloc(sizeof(t_editor ))))
 		exit (1);
-	if (!(wn->game->map = malloc(sizeof(int *) * XBLOC)))
+	if (!(wn->editor->map = malloc(sizeof(int *) * XBLOC)))
 		exit (1);
 	while (i < XBLOC)
-		wn->game->map[i++] = malloc(sizeof(int) * YBLOC);
-	init_structure(wn, wn->game);
+		wn->editor->map[i++] = malloc(sizeof(int) * YBLOC);
+	init_structure(wn, wn->editor);
 	init_sdl(wn);
 	return (wn);
 }
@@ -38,7 +38,7 @@ int init_sdl(t_win *wn)
 	return (1);
 }
 
-int  init_structure(t_win *wn, t_game *game)
+int  init_structure(t_win *wn, t_editor *editor)
 {
 	wn->menu = load_tga("ressources/menu/menu_4.tga");
 	wn->pos_menu.x = 0;
@@ -46,24 +46,24 @@ int  init_structure(t_win *wn, t_game *game)
 
 	wn->pos_menu_mov.x = 83;
 	wn->pos_menu_mov.y = 45;
-	game->nb_goal = 0;
-	game->menu[0] = load_tga("ressources/menu/1.tga");
-	game->menu[1] = load_tga("ressources/menu/2.tga");
-	game->menu[2] = load_tga("ressources/menu/3.tga");
-	game->menu[3] = load_tga("ressources/menu/4.tga");
-	game->menu[4] = load_tga("ressources/menu/5.tga");
-	game->menu[5] = load_tga("ressources/menu/6.tga");
-	game->menu[6] = load_tga("ressources/menu/7.tga");
-	game->menu[7] = load_tga("ressources/menu/8.tga");
-	game->menu[8] = load_tga("ressources/menu/9.tga");
-	game->menu[9] = load_tga("ressources/menu/10.tga");
-	game->wall =  load_tga("ressources/editor/wall3.tga");
-	game->mean =  load_tga("ressources/editor/mean_t.tga");
-	game->goal =  load_tga("ressources/editor/exit.tga");
-	game->player =  load_tga("ressources/editor/player.tga");
-	game->editor =  load_tga("ressources/editor/floor2.tga");
-	game->key =  load_tga("ressources/editor/key_t.tga");
-	game->door =  load_tga("ressources/editor/door_t.tga");
+	editor->nb_goal = 0;
+	editor->menu[0] = load_tga("ressources/menu/1.tga");
+	editor->menu[1] = load_tga("ressources/menu/2.tga");
+	editor->menu[2] = load_tga("ressources/menu/3.tga");
+	editor->menu[3] = load_tga("ressources/menu/4.tga");
+	editor->menu[4] = load_tga("ressources/menu/5.tga");
+	editor->menu[5] = load_tga("ressources/menu/6.tga");
+	editor->menu[6] = load_tga("ressources/menu/7.tga");
+	editor->menu[7] = load_tga("ressources/menu/8.tga");
+	editor->menu[8] = load_tga("ressources/menu/9.tga");
+	editor->menu[9] = load_tga("ressources/menu/10.tga");
+	editor->wall =  load_tga("ressources/editor/wall3.tga");
+	editor->mean =  load_tga("ressources/editor/mean_t.tga");
+	editor->goal =  load_tga("ressources/editor/exit.tga");
+	editor->player =  load_tga("ressources/editor/player.tga");
+	editor->editor_surface =  load_tga("ressources/editor/floor2.tga");
+	editor->key =  load_tga("ressources/editor/key_t.tga");
+	editor->door =  load_tga("ressources/editor/door_t.tga");
 
 	/*  game->player_tab[LEFT] = IMG_Load("sprites_mario/mario_gauche.gif");
 		game->player_tab[RIGHT] = IMG_Load("sprites_mario/mario_droite.gif");
