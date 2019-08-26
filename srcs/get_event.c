@@ -37,7 +37,7 @@ static int		ft_keyboard1(const Uint8 *state, t_game *game)
 	return (1);
 }
 
-static int		ft_keyboard2(const Uint8 *state, t_game*game)
+static int		ft_keyboard2(Uint8 *state, t_game *game)
 {
 	if (state[SDL_SCANCODE_1])
 		game->gamemode = 0;
@@ -46,7 +46,10 @@ static int		ft_keyboard2(const Uint8 *state, t_game*game)
 	else if (state[SDL_SCANCODE_3])
 		game->dev_mode = (game->dev_mode) ? 0 : 1;
 	else if (state[SDL_SCANCODE_T])
+	{
+		printf("T\n");
 		game->texturing = (game->texturing) ? 0 : 1;
+	}
 	else if (state[SDL_SCANCODE_L])
 		game->lightshade = (game->lightshade) ? 0 : 1;
 	else if (state[SDL_SCANCODE_KP_PLUS]
@@ -120,19 +123,18 @@ static int		ft_move_events(const Uint8 *state, t_game *game)
 
 int				ft_get_events(t_game *game)
 {
-	const Uint8 *state;
-	int			ok;
+	int			move;
 
-	ok = 0;
-	SDL_PollEvent(&(game->sdl.event));
-	state = SDL_GetKeyboardState(0);
+	move = 0;
+	SDL_PollEvent(&(game->event));
+	game->state = (Uint8*)SDL_GetKeyboardState(NULL);
 	SDL_GetRelativeMouseState(&(game->mouse.x), &(game->mouse.y));
-	if (state[SDL_SCANCODE_ESCAPE])
+	if (game->state[SDL_SCANCODE_ESCAPE])
+		return (0);
+	else if (game->event.type == SDL_QUIT)
 		ft_exit(game);
-	if (game->sdl.event.type == SDL_QUIT)
-		ft_exit(game);
-	if (game->sdl.event.type == SDL_KEYDOWN)
-		ok = (ft_keyboard1(state, game) || ft_keyboard2(state, game)) ? 1 : ok;
-	ok = (ok) ? 1 : ft_move_events(state, game);
-	return (ok);
+	else if (game->event.type == SDL_KEYDOWN)
+		move = (ft_keyboard1(game->state, game) || ft_keyboard2(game->state, game)) ? 1 : move;
+	move = (move) ? 1 : ft_move_events(game->state, game);
+	return (1);
 }

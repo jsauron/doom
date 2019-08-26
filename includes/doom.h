@@ -40,22 +40,39 @@ typedef struct s_limit		t_limit;
 typedef struct s_pos		t_pos;
 typedef struct s_vec		t_vec;
 typedef struct s_size		t_size;
-typedef struct s_coef		t_coef;
 typedef struct s_ray		t_ray;
 typedef struct s_thread		t_thread;
 typedef struct s_object		t_object;
-typedef struct s_sdl		t_sdl;
 typedef struct s_player		t_player;
 typedef struct s_minimap	t_minimap;
 typedef struct s_win			t_win;
 typedef struct s_game		t_game;
+typedef struct s_rgb		t_rgb;
+typedef union  u_color		t_color;
+
+struct        				s_rgb
+{
+    unsigned char		    r;
+    unsigned char		    g;
+    unsigned char 		    b;
+    unsigned char 		    a;
+}; 
+
+
+union        				u_color
+{
+    t_rgb		      		rgb;
+	int						all;
+	unsigned char 			tab[4];
+}; 
+
 
 struct						s_limit
 {
-	int					t;
-	int					b;
-	int					l;
-	int					r;
+	int						t;
+	int						b;
+	int						l;
+	int						r;
 };
 
 struct						s_pos
@@ -76,16 +93,6 @@ struct						s_size
 	int					w;
 };
 
-struct						s_coef
-{
-	int					x;
-	int					y;
-};
-
-struct						s_sdl
-{
-	SDL_Event			event;
-};
 
 struct						s_ray
 {
@@ -130,6 +137,8 @@ struct						s_minimap
 	t_pos				diff;
 };
 
+
+
 struct						s_game
 {
 	SDL_Window			*window;
@@ -138,7 +147,8 @@ struct						s_game
 	SDL_Surface			*screen;
 //	SDL_Surface			*surface;
 	SDL_Surface			*wall[4];
-	t_sdl				sdl;
+	SDL_Event			event;
+	Uint8				*state;
 	int					endinitsdl;
 	TTF_Font			*font;
 	int					**map;
@@ -151,7 +161,7 @@ struct						s_game
 	int					gamemode;
 	int					setting;
 	int					dev_mode;
-	t_coef				mouse;
+	t_mouse				mouse;
 	Uint32				time_last;
 	int					nb_frame;
 	int					fps;

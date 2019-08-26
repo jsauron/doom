@@ -26,7 +26,7 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 	if(!upload_map(editor->map, map))
 		exit(EXIT_FAILURE);
 
-	SDL_PumpEvents();
+	//SDL_PumpEvents();
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
 	wn->input.mouse = (Uint32)SDL_GetMouseState(&wn->input.x, &wn->input.y);
 	while (play)
@@ -82,8 +82,8 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 			else if (wn->state[SDL_SCANCODE_C])
 				upload_map(editor->map, map );
 	}
-		pos.x = 0;
-		pos.y = 0;
+		pos.x = 50;
+		pos.y = 50;
 		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &pos);
 		//SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 0, 255, 255));
 		y = 0;

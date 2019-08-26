@@ -16,8 +16,8 @@
 {
 	ft_putendl(SDL_GetError());
 	ft_putendl(TTF_GetError());
-	if (game->renderer)
-		SDL_DestroyRenderer(game->renderer);
+	//if (game->renderer)
+		//SDL_DestroyRenderer(game->renderer);
 	if (game->window)
 		SDL_DestroyWindow(game->window);
 	if (game->font)
@@ -29,20 +29,10 @@
 
 static void	init_sdl_game(t_game *game)
 {
-	game->window = 0;
-	game->renderer = 0;
 	if (TTF_Init() < 0)
 		ft_sdl_err_exit(0, game);
 
-//	SDL_SetRelativeMouseMode(SDL_TRUE);
-
-	if (!(game->window = SDL_CreateWindow("DOOM",
-	SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIN_W, WIN_H, 0)))
-		ft_sdl_err_exit(0, game);
-
-	if (!(game->renderer = SDL_CreateRenderer(game->window, -1,
-	/*SDL_RENDERER_TARGETTEXTURE | SDL_RENDERER_SOFTWARE*/ 0)))
-		ft_sdl_err_exit(0, game);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	if (!(game->screen = SDL_CreateRGBSurface(0, WIN_W, WIN_H, 32,
 			0x00FF0000,
@@ -51,15 +41,6 @@ static void	init_sdl_game(t_game *game)
 			0xFF000000)))
 		ft_sdl_err_exit(0, game);
 
-		if (!(game->texture = SDL_CreateTexture(game->renderer,
-			SDL_PIXELFORMAT_ARGB8888,
-			SDL_TEXTUREACCESS_STREAMING,
-			WIN_W, WIN_H)))
-		ft_sdl_err_exit(0, game);
-
-//	if (SDL_SetRenderDrawBlendMode(game->renderer, SDL_BLENDMODE_BLEND) < 0)
-	//	ft_sdl_err_exit(0, game);
-	//SDL_RaiseWindow(game->window);
 }
 
 static void	init_fonts(t_game *game)

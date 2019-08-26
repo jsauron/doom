@@ -12,21 +12,6 @@
 
 #include "doom.h"
 
-/*SDL_Surface		*ft_new_surface(int height, int width, t_game *game)
-{
-	SDL_Surface		*surface;
-	Uint32			color[4];
-
-	color[0] = 0x00ff0000;
-	color[1] = 0x0000ff00;
-	color[2] = 0x000000ff;
-	color[3] = 0xff000000;
-	if (!(surface = lt_push(SDL_CreateRGBSurface(
-	0, width, height, 32, color[0], color[1], color[2], color[3]), ft_srfdel)))
-		ft_err_exit("wolf3d: error: SDL_CreateRGBSurface() failed", game);
-	return (surface);
-}*/
-
 void			ft_set_string(SDL_Rect rect, char *text,
 				SDL_Color color, t_game *game)
 {
@@ -42,31 +27,38 @@ void			ft_set_string(SDL_Rect rect, char *text,
 	SDL_FreeSurface(surface);
 }
 
-void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 color)
 {
 	int			bpp;
 	Uint8		*p;
+//	t_color    col;
+  //  int    (*tab_pxl)[y * surface->pitch][x] = NULL;
 
+//	dprintf(1, "tab[1] = %d\n", col.tab[1]);
+//    tab_pxl = surface->pixels;
 	if (x < 0 || x > WIN_W || y < 0 || y > WIN_H)
 		return ;
+//	col.all = color;
 	bpp = surface->format->BytesPerPixel;
+	
 	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
-	(bpp == 1) ? *p = pixel : 0;
-	(bpp == 2) ? *(Uint16 *)p = pixel : 0;
-	(bpp == 4) ? *(Uint32 *)p = pixel : 0;
+	//tab_pxl = color;
+	(bpp == 1) ? *p = color : 0;
+	(bpp == 2) ? *(Uint16 *)p = color : 0;
+	(bpp == 4) ? *(Uint32 *)p = color : 0;
 	if (bpp == 3)
 	{
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 		{
-			p[0] = (pixel >> 16) & 0xff;
-			p[1] = (pixel >> 8) & 0xff;
-			p[2] = pixel & 0xff;
+			p[0] = (color >> 16) & 0xff;
+			p[1] = (color >> 8) & 0xff;
+			p[2] = color & 0xff;
 		}
 		else
 		{
-			p[0] = pixel & 0xff;
-			p[1] = (pixel >> 8) & 0xff;
-			p[2] = (pixel >> 16) & 0xff;
+			p[0] = color & 0xff;
+			p[1] = (color >> 8) & 0xff;
+			p[2] = (color >> 16) & 0xff;
 		}
 	}
 }
@@ -78,7 +70,7 @@ Uint32			ft_getpixel(SDL_Surface *surface, int x, int y, t_game *game)
 	Uint32			ret;
 
 	if ((SDL_LockSurface(surface)) != 0)
-		ft_err_exit("wolf3d: error: SDL_LockSurface() failure", game);
+		ft_err_exit("doom: error: SDL_LockSurface() failure", game);
 	x = ft_abs(--x);
 	y = ft_abs(--y);
 	bpp = surface->format->BytesPerPixel;

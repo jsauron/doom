@@ -20,25 +20,30 @@ static void		ft_make_frame(t_win *wn, t_game *game)
 	(void)wn;
 	ft_rc_wolfcalc(game);
 	ft_set_interface(game);
-	game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
+	if (clock() != 0 && (1000 - game->time_last / 10000) != 0  && (clock() /10000 - game->time_last / 10000) != 0)
+		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
 	ft_set_infos(game);
 
 	game->texture = SDL_CreateTextureFromSurface(
-			game->renderer, game->screen);
-	if ((SDL_RenderCopy(game->renderer, game->texture, 0, 0)) != 0)
+			wn->render, game->screen);
+	if ((SDL_RenderCopy(wn->render, game->texture, 0, 0)) != 0)
 		ft_err_exit("doom: error: RenderCopy failure", game);
 	SDL_DestroyTexture(game->texture);
-	SDL_RenderPresent(game->renderer);
+	SDL_RenderPresent(wn->render);
 }
 
 static void		ft_game_loop(t_win *wn, t_game *game)
 {
+	int play;
+
+	play = 1;
 	ft_make_frame(wn, game);
-	while (1)
+	while (play)
 	{
-		if (ft_get_events(game))
+		play = ft_get_events(game);
+		if (play > 0)
 		{
-			if ((SDL_RenderClear(game->renderer)) != 0)
+			if ((SDL_RenderClear(wn->render)) != 0)
 				ft_err_exit("doom: error: RenderClear failure", game);
 			ft_make_frame(wn, game);
 		}

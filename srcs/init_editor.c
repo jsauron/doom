@@ -36,7 +36,7 @@ int init_sdl(t_win *wn)
 		ft_sdl_err_exit(0, wn->game);
 
 	if (!(wn->window = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_UNDEFINED,
-	 SDL_WINDOWPOS_UNDEFINED, XSCREEN, YSCREEN, 0)))
+	 SDL_WINDOWPOS_UNDEFINED, WIN_W, WIN_H, 0)))
 		ft_sdl_err_exit(0, wn->game);
 
 //	wn->icon =  load_tga("ressources/mechant.png");
@@ -54,7 +54,7 @@ int init_sdl(t_win *wn)
 	if (!(wn->texture = SDL_CreateTexture(wn->render,
 			SDL_PIXELFORMAT_ARGB8888,
 			SDL_TEXTUREACCESS_STREAMING,
-			XSCREEN, YSCREEN)))
+			WIN_W, WIN_H)))
 		ft_sdl_err_exit(0, wn->game);
 	return (1);
 }

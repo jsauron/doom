@@ -31,7 +31,7 @@ static Uint32		ft_calc_col(int y, int i, t_thread *thread)
 {
 	const SDL_Surface	*surface = choose_texture(i, thread);
 	double				h_wall;
-	t_coef				textr;
+	t_mouse				textr;
 	double				ywall;
 	Uint32				color;
 	double				h_txtr;
