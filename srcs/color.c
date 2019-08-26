@@ -54,7 +54,7 @@ static Uint32		ft_calc_col(int y, int i, t_thread *thread)
 
 Uint32				ft_get_color(int axis, int angle_d)
 {
-	const Uint32	tab[4] = {0xFF5454E5, 0xFF86D865, 0xFFD8815F, 0xFF89EFFF};
+	const Uint32	tab[4] = {0xFFB00020, 0xFFFF0266, 0xFF3700B3, 0xFFFFDE03};
 
 	if (axis == VERTICAL_HIT)
 	{
@@ -70,7 +70,7 @@ void				ft_assign_color(int x, int y, int i, t_thread *thread)
 
 	color = 0x0;
 	if (y < thread->ray[i].wall_top)
-		color = (thread->game->lightshade) ? 0xFF46463B : 0xFFFFFED6;
+		color = (thread->game->lightshade) ? 0xFFDC143C : 0xFFD6FEFF;
 	else if (y >= thread->ray[i].wall_top && y <= thread->ray[i].wall_bot)
 	{
 		color = (thread->game->texturing) ? ft_calc_col(y, i, thread)
