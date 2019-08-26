@@ -18,8 +18,8 @@
 	ft_putendl(TTF_GetError());
 	//if (game->renderer)
 		//SDL_DestroyRenderer(game->renderer);
-	if (game->window)
-		SDL_DestroyWindow(game->window);
+	//if (game->window)
+		//SDL_DestroyWindow(game->window);
 	if (game->font)
 		TTF_CloseFont(game->font);
 	TTF_Quit();
@@ -55,7 +55,7 @@ static void	init_wall(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->wall[1] = load_tga("ressources/wall/pink.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->wall[2] = load_tga("ressources/wall/green.tga")))
+	if (!(game->wall[2] = load_tga("ressources/wall/croco.tga")))
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->wall[3] = load_tga("ressources/wall/glue.tga")))
 		ft_err_exit("doom: error: bad textures", game);

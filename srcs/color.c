@@ -48,7 +48,7 @@ static Uint32		ft_calc_col(int y, int i, t_thread *thread)
 	textr.y = h_txtr * ywall / h_wall;
 	color = ft_getpixel((SDL_Surface *)surface,
 	(int)textr.x % (int)surface->w,
-	(int)textr.y % (int)surface->w, thread->game) | 0xFF000000;
+	(int)textr.y % (int)surface->w, thread->game) | 0xFF0000000;
 	return (color);
 }
 

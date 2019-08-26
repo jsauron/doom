@@ -44,7 +44,7 @@ int init_sdl(t_win *wn)
 	if (!(wn->render = SDL_CreateRenderer(wn->window, -1, 0)))
 		ft_sdl_err_exit(0, wn->game);
 
-	if (!(wn->screen = SDL_CreateRGBSurface(0, XSCREEN, YSCREEN, 32,
+	if (!(wn->screen = SDL_CreateRGBSurface(0, WIN_W, WIN_H, 32,
 			0x00FF0000,
 			0x0000FF00,
 			0x000000FF,

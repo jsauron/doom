@@ -26,7 +26,7 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 	if(!upload_map(editor->map, map))
 		exit(EXIT_FAILURE);
 
-	//SDL_PumpEvents();
+	SDL_PumpEvents();
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
 	wn->input.mouse = (Uint32)SDL_GetMouseState(&wn->input.x, &wn->input.y);
 	while (play)
@@ -36,15 +36,18 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 			play = 0;
 		else if (wn->event.type ==  SDL_MOUSEBUTTONDOWN)
 		{
+				printf("1\n");
 			if (wn->event.button.button == SDL_BUTTON_LEFT)
 			{
 				editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = current_obj;
 				left_click = 1;
+				printf("2\n");
 			}
 			if (wn->event.button.button == SDL_BUTTON_RIGHT)
 			{
 				editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = VIDE;
 				right_click = 1;
+				printf("3\n");
 			}
 		}
 		else if (wn->event.type ==  SDL_MOUSEBUTTONUP)
@@ -82,8 +85,8 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 			else if (wn->state[SDL_SCANCODE_C])
 				upload_map(editor->map, map );
 	}
-		pos.x = 50;
-		pos.y = 50;
+		pos.x = 0;
+		pos.y = 0;
 		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &pos);
 		//SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 0, 255, 255));
 		y = 0;

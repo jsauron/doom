@@ -20,7 +20,7 @@ static void		ft_make_frame(t_win *wn, t_game *game)
 	(void)wn;
 	ft_rc_wolfcalc(game);
 	ft_set_interface(game);
-	if (clock() != 0 && (1000 - game->time_last / 10000) != 0  && (clock() /10000 - game->time_last / 10000) != 0)
+	if (clock() != 0 && (1000 - game->time_last / 10000) != 0  && (clock() /10000 - game->time_last / 10000))
 		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
 	ft_set_infos(game);
 
@@ -82,6 +82,7 @@ int			ft_start(char **argv, t_game *game)
 		}
 		else if (wn->state[SDL_SCANCODE_2])
 		{
+			SDL_SetRelativeMouseMode(SDL_FALSE);
 			editor(wn, wn->editor, argv[1]);
 			SDL_WaitEvent(&(wn->event));
 		}
@@ -98,7 +99,7 @@ int			ft_start(char **argv, t_game *game)
 		}
 		SDL_BlitSurface(wn->menu, NULL, wn->screen, &(wn->pos_menu));
 		SDL_BlitSurface(wn->editor->menu[i], NULL, wn->screen, &(wn->pos_menu_mov));
-			render(wn);
+			render_editor(wn);
 	}
 	free_surface_editor(wn, wn->editor);
 	SDL_Quit();

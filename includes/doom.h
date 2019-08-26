@@ -24,7 +24,7 @@
 
 # define H_GREEN 0x00FF00FF
 # define H_RED 0xFF0000FF
-# define WIN_H 700
+# define WIN_H 750
 # define WIN_W 1000
 # define BLOC_SIZE 200
 # define DIST_SCREEN 900
@@ -141,8 +141,6 @@ struct						s_minimap
 
 struct						s_game
 {
-	SDL_Window			*window;
-	SDL_Renderer		*renderer;
 	SDL_Texture			*texture;
 	SDL_Surface			*screen;
 //	SDL_Surface			*surface;
@@ -234,5 +232,6 @@ void						ft_setpixel(SDL_Surface *surface,
 		int x, int y, Uint32 pixel);
 Uint32						ft_getpixel(SDL_Surface *surface,
 		int x, int y, t_game *game);
-
+int     render_game(t_win *wn);
+int     render_editor(t_win *wn);
 #endif
