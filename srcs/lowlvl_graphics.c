@@ -27,22 +27,18 @@ void			ft_set_string(SDL_Rect rect, char *text,
 	SDL_FreeSurface(surface);
 }
 
+//static void swap_tab(tab)
 void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 color)
 {
 	int			bpp;
 	Uint8		*p;
-//	t_color    col;
-  //  int    (*tab_pxl)[y * surface->pitch][x] = NULL;
+	t_color    col;
 
-//	dprintf(1, "tab[1] = %d\n", col.tab[1]);
-//    tab_pxl = surface->pixels;
 	if (x < 0 || x > WIN_W || y < 0 || y > WIN_H)
 		return ;
-//	col.all = color;
+	col.all = color;
 	bpp = surface->format->BytesPerPixel;
-	
 	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
-	//tab_pxl = color;
 	(bpp == 1) ? *p = color : 0;
 	(bpp == 2) ? *(Uint16 *)p = color : 0;
 	(bpp == 4) ? *(Uint32 *)p = color : 0;

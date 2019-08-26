@@ -2,13 +2,12 @@
 * *A wolf3d like game, made with raycasting*
 
 ## demo
-<img src="ressources/img/wolf3d_demo.gif" width="400"></img>
 
 ## Built with
 C language, SDL2 library, Raycasting method
 
 ## Installing
-* Git clone http://github.com/jsauron/wolf3d.git
+* Git clone http://github.com/jsauron/doom.git
 * Compile it with `make`
 
 ## Make it work
