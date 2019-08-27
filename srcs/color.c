@@ -37,6 +37,8 @@ static Uint32		ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 	double				h_txtr;
 	double				w_txtr;
 
+	if (wn->game.door_in == 1)
+		surface = wn->game.door[0];
 	ywall = (y - thread->ray[i].wall_top);
 	w_txtr = surface->w;
 	h_txtr = surface->h;

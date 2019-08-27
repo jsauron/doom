@@ -61,7 +61,7 @@ static void		ft_draw_ray(t_win *wn, t_game *game, int i, int j)
 		draw_line(wn, vec, ft_get_color(game->thread[i].ray[j].axis,
 		game->thread[i].ray[j].angle_d), &(game->minimap.limit));
 	else
-		draw_line(wn, vec, 0xFFBFFCFF, &(game->minimap.limit));
+		draw_line(wn, vec, 0xFFFFFFFF, &(game->minimap.limit));
 }
 
 static void		ft_draw_player(t_win *wn, t_game*game)
@@ -105,9 +105,9 @@ void			ft_minimap(t_win *wn, t_game*game)
 			game->minimap.diff.y + (i * game->minimap.mnp_size),
 			game->minimap.mnp_size, game->minimap.mnp_size};
 			if (game->map[i][j] == 1)
-				ft_draw_rect(wn, rect, 0xFF5C4424, &(game->minimap.limit));
+				ft_draw_rect(wn, rect, 0xFF306bb0, &(game->minimap.limit));
 			else if (game->map[i][j] == 0 || game->map[i][j] == 2)
-				ft_draw_rect(wn, rect, 0xFFADADAD, &(game->minimap.limit));
+				ft_draw_rect(wn, rect, 0xFFffabe4, &(game->minimap.limit));
 			j++;
 		}
 		i++;

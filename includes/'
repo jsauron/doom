@@ -131,6 +131,7 @@ struct						s_game
 	SDL_Surface			*screen;
 	SDL_Texture			*texture;
 	SDL_Surface			*wall[4];
+	SDL_Surface			*door[4];
 	t_sdl				sdl;
 	int					endinitsdl;
 	TTF_Font			*font;

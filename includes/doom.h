@@ -143,6 +143,7 @@ struct						s_minimap
 struct						s_game
 {
 	SDL_Surface			*wall[4];
+	SDL_Surface			*door[4];
 	SDL_Event			event;
 	Uint8				*state;
 	int					endinitsdl;
@@ -155,6 +156,7 @@ struct						s_game
 	int					texturing;
 	int					lightshade;
 	int					gamemode;
+	int					door_in;
 	int					setting;
 	int					dev_mode;
 	t_mouse				mouse;
