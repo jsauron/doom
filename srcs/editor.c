@@ -84,7 +84,7 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 	}
 		pos.x = 0;
 		pos.y = 0;
-		SDL_BlitSurface(editor->editor_back, NULL, wn->screen, &pos);
+//		SDL_BlitSurface(editor->editor_back, NULL, wn->screen, &pos);
 		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &pos);
 		//SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 0, 255, 255));
 		y = 0;

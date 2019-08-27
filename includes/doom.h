@@ -171,7 +171,6 @@ struct						s_game
 	SDL_Surface			*screen;
 	SDL_Surface			*menu;
 	SDL_Surface			*menu_back;
-	SDL_Surface			*editor_back;
 	SDL_Surface			*icon;
 	SDL_Rect			pos_menu;
 	SDL_Rect			pos_menu_mov;

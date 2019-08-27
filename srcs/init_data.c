@@ -51,13 +51,13 @@ static void	init_fonts(t_game *game)
 
 static void	init_wall(t_game *game)
 {
-	if (!(game->wall[0] = load_tga("ressources/wall/blue.tga")))
+	if (!(game->wall[0] = IMG_Load("ressources/wall/blue.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->wall[1] = load_tga("ressources/wall/pink.tga")))
+	if (!(game->wall[1] = IMG_Load("ressources/wall/pink.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->wall[2] = load_tga("ressources/wall/croco.tga")))
+	if (!(game->wall[2] = IMG_Load("ressources/wall/croco.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->wall[3] = load_tga("ressources/wall/glue.tga")))
+	if (!(game->wall[3] = IMG_Load("ressources/wall/glue.tga")))
 		ft_err_exit("doom: error: bad textures", game);
 }
 

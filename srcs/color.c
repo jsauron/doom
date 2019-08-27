@@ -54,7 +54,7 @@ static Uint32		ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 
 Uint32				ft_get_color(int axis, int angle_d)
 {
-	const Uint32	tab[4] = {0xFFB00020, 0xFFFF0266, 0xFF3700B3, 0xFFFFDE03};
+	const Uint32	tab[4] = {0xFF0c97b3, 0xFFdb9ac5, 0xFF262b63, 0xFF94bdcf};
 
 	if (axis == VERTICAL_HIT)
 	{
