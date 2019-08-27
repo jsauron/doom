@@ -50,6 +50,7 @@ Uint32		ft_light_shade(double distance, Uint32 hexa)
 	ft_remove_light(&color.b, delta, 8);
 	ft_remove_light(&color.a, delta, 0);
 	return ((color.r << 24) + (color.g << 16) + (color.b << 8) + (color.a));
+	//return (hexa);
 }
 
 void		ft_srfdel(void **ap)

@@ -12,7 +12,7 @@
 
 #include "doom.h"
 
-int				ft_is_inwall(t_pos *pos, t_game*game)
+int				ft_is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 {
 	int		x2;
 	int		y2;
@@ -21,6 +21,8 @@ int				ft_is_inwall(t_pos *pos, t_game*game)
 	y2 = pos->y / BLOC_SIZE;
 	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
 		return (0);
+	if (ray != NULL && game->map[x2][y2] == 6)
+		ray->the_door = 1;
 	if (game->map[y2][x2] == 1 || game->map[y2][x2] == 3 || game->map[x2][y2] == 6)
 		return (1);
 	return (0);
@@ -53,14 +55,14 @@ static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 	alpha_r = (fabs(thread->game->player.direction
 	- thread->ray[i].angle_d)) * M_PI / 180;
 	angle_r = thread->ray[i].angle_d * M_PI / 180;
-	if ((ft_is_inwall(pos, thread->game)) == 1)
+	if ((ft_is_inwall(pos, thread->game, &thread->ray[i])) == 1)
 	{
 		thread->ray[i].axis = 1;
 		ft_get_raygame(*pos, alpha_r, i, thread);
 		return (0);
 	}
 	pos->x += -cos(angle_r) * 1;
-	if ((ft_is_inwall(pos, thread->game)) == 1)
+	if ((ft_is_inwall(pos, thread->game, &thread->ray[i])) == 1)
 	{
 		thread->ray[i].axis = 2;
 		ft_get_raygame(*pos, alpha_r, i, thread);

@@ -18,6 +18,8 @@ static SDL_Surface	*choose_texture(int i, t_thread *thread)
 	thread->game->wall[0] , thread->game->wall[1] ,
 	thread->game->wall[2] , thread->game->wall[3] };
 
+	if (thread->ray[i].the_door == 1)
+		return (thread->game->door);
 	if (thread->ray[i].axis == VERTICAL_HIT)
 	{
 		return (((thread->ray[i].angle_d >= 0 && thread->ray[i].angle_d <= 180)
@@ -37,8 +39,6 @@ static Uint32		ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 	double				h_txtr;
 	double				w_txtr;
 
-	if (wn->game.door_in == 1)
-		surface = wn->game.door[0];
 	ywall = (y - thread->ray[i].wall_top);
 	w_txtr = surface->w;
 	h_txtr = surface->h;

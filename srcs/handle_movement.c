@@ -42,9 +42,9 @@ int				ft_movement(double angle_r, int dir, t_game *game)
 		pos_h.x = (game->player.position.x * BLOC_SIZE) + move.x * 150;
 		pos_v.y = (game->player.position.y * BLOC_SIZE) + move.y * 150;
 	}
-	if (ft_is_inmap(&pos_v, game) && !(ft_is_inwall(&pos_v, game)))
+	if (ft_is_inmap(&pos_v, game) && !(ft_is_inwall(&pos_v, game, NULL)))
 		game->player.position.y += move.y;
-	if (ft_is_inmap(&pos_h, game) && !(ft_is_inwall(&pos_h, game)))
+	if (ft_is_inmap(&pos_h, game) && !(ft_is_inwall(&pos_h, game, NULL)))
 		game->player.position.x += move.x;
 	return (1);
 }

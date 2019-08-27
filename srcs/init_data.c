@@ -59,7 +59,7 @@ static void	init_wall(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->wall[3] = IMG_Load("ressources/wall/glue.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->door[0] = IMG_Load("ressources/wall/door.tga")))
+	if (!(game->door = IMG_Load("ressources/wall/door.tga")))
 		ft_err_exit("doom: error: bad textures", game);
 
 }
@@ -81,7 +81,6 @@ void		ft_init_game(t_win *wn,  t_game *game , char *map)
 	game->player.sensibility = 3;
 	game->player.speed = 0.12;
 	game->minimap.mnp_size = 20;
-	game->door_in = 0;
   if (!(game->map = malloc(sizeof(int *) * XBLOC)))
       exit (1);
 	  i = 0;

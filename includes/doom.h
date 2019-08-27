@@ -96,6 +96,7 @@ struct						s_size
 
 struct						s_ray
 {
+	int					the_door;
 	int					x;
 	int					y;
 	int					axis;
@@ -143,7 +144,7 @@ struct						s_minimap
 struct						s_game
 {
 	SDL_Surface			*wall[4];
-	SDL_Surface			*door[4];
+	SDL_Surface			*door;
 	SDL_Event			event;
 	Uint8				*state;
 	int					endinitsdl;
@@ -156,7 +157,6 @@ struct						s_game
 	int					texturing;
 	int					lightshade;
 	int					gamemode;
-	int					door_in;
 	int					setting;
 	int					dev_mode;
 	t_mouse				mouse;
@@ -204,7 +204,7 @@ int							ft_rotation_normal(const Uint8 *state,
 		t_game *game);
 int							ft_get_events(t_game *game);
 
-int							ft_is_inwall(t_pos *pos, t_game *game);
+int							ft_is_inwall(t_pos *pos, t_game *game, t_ray *ray);
 Uint32						ft_get_color(int axis, int angle_d);
 void						ft_assign_color(t_win *wn, int x, int y,
 		int i, t_thread *thread);
