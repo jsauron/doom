@@ -27,7 +27,7 @@ static SDL_Surface	*choose_texture(int i, t_thread *thread)
 	? surface[2] : surface[3]);
 }
 
-static Uint32		ft_calc_col(int y, int i, t_thread *thread)
+static Uint32		ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 {
 	const SDL_Surface	*surface = choose_texture(i, thread);
 	double				h_wall;
@@ -46,9 +46,9 @@ static Uint32		ft_calc_col(int y, int i, t_thread *thread)
 	else if (thread->ray[i].axis == HORIZONTAL_HIT)
 		textr.x = ((int)(thread->ray[i].y / 8) % BLOC_SIZE) * w_txtr / BLOC_SIZE;
 	textr.y = h_txtr * ywall / h_wall;
-	color = ft_getpixel((SDL_Surface *)surface,
+	color = ft_getpixel(wn, (SDL_Surface *)surface,
 	(int)textr.x % (int)surface->w,
-	(int)textr.y % (int)surface->w, thread->game) | 0xFF0000000;
+	(int)textr.y % (int)surface->w) | 0xFF0000000;
 	return (color);
 }
 
@@ -64,7 +64,7 @@ Uint32				ft_get_color(int axis, int angle_d)
 	return ((angle_d >= 90 && angle_d <= 270) ? tab[2] : tab[3]);
 }
 
-void				ft_assign_color(int x, int y, int i, t_thread *thread)
+void				ft_assign_color(t_win *wn, int x, int y, int i, t_thread *thread)
 {
 	Uint32		color;
 
@@ -73,12 +73,12 @@ void				ft_assign_color(int x, int y, int i, t_thread *thread)
 		color = (thread->game->lightshade) ? 0xFFDC143C : 0xFFD6FEFF;
 	else if (y >= thread->ray[i].wall_top && y <= thread->ray[i].wall_bot)
 	{
-		color = (thread->game->texturing) ? ft_calc_col(y, i, thread)
+		color = (thread->game->texturing) ? ft_calc_col(wn, y, i, thread)
 		: ft_get_color(thread->ray[i].axis, thread->ray[i].angle_d);
 
 		// lightshading
 		if (thread->game->lightshade == 1)
 			color = ft_light_shade(thread->ray[i].distance, color);
 	}
-	ft_setpixel(thread->game->screen, x, y, color);
+	ft_setpixel(wn->screen, x, y, color);
 }

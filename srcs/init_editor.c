@@ -33,39 +33,42 @@ t_win   *init(t_win  *wn)
 int init_sdl(t_win *wn)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-		ft_sdl_err_exit(0, wn->game);
+		ft_sdl_err_exit(0, &wn->game);
 
 	if (!(wn->window = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_UNDEFINED,
 	 SDL_WINDOWPOS_UNDEFINED, WIN_W, WIN_H, 0)))
-		ft_sdl_err_exit(0, wn->game);
+		ft_sdl_err_exit(0, &wn->game);
 
 //	wn->icon =  load_tga("ressources/mechant.png");
 //	SDL_SetWindowIcon(wn->window, wn->icon);
 	if (!(wn->render = SDL_CreateRenderer(wn->window, -1, 0)))
-		ft_sdl_err_exit(0, wn->game);
+		ft_sdl_err_exit(0, &wn->game);
 
 	if (!(wn->screen = SDL_CreateRGBSurface(0, WIN_W, WIN_H, 32,
 			0x00FF0000,
 			0x0000FF00,
 			0x000000FF,
 			0xFF000000)))
-		ft_sdl_err_exit(0, wn->game);
+		ft_sdl_err_exit(0, &wn->game);
 
 	if (!(wn->texture = SDL_CreateTexture(wn->render,
 			SDL_PIXELFORMAT_ARGB8888,
 			SDL_TEXTUREACCESS_STREAMING,
 			WIN_W, WIN_H)))
-		ft_sdl_err_exit(0, wn->game);
+		ft_sdl_err_exit(0, &wn->game);
 	return (1);
 }
 
 int  init_structure(t_win *wn, t_editor *editor)
 {
-	wn->menu = load_tga("ressources/menu/menu_4.tga");
+	wn->menu = load_tga("ressources/menu/menu_back.tga");
 	wn->pos_menu.x = 0;
 	wn->pos_menu.y = 0;
 
-	wn->pos_menu_mov.x = 83;
+	wn->pos_game.x = 0;
+	wn->pos_game.y = 0;
+
+	wn->pos_menu_mov.x = 120 + 80;
 	wn->pos_menu_mov.y = 45;
 	editor->nb_goal = 0;
 	editor->menu[0] = load_tga("ressources/menu/1.tga");
@@ -83,6 +86,7 @@ int  init_structure(t_win *wn, t_editor *editor)
 	editor->goal =  load_tga("ressources/editor/exit.tga");
 	editor->player =  load_tga("ressources/editor/player.tga");
 	editor->editor_surface =  load_tga("ressources/editor/floor2.tga");
+	editor->editor_back =  load_tga("ressources/editor/editor_back.tga");
 	editor->key =  load_tga("ressources/editor/key_t.tga");
 	editor->door =  load_tga("ressources/editor/door_t.tga");
 

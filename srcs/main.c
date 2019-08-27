@@ -19,17 +19,19 @@ static void		ft_make_frame(t_win *wn, t_game *game)
 
 	(void)wn;
 	ft_rc_wolfcalc(game);
-	ft_set_interface(game);
+	ft_set_interface(wn, game);
 	if (clock() != 0 && (1000 - game->time_last / 10000) != 0  && (clock() /10000 - game->time_last / 10000))
 		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
-	ft_set_infos(game);
+	ft_set_infos(wn, game);
 
-	game->texture = SDL_CreateTextureFromSurface(
-			wn->render, game->screen);
-	if ((SDL_RenderCopy(wn->render, game->texture, 0, 0)) != 0)
-		ft_err_exit("doom: error: RenderCopy failure", game);
-	SDL_DestroyTexture(game->texture);
-	SDL_RenderPresent(wn->render);
+	//game->texture = SDL_CreateTextureFromSurface(
+			//wn->render, wn->screen);
+	//if ((SDL_RenderCopy(wn->render, game->texture, 0, 0)) != 0)
+		//ft_err_exit("doom: error: RenderCopy failure", game);
+	
+	render_game(wn);
+	//SDL_DestroyTexture(game->texture);
+	//SDL_RenderPresent(wn->render);
 }
 
 static void		ft_game_loop(t_win *wn, t_game *game)
@@ -51,7 +53,7 @@ static void		ft_game_loop(t_win *wn, t_game *game)
 	}
 }
 
-int			ft_start(char **argv, t_game *game)
+int			ft_start(char **argv/* t_game *game*/)
 {
 	t_win			*wn;
 	int				play;
@@ -76,8 +78,8 @@ int			ft_start(char **argv, t_game *game)
 			play = 0;
 		else if (wn->state[SDL_SCANCODE_1] && argv[1])
 		{
-			ft_init_game(game, argv[1]);
-			ft_game_loop(wn, game);
+			ft_init_game(wn, &wn->game, argv[1]);
+			ft_game_loop(wn, &wn->game);
 			SDL_WaitEvent(&(wn->event));
 		}
 		else if (wn->state[SDL_SCANCODE_2])
@@ -109,13 +111,14 @@ int			ft_start(char **argv, t_game *game)
 
 int				main(int argc, char **argv)
 {
-	t_game	game;
+//	t_game	game;
 
-	if (argc != 2)
+(void)argc;
+/*	if (argc != 2)
 	{
 		ft_putendl_fd("[->] usage: ./doom [map]", 2);
 		ft_err_exit("[->] README for more informations", &game);
 	}
-	ft_start(argv, &game);
+*/	ft_start(argv/*, &game*/);
 	return (0);
 }

@@ -36,18 +36,15 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 			play = 0;
 		else if (wn->event.type ==  SDL_MOUSEBUTTONDOWN)
 		{
-				printf("1\n");
 			if (wn->event.button.button == SDL_BUTTON_LEFT)
 			{
 				editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = current_obj;
 				left_click = 1;
-				printf("2\n");
 			}
 			if (wn->event.button.button == SDL_BUTTON_RIGHT)
 			{
 				editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = VIDE;
 				right_click = 1;
-				printf("3\n");
 			}
 		}
 		else if (wn->event.type ==  SDL_MOUSEBUTTONUP)
@@ -87,6 +84,7 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 	}
 		pos.x = 0;
 		pos.y = 0;
+		SDL_BlitSurface(editor->editor_back, NULL, wn->screen, &pos);
 		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &pos);
 		//SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 0, 255, 255));
 		y = 0;

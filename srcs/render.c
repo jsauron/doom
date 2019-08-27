@@ -26,7 +26,8 @@ int     render_editor(t_win *wn)
 
 int     render_game(t_win *wn)
 {
-	SDL_UpdateTexture(wn->texture, NULL, wn->game->screen->pixels, wn->game->screen->pitch);
+	SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
+	SDL_UpdateTexture(wn->texture, NULL, wn->screen->pixels, wn->screen->pitch);
 	SDL_RenderClear(wn->render);
 	SDL_RenderCopy(wn->render, wn->texture, NULL, NULL);
 	SDL_RenderPresent(wn->render);

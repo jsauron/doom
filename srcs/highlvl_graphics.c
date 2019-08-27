@@ -32,7 +32,7 @@ static void		bresenham_tab(int *tab, t_pos p1, t_pos p2)
 	tab[4] = (tab[0] > tab[2] ? tab[0] : -tab[2]) / 2;
 }
 
-void			draw_line(t_game *game, t_vec vec,
+void			draw_line(t_win *wn, t_vec vec,
 				Uint32 color, t_limit *limit)
 {
 	int e2;
@@ -43,7 +43,7 @@ void			draw_line(t_game *game, t_vec vec,
 	{
 		if (!limit || ((int)vec.p1.x > limit->l && (int)vec.p1.x < limit->r
 		&& (int)vec.p1.y > limit->t && (int)vec.p1.y < limit->b))
-			ft_setpixel(game->screen, (int)vec.p1.x, (int)vec.p1.y, color);
+			ft_setpixel(wn->screen, (int)vec.p1.x, (int)vec.p1.y, color);
 		e2 = tab[4];
 		if (e2 > -tab[0] && (int)vec.p1.x != (int)vec.p2.x)
 		{
@@ -58,8 +58,8 @@ void			draw_line(t_game *game, t_vec vec,
 	}
 }
 
-void			ft_draw_rect(SDL_Rect rect, Uint32 color,
-				t_limit *limit, t_game *game)
+void			ft_draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
+				t_limit *limit)
 {
 	int		i;
 	int		j;
@@ -72,14 +72,14 @@ void			ft_draw_rect(SDL_Rect rect, Uint32 color,
 		{
 			if (!limit || (rect.x + j > limit->l && rect.x + j < limit->r
 			&& rect.y + i > limit->t && rect.y + i < limit->b))
-				ft_setpixel(game->screen, rect.x + j, rect.y + i, color);
+				ft_setpixel(wn->screen, rect.x + j, rect.y + i, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void			ft_draw_border(SDL_Rect rect, Uint32 color, t_game *game)
+void			ft_draw_border(t_win *wn, SDL_Rect rect, Uint32 color)
 {
 	t_vec vec1;
 	t_vec vec2;
@@ -92,8 +92,8 @@ void			ft_draw_border(SDL_Rect rect, Uint32 color, t_game *game)
 	(t_pos){rect.x + rect.w, rect.y + rect.h}};
 	vec4 = (t_vec){(t_pos){rect.x, rect.y + rect.h},
 	(t_pos){rect.x + rect.w, rect.y + rect.h}};
-	draw_line(game, vec1, color, 0);
-	draw_line(game, vec2, color, 0);
-	draw_line(game, vec3, color, 0);
-	draw_line(game, vec4, color, 0);
+	draw_line(wn, vec1, color, 0);
+	draw_line(wn, vec2, color, 0);
+	draw_line(wn, vec3, color, 0);
+	draw_line(wn, vec4, color, 0);
 }

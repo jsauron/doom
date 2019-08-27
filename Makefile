@@ -1,6 +1,6 @@
 NAME 		= doom
 CC 			= gcc
-CFLAGS 		= -Wall -Wextra -Werror -g -O3 #-fsanitize=address
+CFLAGS 		= -Wall -Wextra -Werror -g -O3 # -fsanitize=address
 
 ID_UN 		= $(shell id -un)
 SRC_PATH 	= srcs/

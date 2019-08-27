@@ -40,7 +40,7 @@ static void		*ft_calc_frame(void *arg)
 		ft_calc_walls(++i, x, thread);
 		while (y < WIN_H)
 		{
-			ft_assign_color(x, y, i, thread);
+			ft_assign_color(thread->wn, x, y, i, thread);
 			y++;
 		}
 		x += 8;
@@ -48,19 +48,18 @@ static void		*ft_calc_frame(void *arg)
 	pthread_exit(0);
 }
 
-void			ft_rc_wolfcalc(t_game*game)
+void			ft_rc_wolfcalc(t_game *game)
 {
 	int i;
 
 	i = 0;
-	//game->screen = ft_new_surface(WIN_H, WIN_W, game);
 	while (i < 8)
 	{
 		game->thread[i].x_start = i;
 		game->thread[i].game = game;
 		ft_bzero(game->thread[i].ray, sizeof(t_ray) * (WIN_W / 8));
 		if ((pthread_create(&(game->thread[i].th), 0,
-		ft_calc_frame, (void *)&(game->thread[i]))) != 0)
+		ft_calc_frame,  (void *)&(game->thread[i]))) != 0)
 			ft_err_exit("wolf3d: error: pthread_create failed", game);
 		i++;
 	}

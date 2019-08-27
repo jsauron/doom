@@ -12,18 +12,18 @@
 
 #include "doom.h"
 
-void			ft_set_string(SDL_Rect rect, char *text,
-				SDL_Color color, t_game *game)
+void			ft_set_string(t_win *wn, SDL_Rect rect, char *text,
+				SDL_Color color)
 {
 	SDL_Rect			sdl_rect;
 	SDL_Surface			*surface;
 
 	sdl_rect = (SDL_Rect){rect.x, rect.y, rect.w, rect.h};
-	if (!(surface = TTF_RenderText_Blended(game->font, text, color)))
-		ft_err_exit("Doom: Error while making surface", game);
+	if (!(surface = TTF_RenderText_Blended(wn->game.font, text, color)))
+		ft_err_exit("Doom: Error while making surface", &wn->game);
 	sdl_rect.w = (sdl_rect.h * surface->w) / surface->h;
-	if ((SDL_BlitScaled(surface, 0, game->screen, &sdl_rect)) == -1)
-		ft_err_exit("Doom: Error can't blit surface", game);
+	if ((SDL_BlitScaled(surface, 0, wn->screen, &sdl_rect)) == -1)
+		ft_err_exit("Doom: Error can't blit surface", &wn->game);
 	SDL_FreeSurface(surface);
 }
 
@@ -81,14 +81,14 @@ bpp = surface->format->BytesPerPixel;
 	}
 }
 
-Uint32			ft_getpixel(SDL_Surface *surface, int x, int y, t_game *game)
+Uint32			ft_getpixel(t_win *wn, SDL_Surface *surface, int x, int y)
 {
 	int				bpp;
 	Uint8			*p;
 	Uint32			ret;
 
 	if ((SDL_LockSurface(surface)) != 0)
-		ft_err_exit("doom: error: SDL_LockSurface() failure", game);
+		ft_err_exit("doom: error: SDL_LockSurface() failure", &wn->game);
 	x = ft_abs(--x);
 	y = ft_abs(--y);
 	bpp = surface->format->BytesPerPixel;

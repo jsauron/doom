@@ -60,7 +60,7 @@ void			rotatepxl(t_tga *tga)
 	if ((done = (unsigned char *)malloc(sizeof(unsigned char)
 					* tga->w * tga->h * 4)) == NULL)
 		return ;
-	while (i < (tga->w * tga->h * 4))
+	while (i < (tga->w * tga->h * 4) - 4 )
 	{
 		done[((tga->w * tga->h * 4) - (i + 0))] = tga->data[i];
 		done[((tga->w * tga->h * 4) - (i + 3))] = tga->data[i + 1];

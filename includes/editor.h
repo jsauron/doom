@@ -39,6 +39,7 @@ typedef struct		s_editor
 	SDL_Surface		*wall;
 	SDL_Surface		*mean;
 	SDL_Surface		*goal;
+	SDL_Surface			*editor_back;
 //	SDL_Surface		*current_player;
 	int				**map;
 	int				nb_goal;

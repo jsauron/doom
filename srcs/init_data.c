@@ -34,13 +34,13 @@ static void	init_sdl_game(t_game *game)
 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
-	if (!(game->screen = SDL_CreateRGBSurface(0, WIN_W, WIN_H, 32,
+/*	if (!(wn->screen = SDL_CreateRGBSurface(0, WIN_W, WIN_H, 32,
 			0x00FF0000,
 			0x0000FF00,
 			0x000000FF,
 			0xFF000000)))
 		ft_sdl_err_exit(0, game);
-
+*/
 }
 
 static void	init_fonts(t_game *game)
@@ -61,11 +61,16 @@ static void	init_wall(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 }
 
-void		ft_init_game( t_game *game , char *map)
+void		ft_init_game(t_win *wn,  t_game *game , char *map)
 {
   int i = 0; 
 
 	ft_bzero(game, sizeof(t_game));
+	while (i < 8)
+	{
+		game->thread[i].wn = wn;
+		i++;
+	}
 	game->player.position.x = -1;
 	game->player.position.y = -1;
 	game->player.direction = 90;
@@ -75,6 +80,7 @@ void		ft_init_game( t_game *game , char *map)
 	game->minimap.mnp_size = 20;
   if (!(game->map = malloc(sizeof(int *) * XBLOC)))
       exit (1);
+	  i = 0;
   while (i < XBLOC)
         game->map[i++] = malloc(sizeof(int) * YBLOC);
 	ft_get_map(map, game);

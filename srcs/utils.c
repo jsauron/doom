@@ -17,16 +17,16 @@ double		ft_pythagore(int a, int b)
 	return (sqrt(a * a + b * b));
 }
 
-void		ft_set_cursor(t_game*game)
+void		ft_set_cursor(t_win *wn)
 {
 	t_vec	vec;
 
 	vec = (t_vec){(t_pos){WIN_W / 2 - 10, WIN_H / 2},
 	(t_pos){WIN_W / 2 + 10, WIN_H / 2}};
-	draw_line(game, vec, 0xFF5BE50B, 0);
+	draw_line(wn, vec, 0xFF5BE50B, 0);
 	vec = (t_vec){(t_pos){WIN_W / 2, WIN_H / 2 - 10},
 	(t_pos){WIN_W / 2, WIN_H / 2 + 10}};
-	draw_line(game, vec, 0xFF5BE50B, 0);
+	draw_line(wn, vec, 0xFF5BE50B, 0);
 }
 
 static void	ft_remove_light(Uint8 *component, double delta, int arg)
