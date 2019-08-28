@@ -1,5 +1,21 @@
 #include "doom.h"
 
+int		render_life(t_win *wn, int life)
+{
+	SDL_Rect	pos;
+	int i;
+
+	i = 0;
+	pos.x = 0;
+	pos.y = 20;
+	while (life && i < life)
+	{
+		SDL_BlitSurface(wn->game.heart[i++], NULL, wn->screen, &pos);
+		pos.x += 55;
+	}
+	return (0);
+}
+
 int     free_surface_editor(t_win *wn, t_editor *editor)
 {
 	(void)wn;
@@ -27,6 +43,7 @@ int     render_editor(t_win *wn)
 int     render_game(t_win *wn)
 {
 	SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
+	render_life(wn, wn->game.player.life);
 	SDL_UpdateTexture(wn->texture, NULL, wn->screen->pixels, wn->screen->pitch);
 	SDL_RenderClear(wn->render);
 	SDL_RenderCopy(wn->render, wn->texture, NULL, NULL);

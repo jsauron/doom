@@ -106,11 +106,17 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 						SDL_BlitSurface(editor->key, NULL, wn->screen, &pos);
 				else if (editor->map[y][x] == DOOR)
 						SDL_BlitSurface(editor->door, NULL, wn->screen, &pos);
-				else if (editor->map[y][x] == PLAYER && c == 0)
+				else if (editor->map[y][x] == PLAYER)
 				{
+					if (c == 0)
+					{
 						SDL_BlitSurface(editor->player, NULL, wn->screen, &pos);
 						c++;
+					}
+					else 
+						editor->map[y][x] = VIDE;
 				}
+
 				x++;
 			}
 			y++;

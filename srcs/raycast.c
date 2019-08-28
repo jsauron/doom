@@ -21,9 +21,9 @@ int				ft_is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 	y2 = pos->y / BLOC_SIZE;
 	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
 		return (0);
-	if (ray != NULL && game->map[x2][y2] == 6)
+	if (ray != NULL && game->map[y2][x2] == 6)
 		ray->the_door = 1;
-	if (game->map[x2][y2] == 1 || game->map[x2][y2] == 6)
+	if (game->map[y2][x2] == 1 || game->map[y2][x2] == 6)
 		return (1);
 	return (0);
 }

@@ -125,6 +125,7 @@ struct						s_player
 	int					cam_height;
 	int					visual_field;
 	int					sensibility;
+	int					life;
 	double				speed;
 };
 
@@ -143,7 +144,9 @@ struct						s_minimap
 
 struct						s_game
 {
+
 	SDL_Surface			*wall[4];
+	SDL_Surface			*heart[3];
 	SDL_Surface			*door;
 	SDL_Event			event;
 	Uint8				*state;

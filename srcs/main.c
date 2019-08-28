@@ -28,7 +28,6 @@ static void		ft_make_frame(t_win *wn, t_game *game)
 			//wn->render, wn->screen);
 	//if ((SDL_RenderCopy(wn->render, game->texture, 0, 0)) != 0)
 		//ft_err_exit("doom: error: RenderCopy failure", game);
-	
 	render_game(wn);
 	//SDL_DestroyTexture(game->texture);
 	//SDL_RenderPresent(wn->render);
