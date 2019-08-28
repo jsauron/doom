@@ -37,6 +37,7 @@
 # define HORIZONTAL_HIT 2
 
 typedef struct s_limit		t_limit;
+typedef struct s_time		t_time;
 typedef struct s_pos		t_pos;
 typedef struct s_vec		t_vec;
 typedef struct s_size		t_size;
@@ -140,14 +141,23 @@ struct						s_minimap
 	t_pos				diff;
 };
 
+struct						s_time
+{
+	int				current_time;
+	int				old_time;
 
+};
 
 struct						s_game
 {
-
+	t_time				time;
 	SDL_Surface			*wall[4];
 	SDL_Surface			*heart[3];
 	SDL_Surface			*door;
+	SDL_Surface			*gameover;
+	SDL_Surface			*weapon;
+	SDL_Surface			*keys[6];
+	int					key;
 	SDL_Event			event;
 	Uint8				*state;
 	int					endinitsdl;

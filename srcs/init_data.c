@@ -67,7 +67,26 @@ static void	init_wall(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->heart[2] = IMG_Load("ressources/heart.png")))
 		ft_err_exit("doom: error: bad textures", game);
-
+	if (!(game->gameover = IMG_Load("ressources/gameover.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->weapon = IMG_Load("ressources/arme_1.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->keys[0] = IMG_Load("ressources/key.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->keys[1] = IMG_Load("ressources/key2.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->keys[2] = IMG_Load("ressources/key3.png")))
+		ft_err_exit("doom: error: bad textures", game);
+//	if (!(game->keys[3] = IMG_Load("ressources/key4.png")))
+		//ft_err_exit("doom: error: bad textures", game);
+//	if (!(game->keys[4] = IMG_Load("ressources/key5.png")))
+	//	ft_err_exit("doom: error: bad textures", game);
+	if (!(game->keys[3] = IMG_Load("ressources/key6.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->keys[4] = IMG_Load("ressources/key7.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->keys[5] = IMG_Load("ressources/key8.png")))
+		ft_err_exit("doom: error: bad textures", game);
 }
 
 void		ft_init_game(t_win *wn,  t_game *game , char *map)
@@ -87,7 +106,8 @@ void		ft_init_game(t_win *wn,  t_game *game , char *map)
 	game->player.sensibility = 1;
 	game->player.speed = 0.12;
 	game->minimap.mnp_size = 20;
-	game->player.life = 3;
+	game->player.life = 2;
+	game->key = 2;
   if (!(game->map = malloc(sizeof(int *) * XBLOC)))
       exit (1);
 	  i = 0;

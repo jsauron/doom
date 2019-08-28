@@ -23,14 +23,7 @@ static void		ft_make_frame(t_win *wn, t_game *game)
 	if (clock() != 0 && (1000 - game->time_last / 10000) != 0  && (clock() /10000 - game->time_last / 10000))
 		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
 	ft_set_infos(wn, game);
-
-	//game->texture = SDL_CreateTextureFromSurface(
-			//wn->render, wn->screen);
-	//if ((SDL_RenderCopy(wn->render, game->texture, 0, 0)) != 0)
-		//ft_err_exit("doom: error: RenderCopy failure", game);
-	render_game(wn);
-	//SDL_DestroyTexture(game->texture);
-	//SDL_RenderPresent(wn->render);
+	render_game(wn);		
 }
 
 static void		ft_game_loop(t_win *wn, t_game *game)
@@ -44,6 +37,7 @@ static void		ft_game_loop(t_win *wn, t_game *game)
 		play = ft_get_events(game);
 		if (play > 0)
 		{
+			game->time.current_time = SDL_GetTicks();
 			if ((SDL_RenderClear(wn->render)) != 0)
 				ft_err_exit("doom: error: RenderClear failure", game);
 			ft_make_frame(wn, game);
@@ -52,7 +46,7 @@ static void		ft_game_loop(t_win *wn, t_game *game)
 	}
 }
 
-int			ft_start(char **argv/* t_game *game*/)
+int			ft_start(char **argv)
 {
 	t_win			*wn;
 	int				play;
@@ -112,12 +106,13 @@ int				main(int argc, char **argv)
 {
 //	t_game	game;
 
-(void)argc;
+	(void)argc;
 /*	if (argc != 2)
 	{
 		ft_putendl_fd("[->] usage: ./doom [map]", 2);
 		ft_err_exit("[->] README for more informations", &game);
 	}
-*/	ft_start(argv/*, &game*/);
+*/
+	ft_start(argv);
 	return (0);
 }

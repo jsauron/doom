@@ -129,6 +129,12 @@ int				ft_get_events(t_game *game)
 	SDL_PollEvent(&(game->event));
 	game->state = (Uint8*)SDL_GetKeyboardState(NULL);
 	SDL_GetRelativeMouseState(&(game->mouse.x), &(game->mouse.y));
+	if (game->player.life == 0)
+	{
+		while(!game->state[SDL_SCANCODE_ESCAPE])
+		;
+		return (0);
+	}
 	if (game->state[SDL_SCANCODE_ESCAPE])
 		return (0);
 	else if (game->event.type == SDL_QUIT)
