@@ -78,7 +78,7 @@ void		ft_init_game(t_win *wn,  t_game *game , char *map)
 	game->player.position.y = -1;
 	game->player.direction = 90;
 	game->player.direction_up = 0;
-	game->player.sensibility = 3;
+	game->player.sensibility = 1;
 	game->player.speed = 0.12;
 	game->minimap.mnp_size = 20;
   if (!(game->map = malloc(sizeof(int *) * XBLOC)))

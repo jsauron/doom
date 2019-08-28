@@ -23,7 +23,7 @@ int				ft_is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 		return (0);
 	if (ray != NULL && game->map[x2][y2] == 6)
 		ray->the_door = 1;
-	if (game->map[y2][x2] == 1 || game->map[y2][x2] == 3 || game->map[x2][y2] == 6)
+	if (game->map[x2][y2] == 1 || game->map[x2][y2] == 6)
 		return (1);
 	return (0);
 }

@@ -85,7 +85,7 @@ int  init_structure(t_win *wn, t_editor *editor)
 	editor->mean =  IMG_Load("ressources/editor/mean_2.png");
 	editor->goal =  IMG_Load("ressources/editor/exit_8.png");
 	editor->player =  IMG_Load("ressources/editor/player.png");
-	editor->editor_surface =  load_tga("ressources/editor/editor_back.tga");
+	editor->editor_surface =  load_tga("ressources/editor/editor_back_s.tga");
 //	editor->editor_back =  load_tga("ressources/editor/editor_back.tga");
 	editor->key =  IMG_Load("ressources/editor/key_8.png");
 	editor->door =  IMG_Load("ressources/editor/door_10.png");

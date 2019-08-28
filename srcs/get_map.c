@@ -62,7 +62,7 @@ static void		ft_parse_map(int fd, char *map,  t_game *game)
     j = 0;
       while (j < MAP_SIZE )
       {
-        if (map[i * MAP_SIZE + j] == '3')
+        if (map[i * MAP_SIZE + j] == '4')
         {
           if (game->player.position.x != -1)
             ft_parsing_exit(fd, "wolf3d: parsing error: bad spawn", game);
