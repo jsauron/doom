@@ -14,12 +14,14 @@
 
 static SDL_Surface	*choose_texture(int i, t_thread *thread)
 {
-	SDL_Surface	*surface[4] = {
+	SDL_Surface	*surface[5] = {
 	thread->game->wall[0] , thread->game->wall[1] ,
-	thread->game->wall[2] , thread->game->wall[3] };
+	thread->game->wall[2] , thread->game->wall[3]};
 
 	if (thread->ray[i].the_door == 1)
 		return (thread->game->door);
+//	if (thread->ray[i].the_key == 1)
+		//return (surface[4]);
 	if (thread->ray[i].axis == VERTICAL_HIT)
 	{
 		return (((thread->ray[i].angle_d >= 0 && thread->ray[i].angle_d <= 180)

@@ -25,15 +25,15 @@ static void	ft_bloc_devmode(t_win *wn, t_game *game)
 {
 	SDL_Rect	rect;
 	(void)game;
-	rect = (SDL_Rect){15, 48, 220, 35};
+	rect = (SDL_Rect){370, 28, 220, 35};
 	ft_draw_rect(wn, rect, 0x10000000, 0);
-	rect = (SDL_Rect){15, 98, 220, 35};
+	rect = (SDL_Rect){370, 78, 220, 35};
 	ft_draw_rect(wn, rect, 0x10000000, 0);
-	rect = (SDL_Rect){15, 138, 220, 35};
+	rect = (SDL_Rect){370, 118, 220, 35};
 	ft_draw_rect(wn, rect, 0x10000000, 0);
-	rect = (SDL_Rect){15, 178, 220, 35};
+	rect = (SDL_Rect){370, 158, 220, 35};
 	ft_draw_rect(wn, rect, 0x10000000, 0);
-	rect = (SDL_Rect){15, 218, 220, 35};
+	rect = (SDL_Rect){370, 198, 220, 35};
 	ft_draw_rect(wn, rect, 0x10000000, 0);
 }
 

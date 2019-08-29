@@ -64,27 +64,25 @@ static void			ft_dev_mode(t_win *wn, t_game *game)
 {
 	SDL_Rect	rect;
 
-	rect = (SDL_Rect){20, 18, 150, 15};
-	ft_set_string(wn, rect, "1 normal", ft_set_color(game, 0));
-	rect = (SDL_Rect){20, 50, 150, 30};
+	rect = (SDL_Rect){375, 30, 150, 30};
 	ft_set_string(wn, rect, "fps : ", ft_hex_to_rgb(H_GREEN));
-	rect = (SDL_Rect){160, 50, 150, 30};
+	rect = (SDL_Rect){520, 30, 150, 30};
 	ft_set_nbrstring(wn, game->fps, rect, H_GREEN);
-	rect = (SDL_Rect){20, 100, 150, 30};
+	rect = (SDL_Rect){375, 80, 150, 30};
 	ft_set_string(wn, rect, "frames : ", ft_hex_to_rgb(H_GREEN));
-	rect = (SDL_Rect){160, 100, 150, 30};
+	rect = (SDL_Rect){520, 80, 150, 30};
 	ft_set_nbrstring(wn, game->nb_frame, rect, H_GREEN);
-	rect = (SDL_Rect){20, 140, 150, 30};
+	rect = (SDL_Rect){375, 120, 150, 30};
 	ft_set_string(wn, rect, "position.x : ", ft_hex_to_rgb(H_GREEN));
-	rect = (SDL_Rect){160, 140, 150, 30};
+	rect = (SDL_Rect){520, 120, 150, 30};
 	ft_set_nbrstring(wn, game->player.position.x * BLOC_SIZE, rect, H_GREEN);
-	rect = (SDL_Rect){20, 180, 150, 30};
+	rect = (SDL_Rect){375, 160, 150, 30};
 	ft_set_string(wn, rect, "position.y : ", ft_hex_to_rgb(H_GREEN));
-	rect = (SDL_Rect){160, 180, 150, 30};
+	rect = (SDL_Rect){520, 160, 150, 30};
 	ft_set_nbrstring(wn, game->player.position.y * BLOC_SIZE, rect, H_GREEN);
-	rect = (SDL_Rect){20, 220, 150, 30};
+	rect = (SDL_Rect){375, 200, 150, 30};
 	ft_set_string(wn, rect, "direction : ", ft_hex_to_rgb(H_GREEN));
-	rect = (SDL_Rect){160, 220, 150, 30};
+	rect = (SDL_Rect){520, 200, 150, 30};
 	ft_set_nbrstring(wn, game->player.direction, rect, H_GREEN);
 }
 
@@ -100,6 +98,8 @@ void				ft_set_infos(t_win *wn, t_game *game)
 	ft_set_string(wn, rect, "3 dev", ft_set_color(game, 2));
 	rect = (SDL_Rect){WIN_W / 2 - 75, 660, 150, 20};
 	ft_set_string(wn, rect, "SETTINGS : [ i ]", ft_set_color(game, 3));
+	rect = (SDL_Rect){WIN_W / 2 - 1, WIN_H / 2 - 1, 150, 20};
+	ft_set_string(wn, rect, "+",ft_hex_to_rgb(H_RED) );
 	if (game->setting == 1)
 		ft_set_menu_config(wn, game);
 	else if (game->dev_mode == 1)

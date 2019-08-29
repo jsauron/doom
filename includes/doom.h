@@ -49,6 +49,7 @@ typedef struct s_minimap	t_minimap;
 typedef struct s_win			t_win;
 typedef struct s_game		t_game;
 typedef struct s_rgb		t_rgb;
+typedef struct s_sprite	t_sprite;
 typedef union  u_color		t_color;
 
 struct        				s_rgb
@@ -98,6 +99,7 @@ struct						s_size
 struct						s_ray
 {
 	int					the_door;
+	int					the_key;
 	int					x;
 	int					y;
 	int					axis;
@@ -117,6 +119,15 @@ struct						s_thread
 	t_ray				ray[WIN_W / 8];
 };
 
+
+struct						s_sprite
+{
+
+	SDL_Surface			*weapon[3];
+//	SDL_Surface			*key_s[6];
+	SDL_Surface			*enemy[4];
+
+};
 
 struct						s_player
 {
@@ -151,12 +162,13 @@ struct						s_time
 struct						s_game
 {
 	t_time				time;
+	t_sprite			sprite;
 	SDL_Surface			*wall[4];
 	SDL_Surface			*heart[3];
 	SDL_Surface			*door;
 	SDL_Surface			*gameover;
 	SDL_Surface			*weapon;
-	SDL_Surface			*keys[6];
+	SDL_Surface			*keys[7];
 	int					key;
 	SDL_Event			event;
 	Uint8				*state;
