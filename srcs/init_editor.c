@@ -81,14 +81,14 @@ int  init_structure(t_win *wn, t_editor *editor)
 	editor->menu[7] = load_tga("ressources/menu/8.tga");
 	editor->menu[8] = load_tga("ressources/menu/9.tga");
 	editor->menu[9] = load_tga("ressources/menu/10.tga");
-	editor->wall =  load_tga("ressources/editor/wall_f.tga");
-	editor->mean =  IMG_Load("ressources/editor/mean_2.png");
-	editor->goal =  IMG_Load("ressources/editor/exit_8.png");
+	editor->wall =  load_tga("ressources/editor/wall3.tga");
+	editor->mean =  IMG_Load("ressources/editor/enemy.png");
+	editor->goal =  IMG_Load("ressources/editor/exit.png");
 	editor->player =  IMG_Load("ressources/editor/player.png");
 	editor->editor_surface =  load_tga("ressources/editor/editor_back.tga");
-//	editor->editor_back =  load_tga("ressources/editor/editor_back.tga");
-	editor->key =  IMG_Load("ressources/editor/key_8.png");
-	editor->door =  load_tga("ressources/editor/door_f.tga");
+	editor->key =  IMG_Load("ressources/editor/keys.png");
+	editor->door =  load_tga("ressources/editor/door_t.tga");
+	editor->poster =  load_tga("ressources/editor/poster.tga");
 
 	return (1);
 }

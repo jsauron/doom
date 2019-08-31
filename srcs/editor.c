@@ -77,6 +77,8 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 				current_obj = KEY;
 			else if (wn->state[SDL_SCANCODE_6])
 				current_obj = DOOR;
+			else if (wn->state[SDL_SCANCODE_7])
+				current_obj = POSTER;
 			else if (wn->state[SDL_SCANCODE_S])
 				save_map(editor->map, map);
 			else if (wn->state[SDL_SCANCODE_C])
@@ -84,9 +86,7 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 	}
 		pos.x = 0;
 		pos.y = 0;
-//		SDL_BlitSurface(editor->editor_back, NULL, wn->screen, &pos);
 		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &pos);
-		//SDL_FillRect(wn->screen ,NULL, SDL_MapRGB(wn->screen->format, 0, 255, 255));
 		y = 0;
 		int c = 0;
 		while (y < XBLOC)
@@ -106,6 +106,8 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 						SDL_BlitSurface(editor->key, NULL, wn->screen, &pos);
 				else if (editor->map[y][x] == DOOR)
 						SDL_BlitSurface(editor->door, NULL, wn->screen, &pos);
+				else if (editor->map[y][x] == POSTER)
+						SDL_BlitSurface(editor->poster, NULL, wn->screen, &pos);
 				else if (editor->map[y][x] == PLAYER)
 				{
 					if (c == 0)
@@ -124,7 +126,6 @@ void	editor(t_win *wn, t_editor *editor, char *map)
 		SDL_UpdateTexture(wn->texture, NULL, wn->screen->pixels, wn->screen->pitch);
 		SDL_RenderClear(wn->render);
 		SDL_RenderCopy(wn->render, wn->texture, NULL, NULL);
-		
 		SDL_RenderPresent(wn->render);
 		}
 }

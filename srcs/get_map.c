@@ -69,7 +69,7 @@ static void		ft_parse_map(int fd, char *map,  t_game *game)
           game->player.position.x = i + 0.5;
           game->player.position.y = j + 0.5;
         }
-         if (map[i * MAP_SIZE + j] >= '0' && map[i * MAP_SIZE + j] <= '6')
+         if (map[i * MAP_SIZE + j] >= '0' && map[i * MAP_SIZE + j] <= '7')
         {
           if (map[i * MAP_SIZE + j] > '9')
             ft_parsing_exit(fd, "wolf3d alal : parsing error: bad bloc", game);

@@ -16,7 +16,7 @@
 #define YSCREEN		SIZE_BLOC * YBLOC
 
 enum {UP, DOWN, LEFT, RIGHT};
-enum {VIDE, WALL, MEAN, GOAL, PLAYER, KEY, DOOR};
+enum {VIDE, WALL, MEAN, GOAL, PLAYER, KEY, DOOR, POSTER};
 
 typedef struct s_win		t_win;
 
@@ -40,6 +40,7 @@ typedef struct		s_editor
 	SDL_Surface		*mean;
 	SDL_Surface		*goal;
 	SDL_Surface			*editor_back;
+	SDL_Surface			*poster;
 //	SDL_Surface		*current_player;
 	int				**map;
 	int				nb_goal;

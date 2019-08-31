@@ -51,7 +51,7 @@ void		ft_set_interface(t_win *wn, t_game *game)
 	ft_draw_border(wn, rect, 0xFFFFFFFF);
 	if (game->setting == 1)
 		ft_set_config(wn, game);
-	if (game->gamemode == 1 && game->setting == 0)
+	if (game->gamemode == 1 && game->setting == 0 && game->target == 0)
 		ft_set_cursor(wn);
 	if (game->dev_mode == 1 && game->setting == 0)
 		ft_bloc_devmode(wn, game);

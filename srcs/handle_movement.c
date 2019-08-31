@@ -22,29 +22,46 @@ static int		ft_is_inmap(t_pos *pos, t_game *game)
 int				ft_movement(double angle_r, int dir, t_game *game)
 {
 	t_pos		move;
-	t_pos		pos_h;
-	t_pos		pos_v;
+	t_pos		pos;
+	int		x;
+	int		y;
 
 
 	move.y = sin(angle_r) * game->player.speed;
 	move.x = cos(angle_r) * game->player.speed;
-	pos_h.y = (game->player.position.y * BLOC_SIZE);
-	pos_v.x = (game->player.position.x * BLOC_SIZE);
+	pos.y = (game->player.position.y * BLOC_SIZE);
+	pos.x = (game->player.position.x * BLOC_SIZE);
+
 	if (dir == 1)
 	{
-		pos_h.x = (game->player.position.x * BLOC_SIZE) - move.x * 150;
-		pos_v.y = (game->player.position.y * BLOC_SIZE) - move.y * 150;
+		pos.x = (game->player.position.x * BLOC_SIZE) - move.x * 150;
+		pos.y = (game->player.position.y * BLOC_SIZE) - move.y * 150;
 		move.y = -move.y;
 		move.x = -move.x;
 	}
 	else
 	{
-		pos_h.x = (game->player.position.x * BLOC_SIZE) + move.x * 150;
-		pos_v.y = (game->player.position.y * BLOC_SIZE) + move.y * 150;
+		pos.x = (game->player.position.x * BLOC_SIZE) + move.x * 150;
+		pos.y = (game->player.position.y * BLOC_SIZE) + move.y * 150;
 	}
-	if (ft_is_inmap(&pos_v, game) && !(ft_is_inwall(&pos_v, game, NULL)))
+
+	y = (int)pos.y / BLOC_SIZE;
+	x = (int)pos.x / BLOC_SIZE;
+	if ((ft_is_inmap(&pos, game) && (ft_is_inwall(&pos, game, NULL) == 6) && game->key > 0))
+	{
+		game->key--;
+		game->map[y][x] = 0;
+	}
+	else if ((ft_is_inmap(&pos, game) && (ft_is_inwall(&pos, game, NULL) == 5)))
+	{
+		game->key++;
+		game->map[y][x] = 0;
+	}
+	else if ((ft_is_inmap(&pos, game) && (ft_is_inwall(&pos, game, NULL) == 3)))
+		game->exit = 1;
+	if (ft_is_inmap(&pos, game) && !(ft_is_inwall(&pos, game, NULL)))
 		game->player.position.y += move.y;
-	if (ft_is_inmap(&pos_h, game) && !(ft_is_inwall(&pos_h, game, NULL)))
+	if (ft_is_inmap(&pos, game) && !(ft_is_inwall(&pos, game, NULL)))
 		game->player.position.x += move.x;
 	return (1);
 }

@@ -14,16 +14,23 @@
 
 static void		ft_make_frame(t_win *wn, t_game *game)
 {
+	SDL_Rect	pos;
+	int i;
+
 	game->nb_frame++;
 	game->time_last = clock();
 
+	pos.y = 0;
 	(void)wn;
+	i = (int) (((int)(game->player.direction)));
+	pos.x = -(i * 3000 / 360);
+	SDL_BlitSurface(wn->game.sky, NULL, wn->screen, &(pos));
 	ft_rc_wolfcalc(game);
 	ft_set_interface(wn, game);
 	if (clock() != 0 && (1000 - game->time_last / 10000) != 0  && (clock() /10000 - game->time_last / 10000))
 		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
 	ft_set_infos(wn, game);
-	render_game(wn);		
+	render_game(wn);
 }
 
 static void		ft_game_loop(t_win *wn, t_game *game)

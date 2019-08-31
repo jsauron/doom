@@ -33,14 +33,6 @@ static void	init_sdl_game(t_game *game)
 		ft_sdl_err_exit(0, game);
 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-
-/*	if (!(wn->screen = SDL_CreateRGBSurface(0, WIN_W, WIN_H, 32,
-			0x00FF0000,
-			0x0000FF00,
-			0x000000FF,
-			0xFF000000)))
-		ft_sdl_err_exit(0, game);
-*/
 }
 
 static void	init_fonts(t_game *game)
@@ -69,7 +61,13 @@ static void	init_wall(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->gameover = IMG_Load("ressources/gameover.png")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->weapon = IMG_Load("ressources/arme_1.png")))
+//	if (!(game->weapon[0] = IMG_Load("ressources/arme_1.png")))
+		//ft_err_exit("doom: error: bad textures", game);
+	if (!(game->sky = load_tga("ressources/skybox.tga")))
+		ft_err_exit("doom: error: bad textures ciel", game);
+	if (!(game->weapon[0] = IMG_Load("ressources/arme_3.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->weapon[1] = IMG_Load("ressources/arme_tir.png")))
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->keys[0] = IMG_Load("ressources/key.png")))
 		ft_err_exit("doom: error: bad textures", game);
@@ -89,6 +87,45 @@ static void	init_wall(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->keys[6] = IMG_Load("ressources/key_sprite.png")))
 		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->lunette[0] = IMG_Load("ressources/lunette.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->lunette[1] = IMG_Load("ressources/lunette_tir.png")))
+		ft_err_exit("doom: error: bad textures", game);
+
+	if (!(game->win[0] = load_tga("ressources/win2.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[1] = load_tga("ressources/win3.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[2] = load_tga("ressources/win4.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[3] = load_tga("ressources/win5.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[4] = load_tga("ressources/win6.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[5] = load_tga("ressources/win7.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[6] = load_tga("ressources/win8.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[7] = load_tga("ressources/win9.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[8] = load_tga("ressources/win10.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[9] = load_tga("ressources/win11.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[10] = load_tga("ressources/win12.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->win[11] = load_tga("ressources/win13.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->mission_s = IMG_Load("ressources/Mission.tga")))
+		 ft_err_exit("doom: error: bad textures", game);
+	if (!(game->poster[0]= IMG_Load("ressources/wall/poster1.tga")))
+		 ft_err_exit("doom: error: bad textures p1", game);
+	if (!(game->poster[1] = IMG_Load("ressources/wall/poster2.tga")))
+		 ft_err_exit("doom: error: bad textures p2", game);
+	if (!(game->poster[2] = IMG_Load("ressources/wall/poster3.tga")))
+		 ft_err_exit("doom: error: bad textures p3", game);
+	if (!(game->poster[3] = IMG_Load("ressources/wall/poster4.tga")))
+		 ft_err_exit("doom: error: bad textures p4", game);
 }
 
 void		ft_init_game(t_win *wn,  t_game *game , char *map)
@@ -108,8 +145,9 @@ void		ft_init_game(t_win *wn,  t_game *game , char *map)
 	game->player.sensibility = 1;
 	game->player.speed = 0.12;
 	game->minimap.mnp_size = 20;
-	game->player.life = 2;
-	game->key = 2;
+	game->player.life = 3;
+	game->key = 0;
+	game->mission = 1;
   if (!(game->map = malloc(sizeof(int *) * XBLOC)))
       exit (1);
 	  i = 0;

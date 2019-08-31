@@ -54,10 +54,10 @@ typedef union  u_color		t_color;
 
 struct        				s_rgb
 {
+    unsigned char 		    a;
     unsigned char		    r;
     unsigned char		    g;
     unsigned char 		    b;
-    unsigned char 		    a;
 }; 
 
 
@@ -100,6 +100,7 @@ struct						s_ray
 {
 	int					the_door;
 	int					the_key;
+	int					the_poster;
 	int					x;
 	int					y;
 	int					axis;
@@ -164,11 +165,16 @@ struct						s_game
 	t_time				time;
 	t_sprite			sprite;
 	SDL_Surface			*wall[4];
+	SDL_Surface			*sky;
 	SDL_Surface			*heart[3];
 	SDL_Surface			*door;
 	SDL_Surface			*gameover;
-	SDL_Surface			*weapon;
+	SDL_Surface			*weapon[2];
+	SDL_Surface			*lunette[2];
 	SDL_Surface			*keys[7];
+	SDL_Surface			*win[12];
+	SDL_Surface			*mission_s;
+	SDL_Surface			*poster[4];
 	int					key;
 	SDL_Event			event;
 	Uint8				*state;
@@ -184,11 +190,14 @@ struct						s_game
 	int					gamemode;
 	int					setting;
 	int					dev_mode;
+	int					target;
+	int					shot;
 	t_mouse				mouse;
 	Uint32				time_last;
 	int					nb_frame;
 	int					fps;
-
+	int					exit;
+	int					mission;
 };
 
  struct					s_win

@@ -31,33 +31,9 @@ void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 color)
 {
 	int			bpp;
 	Uint8		*p;
-//	Uint32 tmp;	
-//	t_color    col;
 
-//	tmp = 0;
 	if (x < 0 || x > WIN_W || y < 0 || y > WIN_H)
 		return ;
-//	col.all = color;
-	//printf("color = %u\n", color);
-	//exit(EXIT_FAILURE);
-	/*while ()
-	{
-		tmp2 = col.all & 1;
-		tmp = tmp & tmp2;
-		col.all >>= 1;
-		tmp <<= 1;
-	}*/
-//	tmp = col.tab[1];
-//	col.tab[1] = col.tab[3];
-//	col.tab[3] = tmp;
-//	tmp = col.tab[1];
-	//col.tab[1] = col.tab[2];
-//	col.tab[2] = tmp;
-//	color = col.all;
-	//color = tmp;
-	//col.all <<= 8;
-	//col.tab[3] = tmp;
-	//color = col.all;
 
 bpp = surface->format->BytesPerPixel;
 	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;

@@ -29,7 +29,7 @@ static void			ft_set_nbrstring(t_win *wn, int value, SDL_Rect rect,
 	if (!(str = ft_itoa(value)))
 		ft_err_exit("doom: error: itoa, out of memory", &wn->game);
 	ft_set_string(wn, rect, str, ft_hex_to_rgb(color));
-	lt_release(str);
+//	lt_release(str);
 }
 
 static void			ft_set_menu_config(t_win *wn, t_game *game)
@@ -97,9 +97,8 @@ void				ft_set_infos(t_win *wn, t_game *game)
 	rect = (SDL_Rect){184, 18, 150, 15};
 	ft_set_string(wn, rect, "3 dev", ft_set_color(game, 2));
 	rect = (SDL_Rect){WIN_W / 2 - 75, 660, 150, 20};
-	ft_set_string(wn, rect, "SETTINGS : [ i ]", ft_set_color(game, 3));
-	rect = (SDL_Rect){WIN_W / 2 - 1, WIN_H / 2 - 1, 150, 20};
-	ft_set_string(wn, rect, "+",ft_hex_to_rgb(H_RED) );
+	if (wn->game.target == 0)
+		ft_set_string(wn, rect, "SETTINGS : [ i ]", ft_set_color(game, 3));
 	if (game->setting == 1)
 		ft_set_menu_config(wn, game);
 	else if (game->dev_mode == 1)

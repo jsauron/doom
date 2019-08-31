@@ -33,6 +33,8 @@ int     upload_map(int **map, char *input_map)
 				map[i][j] = 5;
 			if (elem ==  '6')
 				map[i][j] = 6;
+			if (elem ==  '7')
+				map[i][j] = 7;
 			j++;
 		}
 		i++;
