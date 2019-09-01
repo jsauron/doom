@@ -171,7 +171,8 @@ struct						s_game
 	SDL_Surface			*gameover;
 	SDL_Surface			*weapon[2];
 	SDL_Surface			*lunette[2];
-	SDL_Surface			*keys[7];
+	SDL_Surface			*keys[6];
+	SDL_Surface			*key_s;
 	SDL_Surface			*win[12];
 	SDL_Surface			*mission_s;
 	SDL_Surface			*poster[4];
@@ -185,7 +186,7 @@ struct						s_game
 	t_player			player;
 	t_thread			thread[8];
 	t_minimap			minimap;
-	int					texturing;
+//	int					texturing;
 	int					lightshade;
 	int					gamemode;
 	int					setting;
@@ -269,4 +270,5 @@ Uint32						ft_getpixel(t_win *wn, SDL_Surface *surface,
 		int x, int y);
 int     render_game(t_win *wn);
 int     render_editor(t_win *wn);
+void		ft_assign_sprite(t_win *wn, int x, int y, int i, t_thread *thread);
 #endif

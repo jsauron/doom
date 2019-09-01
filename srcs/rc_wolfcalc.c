@@ -27,12 +27,14 @@ static void		ft_calc_walls(int i, int x, t_thread *thread)
 static void		*ft_calc_frame(void *arg)
 {
 	t_thread	*thread;
+	t_thread	*thread_s;
 	int			x;
 	int			y;
 	int			i;
 
 	i = -1;
 	thread = (t_thread *)arg;
+	thread_s = (t_thread *)arg;
 	x = thread->x_start;
 	while (x < WIN_W)
 	{
@@ -41,6 +43,7 @@ static void		*ft_calc_frame(void *arg)
 		while (y < WIN_H)
 		{
 			ft_assign_color(thread->wn, x, y, i, thread);
+			ft_assign_sprite(thread_s->wn, x, y, i, thread_s);
 			y++;
 		}
 		x += 8;

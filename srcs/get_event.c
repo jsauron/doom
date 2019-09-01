@@ -45,8 +45,8 @@ static int ft_keyboard2(Uint8 *state, t_game *game)
 		game->gamemode = 1;
 	else if (state[SDL_SCANCODE_3])
 		game->dev_mode = (game->dev_mode) ? 0 : 1;
-	else if (state[SDL_SCANCODE_T])
-		game->texturing = (game->texturing) ? 0 : 1;
+//	else if (state[SDL_SCANCODE_T])
+//		game->texturing = (game->texturing) ? 0 : 1;
 	else if (state[SDL_SCANCODE_L])
 		game->lightshade = (game->lightshade) ? 0 : 1;
 	else if (state[SDL_SCANCODE_KP_PLUS] && game->minimap.mnp_size * ZOOM_P < 50)

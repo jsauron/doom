@@ -102,10 +102,18 @@ void ft_minimap(t_win *wn, t_game *game)
 				rect = (SDL_Rect){game->minimap.diff.x + (j * game->minimap.mnp_size),
 								  game->minimap.diff.y + (i * game->minimap.mnp_size),
 								  game->minimap.mnp_size, game->minimap.mnp_size};
-				if (game->map[i][j] == 1)
+				if (game->map[i][j] == 1 || game->map[i][j] == 7)
 					ft_draw_rect(wn, rect, 0xFF306bb0, &(game->minimap.limit));
-				else if (game->map[i][j] == 0 || game->map[i][j] == 2)
+				else if (game->map[i][j] == 2)
+					ft_draw_rect(wn, rect, 0xFFDC143C, &(game->minimap.limit));
+				else if (game->map[i][j] == 0 ||game->map[i][j] == 4)
 					ft_draw_rect(wn, rect, 0xFFffabe4, &(game->minimap.limit));
+				else if (game->map[i][j] == 3)
+					ft_draw_rect(wn, rect, 0xFF2E8B57, &(game->minimap.limit));
+				else if (game->map[i][j] == 5)
+					ft_draw_rect(wn, rect, 0xFFFFD700, &(game->minimap.limit));
+				else if (game->map[i][j] == 6)
+					ft_draw_rect(wn, rect, 0xFF00BFFF  , &(game->minimap.limit));
 				j++;
 			}
 			i++;

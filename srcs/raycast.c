@@ -31,6 +31,8 @@ int				ft_is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 		return (1);
 	if (game->map[y2][x2] == 6)
 		return (6);
+	if (game->map[y2][x2] == 7)
+		return (7);
 	if (game->map[y2][x2] == 3)
 		return (3);
 	if (game->map[y2][x2] == 5)
@@ -66,7 +68,8 @@ static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 	- thread->ray[i].angle_d)) * M_PI / 180;
 	angle_r = thread->ray[i].angle_d * M_PI / 180;
 	if ((ft_is_inwall(pos, thread->game, &thread->ray[i])) == 1
-	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6)
+	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6
+	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7)
 	{
 		thread->ray[i].axis = 1;
 		ft_get_raygame(*pos, alpha_r, i, thread);
@@ -74,7 +77,8 @@ static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 	}
 	pos->x += -cos(angle_r) * 1;
 	if ((ft_is_inwall(pos, thread->game, &thread->ray[i])) == 1
-		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6)
+		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6
+		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7)
 	{
 		thread->ray[i].axis = 2;
 		ft_get_raygame(*pos, alpha_r, i, thread);

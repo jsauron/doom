@@ -26,6 +26,7 @@ static void		ft_make_frame(t_win *wn, t_game *game)
 	pos.x = -(i * 3000 / 360);
 	SDL_BlitSurface(wn->game.sky, NULL, wn->screen, &(pos));
 	ft_rc_wolfcalc(game);
+	//assign_sprite(wn);
 	ft_set_interface(wn, game);
 	if (clock() != 0 && (1000 - game->time_last / 10000) != 0  && (clock() /10000 - game->time_last / 10000))
 		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
