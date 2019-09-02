@@ -16,9 +16,17 @@ int				ft_is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 {
 	int		x2;
 	int		y2;
-
-	x2 = pos->x / BLOC_SIZE;
-	y2 = pos->y / BLOC_SIZE;
+ /*	if (ray && ray->the_key== 1)
+	{
+		x2 = pos->x / SPRITE_SIZE;
+		y2 = pos->y / SPRITE_SIZE;
+	}
+	else
+	{*/
+		x2 = pos->x / BLOC_SIZE;
+		y2 = pos->y / BLOC_SIZE;
+	
+	
 	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
 		return (0);
 	if (ray != NULL && game->map[y2][x2] == 6)
@@ -46,9 +54,16 @@ static void		ft_get_raygame(t_pos pos,
 	t_pos	player_pos;
 	double	distance_x;
 	double	distance_y;
-
+/*	if (thread->ray[i].the_key == 1)
+	{
+	player_pos.x = thread->game->player.position.x * SPRITE_SIZE;
+	player_pos.y = thread->game->player.position.y * SPRITE_SIZE;
+	}
+	else
+	{*/
 	player_pos.x = thread->game->player.position.x * BLOC_SIZE;
 	player_pos.y = thread->game->player.position.y * BLOC_SIZE;
+	
 	distance_x = (thread->ray[i].axis == 1)
 	? pos.x - player_pos.x : (int)pos.x - player_pos.x;
 	distance_y = (thread->ray[i].axis == 1)
@@ -58,7 +73,26 @@ static void		ft_get_raygame(t_pos pos,
 	thread->ray[i].x = pos.x * 8;
 	thread->ray[i].y = pos.y * 8;
 }
+/*
+static void		ft_get_raygame_s(t_pos pos,
+				double alpha_r, int i, t_thread *thread)
+{
+	t_pos	player_pos;
+	double	distance_x;
+	double	distance_y;
 
+	player_pos.x = thread->game->player.position.x * SPRITE_SIZE;
+	player_pos.y = thread->game->player.position.y * SPRITE_SIZE;
+	distance_x = (thread->ray[i].axis == 1)
+	? pos.x - player_pos.x : (int)pos.x - player_pos.x;
+	distance_y = (thread->ray[i].axis == 1)
+	? (int)pos.y - player_pos.y : pos.y - player_pos.y;
+	thread->ray[i].dist_minimap = ft_pythagore(distance_x, distance_y);
+	thread->ray[i].distance = thread->ray[i].dist_minimap * cos(alpha_r);
+	thread->ray[i].x = pos.x * 8;
+	thread->ray[i].y = pos.y * 8;
+}
+*/
 static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 {
 	double	angle_r;
@@ -69,18 +103,21 @@ static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 	angle_r = thread->ray[i].angle_d * M_PI / 180;
 	if ((ft_is_inwall(pos, thread->game, &thread->ray[i])) == 1
 	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6
-	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7)
+	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7
+	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 5)
 	{
 		thread->ray[i].axis = 1;
-		ft_get_raygame(*pos, alpha_r, i, thread);
+			ft_get_raygame(*pos, alpha_r, i, thread);
 		return (0);
 	}
 	pos->x += -cos(angle_r) * 1;
 	if ((ft_is_inwall(pos, thread->game, &thread->ray[i])) == 1
 		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6
-		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7)
+		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7
+		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 5)
 	{
 		thread->ray[i].axis = 2;
+//			ft_get_raygame_s(*pos, alpha_r, i, thread);
 		ft_get_raygame(*pos, alpha_r, i, thread);
 		return (0);
 	}
@@ -95,7 +132,7 @@ void			ft_calc_distance(int i, int x, t_thread *thread)
 	thread->ray[i].angle_d =
 	(thread->game->player.direction - 30) + (x * (60.0 / WIN_W));
 	pos.x = thread->game->player.position.x * BLOC_SIZE;
-	pos.y = thread->game->player.position.y * BLOC_SIZE;
+	pos.y = thread->game->player.position.y * BLOC_SIZE ;
 	while (pos.x > 0 && pos.x < MAP_SIZE * BLOC_SIZE
 	&& pos.y > 0 && pos.y < MAP_SIZE * BLOC_SIZE)
 	{

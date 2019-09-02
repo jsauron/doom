@@ -12,6 +12,21 @@
 
 #include "doom.h"
 
+static void		ft_calc_sprite(int i, int x, t_thread *thread)
+{
+	double	height;
+
+	height = 0;
+	if (thread->ray[i].the_key == 1)
+	{
+	ft_calc_distance(i, x, thread);
+	if (thread->ray[i].distance >= 0)
+		height = (SPRITE_SIZE / thread->ray[i].distance) * DIST_SCREEN;
+	thread->ray[i].wall_top = (WIN_H - height) / 2;
+	thread->ray[i].wall_bot = WIN_H - ((WIN_H - height)/ 2);
+	}
+}
+
 static void		ft_calc_walls(int i, int x, t_thread *thread)
 {
 	double	height;
@@ -39,11 +54,13 @@ static void		*ft_calc_frame(void *arg)
 	while (x < WIN_W)
 	{
 		y = 0;
-		ft_calc_walls(++i, x, thread);
+		++i;
+		ft_calc_walls(i, x, thread);
+		ft_calc_sprite(i, x, thread_s);
 		while (y < WIN_H)
 		{
 			ft_assign_color(thread->wn, x, y, i, thread);
-			ft_assign_sprite(thread_s->wn, x, y, i, thread_s);
+			ft_assign_sprite(thread->wn, x, y, i, thread_s);
 			y++;
 		}
 		x += 8;

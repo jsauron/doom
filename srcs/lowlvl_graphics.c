@@ -35,7 +35,7 @@ void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 color)
 	if (x < 0 || x > WIN_W || y < 0 || y > WIN_H)
 		return ;
 
-bpp = surface->format->BytesPerPixel;
+	bpp = surface->format->BytesPerPixel;
 	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 	(bpp == 1) ? *p = color : 0;
 	(bpp == 2) ? *(Uint16 *)p = color : 0;

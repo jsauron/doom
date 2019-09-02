@@ -23,7 +23,7 @@ static SDL_Surface *choose_texture(int i, t_thread *thread)
 	if (thread->ray[i].the_door == 1)
 		return (thread->game->door);
 	//if (thread->ray[i].the_key == 1)
-//		return (thread->game->keys[0]);
+		//return (NULL);
 	if (thread->ray[i].axis == VERTICAL_HIT && thread->ray[i].the_poster == 1)
 	{
 		return (((thread->ray[i].angle_d >= 0 && thread->ray[i].angle_d <= 180) 
@@ -68,21 +68,20 @@ static Uint32 ft_calc_sprite(t_win *wn, int y, int i, t_thread *thread)
 	ywall = (y - thread->ray[i].wall_top);
 	h_wall = thread->ray[i].wall_bot - thread->ray[i].wall_top;
 
-//printf(" wall-top = %f\n",thread->ray[i].wall_top);
-//printf(" wall-bot = %f\n",thread->ray[i].wall_bot);
-//printf(" waal-top - wall-bot = %f\n", thread->ray[i].wall_bot - thread->ray[i].wall_top);
-	(void)y;
+	//printf(" wall-top = %f\n",thread->ray[i].wall_top);
+	//printf(" wall-bot = %f\n",thread->ray[i].wall_bot);
+	//printf(" waal-top - wall-bot = %f\n", thread->ray[i].wall_bot - thread->ray[i].wall_top);
 			
-	//if (thread->ray[i].axis == VERTICAL_HIT)
-		textr.x = ((int)(thread->ray[i].x / 8) % WIN_W) * w_txtr / WIN_W;
-	//else if (thread->ray[i].axis == HORIZONTAL_HIT)
-		textr.x = ((int)(thread->ray[i].y / 8) % WIN_H) * w_txtr / WIN_H;
+	if (thread->ray[i].axis == VERTICAL_HIT)
+		textr.x = ((int)(thread->ray[i].x / 8) % SPRITE_SIZE) * w_txtr / SPRITE_SIZE;
+	else if (thread->ray[i].axis == HORIZONTAL_HIT)
+		textr.x = ((int)(thread->ray[i].y / 8) % SPRITE_SIZE) * w_txtr / SPRITE_SIZE;
 	textr.y = h_txtr * ywall / h_wall;
 	
 	color = ft_getpixel(wn, (SDL_Surface *)surface,
 						(int)textr.x % (int)surface->w,
-						(int)textr.y % (int)surface->w); //|
-	//		0xFF0000000;
+						(int)textr.y % (int)surface->h);//* |
+		//	0xFF0000000;
 	return (color);	
 }
 
@@ -101,7 +100,8 @@ static Uint32 ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 	h_txtr = surface->h;
 	h_wall = thread->ray[i].wall_bot - thread->ray[i].wall_top;
 
-			
+	if (thread->ray[i].the_key == 1)
+		return (0x00000000);	
 	if (thread->ray[i].axis == VERTICAL_HIT)
 		textr.x = ((int)(thread->ray[i].x / 8) % BLOC_SIZE) * w_txtr / BLOC_SIZE;
 	else if (thread->ray[i].axis == HORIZONTAL_HIT)
@@ -131,7 +131,7 @@ void	ft_assign_sprite(t_win *wn, int x, int y, int i, t_thread *thread)
 {
 Uint32 color;
 
-	color = 0x0;
+	color = 0;
 	if (!(y < thread->ray[i].wall_top))
 	{
 		if (y >= thread->ray[i].wall_top && y <= thread->ray[i].wall_bot)
@@ -141,7 +141,7 @@ Uint32 color;
 			if (thread->game->lightshade == 1 && color)
 				color = ft_light_shade(thread->ray[i].distance, color);
 		}
-		if (color)
+		if (color != 0x00000000)
 			ft_setpixel(wn->screen, x, y, color);
 	}	
 }
