@@ -26,8 +26,7 @@
 # define H_RED 0xFF0000FF
 # define WIN_H 750
 # define WIN_W 1000
-# define BLOC_SIZE 100
-# define SPRITE_SIZE 200
+# define BLOC_SIZE 200
 
 # define DIST_SCREEN 900
 # define MAP_SIZE 15

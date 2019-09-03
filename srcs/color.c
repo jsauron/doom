@@ -43,47 +43,13 @@ static SDL_Surface *choose_texture(int i, t_thread *thread)
 				? surface[2] : surface[3]);
 }
 
-static SDL_Surface *choose_sprite(int i, t_thread *thread)
+/*static SDL_Surface *choose_sprite(int i, t_thread *thread)
 {
 	if (thread->ray[i].the_key == 1)
 		return (thread->game->key_s);
 	return (NULL);
 }
-
-static Uint32 ft_calc_sprite(t_win *wn, int y, int i, t_thread *thread)
-{
-	const SDL_Surface *surface = choose_sprite(i, thread);
-	double h_txtr;
-	double w_txtr;
-	w_txtr = surface->w;
-	h_txtr = surface->h;
-	Uint32 color;
-
-	double h_wall;
-	t_mouse textr;
-	double ywall;
-
-	if (!surface)
-		return(0);
-	ywall = (y - thread->ray[i].wall_top);
-	h_wall = thread->ray[i].wall_bot - thread->ray[i].wall_top;
-
-	//printf(" wall-top = %f\n",thread->ray[i].wall_top);
-	//printf(" wall-bot = %f\n",thread->ray[i].wall_bot);
-	//printf(" waal-top - wall-bot = %f\n", thread->ray[i].wall_bot - thread->ray[i].wall_top);
-			
-	if (thread->ray[i].axis == VERTICAL_HIT)
-		textr.x = ((int)(thread->ray[i].x / 8) % SPRITE_SIZE) * w_txtr / SPRITE_SIZE;
-	else if (thread->ray[i].axis == HORIZONTAL_HIT)
-		textr.x = ((int)(thread->ray[i].y / 8) % SPRITE_SIZE) * w_txtr / SPRITE_SIZE;
-	textr.y = h_txtr * ywall / h_wall;
-	
-	color = ft_getpixel(wn, (SDL_Surface *)surface,
-						(int)textr.x % (int)surface->w,
-						(int)textr.y % (int)surface->h);//* |
-		//	0xFF0000000;
-	return (color);	
-}
+*/
 
 static Uint32 ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 {
@@ -99,9 +65,12 @@ static Uint32 ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 	w_txtr = surface->w;
 	h_txtr = surface->h;
 	h_wall = thread->ray[i].wall_bot - thread->ray[i].wall_top;
-
-	if (thread->ray[i].the_key == 1)
-		return (0x00000000);	
+//static int  c ;
+//	if (thread->ray[i].the_key == 1)
+//	{
+	//	SDL_BlitSurface(wn->game.key_s, NULL, wn->screen, &(wn->pos_game));
+		
+//	}
 	if (thread->ray[i].axis == VERTICAL_HIT)
 		textr.x = ((int)(thread->ray[i].x / 8) % BLOC_SIZE) * w_txtr / BLOC_SIZE;
 	else if (thread->ray[i].axis == HORIZONTAL_HIT)
@@ -127,25 +96,6 @@ Uint32 ft_get_color(int axis, int angle_d)
 	return ((angle_d >= 90 && angle_d <= 270) ? tab[2] : tab[3]);
 }
 
-void	ft_assign_sprite(t_win *wn, int x, int y, int i, t_thread *thread)
-{
-Uint32 color;
-
-	color = 0;
-	if (!(y < thread->ray[i].wall_top))
-	{
-		if (y >= thread->ray[i].wall_top && y <= thread->ray[i].wall_bot)
-		{
-			color = ft_calc_sprite(wn, y, i, thread);
-			// lightshading
-			if (thread->game->lightshade == 1 && color)
-				color = ft_light_shade(thread->ray[i].distance, color);
-		}
-		if (color != 0x00000000)
-			ft_setpixel(wn->screen, x, y, color);
-	}	
-}
-
 void ft_assign_color(t_win *wn, int x, int y, int i, t_thread *thread)
 {
 	Uint32 color;
@@ -153,14 +103,9 @@ void ft_assign_color(t_win *wn, int x, int y, int i, t_thread *thread)
 	color = 0x0;
 	if (!(y < thread->ray[i].wall_top))
 	{
-	//	 if (y < thread->ray[i].wall_top && thread->game->texturing == 0)
-			//color = (thread->game->lightshade) ? 0xFFDC143C : 0xFFD6FEFF;
-	//	if (y < thread->ray[i].wall_top)
-			//	color = ft_calc_col(wn, y, i ,thread);
 		if (y >= thread->ray[i].wall_top && y <= thread->ray[i].wall_bot)
 		{
 			color = ft_calc_col(wn, y, i, thread);
-			 // : ft_get_color(thread->ray[i].axis, thread->ray[i].angle_d);
 
 			// lightshading
 			if (thread->game->lightshade == 1)
