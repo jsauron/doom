@@ -21,6 +21,7 @@ static void		ft_calc_walls(int i, int x, t_thread *thread)
 	ft_calc_distance(i, x, thread);
 	if (thread->ray[i].distance >= 0)
 		height = (BLOC_SIZE / thread->ray[i].distance) * DIST_SCREEN;
+
 	thread->ray[i].wall_top = (WIN_H - height) / 2;
 	thread->ray[i].wall_bot = WIN_H - ((WIN_H - height) / 2);
 }
@@ -28,14 +29,12 @@ static void		ft_calc_walls(int i, int x, t_thread *thread)
 static void		*ft_calc_frame(void *arg)
 {
 	t_thread	*thread;
-	t_thread	*thread_s;
 	int			x;
 	int			y;
 	int			i;
 
 	i = -1;
 	thread = (t_thread *)arg;
-	thread_s = (t_thread *)arg;
 	x = thread->x_start;
 	while (x < WIN_W)
 	{
@@ -49,6 +48,7 @@ static void		*ft_calc_frame(void *arg)
 		}
 		x += 8;
 	}
+	check_sprite(thread);
 	pthread_exit(0);
 }
 

@@ -32,6 +32,8 @@ static int ft_keyboard1(const Uint8 *state, t_game *game)
 		game->player.sensibility -= (game->player.sensibility > 1) ? 1 : 0;
 	else if (state[SDL_SCANCODE_KP_DIVIDE])
 		game->player.sensibility += (game->player.sensibility < 10) ? 1 : 0;
+	else if (state[SDL_SCANCODE_SPACE])
+		game->player.cam_height++;
 	else
 		return (0);
 	return (1);
@@ -155,9 +157,8 @@ int ft_get_events(t_game *game)
 	SDL_GetRelativeMouseState(&(game->mouse.x), &(game->mouse.y));
 	if (game->player.life == 0)
 	{
-		while (!game->state[SDL_SCANCODE_ESCAPE])
-			;
-		return (0);
+		if (game->state[SDL_SCANCODE_ESCAPE])
+			return (0);
 	}
 	if (game->state[SDL_SCANCODE_ESCAPE])
 		return (0);

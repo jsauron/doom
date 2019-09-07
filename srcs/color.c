@@ -12,6 +12,8 @@
 
 #include "doom.h"
 
+
+
 static SDL_Surface *choose_texture(int i, t_thread *thread)
 {
 	SDL_Surface *surface[8] = {
@@ -43,13 +45,6 @@ static SDL_Surface *choose_texture(int i, t_thread *thread)
 				? surface[2] : surface[3]);
 }
 
-/*static SDL_Surface *choose_sprite(int i, t_thread *thread)
-{
-	if (thread->ray[i].the_key == 1)
-		return (thread->game->key_s);
-	return (NULL);
-}
-*/
 
 static Uint32 ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 {
@@ -65,12 +60,6 @@ static Uint32 ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 	w_txtr = surface->w;
 	h_txtr = surface->h;
 	h_wall = thread->ray[i].wall_bot - thread->ray[i].wall_top;
-//static int  c ;
-//	if (thread->ray[i].the_key == 1)
-//	{
-	//	SDL_BlitSurface(wn->game.key_s, NULL, wn->screen, &(wn->pos_game));
-		
-//	}
 	if (thread->ray[i].axis == VERTICAL_HIT)
 		textr.x = ((int)(thread->ray[i].x / 8) % BLOC_SIZE) * w_txtr / BLOC_SIZE;
 	else if (thread->ray[i].axis == HORIZONTAL_HIT)

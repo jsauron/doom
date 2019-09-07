@@ -57,6 +57,14 @@ int				ft_movement(double angle_r, int dir, t_game *game)
 		game->key++;
 		game->map[y][x] = 0;
 	}
+	else if ((ft_is_inmap(&pos, game) && (ft_is_inwall(&pos, game, NULL) == 2)))
+	{
+		printf("lfe = %d\n", game->player.life);
+		if (game->player.life > 0)
+		game->player.life--;
+	//	pos.x = (game->player.position.x * BLOC_SIZE) - move.x * 150;
+		//pos.y  = (game->player.position.y * BLOC_SIZE )- move.y * 150;
+	}
 	else if ((ft_is_inmap(&pos, game) && (ft_is_inwall(&pos, game, NULL) == 3)))
 		game->exit = 1;
 	if (ft_is_inmap(&pos, game) && !(ft_is_inwall(&pos, game, NULL)))

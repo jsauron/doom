@@ -16,9 +16,10 @@ int gameover(t_win *wn)
 {
 	SDL_Rect pos;
 
-	pos.x = 250;
-	pos.y = 350;
+	pos.x = 0;
+	pos.y = 0;
 	SDL_BlitSurface(wn->game.gameover, NULL, wn->screen, &pos);
+
 	return (0);
 }
 
@@ -157,6 +158,8 @@ int render_editor(t_win *wn)
 	return (0);
 }
 
+
+
 int	display_mission(t_win *wn)
 {
 	int i;
@@ -183,6 +186,12 @@ int render_game(t_win *wn)
 	else
 	{
 		SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
+		if (wn->game.s_key == 1)
+			SDL_BlitSurface(wn->game.key_s, NULL, wn->screen, &wn->game.key_pos);
+		if (wn->game.s_mean == 1)
+			SDL_BlitSurface(wn->game.mean_s, NULL, wn->screen, &wn->game.mean_pos);
+		if (wn->game.s_exit == 1)
+			SDL_BlitSurface(wn->game.exit_s, NULL, wn->screen, &wn->game.exit_pos);
 		render_life(wn, wn->game.player.life);
 		//	weapon(wn);
 		shot(wn);

@@ -48,6 +48,7 @@ SRC_NAME = main.c \
 			tga_reader_uncompress.c \
 			tga_reader_rot.c \
 			tga_reader_main.c \
+			get_sprite.c \
 			files.c  
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

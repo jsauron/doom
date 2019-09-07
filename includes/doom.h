@@ -102,6 +102,8 @@ struct						s_ray
 	int					the_door;
 	int					the_key;
 	int					the_poster;
+	int					the_mean;
+	int					the_exit;
 	int					x;
 	int					y;
 	int					axis;
@@ -174,6 +176,8 @@ struct						s_game
 	SDL_Surface			*lunette[2];
 	SDL_Surface			*keys[6];
 	SDL_Surface			*key_s;
+	SDL_Surface			*exit_s;
+	SDL_Surface			*mean_s;
 	SDL_Surface			*win[12];
 	SDL_Surface			*mission_s;
 	SDL_Surface			*poster[4];
@@ -200,6 +204,17 @@ struct						s_game
 	int					fps;
 	int					exit;
 	int					mission;
+	double				distance_sprite;
+	double				top;
+	double				bot;
+	double				angle_d;
+	int					axis;
+	int					s_key;
+	SDL_Rect				key_pos;
+	int					s_exit;
+	SDL_Rect				exit_pos;
+	int					s_mean;
+	SDL_Rect			mean_pos;
 };
 
  struct					s_win
@@ -221,7 +236,7 @@ struct						s_game
 	t_editor			*editor;
 };
 
-
+int							ft_set_sprites(t_win *wn);
 void						ft_exit(t_game *game);
 void						ft_err_exit(char *msg, t_game *game);
 void						ft_sdl_err_exit(char *msg, t_game *game);
@@ -271,5 +286,5 @@ Uint32						ft_getpixel(t_win *wn, SDL_Surface *surface,
 		int x, int y);
 int     render_game(t_win *wn);
 int     render_editor(t_win *wn);
-void		ft_assign_sprite(t_win *wn, int x, int y, int i, t_thread *thread);
+int		check_sprite(t_thread *thread);
 #endif

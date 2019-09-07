@@ -17,20 +17,25 @@ int				ft_is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 	int		x2;
 	int		y2;
 
-		x2 = pos->x / BLOC_SIZE;
-		y2 = pos->y / BLOC_SIZE;
-	
-	
+	x2 = pos->x / BLOC_SIZE;
+	y2 = pos->y / BLOC_SIZE;
+		
 	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
 		return (0);
+	if (ray != NULL && game->map[y2][x2] == 3)
+		ray->the_exit = 1;
+	if (ray != NULL && game->map[y2][x2] == 2)
+		ray->the_mean = 1;
 	if (ray != NULL && game->map[y2][x2] == 6)
-			ray->the_door = 1;
+		ray->the_door = 1;
 	if (ray != NULL && game->map[y2][x2] == 5)
 		ray->the_key = 1;
 	if (ray != NULL && game->map[y2][x2] == 7)
 		ray->the_poster = 1;
 	if (game->map[y2][x2] == 1) 
 		return (1);
+	if (game->map[y2][x2] == 2) 
+		return (2);
 	if (game->map[y2][x2] == 6)
 		return (6);
 	if (game->map[y2][x2] == 7)

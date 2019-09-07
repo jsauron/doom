@@ -50,8 +50,8 @@ static void			ft_set_menu_config(t_win *wn, t_game *game)
 	ft_set_string(wn,  rect, "[ l ]  Light shading", ft_hex_to_rgb(H_GREEN));
 	rect = (SDL_Rect){500, 380, 500, 25};
 	ft_set_nbrstring(wn,  game->lightshade, rect, H_GREEN);
-	rect = (SDL_Rect){230, 420, 500, 25};
-	ft_set_string(wn, rect, "[ t ]  Texturing", ft_hex_to_rgb(H_GREEN));
+//	rect = (SDL_Rect){230, 420, 500, 25};
+	//ft_set_string(wn, rect, "[ t ]  Texturing", ft_hex_to_rgb(H_GREEN));
 //	rect = (SDL_Rect){500, 420, 500, 25};
 	//ft_set_nbrstring(wn,  game->texturing, rect, H_GREEN);
 	rect = (SDL_Rect){230, 420, 500, 25};

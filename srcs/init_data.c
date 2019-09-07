@@ -81,7 +81,11 @@ static void	init_wall(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->keys[5] = IMG_Load("ressources/key8.png")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->key_s = IMG_Load("ressources/key_oo.png")))
+	if (!(game->key_s = IMG_Load("ressources/wall/key_oo.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->exit_s = IMG_Load("ressources/wall/exit_oo.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->mean_s = IMG_Load("ressources/wall/mean_oo.png")))
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->lunette[0] = IMG_Load("ressources/lunette.png")))
 		ft_err_exit("doom: error: bad textures", game);
