@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 17:34:32 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 23:25:40 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 color)
 
 	if (x < 0 || x > WIN_W || y < 0 || y > WIN_H)
 		return ;
-
 	bpp = surface->format->BytesPerPixel;
 	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 	(bpp == 1) ? *p = color : 0;

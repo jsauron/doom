@@ -287,4 +287,23 @@ Uint32						ft_getpixel(t_win *wn, SDL_Surface *surface,
 int     render_game(t_win *wn);
 int     render_editor(t_win *wn);
 int		check_sprite(t_thread *thread);
+
+/* init_data.c */
+void	sdl_err_exit(char *msg, t_game *game);
+void	init_sdl_game(t_game *game);
+void	init_fonts(t_game *game);
+void	init_surface_game(t_game *game);
+void	init_wall(t_game *game);
+void	init_keys(t_game *game);
+void	init_hud(t_game *game);
+void	init_win_menu(t_game *game);
+void	init_poster(t_game *game);
+void	init_weapon(t_game *game);
+void	init_sprite(t_game *game);
+void	init_graphic(t_game *game);
+void	init_thread(t_win *wn, t_game *game);
+void	init_player(t_player *player);
+void	ft_init_game(t_win *wn,  t_game *game , char *map);
+
+
 #endif

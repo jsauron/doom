@@ -85,9 +85,6 @@ void	play_editor(t_win *wn, t_editor *editor, char *map)
 		editor->pos.y = 0;
 		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &editor->pos);
 		display_editor(wn, editor);
-		SDL_UpdateTexture(wn->texture, NULL, wn->screen->pixels, wn->screen->pitch);
-		SDL_RenderClear(wn->render);
-		SDL_RenderCopy(wn->render, wn->texture, NULL, NULL);
-		SDL_RenderPresent(wn->render);
+		render_editor(wn);
 	}
 }

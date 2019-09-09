@@ -1,4 +1,3 @@
-#include "doom.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,15 +6,16 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:31 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 13:34:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 22:32:18 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "doom.h"
 
-int				store_sprite(t_sprite **sprite, int n)
+int		store_sprite(t_sprite **sprite, int n)
 {
-	int i;
-	t_sprite *tmp;
+	int			i;
+	t_sprite	*tmp;
 
 	i = 0;
 	tmp = NULL;
@@ -33,16 +33,19 @@ int				store_sprite(t_sprite **sprite, int n)
 	return (0);
 }
 
-int check_sprite(t_thread *thread)
+int		check_sprite(t_thread *thread)
 {
 	int i;
 	int n;
-	i = 0;
-	n = 0;
-	int l = 0;
-	int k = 0;
-	int j = 0;
+	int l;
+	int k;
+	int j;
 
+	i = 0;
+	l = 0;
+	n = 0;
+	k = 0;
+	j = 0;
 	while (i < WIN_W / 8)
 	{
 		if (thread->ray[i].the_key == 1 && l == 0)
@@ -50,10 +53,14 @@ int check_sprite(t_thread *thread)
 			thread->game->sprite[n] = malloc(sizeof(t_sprite));
 			thread->game->sprite[n]->sprite = thread->game->key_s;
 			thread->game->sprite[n]->distance = thread->ray[i].distance;
-			thread->game->sprite[n]->size.x = thread->game->key_s->w / thread->ray[i].distance;
-			thread->game->sprite[n]->size.y = thread->game->key_s->h / thread->ray[i].distance ;
+			thread->game->sprite[n]->size.x =
+				thread->game->key_s->w / thread->ray[i].distance;
+			thread->game->sprite[n]->size.y =
+				thread->game->key_s->h / thread->ray[i].distance;
 			thread->game->sprite[n]->pos.x = i * 8;
-			thread->game->sprite[n]->pos.y = (WIN_H - ((BLOC_SIZE / thread->ray[i].distance) * DIST_SCREEN)) / 2;
+			thread->game->sprite[n]->pos.y =
+				(WIN_H - ((BLOC_SIZE / thread->ray[i].distance)
+						* DIST_SCREEN)) / 2;
 			l++;
 			n++;
 		}
@@ -62,22 +69,30 @@ int check_sprite(t_thread *thread)
 			thread->game->sprite[n] = malloc(sizeof(t_sprite));
 			thread->game->sprite[n]->sprite = thread->game->mean_s;
 			thread->game->sprite[n]->distance = thread->ray[i].distance;
-			thread->game->sprite[n]->size.x = thread->game->mean_s->w /thread->ray[i].distance;
-			thread->game->sprite[n]->size.y = thread->game->mean_s->h / thread->ray[i].distance ;
-			thread->game->sprite[n]->pos.x = i * 8 /*(thread->game->sprite[n]->sprite->w)*/;
-			thread->game->sprite[n]->pos.y = (WIN_H - ((BLOC_SIZE / thread->ray[i].distance) * DIST_SCREEN)) / 2;
+			thread->game->sprite[n]->size.x =
+				thread->game->mean_s->w / thread->ray[i].distance;
+			thread->game->sprite[n]->size.y =
+				thread->game->mean_s->h / thread->ray[i].distance;
+			thread->game->sprite[n]->pos.x = i * 8;
+			thread->game->sprite[n]->pos.y =
+				(WIN_H - ((BLOC_SIZE / thread->ray[i].distance)
+						* DIST_SCREEN)) / 2;
 			k++;
 			n++;
 		}
-		else  if (thread->ray[i].the_exit == 1 && j < 2)
+		else if (thread->ray[i].the_exit == 1 && j < 2)
 		{
 			thread->game->sprite[n] = malloc(sizeof(t_sprite));
 			thread->game->sprite[n]->sprite = thread->game->exit_s;
 			thread->game->sprite[n]->distance = thread->ray[i].distance;
-			thread->game->sprite[n]->size.x = thread->game->exit_s->w / thread->ray[i].distance;
-			thread->game->sprite[n]->size.y = thread->game->exit_s->h / thread->ray[i].distance;
-			thread->game->sprite[n]->pos.x = i * 8 - (thread->game->sprite[n]->sprite->w);
-			thread->game->sprite[n]->pos.y = (WIN_H - ((BLOC_SIZE / thread->ray[i].distance) * DIST_SCREEN)) / 2;
+			thread->game->sprite[n]->size.x = thread->game->exit_s->w
+				/ thread->ray[i].distance;
+			thread->game->sprite[n]->size.y = thread->game->exit_s->h
+				/ thread->ray[i].distance;
+			thread->game->sprite[n]->pos.x = i * 8;
+			thread->game->sprite[n]->pos.y =
+				(WIN_H - ((BLOC_SIZE / thread->ray[i].distance)
+						* DIST_SCREEN)) / 2;
 			j++;
 			n++;
 		}

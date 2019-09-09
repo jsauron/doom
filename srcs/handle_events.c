@@ -6,13 +6,13 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:01:58 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 17:34:04 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 22:32:49 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int				ft_movement_normal(const Uint8 *state, t_game  *game)
+int				ft_movement_normal(const Uint8 *state, t_game *game)
 {
 	double		angle_r;
 

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 17:34:36 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 23:40:08 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,18 @@
 static void		ft_make_frame(t_win *wn, t_game *game)
 {
 	SDL_Rect	pos;
-	int i;
+	int			i;
 
+	i = (int)(((int)(game->player.direction)));
+	pos.x = -(i * 3000 / 360);
+	pos.y = 0;
 	game->nb_frame++;
 	game->time_last = clock();
-
-	pos.y = 0;
-	(void)wn;
-	i = (int) (((int)(game->player.direction)));
-	pos.x = -(i * 3000 / 360);
 	SDL_BlitSurface(wn->game.sky, NULL, wn->screen, &(pos));
 	ft_rc_wolfcalc(game);
-	//assign_sprite(wn);
-	//ft_set_sprites(wn);
 	ft_set_interface(wn, game);
-	if (clock() != 0 && (1000 - game->time_last / 10000) != 0  && (clock() /10000 - game->time_last / 10000))
+	if (clock() != 0 && (1000 - game->time_last / 10000) != 0
+			&& (clock() / 10000 - game->time_last / 10000))
 		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
 	ft_set_infos(wn, game);
 	render_game(wn);
@@ -55,23 +52,38 @@ static void		ft_game_loop(t_win *wn, t_game *game)
 	}
 }
 
-int			ft_start(char **argv)
+void		display_anim_menu(t_win *wn)
 {
-	t_win			*wn;
-	int				play;
 	int				current_time;
 	int				old_time;
-	int				i;
 	int				c;
+	int				i;
 
-	wn = NULL;
-	play = 1;
 	i = 0;
 	c = 0;
 	current_time = 0;
 	old_time = 0;
+	current_time = SDL_GetTicks();
+	if (current_time - old_time > 200)
+	{
+		if (i == 9 || i == 0)
+			c++;
+		if (c % 2 == 0)
+			i--;
+		else if (c % 2 != 0)
+			i++;
+		old_time = current_time;
+	}
+	SDL_BlitSurface(wn->menu, NULL, wn->screen, &(wn->pos_menu));
+	SDL_BlitSurface(wn->editor->menu[i], NULL,
+			wn->screen, &(wn->pos_menu_mov));
+}
 
-	wn = init(wn);
+int			ft_start(char **argv)
+{
+	int				play;
+
+	play = 1;
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
 	while (play)
 	{
@@ -90,38 +102,27 @@ int			ft_start(char **argv)
 			editor(wn, wn->editor, argv[1]);
 			SDL_WaitEvent(&(wn->event));
 		}
-		current_time = SDL_GetTicks();
-		if (current_time - old_time > 200)
-		{
-			if (i == 9 || i == 0)
-				c++;
-			if (c % 2 == 0)
-				i--;
-			else if (c % 2 != 0)
-				i++;
-			old_time = current_time;
-		}
-		SDL_BlitSurface(wn->menu, NULL, wn->screen, &(wn->pos_menu));
-		SDL_BlitSurface(wn->editor->menu[i], NULL, wn->screen, &(wn->pos_menu_mov));
+		display_anim_menu(wn);
 		render_editor(wn);
 	}
 	free_surface_editor(wn, wn->editor);
 	SDL_Quit();
-
 	return (0);
 }
 
 int				main(int argc, char **argv)
 {
-	//	t_game	game;
+	t_win			wn;
 
-	(void)argc;
-	/*	if (argc != 2)
-		{
+	if (argc != 2)
+	{
 		ft_putendl_fd("[->] usage: ./doom [map]", 2);
-		ft_err_exit("[->] README for more informations", &game);
-		}
-		*/
-	ft_start(argv);
+		ft_putendl_fd("[->] README for more informations", 2);
+	}
+	else
+	{
+		wn = init(wn);
+		ft_start(argv);
+	}
 	return (0);
 }
