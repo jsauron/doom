@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 16:00:22 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:25:15 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,118 +14,80 @@
 
 void	editor(t_win *wn, t_editor *editor, char *map)
 {
-	SDL_Rect pos;
-
-	int play = 1;
-	int left_click = 0;
-	int right_click = 0;
-	int current_obj = WALL;
-	int x = 0;
-	int y = 0;
-
-	if(!upload_map(editor->map, map))
+	if (!upload_map(editor->map, map))
 		exit(EXIT_FAILURE);
+	init_editor(editor);
+	play_editor(wn, editor, map);
+}
 
+void	set_obj(t_win *wn, SDL_Rect pos, int x, int y)
+{
+	if (wn->editor->map[y][x] == WALL)
+		SDL_BlitSurface(wn->editor->obj.wall, NULL, wn->screen, &pos);
+	else if (wn->editor->map[y][x] == MEAN)
+		SDL_BlitSurface(wn->editor->obj.mean, NULL, wn->screen, &pos);
+	else if (wn->editor->map[y][x] == GOAL)
+		SDL_BlitSurface(wn->editor->obj.goal, NULL, wn->screen, &pos);
+	else if (wn->editor->map[y][x] == KEY)
+		SDL_BlitSurface(wn->editor->obj.key, NULL, wn->screen, &pos);
+	else if (wn->editor->map[y][x] == DOOR)
+		SDL_BlitSurface(wn->editor->obj.door, NULL, wn->screen, &pos);
+	else if (wn->editor->map[y][x] == POSTER)
+		SDL_BlitSurface(wn->editor->obj.poster, NULL, wn->screen, &pos);
+	else if (wn->editor->map[y][x] == PLAYER)
+	{
+		SDL_BlitSurface(wn->editor->obj.player, NULL, wn->screen, &pos);
+	}
+}
+
+void	display_editor(t_win *wn, t_editor *editor)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	while (y < XBLOC)
+	{
+		x = 0;
+		while (x < YBLOC)
+		{
+			editor->pos.x = x * SIZE_BLOC;
+			editor->pos.y = y * SIZE_BLOC;
+			set_obj(wn, editor->pos, x, y);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	play_editor(t_win *wn, t_editor *editor, char *map)
+{
+	int		play;
+
+	play = 1;
 	SDL_PumpEvents();
-	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
+	wn->state = (Uint8 *)SDL_GetKeyboardState(NULL);
 	wn->input.mouse = (Uint32)SDL_GetMouseState(&wn->input.x, &wn->input.y);
 	while (play)
 	{
 		SDL_WaitEvent(&(wn->event));
 		if (wn->event.type == SDL_QUIT)
 			play = 0;
-		else if (wn->event.type ==  SDL_MOUSEBUTTONDOWN)
-		{
-			if (wn->event.button.button == SDL_BUTTON_LEFT)
-			{
-				editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = current_obj;
-				left_click = 1;
-			}
-			if (wn->event.button.button == SDL_BUTTON_RIGHT)
-			{
-				editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x / SIZE_BLOC] = VIDE;
-				right_click = 1;
-			}
-		}
-		else if (wn->event.type ==  SDL_MOUSEBUTTONUP)
-		{
-			if (wn->event.button.button == SDL_BUTTON_LEFT)
-				left_click = 0;
-			else if (wn->event.button.button == SDL_BUTTON_RIGHT)
-				right_click = 0;
-		}
-		if (wn->event.type ==  SDL_MOUSEMOTION)
-		{
-			if (left_click)
-				editor->map[wn->event.motion.y / SIZE_BLOC][wn->event.motion.x / SIZE_BLOC] = current_obj;
-			else if (right_click)
-				editor->map[wn->event.motion.y / SIZE_BLOC][wn->event.motion.x / SIZE_BLOC] = VIDE;
-		}
+		else if (wn->event.type == SDL_MOUSEBUTTONDOWN)
+			button_down(wn, editor);
+		else if (wn->event.type == SDL_MOUSEBUTTONUP)
+			button_up(wn, editor);
+		if (wn->event.type == SDL_MOUSEMOTION)
+			mouse_motion(wn, editor);
 		if (wn->event.type == SDL_KEYDOWN)
-		{
-			if (wn->state[SDL_SCANCODE_ESCAPE])
-				play = 0;
-			else if (wn->state[SDL_SCANCODE_1])
-				current_obj = WALL;
-			else if (wn->state[SDL_SCANCODE_2])
-				current_obj = MEAN;
-			else if (wn->state[SDL_SCANCODE_3])
-				current_obj = GOAL;
-			else if (wn->state[SDL_SCANCODE_4])
-				current_obj = PLAYER;
-			else if (wn->state[SDL_SCANCODE_5])
-				current_obj = KEY;
-			else if (wn->state[SDL_SCANCODE_6])
-				current_obj = DOOR;
-			else if (wn->state[SDL_SCANCODE_7])
-				current_obj = POSTER;
-			else if (wn->state[SDL_SCANCODE_S])
-				save_map(editor->map, map);
-			else if (wn->state[SDL_SCANCODE_C])
-				upload_map(editor->map, map );
-	}
-		pos.x = 0;
-		pos.y = 0;
-		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &pos);
-		y = 0;
-		int c = 0;
-		while (y < XBLOC)
-		{
-			x = 0;
-			while (x < YBLOC)
-			{
-				pos.x = x * SIZE_BLOC;
-				pos.y = y * SIZE_BLOC;
-				if (editor->map[y][x] == WALL)
-						SDL_BlitSurface(editor->wall, NULL, wn->screen, &pos);
-				else if (editor->map[y][x] == MEAN)
-						SDL_BlitSurface(editor->mean, NULL, wn->screen, &pos);
-				else if (editor->map[y][x] == GOAL)
-						SDL_BlitSurface(editor->goal, NULL, wn->screen, &pos);
-				else if (editor->map[y][x] == KEY)
-						SDL_BlitSurface(editor->key, NULL, wn->screen, &pos);
-				else if (editor->map[y][x] == DOOR)
-						SDL_BlitSurface(editor->door, NULL, wn->screen, &pos);
-				else if (editor->map[y][x] == POSTER)
-						SDL_BlitSurface(editor->poster, NULL, wn->screen, &pos);
-				else if (editor->map[y][x] == PLAYER)
-				{
-					if (c == 0)
-					{
-						SDL_BlitSurface(editor->player, NULL, wn->screen, &pos);
-						c++;
-					}
-					else 
-						editor->map[y][x] = VIDE;
-				}
-
-				x++;
-			}
-			y++;
-		}
+			play = key_down(wn, editor, map);
+		editor->pos.x = 0;
+		editor->pos.y = 0;
+		SDL_BlitSurface(editor->editor_surface, NULL, wn->screen, &editor->pos);
+		display_editor(wn, editor);
 		SDL_UpdateTexture(wn->texture, NULL, wn->screen->pixels, wn->screen->pitch);
 		SDL_RenderClear(wn->render);
 		SDL_RenderCopy(wn->render, wn->texture, NULL, NULL);
 		SDL_RenderPresent(wn->render);
-		}
+	}
 }

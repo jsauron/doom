@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:34:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:34:40 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void ft_draw_background(t_win *wn, t_game *game)
 	SDL_Rect rect;
 
 	rect = (SDL_Rect){game->minimap.origin.x,
-					  game->minimap.origin.y, WIN_W / 4, WIN_H / 4};
+		game->minimap.origin.y, WIN_W / 4, WIN_H / 4};
 	ft_draw_border(wn, rect, 0xFFFFFFF);
 	ft_draw_rect(wn, rect, 0xFF000000, &(game->minimap.limit));
 }
@@ -79,7 +79,7 @@ static void ft_draw_player(t_win *wn, t_game *game)
 		i++;
 	}
 	player = (SDL_Rect){game->minimap.centre.x - 5,
-						game->minimap.centre.y - 5, 10, 10};
+		game->minimap.centre.y - 5, 10, 10};
 	ft_draw_rect(wn, player, 0x0, 0);
 }
 
@@ -100,8 +100,8 @@ void ft_minimap(t_win *wn, t_game *game)
 			while (j < MAP_SIZE)
 			{
 				rect = (SDL_Rect){game->minimap.diff.x + (j * game->minimap.mnp_size),
-								  game->minimap.diff.y + (i * game->minimap.mnp_size),
-								  game->minimap.mnp_size, game->minimap.mnp_size};
+					game->minimap.diff.y + (i * game->minimap.mnp_size),
+					game->minimap.mnp_size, game->minimap.mnp_size};
 				if (game->map[i][j] == 1 || game->map[i][j] == 7)
 					ft_draw_rect(wn, rect, 0xFF306bb0, &(game->minimap.limit));
 				else if (game->map[i][j] == 2)

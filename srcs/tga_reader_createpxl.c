@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 10:14:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 14:28:14 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:35:13 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int				createpxl(t_tga *tga)
 		ret = pxlbase(tga, ret);
 	else
 		ret = pxlbasecm(tga, ret);
-	
+
 	free(tga->data);
 	tga->data = &(ret[0]);
 	return (0);

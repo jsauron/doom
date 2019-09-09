@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:40 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 20:01:01 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:34:49 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		*ft_calc_frame(void *arg)
 		ft_calc_walls(i, x, thread);
 		while (y < WIN_H)
 		{
-			ft_assign_color(thread->wn, x, y, i, thread);
+			ft_assign_color(thread, x, y, i);
 			y++;
 		}
 		x += 8;
@@ -63,7 +63,7 @@ void			ft_rc_wolfcalc(t_game *game)
 		game->thread[i].game = game;
 		ft_bzero(game->thread[i].ray, sizeof(t_ray) * (WIN_W / 8));
 		if ((pthread_create(&(game->thread[i].th), 0,
-		ft_calc_frame,  (void *)&(game->thread[i]))) != 0)
+						ft_calc_frame,  (void *)&(game->thread[i]))) != 0)
 			ft_err_exit("wolf3d: error: pthread_create failed", game);
 		i++;
 	}

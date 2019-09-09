@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:31 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 13:34:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:34:45 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				ft_is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 
 	x2 = pos->x / BLOC_SIZE;
 	y2 = pos->y / BLOC_SIZE;
-		
+
 	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
 		return (0);
 	if (ray != NULL && game->map[y2][x2] == 3)
@@ -48,7 +48,7 @@ int				ft_is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 }
 
 static void		ft_get_raygame(t_pos pos,
-				double alpha_r, int i, t_thread *thread)
+		double alpha_r, int i, t_thread *thread)
 {
 	t_pos	player_pos;
 	double	distance_x;
@@ -56,11 +56,11 @@ static void		ft_get_raygame(t_pos pos,
 
 	player_pos.x = thread->game->player.position.x * BLOC_SIZE;
 	player_pos.y = thread->game->player.position.y * BLOC_SIZE;
-	
+
 	distance_x = (thread->ray[i].axis == 1)
-	? pos.x - player_pos.x : (int)pos.x - player_pos.x;
+		? pos.x - player_pos.x : (int)pos.x - player_pos.x;
 	distance_y = (thread->ray[i].axis == 1)
-	? (int)pos.y - player_pos.y : pos.y - player_pos.y;
+		? (int)pos.y - player_pos.y : pos.y - player_pos.y;
 	thread->ray[i].dist_minimap = ft_pythagore(distance_x, distance_y);
 	thread->ray[i].distance = thread->ray[i].dist_minimap * cos(alpha_r);
 	thread->ray[i].x = pos.x * 8;
@@ -73,20 +73,20 @@ static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 	double	alpha_r;
 
 	alpha_r = (fabs(thread->game->player.direction
-	- thread->ray[i].angle_d)) * M_PI / 180;
+				- thread->ray[i].angle_d)) * M_PI / 180;
 	angle_r = thread->ray[i].angle_d * M_PI / 180;
 	if ((ft_is_inwall(pos, thread->game, &thread->ray[i])) == 1
-	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6
-	|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7)
+			|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6
+			|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7)
 	{
 		thread->ray[i].axis = 1;
-			ft_get_raygame(*pos, alpha_r, i, thread);
+		ft_get_raygame(*pos, alpha_r, i, thread);
 		return (0);
 	}
 	pos->x += -cos(angle_r) * 1;
 	if ((ft_is_inwall(pos, thread->game, &thread->ray[i])) == 1
-		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6
-		|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7)
+			|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 6
+			|| ft_is_inwall(pos, thread->game, &thread->ray[i]) == 7)
 	{
 		thread->ray[i].axis = 2;
 		ft_get_raygame(*pos, alpha_r, i, thread);
@@ -101,11 +101,11 @@ void			ft_calc_distance(int i, int x, t_thread *thread)
 	t_pos	pos;
 
 	thread->ray[i].angle_d =
-	(thread->game->player.direction - 30) + (x * (60.0 / WIN_W));
+		(thread->game->player.direction - 30) + (x * (60.0 / WIN_W));
 	pos.x = thread->game->player.position.x * BLOC_SIZE;
 	pos.y = thread->game->player.position.y * BLOC_SIZE;
 	while (pos.x > 0 && pos.x < MAP_SIZE * BLOC_SIZE
-	&& pos.y > 0 && pos.y < MAP_SIZE * BLOC_SIZE)
+			&& pos.y > 0 && pos.y < MAP_SIZE * BLOC_SIZE)
 	{
 		if (!ft_iterate_ray(i, &pos, thread))
 			return ;

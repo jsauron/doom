@@ -22,6 +22,16 @@
 # include "editor.h"
 # include "tga_reader.h"
 
+# define N_VIDE '0'
+# define N_WALL '1'
+# define N_MEAN '2'
+# define N_GOAL '3'
+# define N_PLAYER '4'
+# define N_KEY '5'
+# define N_DOOR '6'
+# define N_POSTER '7'
+
+
 # define H_GREEN 0x00FF00FF
 # define H_RED 0xFF0000FF
 # define WIN_H 750
@@ -126,10 +136,10 @@ struct						s_thread
 
 struct						s_sprite
 {
-
-	SDL_Surface			*weapon[3];
-//	SDL_Surface			*key_s[6];
-	SDL_Surface			*enemy[4];
+	double				distance;
+	SDL_Surface			*sprite;
+	SDL_Rect			pos;
+	SDL_Rect				size;
 
 };
 
@@ -163,10 +173,12 @@ struct						s_time
 
 };
 
+
 struct						s_game
 {
+	int					n;
 	t_time				time;
-	t_sprite			sprite;
+	t_sprite			*sprite[100];
 	SDL_Surface			*wall[4];
 	SDL_Surface			*sky;
 	SDL_Surface			*heart[3];
@@ -175,9 +187,6 @@ struct						s_game
 	SDL_Surface			*weapon[2];
 	SDL_Surface			*lunette[2];
 	SDL_Surface			*keys[6];
-	SDL_Surface			*key_s;
-	SDL_Surface			*exit_s;
-	SDL_Surface			*mean_s;
 	SDL_Surface			*win[12];
 	SDL_Surface			*mission_s;
 	SDL_Surface			*poster[4];
@@ -191,7 +200,6 @@ struct						s_game
 	t_player			player;
 	t_thread			thread[8];
 	t_minimap			minimap;
-//	int					texturing;
 	int					lightshade;
 	int					gamemode;
 	int					setting;
@@ -204,17 +212,9 @@ struct						s_game
 	int					fps;
 	int					exit;
 	int					mission;
-	double				distance_sprite;
-	double				top;
-	double				bot;
-	double				angle_d;
-	int					axis;
-	int					s_key;
-	SDL_Rect				key_pos;
-	int					s_exit;
-	SDL_Rect				exit_pos;
-	int					s_mean;
-	SDL_Rect			mean_pos;
+	SDL_Surface			*exit_s;
+	SDL_Surface			*key_s;
+	SDL_Surface			*mean_s;
 };
 
  struct					s_win
@@ -257,8 +257,8 @@ int							ft_get_events(t_game *game);
 
 int							ft_is_inwall(t_pos *pos, t_game *game, t_ray *ray);
 Uint32						ft_get_color(int axis, int angle_d);
-void						ft_assign_color(t_win *wn, int x, int y,
-		int i, t_thread *thread);
+void						ft_assign_color(t_thread *thread, int x, int y,
+		int i);
 void						ft_calc_distance(int i, int x, t_thread *thread);
 void						ft_rc_wolfcalc(t_game *game);
 

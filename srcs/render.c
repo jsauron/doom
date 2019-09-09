@@ -1,16 +1,16 @@
 #include "doom.h"
 
 /*int target(t_win *wn)
-{
-	SDL_Rect pos;
+  {
+  SDL_Rect pos;
 
-	pos.x = 0;
-	pos.y = 0;
-	if (wn->game.target == 1)
-		SDL_BlitSurface(wn->game.lunette[0], NULL, wn->screen, &pos);
-	return (0);
-}
-*/
+  pos.x = 0;
+  pos.y = 0;
+  if (wn->game.target == 1)
+  SDL_BlitSurface(wn->game.lunette[0], NULL, wn->screen, &pos);
+  return (0);
+  }
+  */
 
 int gameover(t_win *wn)
 {
@@ -24,15 +24,15 @@ int gameover(t_win *wn)
 }
 
 /*int weapon(t_win *wn)
-{
-	SDL_Rect pos;
+  {
+  SDL_Rect pos;
 
-	pos.x = 0;
-	pos.y = 0;
-	SDL_BlitSurface(wn->game.weapon, NULL, wn->screen, &pos);
-	return (0);
-}
-*/
+  pos.x = 0;
+  pos.y = 0;
+  SDL_BlitSurface(wn->game.weapon, NULL, wn->screen, &pos);
+  return (0);
+  }
+  */
 int render_life(t_win *wn, int life)
 {
 	SDL_Rect pos;
@@ -58,15 +58,15 @@ int you_win(t_win *wn)
 
 	pos.x = 0;
 	pos.y = 0;
-		if (wn->game.time.current_time - wn->game.time.old_time > 100)
-		{
-			i++;
-			wn->game.time.old_time = wn->game.time.current_time;
-		}
-		if (i == 12)
-			i = 0;
+	if (wn->game.time.current_time - wn->game.time.old_time > 100)
+	{
+		i++;
+		wn->game.time.old_time = wn->game.time.current_time;
+	}
+	if (i == 12)
+		i = 0;
 
-		SDL_BlitSurface(wn->game.win[i], NULL, wn->screen, &pos);
+	SDL_BlitSurface(wn->game.win[i], NULL, wn->screen, &pos);
 	return (0);
 }
 
@@ -137,12 +137,12 @@ int display_key(t_win *wn)
 int free_surface_editor(t_win *wn, t_editor *editor)
 {
 	(void)wn;
-	SDL_FreeSurface(editor->wall);
-	SDL_FreeSurface(editor->mean);
-	SDL_FreeSurface(editor->door);
-	SDL_FreeSurface(editor->key);
-	SDL_FreeSurface(editor->goal);
-	SDL_FreeSurface(editor->player);
+	SDL_FreeSurface(editor->obj.wall);
+	SDL_FreeSurface(editor->obj.mean);
+	SDL_FreeSurface(editor->obj.door);
+	SDL_FreeSurface(editor->obj.key);
+	SDL_FreeSurface(editor->obj.goal);
+	SDL_FreeSurface(editor->obj.player);
 	SDL_FreeSurface(editor->editor_surface);
 	int i = 0;
 	while (i < 9)
@@ -177,21 +177,31 @@ int	display_mission(t_win *wn)
 	return (0);
 }
 
+int	render_sprite(t_win *wn)
+{
+	SDL_Texture *texture;
+	int n;
+
+	n = 0;
+	texture = NULL;
+	while (n < wn->game.n)
+	{
+		SDL_BlitSurface(wn->game.sprite[n]->sprite, &wn->game.sprite[n]->size, wn->screen, &(wn->game.sprite[n]->pos));
+		n++;
+	}
+	return (0);
+}
+
 int render_game(t_win *wn)
 {
 	if (wn->game.exit == 1)
 		you_win(wn);
 	//else if (wn->game.mission == 1)
-		//display_mission(wn);
+	//display_mission(wn);
 	else
 	{
 		SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
-		if (wn->game.s_key == 1)
-			SDL_BlitSurface(wn->game.key_s, NULL, wn->screen, &wn->game.key_pos);
-		if (wn->game.s_mean == 1)
-			SDL_BlitSurface(wn->game.mean_s, NULL, wn->screen, &wn->game.mean_pos);
-		if (wn->game.s_exit == 1)
-			SDL_BlitSurface(wn->game.exit_s, NULL, wn->screen, &wn->game.exit_pos);
+		render_sprite(wn);
 		render_life(wn, wn->game.player.life);
 		//	weapon(wn);
 		shot(wn);

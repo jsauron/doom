@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 18:00:32 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:34:36 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			ft_start(char **argv)
 		}
 		SDL_BlitSurface(wn->menu, NULL, wn->screen, &(wn->pos_menu));
 		SDL_BlitSurface(wn->editor->menu[i], NULL, wn->screen, &(wn->pos_menu_mov));
-			render_editor(wn);
+		render_editor(wn);
 	}
 	free_surface_editor(wn, wn->editor);
 	SDL_Quit();
@@ -113,15 +113,15 @@ int			ft_start(char **argv)
 
 int				main(int argc, char **argv)
 {
-//	t_game	game;
+	//	t_game	game;
 
 	(void)argc;
-/*	if (argc != 2)
-	{
+	/*	if (argc != 2)
+		{
 		ft_putendl_fd("[->] usage: ./doom [map]", 2);
 		ft_err_exit("[->] README for more informations", &game);
-	}
-*/
+		}
+		*/
 	ft_start(argv);
 	return (0);
 }

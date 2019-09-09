@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:01:21 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:34:27 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:33:40 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static int ft_keyboard2(Uint8 *state, t_game *game)
 		game->gamemode = 1;
 	else if (state[SDL_SCANCODE_3])
 		game->dev_mode = (game->dev_mode) ? 0 : 1;
-//	else if (state[SDL_SCANCODE_T])
-//		game->texturing = (game->texturing) ? 0 : 1;
+	//	else if (state[SDL_SCANCODE_T])
+	//		game->texturing = (game->texturing) ? 0 : 1;
 	else if (state[SDL_SCANCODE_L])
 		game->lightshade = (game->lightshade) ? 0 : 1;
 	else if (state[SDL_SCANCODE_KP_PLUS] && game->minimap.mnp_size * ZOOM_P < 50)
@@ -62,49 +62,49 @@ static int ft_keyboard2(Uint8 *state, t_game *game)
 
 static int ft_mouse_motion(t_game *game)
 {
-/*	if (game->event.type == SDL_MOUSEBUTTONDOWN)
-	{
+	/*	if (game->event.type == SDL_MOUSEBUTTONDOWN)
+		{
 		printf("ckuhsklcheds\n");
 		if (game->event.button.button == SDL_BUTTON_LEFT)
-			game->shot = 1;
+		game->shot = 1;
 		if (game->event.button.button == SDL_BUTTON_RIGHT)
-			game->target = 1;
-	}
-	if (game->event.type ==  SDL_MOUSEBUTTONUP)
-	{
+		game->target = 1;
+		}
+		if (game->event.type ==  SDL_MOUSEBUTTONUP)
+		{
 		if (game->event.button.button == SDL_BUTTON_LEFT)
-			game->shot = 0;
+		game->shot = 0;
 		else if (game->event.button.button == SDL_BUTTON_RIGHT)
-			game->target = 0;
-	}
-*/	if (game->mouse.x > 0.0)
+		game->target = 0;
+		}
+		*/	if (game->mouse.x > 0.0)
 	{
 		game->player.direction = (int)(game->player.direction + abs(game->mouse.x) / game->player.sensibility) % 360;
 		return (1);
 	}
-	else if (game->mouse.x < 0.0)
-	{
-		game->player.direction = (int)(game->player.direction - abs(game->mouse.x) / game->player.sensibility) % 360;
-		if (game->player.direction < 0)
+		else if (game->mouse.x < 0.0)
+		{
+			game->player.direction = (int)(game->player.direction - abs(game->mouse.x) / game->player.sensibility) % 360;
+			if (game->player.direction < 0)
+				game->player.direction = 360 + game->player.direction;
+			return (1);
+		}
+		/*	else if (game->mouse.y > 0.0)
+			{
+			printf("sdksjbd\n");
+			game->player.direction = (int)(game->player.direction
+			+ abs(game->mouse.y) / game->player.sensibility) %;
+			return (1);
+			}
+			else if (game->mouse.y < 0.0)
+			{
+			game->player.direction = (int)(game->player.direction
+			- abs(game->mouse.y) / game->player.sensibility) % ;
+			if (game->player.direction < 0)
 			game->player.direction = 360 + game->player.direction;
-		return (1);
-	}
-	/*	else if (game->mouse.y > 0.0)
-	{
-		printf("sdksjbd\n");
-		game->player.direction = (int)(game->player.direction
-				+ abs(game->mouse.y) / game->player.sensibility) %;
-		return (1);
-	}
-	else if (game->mouse.y < 0.0)
-	{
-		game->player.direction = (int)(game->player.direction
-		- abs(game->mouse.y) / game->player.sensibility) % ;
-		if (game->player.direction < 0)
-			game->player.direction = 360 + game->player.direction;
-		return (1);
-	}*/
-	return (0);
+			return (1);
+			}*/
+		return (0);
 }
 
 static int ft_move_events(const Uint8 *state, t_game *game)

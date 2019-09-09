@@ -6,14 +6,14 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:53:35 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:34:32 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 void			ft_set_string(t_win *wn, SDL_Rect rect, char *text,
-				SDL_Color color)
+		SDL_Color color)
 {
 	SDL_Rect			sdl_rect;
 	SDL_Surface			*surface;
@@ -76,7 +76,7 @@ Uint32			ft_getpixel(t_win *wn, SDL_Surface *surface, int x, int y)
 	else if (bpp == 3)
 	{
 		ret = (SDL_BYTEORDER == SDL_BIG_ENDIAN) ?
-		(p[0] << 16 | p[1] << 8 | p[2]) : (p[0] | p[1] << 8 | p[2] << 16);
+			(p[0] << 16 | p[1] << 8 | p[2]) : (p[0] | p[1] << 8 | p[2] << 16);
 	}
 	else if (bpp == 4)
 		ret = *(Uint32 *)p;

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:02:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:08:58 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:34:18 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		bresenham_tab(int *tab, t_pos p1, t_pos p2)
 }
 
 void			draw_line(t_win *wn, t_vec vec,
-				Uint32 color, t_limit *limit)
+		Uint32 color, t_limit *limit)
 {
 	int e2;
 	int tab[5];
@@ -42,7 +42,7 @@ void			draw_line(t_win *wn, t_vec vec,
 	while (!((int)vec.p1.x == (int)vec.p2.x && (int)vec.p1.y == (int)vec.p2.y))
 	{
 		if (!limit || ((int)vec.p1.x > limit->l && (int)vec.p1.x < limit->r
-		&& (int)vec.p1.y > limit->t && (int)vec.p1.y < limit->b))
+					&& (int)vec.p1.y > limit->t && (int)vec.p1.y < limit->b))
 			ft_setpixel(wn->screen, (int)vec.p1.x, (int)vec.p1.y, color);
 		e2 = tab[4];
 		if (e2 > -tab[0] && (int)vec.p1.x != (int)vec.p2.x)
@@ -59,7 +59,7 @@ void			draw_line(t_win *wn, t_vec vec,
 }
 
 void			ft_draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
-				t_limit *limit)
+		t_limit *limit)
 {
 	int		i;
 	int		j;
@@ -71,7 +71,7 @@ void			ft_draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
 		while (j < rect.w)
 		{
 			if (!limit || (rect.x + j > limit->l && rect.x + j < limit->r
-			&& rect.y + i > limit->t && rect.y + i < limit->b))
+						&& rect.y + i > limit->t && rect.y + i < limit->b))
 				ft_setpixel(wn->screen, rect.x + j, rect.y + i, color);
 			j++;
 		}
@@ -89,9 +89,9 @@ void			ft_draw_border(t_win *wn, SDL_Rect rect, Uint32 color)
 	vec1 = (t_vec){(t_pos){rect.x, rect.y}, (t_pos){rect.x + rect.w, rect.y}};
 	vec2 = (t_vec){(t_pos){rect.x, rect.y}, (t_pos){rect.x, rect.y + rect.h}};
 	vec3 = (t_vec){(t_pos){rect.x + rect.w, rect.y},
-	(t_pos){rect.x + rect.w, rect.y + rect.h}};
+		(t_pos){rect.x + rect.w, rect.y + rect.h}};
 	vec4 = (t_vec){(t_pos){rect.x, rect.y + rect.h},
-	(t_pos){rect.x + rect.w, rect.y + rect.h}};
+		(t_pos){rect.x + rect.w, rect.y + rect.h}};
 	draw_line(wn, vec1, color, 0);
 	draw_line(wn, vec2, color, 0);
 	draw_line(wn, vec3, color, 0);

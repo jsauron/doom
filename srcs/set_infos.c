@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:03:50 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/22 20:01:13 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:35:04 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 static SDL_Color	ft_set_color(t_game*game, int i)
 {
 	if ((game->gamemode == 0 && i == 0)
-	|| (game->gamemode == 1 && i == 1)
-	|| (game->dev_mode == 1 && i == 2))
+			|| (game->gamemode == 1 && i == 1)
+			|| (game->dev_mode == 1 && i == 2))
 		return (ft_hex_to_rgb(H_RED));
 	return (ft_hex_to_rgb(H_GREEN));
 }
 
 static void			ft_set_nbrstring(t_win *wn, int value, SDL_Rect rect,
-					Uint32 color)
+		Uint32 color)
 {
 	char	*str;
 
 	if (!(str = ft_itoa(value)))
 		ft_err_exit("doom: error: itoa, out of memory", &wn->game);
 	ft_set_string(wn, rect, str, ft_hex_to_rgb(color));
-//	lt_release(str);
+	//	lt_release(str);
 }
 
 static void			ft_set_menu_config(t_win *wn, t_game *game)
@@ -50,9 +50,9 @@ static void			ft_set_menu_config(t_win *wn, t_game *game)
 	ft_set_string(wn,  rect, "[ l ]  Light shading", ft_hex_to_rgb(H_GREEN));
 	rect = (SDL_Rect){500, 380, 500, 25};
 	ft_set_nbrstring(wn,  game->lightshade, rect, H_GREEN);
-//	rect = (SDL_Rect){230, 420, 500, 25};
+	//	rect = (SDL_Rect){230, 420, 500, 25};
 	//ft_set_string(wn, rect, "[ t ]  Texturing", ft_hex_to_rgb(H_GREEN));
-//	rect = (SDL_Rect){500, 420, 500, 25};
+	//	rect = (SDL_Rect){500, 420, 500, 25};
 	//ft_set_nbrstring(wn,  game->texturing, rect, H_GREEN);
 	rect = (SDL_Rect){230, 420, 500, 25};
 	ft_set_string(wn, rect, "[ + - ]  Minimap zoom", ft_hex_to_rgb(H_GREEN));

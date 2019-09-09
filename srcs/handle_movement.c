@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 10:02:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:07:06 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:34:12 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		ft_is_inmap(t_pos *pos, t_game *game)
 {
 	(void)game;
 	return (pos->x > 0 && pos->x < MAP_SIZE * BLOC_SIZE
-	&& pos->y > 0 && pos->y < MAP_SIZE * BLOC_SIZE);
+			&& pos->y > 0 && pos->y < MAP_SIZE * BLOC_SIZE);
 }
 
 int				ft_movement(double angle_r, int dir, t_game *game)
@@ -61,8 +61,8 @@ int				ft_movement(double angle_r, int dir, t_game *game)
 	{
 		printf("lfe = %d\n", game->player.life);
 		if (game->player.life > 0)
-		game->player.life--;
-	//	pos.x = (game->player.position.x * BLOC_SIZE) - move.x * 150;
+			game->player.life--;
+		//	pos.x = (game->player.position.x * BLOC_SIZE) - move.x * 150;
 		//pos.y  = (game->player.position.y * BLOC_SIZE )- move.y * 150;
 	}
 	else if ((ft_is_inmap(&pos, game) && (ft_is_inwall(&pos, game, NULL) == 3)))
