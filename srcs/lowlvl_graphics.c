@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lowlvl_graphics.c                               :+:      :+:    :+:   */
+/*   lowlvl_graphics.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 10:03:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 23:25:40 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:33:31 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:33:35 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void			ft_set_string(t_win *wn, SDL_Rect rect, char *text,
+void			set_string(t_win *wn, SDL_Rect rect, char *text,
 		SDL_Color color)
 {
 	SDL_Rect			sdl_rect;
@@ -27,7 +27,7 @@ void			ft_set_string(t_win *wn, SDL_Rect rect, char *text,
 	SDL_FreeSurface(surface);
 }
 
-void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 color)
+void			setpixel(SDL_Surface *surface, int x, int y, Uint32 color)
 {
 	int			bpp;
 	Uint8		*p;

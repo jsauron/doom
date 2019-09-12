@@ -236,51 +236,51 @@ struct						s_game
 	t_editor			*editor;
 };
 
-int							ft_set_sprites(t_win *wn);
+int							set_sprites(t_win *wn);
 void						ft_exit(t_game *game);
 void						ft_err_exit(char *msg, t_game *game);
 void						ft_sdl_err_exit(char *msg, t_game *game);
 
-void						ft_get_map(char *map, t_game *game);
-void						ft_init_game(t_win *wn, t_game *game, char *map);
+void						get_map(char *map, t_game *game);
+void						init_game(t_win *wn, t_game *game, char *map);
 
-int							ft_movement(double angle_r, int dir,t_game *game);
-int							ft_movement_gaming(const Uint8 *state,
+int							movement(double angle_r, int dir,t_game *game);
+int							movement_gaming(const Uint8 *state,
 	t_game *game);
-int							ft_lateral_gaming(const Uint8 *state,
+int							lateral_gaming(const Uint8 *state,
 		t_game *game);
-int							ft_movement_normal(const Uint8 *state,
+int							movement_normal(const Uint8 *state,
 		t_game *game);
 int							ft_rotation_normal(const Uint8 *state,
 		t_game *game);
-int							ft_get_events(t_game *game);
+int							get_events(t_game *game);
 
-int							ft_is_inwall(t_pos *pos, t_game *game, t_ray *ray);
-Uint32						ft_get_color(int axis, int angle_d);
-void						ft_assign_color(t_thread *thread, int x, int y,
+int							is_inwall(t_pos *pos, t_game *game, t_ray *ray);
+Uint32						get_color(int axis, int angle_d);
+void						assign_color(t_thread *thread, int x, int y,
 		int i);
-void						ft_calc_distance(int i, int x, t_thread *thread);
-void						ft_rc_wolfcalc(t_game *game);
+void						calc__distance(int i, int x, t_thread *thread);
+void						rc_wolfcalc(t_game *game);
 
-void						ft_set_infos(t_win *wn, t_game *game);
-void						ft_set_interface(t_win *wn, t_game *game);
-void						ft_minimap(t_win *wn, t_game *game);
+void						set_infos(t_win *wn, t_game *game);
+void						set_interface(t_win *wn, t_game *game);
+void						minimap(t_win *wn, t_game *game);
 
-double						ft_pythagore(int a, int b);
-void						ft_set_cursor(t_win *wn);
-Uint32						ft_light_shade(double distance, Uint32 color);
-void						ft_srfdel(void **ap);
-SDL_Color					ft_hex_to_rgb(int hexa);
+double						pythagore(int a, int b);
+void						set_cursor(t_win *wn);
+Uint32						light_shade(double distance, Uint32 color);
+void						srfdel(void **ap);
+SDL_Color					hex_to_rgb(int hexa);
 void						draw_line(t_win *wn, t_vec vec,
 		Uint32 color, t_limit *limit);
-void						ft_draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
+void						draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
 		t_limit *limit);
-void						ft_draw_border(t_win *wn,  SDL_Rect rect, Uint32 color);
+void						draw_border(t_win *wn,  SDL_Rect rect, Uint32 color);
 SDL_Surface					*ft_new_surface(int height,
 		int width, t_win *wn);
-void						ft_set_string(t_win *wn, SDL_Rect rect, char *text,
+void						set_string(t_win *wn, SDL_Rect rect, char *text,
 		SDL_Color color);
-void						ft_setpixel(SDL_Surface *surface,
+void						setpixel(SDL_Surface *surface,
 		int x, int y, Uint32 pixel);
 Uint32						ft_getpixel(t_win *wn, SDL_Surface *surface,
 		int x, int y);
@@ -303,7 +303,7 @@ void	init_sprite(t_game *game);
 void	init_graphic(t_game *game);
 void	init_thread(t_win *wn, t_game *game);
 void	init_player(t_player *player);
-void	ft_init_game(t_win *wn,  t_game *game , char *map);
+void	init_game(t_win *wn,  t_game *game , char *map);
 
 
 #endif

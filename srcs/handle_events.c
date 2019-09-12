@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_events.c                                 :+:      :+:    :+:   */
+/*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 10:01:58 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 22:32:49 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:32:20 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:32:23 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int				ft_movement_normal(const Uint8 *state, t_game *game)
+int				movement_normal(const Uint8 *state, t_game *game)
 {
 	double		angle_r;
 
 	angle_r = game->player.direction * M_PI / 180;
 	if (state[SDL_SCANCODE_UP])
-		return (ft_movement(angle_r, 1, game));
+		return (movement(angle_r, 1, game));
 	else if (state[SDL_SCANCODE_DOWN])
-		return (ft_movement(angle_r, 0, game));
+		return (movement(angle_r, 0, game));
 	return (0);
 }
 
@@ -42,26 +42,26 @@ int				ft_rotation_normal(const Uint8 *state, t_game *game)
 	return (0);
 }
 
-int				ft_movement_gaming(const Uint8 *state, t_game *game)
+int				movement_gaming(const Uint8 *state, t_game *game)
 {
 	double		angle_r;
 
 	angle_r = game->player.direction * M_PI / 180;
 	if (state[SDL_SCANCODE_W])
-		return (ft_movement(angle_r, 1, game));
+		return (movement(angle_r, 1, game));
 	else if (state[SDL_SCANCODE_S])
-		return (ft_movement(angle_r, 0, game));
+		return (movement(angle_r, 0, game));
 	return (0);
 }
 
-int				ft_lateral_gaming(const Uint8 *state, t_game *game)
+int				lateral_gaming(const Uint8 *state, t_game *game)
 {
 	double		angle_r;
 
 	angle_r = (game->player.direction + 90) * M_PI / 180;
 	if (state[SDL_SCANCODE_D])
-		return (ft_movement(angle_r, 1, game));
+		return (movement(angle_r, 1, game));
 	else if (state[SDL_SCANCODE_A])
-		return (ft_movement(angle_r, 0, game));
+		return (movement(angle_r, 0, game));
 	return (0);
 }

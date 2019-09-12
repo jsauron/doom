@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_editor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/25 18:04:16 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 23:34:40 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:33:18 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:33:22 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_win	*init(t_win *wn)
 	int i;
 
 	i = 0;
-	if (!(wn = malloc(sizeof(t_win ))))
-		exit(1);
+	//if (!(wn = malloc(sizeof(t_win ))))
+		//exit(1);
 	if (!(wn->editor = malloc(sizeof(t_editor ))))
 		exit(1);
 	if (!(wn->editor->map = malloc(sizeof(int *) * XBLOC)))
@@ -64,33 +64,52 @@ int		init_sdl(t_win *wn)
 
 void	init_surface_menu(t_editor *editor)
 {
-	editor->menu[0] = IMG_Load("ressources/menu/1.tga");
-	editor->menu[1] = IMG_Load("ressources/menu/2.tga");
-	editor->menu[2] = IMG_Load("ressources/menu/3.tga");
-	editor->menu[3] = IMG_Load("ressources/menu/4.tga");
-	editor->menu[4] = IMG_Load("ressources/menu/5.tga");
-	editor->menu[5] = IMG_Load("ressources/menu/6.tga");
-	editor->menu[6] = IMG_Load("ressources/menu/7.tga");
-	editor->menu[7] = IMG_Load("ressources/menu/8.tga");
-	editor->menu[8] = IMG_Load("ressources/menu/9.tga");
-	editor->menu[9] = IMG_Load("ressources/menu/10.tga");
+	if (!(editor->menu[0] = IMG_Load("ressources/menu/1.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[1] = IMG_Load("ressources/menu/2.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[2] = IMG_Load("ressources/menu/3.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[3] = IMG_Load("ressources/menu/4.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[4] = IMG_Load("ressources/menu/5.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[5] = IMG_Load("ressources/menu/6.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[6] = IMG_Load("ressources/menu/7.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[7] = IMG_Load("ressources/menu/8.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[8] = IMG_Load("ressources/menu/9.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
+	if (!(editor->menu[9] = IMG_Load("ressources/menu/10.tga")))
+		ft_err_exit("doom: error: bad textures init_surface_menu", NULL);
 }
 
 void	init_structure_obj(t_editor *editor)
 {
-	editor->obj.wall = IMG_Load("ressources/editor/wall3.tga");
-	editor->obj.mean = IMG_Load("ressources/editor/enemy.png");
-	editor->obj.goal = IMG_Load("ressources/editor/exit.png");
-	editor->obj.player = IMG_Load("ressources/editor/player.png");
-	editor->editor_surface = IMG_Load("ressources/editor/editor_back.tga");
-	editor->obj.key = IMG_Load("ressources/editor/keys.png");
-	editor->obj.door = IMG_Load("ressources/editor/door_t.tga");
-	editor->obj.poster = IMG_Load("ressources/editor/poster.tga");
+	if (!(editor->editor_surface = IMG_Load("ressources/editor/editor_back.tga")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.wall = IMG_Load("ressources/editor/wall3.tga")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.mean = IMG_Load("ressources/editor/enemy.png")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.goal = IMG_Load("ressources/editor/exit.png")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.player = IMG_Load("ressources/editor/player.png")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.key = IMG_Load("ressources/editor/keys.png")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.door = IMG_Load("ressources/editor/door_t.tga")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.poster = IMG_Load("ressources/editor/poster.tga")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
 }
 
 int		init_structure(t_win *wn, t_editor *editor)
 {
-	wn->menu = IMG_Load("ressources/menu/menu_back.tga");
+	if (!(wn->menu = IMG_Load("ressources/menu/menu_back.tga")))
+		ft_err_exit("doom: error: bad textures init_menu_back", NULL);
 	wn->pos_menu.x = 0;
 	wn->pos_menu.y = 0;
 	wn->pos_game.x = 0;

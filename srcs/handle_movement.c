@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_movement.c                               :+:      :+:    :+:   */
+/*   handle_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 10:02:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 22:42:01 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:32:41 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:32:44 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static int		ft_is_inmap(t_pos *pos)
+static int		is_inmap(t_pos *pos)
 {
 	return (pos->x > 0 && pos->x < MAP_SIZE * BLOC_SIZE
 			&& pos->y > 0 && pos->y < MAP_SIZE * BLOC_SIZE);
@@ -25,29 +25,29 @@ void	hud_impact(t_game *game, t_pos move, t_pos pos)
 
 	y = (int)pos.y / BLOC_SIZE;
 	x = (int)pos.x / BLOC_SIZE;
-	if ((ft_is_inmap(&pos)
-		&& (ft_is_inwall(&pos, game, NULL) == 6) && game->key > 0))
+	if ((is_inmap(&pos)
+		&& (is_inwall(&pos, game, NULL) == 6) && game->key > 0))
 	{
 		game->key--;
 		game->map[y][x] = 0;
 	}
-	else if ((ft_is_inmap(&pos) && (ft_is_inwall(&pos, game, NULL) == 5)))
+	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 5)))
 	{
 		game->key++;
 		game->map[y][x] = 0;
 	}
-	else if ((ft_is_inmap(&pos) && (ft_is_inwall(&pos, game, NULL) == 2))
+	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 2))
 			&& game->player.life > 0)
 		game->player.life--;
-	else if ((ft_is_inmap(&pos) && (ft_is_inwall(&pos, game, NULL) == 3)))
+	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 3)))
 		game->exit = 1;
-	if (ft_is_inmap(&pos) && !(ft_is_inwall(&pos, game, NULL)))
+	if (is_inmap(&pos) && !(is_inwall(&pos, game, NULL)))
 		game->player.position.y += move.y;
-	if (ft_is_inmap(&pos) && !(ft_is_inwall(&pos, game, NULL)))
+	if (is_inmap(&pos) && !(is_inwall(&pos, game, NULL)))
 		game->player.position.x += move.x;
 }
 
-int			ft_movement(double angle_r, int dir, t_game *game)
+int			movement(double angle_r, int dir, t_game *game)
 {
 	t_pos	move;
 	t_pos	pos;

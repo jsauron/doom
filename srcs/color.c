@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_color.c                                  :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 10:01:48 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 15:40:09 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:29:59 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:30:06 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static SDL_Surface	*choose_texture(int i, t_thread *thread)
 				? surface[2] : surface[3]);
 }
 
-static Uint32		ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
+static Uint32		calc__col(t_win *wn, int y, int i, t_thread *thread)
 {
 	const SDL_Surface	*surface = choose_texture(i, thread);
 	double				h_wall;
@@ -66,7 +66,7 @@ static Uint32		ft_calc_col(t_win *wn, int y, int i, t_thread *thread)
 						(int)textr.y % (int)surface->w));
 }
 
-Uint32			ft_get_color(int axis, int angle_d)
+Uint32			get_color(int axis, int angle_d)
 {
 	const Uint32 tab[4] = {0xFF0c97b3, 0xFFdb9ac5, 0xFF262b63, 0xFF94bdcf};
 
@@ -79,7 +79,7 @@ Uint32			ft_get_color(int axis, int angle_d)
 	return ((angle_d >= 90 && angle_d <= 270) ? tab[2] : tab[3]);
 }
 
-void			ft_assign_color(t_thread *thread, int x, int y, int i)
+void			assign_color(t_thread *thread, int x, int y, int i)
 {
 	Uint32		color;
 
@@ -88,10 +88,10 @@ void			ft_assign_color(t_thread *thread, int x, int y, int i)
 	{
 		if (y >= thread->ray[i].wall_top && y <= thread->ray[i].wall_bot)
 		{
-			color = ft_calc_col(thread->wn, y, i, thread);
+			color = calc__col(thread->wn, y, i, thread);
 			if (thread->game->lightshade == 1)
-				color = ft_light_shade(thread->ray[i].distance, color);
+				color = light_shade(thread->ray[i].distance, color);
 		}
-		ft_setpixel(thread->wn->screen, x, y, color);
+		setpixel(thread->wn->screen, x, y, color);
 	}
 }

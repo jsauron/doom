@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_game.c                                     :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 10:02:56 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 23:11:18 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:33:10 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_wall(t_game *game)
 {
 	if (!(game->wall[0] = IMG_Load("ressources/wall/blue.tga")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->wall[1] = IMG_Load("ressources/champion2.png")))
+	if (!(game->wall[1] = IMG_Load("ressources/wall/pink.tga")))
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->wall[2] = IMG_Load("ressources/wall/croco.tga")))
 		ft_err_exit("doom: error: bad textures", game);
@@ -150,7 +150,7 @@ void	init_sprite(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->exit_s = IMG_Load("ressources/wall/exit_oo.png")))
 		ft_err_exit("doom: error: bad textures", game);
-	if (!(game->mean_s = IMG_Load("ressources/champioon.png")))
+	if (!(game->mean_s = IMG_Load("ressources/wall/mean_oo.png")))
 		ft_err_exit("doom: error: bad textures", game);
 }
 
@@ -187,7 +187,7 @@ void	init_player(t_player *player)
 	player->life = 3;
 }
 
-void	ft_init_game(t_win *wn, t_game *game, char *map)
+void	init_game(t_win *wn, t_game *game, char *map)
 {
 	int		i;
 
@@ -203,7 +203,7 @@ void	ft_init_game(t_win *wn, t_game *game, char *map)
 		exit(1);
 	while (i < XBLOC)
 		game->map[i++] = malloc(sizeof(int) * YBLOC);
-	ft_get_map(map, game);
+	get_map(map, game);
 	init_sdl_game(game);
 	init_fonts(game);
 	init_wall(game);

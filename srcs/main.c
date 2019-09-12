@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 10:04:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 23:40:08 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:33:48 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void		ft_make_frame(t_win *wn, t_game *game)
+static void		make_frame(t_win *wn, t_game *game)
 {
 	SDL_Rect	pos;
 	int			i;
@@ -23,30 +23,30 @@ static void		ft_make_frame(t_win *wn, t_game *game)
 	game->nb_frame++;
 	game->time_last = clock();
 	SDL_BlitSurface(wn->game.sky, NULL, wn->screen, &(pos));
-	ft_rc_wolfcalc(game);
-	ft_set_interface(wn, game);
+	rc_wolfcalc(game);
+	set_interface(wn, game);
 	if (clock() != 0 && (1000 - game->time_last / 10000) != 0
 			&& (clock() / 10000 - game->time_last / 10000))
 		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
-	ft_set_infos(wn, game);
+	set_infos(wn, game);
 	render_game(wn);
 }
 
-static void		ft_game_loop(t_win *wn, t_game *game)
+static void		game_loop(t_win *wn, t_game *game)
 {
 	int play;
 
 	play = 1;
-	ft_make_frame(wn, game);
+	make_frame(wn, game);
 	while (play)
 	{
-		play = ft_get_events(game);
+		play = get_events(game);
 		if (play > 0)
 		{
 			game->time.current_time = SDL_GetTicks();
 			if ((SDL_RenderClear(wn->render)) != 0)
 				ft_err_exit("doom: error: RenderClear failure", game);
-			ft_make_frame(wn, game);
+			make_frame(wn, game);
 		}
 		SDL_FlushEvent(SDL_KEYDOWN | SDL_MOUSEMOTION);
 	}
@@ -79,7 +79,7 @@ void		display_anim_menu(t_win *wn)
 			wn->screen, &(wn->pos_menu_mov));
 }
 
-int			ft_start(char **argv)
+int			start(t_win *wn, char **argv)
 {
 	int				play;
 
@@ -92,8 +92,8 @@ int			ft_start(char **argv)
 			play = 0;
 		else if (wn->state[SDL_SCANCODE_1] && argv[1])
 		{
-			ft_init_game(wn, &wn->game, argv[1]);
-			ft_game_loop(wn, &wn->game);
+			init_game(wn, &wn->game, argv[1]);
+			game_loop(wn, &wn->game);
 			SDL_WaitEvent(&(wn->event));
 		}
 		else if (wn->state[SDL_SCANCODE_2])
@@ -121,8 +121,8 @@ int				main(int argc, char **argv)
 	}
 	else
 	{
-		wn = init(wn);
-		ft_start(argv);
+		wn = *init(&wn);
+		start(&wn, argv);
 	}
 	return (0);
 }

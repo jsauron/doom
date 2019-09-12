@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_highlvl_graphics.c                              :+:      :+:    :+:   */
+/*   highlvl_graphics.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 10:02:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 17:34:18 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:32:55 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:32:58 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-SDL_Color		ft_hex_to_rgb(int hexa)
+SDL_Color		hex_to_rgb(int hexa)
 {
 	SDL_Color color;
 
@@ -43,7 +43,7 @@ void			draw_line(t_win *wn, t_vec vec,
 	{
 		if (!limit || ((int)vec.p1.x > limit->l && (int)vec.p1.x < limit->r
 					&& (int)vec.p1.y > limit->t && (int)vec.p1.y < limit->b))
-			ft_setpixel(wn->screen, (int)vec.p1.x, (int)vec.p1.y, color);
+			setpixel(wn->screen, (int)vec.p1.x, (int)vec.p1.y, color);
 		e2 = tab[4];
 		if (e2 > -tab[0] && (int)vec.p1.x != (int)vec.p2.x)
 		{
@@ -58,7 +58,7 @@ void			draw_line(t_win *wn, t_vec vec,
 	}
 }
 
-void			ft_draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
+void			draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
 		t_limit *limit)
 {
 	int		i;
@@ -72,14 +72,14 @@ void			ft_draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
 		{
 			if (!limit || (rect.x + j > limit->l && rect.x + j < limit->r
 						&& rect.y + i > limit->t && rect.y + i < limit->b))
-				ft_setpixel(wn->screen, rect.x + j, rect.y + i, color);
+				setpixel(wn->screen, rect.x + j, rect.y + i, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void			ft_draw_border(t_win *wn, SDL_Rect rect, Uint32 color)
+void			draw_border(t_win *wn, SDL_Rect rect, Uint32 color)
 {
 	t_vec vec1;
 	t_vec vec2;

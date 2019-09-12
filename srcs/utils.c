@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 10:04:12 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/24 16:02:42 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:36:00 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:36:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-double		ft_pythagore(int a, int b)
+double		pythagore(int a, int b)
 {
 	return (sqrt(a * a + b * b));
 }
 
-void		ft_set_cursor(t_win *wn)
+void		set_cursor(t_win *wn)
 {
 	t_vec	vec;
 
@@ -35,7 +35,7 @@ static void	ft_remove_light(Uint8 *component, double delta, int arg)
 		*component = (*component * (1 - delta) + ((0x0 >> arg) * delta));
 }
 
-Uint32		ft_light_shade(double distance, Uint32 hexa)
+Uint32		light_shade(double distance, Uint32 hexa)
 {
 	SDL_Color	color;
 	double		delta;
@@ -53,7 +53,7 @@ Uint32		ft_light_shade(double distance, Uint32 hexa)
 	//return (hexa);
 }
 
-void		ft_srfdel(void **ap)
+void		srfdel(void **ap)
 {
 	SDL_Surface		*surface;
 

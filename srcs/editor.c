@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/21 19:30:15 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/09 17:25:15 by jsauron          ###   ########.fr       */
+/*   Created: 2019/09/12 15:30:17 by jsauron           #+#    #+#             */
+/*   Updated: 2019/09/12 15:30:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,3 +88,4 @@ void	play_editor(t_win *wn, t_editor *editor, char *map)
 		render_editor(wn);
 	}
 }
+
