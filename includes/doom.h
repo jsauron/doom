@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 17:58:10 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/12 19:19:48 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define N_VIDE '0'
 # define N_WALL '1'
 # define N_MEAN '2'
-# define N_GOAL '3'
+# define N_EXIT '3'
 # define N_PLAYER '4'
 # define N_KEY '5'
 # define N_DOOR '6'
@@ -47,6 +47,8 @@
 # define VERTICAL_HIT 1
 # define HORIZONTAL_HIT 2
 
+
+typedef enum   e_entity		t_entity;
 typedef struct s_limit		t_limit;
 typedef struct s_time		t_time;
 typedef struct s_pos		t_pos;
@@ -62,6 +64,8 @@ typedef struct s_game		t_game;
 typedef struct s_rgb		t_rgb;
 typedef struct s_sprite	t_sprite;
 typedef union  u_color		t_color;
+
+enum  e_entity {SP_KEY, SP_MEAN, SP_EXIT};
 
 struct        				s_rgb
 {
@@ -136,11 +140,12 @@ struct						s_thread
 
 struct						s_sprite
 {
-	double				distance;
-	SDL_Surface			*sprite;
-	SDL_Rect			pos;
+	t_entity			entity;
+	double					distance;
+	SDL_Surface				*sprite;
+	SDL_Rect				pos;
 	SDL_Rect				size;
-
+	int						actif;
 };
 
 struct						s_player
@@ -178,7 +183,7 @@ struct						s_game
 {
 	int					n;
 	t_time				time;
-	t_sprite			*sprite[100];
+	t_sprite			sprite[10];
 	SDL_Surface			*wall[4];
 	SDL_Surface			*sky;
 	SDL_Surface			*heart[3];
@@ -211,6 +216,7 @@ struct						s_game
 	int					nb_frame;
 	int					fps;
 	int					exit;
+	int					map_exit;
 	int					mission;
 	SDL_Surface			*exit_s;
 	SDL_Surface			*key_s;
@@ -286,7 +292,7 @@ Uint32						ft_getpixel(t_win *wn, SDL_Surface *surface,
 		int x, int y);
 int     render_game(t_win *wn);
 int     render_editor(t_win *wn);
-int		check_sprite(t_thread *thread);
+int		check_sprite(t_game *game);
 
 /* init_data.c */
 void	sdl_err_exit(char *msg, t_game *game);

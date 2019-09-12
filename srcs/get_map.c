@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:43 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:31:49 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/12 19:18:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ static int		map_is_digit(char *line)
 
 static void		assign_elem_map(t_game *game, char *map, int i, int j)
 {
+	int n;
+
+	n = 0;
 	if (map[i * MAP_SIZE + j] == N_PLAYER)
 	{
 		if (game->player.position.x != -1)
@@ -42,13 +45,27 @@ static void		assign_elem_map(t_game *game, char *map, int i, int j)
 		game->player.position.x = i + 0.5;
 		game->player.position.y = j + 0.5;
 	}
-	if (map[i * MAP_SIZE + j] >= N_VIDE
+/*	else if (map[i * MAP_SIZE + j] == N_KEY || map[i * MAP_SIZE + j] == N_MEAN
+		|| map[i * MAP_SIZE + j] == N_EXIT)
+	{
+		//if (map[i * MAP_SIZE + j] == N_EXIT)
+			//game->map_exit = 1;
+		game->sprite[n] = malloc(sizeof(t_sprite));
+		
+		//	entity
+		
+		n++;
+
+		printf("n = %d\n", n);
+	}
+*/	if (map[i * MAP_SIZE + j] >= N_VIDE
 			&& map[i * MAP_SIZE + j] <= N_POSTER)
 	{
 		game->map[i][j] = map[i * MAP_SIZE + j] - '0';
 	}
 	else if (map[i * MAP_SIZE + j] != ' ')
 		parsing_exit(2, "Doom: parsing error: bad bloc", game);
+	//game->n = n;
 }
 
 static void		parse_map_game(char *map, t_game *game)
@@ -86,5 +103,7 @@ void	get_map(char *file, t_game *game)
 	parse_map_game(map, game);
 	if (game->player.position.x == -1.0)
 		parsing_exit(fd, "Doom : parsing error: bad map format", game);
+	//if (game->map_exit == 0)
+		//parsing_exit(fd, "Doom : parsing error: no exit", game);
 	close(fd);
 }

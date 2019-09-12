@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:12 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:34:14 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/12 19:03:43 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 	if (ray != NULL && game->map[y2][x2] == 3)
 		ray->the_exit = 1;
 	if (ray != NULL && game->map[y2][x2] == 2)
-		ray->the_mean = 1;
+		ray->the_mean++;
 	if (ray != NULL && game->map[y2][x2] == 6)
 		ray->the_door = 1;
 	if (ray != NULL && game->map[y2][x2] == 5)
@@ -36,14 +36,14 @@ int				is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 		return (1);
 	if (game->map[y2][x2] == 2) 
 		return (2);
-	if (game->map[y2][x2] == 6)
-		return (6);
-	if (game->map[y2][x2] == 7)
-		return (7);
 	if (game->map[y2][x2] == 3)
 		return (3);
 	if (game->map[y2][x2] == 5)
 		return (5);
+	if (game->map[y2][x2] == 6)
+		return (6);
+	if (game->map[y2][x2] == 7)
+		return (7);
 	return (0);
 }
 

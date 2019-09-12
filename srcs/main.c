@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:33:48 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/12 19:28:33 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		make_frame(t_win *wn, t_game *game)
 	game->time_last = clock();
 	SDL_BlitSurface(wn->game.sky, NULL, wn->screen, &(pos));
 	rc_wolfcalc(game);
+	check_sprite(game);
 	set_interface(wn, game);
 	if (clock() != 0 && (1000 - game->time_last / 10000) != 0
 			&& (clock() / 10000 - game->time_last / 10000))
@@ -55,14 +56,10 @@ static void		game_loop(t_win *wn, t_game *game)
 void		display_anim_menu(t_win *wn)
 {
 	int				current_time;
-	int				old_time;
-	int				c;
-	int				i;
+	static int				old_time;
+	static int				c;
+	static int				i;
 
-	i = 0;
-	c = 0;
-	current_time = 0;
-	old_time = 0;
 	current_time = SDL_GetTicks();
 	if (current_time - old_time > 200)
 	{

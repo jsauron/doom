@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:34:40 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/12 18:11:25 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ int	render_sprite(t_win *wn)
 	texture = NULL;
 	while (n < wn->game.n)
 	{
-		SDL_BlitSurface(wn->game.sprite[n]->sprite, &wn->game.sprite[n]->size, wn->screen, &(wn->game.sprite[n]->pos));
+		SDL_BlitSurface(wn->game.sprite[n].sprite, NULL, wn->screen, &(wn->game.sprite[n].pos));
 		n++;
 	}
 	return (0);
