@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:01 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:34:04 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/13 16:56:17 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,13 @@ void minimap(t_win *wn, t_game *game)
 					game->minimap.mnp_size, game->minimap.mnp_size};
 				if (game->map[i][j] == 1 || game->map[i][j] == 7)
 					draw_rect(wn, rect, 0xFF306bb0, &(game->minimap.limit));
-				else if (game->map[i][j] == 2)
+				else if (game->map[i][j] > 200)
 					draw_rect(wn, rect, 0xFFDC143C, &(game->minimap.limit));
 				else if (game->map[i][j] == 0 ||game->map[i][j] == 4)
 					draw_rect(wn, rect, 0xFFffabe4, &(game->minimap.limit));
 				else if (game->map[i][j] == 3)
 					draw_rect(wn, rect, 0xFF2E8B57, &(game->minimap.limit));
-				else if (game->map[i][j] == 5)
+				else if (game->map[i][j] > 100)
 					draw_rect(wn, rect, 0xFFFFD700, &(game->minimap.limit));
 				else if (game->map[i][j] == 6)
 					draw_rect(wn, rect, 0xFF00BFFF  , &(game->minimap.limit));

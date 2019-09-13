@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 18:17:48 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/13 19:50:50 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ void rc_wolfcalc(t_game *game)
 {
 	int i;
 
+	i = 0;
+	while (i < 8)
+	{
+		ft_bzero(game->thread[i].ray, sizeof(t_ray));
+		i++;
+	}
 	i = 0;
 	while (i < 8)
 	{

@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 19:19:48 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/13 18:23:18 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,11 +141,13 @@ struct						s_thread
 struct						s_sprite
 {
 	t_entity			entity;
-	double					distance;
 	SDL_Surface				*sprite;
 	SDL_Rect				pos;
+	SDL_Rect				pos_map;
 	SDL_Rect				size;
+	double					distance;
 	int						actif;
+	int					id;
 };
 
 struct						s_player
@@ -183,7 +185,7 @@ struct						s_game
 {
 	int					n;
 	t_time				time;
-	t_sprite			sprite[10];
+	t_sprite			*sprite;
 	SDL_Surface			*wall[4];
 	SDL_Surface			*sky;
 	SDL_Surface			*heart[3];
@@ -293,7 +295,9 @@ Uint32						ft_getpixel(t_win *wn, SDL_Surface *surface,
 int     render_game(t_win *wn);
 int     render_editor(t_win *wn);
 int		check_sprite(t_game *game);
-
+int	set_key_sprite(t_game *game, int x, int y);
+int	set_exit_sprite(t_game *game, int x, int y);
+int	set_mean_sprite(t_game *game, int x, int y);
 /* init_data.c */
 void	sdl_err_exit(char *msg, t_game *game);
 void	init_sdl_game(t_game *game);
@@ -310,6 +314,7 @@ void	init_graphic(t_game *game);
 void	init_thread(t_win *wn, t_game *game);
 void	init_player(t_player *player);
 void	init_game(t_win *wn,  t_game *game , char *map);
-
-
+int		search_sprite(t_game *game, int id);
+int		range_sprite(t_sprite *sprite, int n);
+int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x);
 #endif

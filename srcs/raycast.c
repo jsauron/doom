@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:12 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 19:03:43 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/13 18:23:54 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,31 @@ int				is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 {
 	int		x2;
 	int		y2;
+	int n;
 
+	n = 0;
 	x2 = pos->x / BLOC_SIZE;
 	y2 = pos->y / BLOC_SIZE;
 
 	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
 		return (0);
 	if (ray != NULL && game->map[y2][x2] == 3)
-		ray->the_exit = 1;
-	if (ray != NULL && game->map[y2][x2] == 2)
-		ray->the_mean++;
+		ray->the_exit = 3;
+	if (ray != NULL && game->map[y2][x2] > 200)
+		ray->the_mean = game->map[y2][x2];
 	if (ray != NULL && game->map[y2][x2] == 6)
 		ray->the_door = 1;
-	if (ray != NULL && game->map[y2][x2] == 5)
-		ray->the_key = 1;
+	if (ray != NULL && game->map[y2][x2] > 100)
+		ray->the_key = game->map[y2][x2];
 	if (ray != NULL && game->map[y2][x2] == 7)
 		ray->the_poster = 1;
 	if (game->map[y2][x2] == 1) 
 		return (1);
-	if (game->map[y2][x2] == 2) 
+	if (game->map[y2][x2] > 200) 
 		return (2);
 	if (game->map[y2][x2] == 3)
 		return (3);
-	if (game->map[y2][x2] == 5)
+	if (game->map[y2][x2] > 100)
 		return (5);
 	if (game->map[y2][x2] == 6)
 		return (6);
