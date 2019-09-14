@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/13 19:57:43 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/15 00:19:58 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,24 @@ alpha_r = (fabs(game->player.direction
 //	x = pos.x * 8;
 //	y =pos.y * 8;
 */
+	if (game->sprite[n].actif == 1)
+		return (0);
 	game->sprite[n].distance = ray->distance;
-	game->sprite[n].size.x =
-	game->key_s->w / game->sprite[n].distance;
-	game->sprite[n].size.y =
-	game->key_s->h / game->sprite[n].distance;
+				//	game->key_s->w / game->sprite[n].distance,
+					//game->key_s->h / game->sprite[n].distance);
+	//game->mean_s->w = 500/*game->mean_s->w / game->sprite[n].distance*/;
+	//game->sprite[n].sprite->h =
+	//game->mean_s->h = 500/* game->mean_s->h / game->sprite[n].distance*/;
+	//game->sprite[n].sprite = game->mean_s;
 	game->sprite[n].pos.x = x;
 	game->sprite[n].pos.y =
 		(WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2;
 	game->sprite[n].actif = 1;
-		return (0)	;
+/*	color = calc__col(thread->wn, (WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2, i, thread);
+	if (thread->game->lightshade == 1)
+		color = light_shade(ray->distance, color);
+	setpixel(thread->wn->screen, x, (WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2, color);
+*/	return (0);
 }
 
 int	set_key_sprite(t_game *game, int x, int y)
@@ -137,7 +145,7 @@ int	check_sprite(t_game *game)
 
 	n = 0;
 	int k = 0;
-	while (k <= game->n)
+	while (k < game->n)
 	{
 		game->sprite[k].actif = 0;
 		k++;
@@ -152,20 +160,20 @@ int	check_sprite(t_game *game)
 			 {
 				n = search_sprite(game, game->thread[i].ray[j].the_mean);
 				set_distance_sprite(game, &game->thread[i].ray[j],
-				 n, (i - 1) * (WIN_W / 8) + j); // a debug -1 em plus
+				 n, i * (WIN_W / 8) + j); // a debug -1 em plus
 			 }
-			else if (game->thread[i].ray[j].the_key > 0)
+			if (game->thread[i].ray[j].the_key > 0)
 			{
 				n = search_sprite(game, game->thread[i].ray[j].the_key);
 				set_distance_sprite(game, &game->thread[i].ray[j],
-				n, (i - 1) * (WIN_W / 8) + j);
+				n, i * (WIN_W / 8) + j);
 			}
-			else if (game->thread[i].ray[j].the_exit == 3)
+			if (game->thread[i].ray[j].the_exit == 3)
 			{
 				n = search_sprite(game, game->thread[i].ray[j].the_exit);
 				set_distance_sprite(game, &game->thread[i].ray[j], n,
-				(i - 1) * (WIN_W / 8) + j);
-			}
+				i  * (WIN_W / 8) + j);
+		}
 			j++;
 		}
 		i++;
