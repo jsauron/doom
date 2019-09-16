@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:12 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/13 18:23:54 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:59:12 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int				is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 	if (ray != NULL && game->map[y2][x2] == 3)
 		ray->the_exit = 3;
 	if (ray != NULL && game->map[y2][x2] > 200)
+	{
 		ray->the_mean = game->map[y2][x2];
+		game->touch = game->map[y2][x2];
+	}
 	if (ray != NULL && game->map[y2][x2] == 6)
 		ray->the_door = 1;
 	if (ray != NULL && game->map[y2][x2] > 100)

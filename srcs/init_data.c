@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:33:10 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:23:19 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	init_hud(t_game *game)
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->heart[2] = IMG_Load("ressources/heart.png")))
 		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->hit_contact = IMG_Load("ressources/coutour_hit.png")))
+		ft_err_exit("doom: error: bad textures hit contact", game);
 }
 
 void	init_win_menu(t_game *game)

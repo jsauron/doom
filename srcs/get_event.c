@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:31:30 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:55:32 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,18 @@ static int	ft_mouse_motion(t_game *game)
 void		get_target_shot(t_game *game)
 {
 	static int	c;
+	int			n;
 
+	n = 0;
 	if (game->event.button.button == SDL_BUTTON_LEFT)
+	{
 		game->shot = 1;
+		if (game->touch > 0)
+		{
+			n = search_sprite(game, game->touch);
+			game->sprite[n].left_life--;
+		}			
+	}
 	if (game->event.button.button == SDL_BUTTON_RIGHT)
 	{
 		game->target = (c % 2 == 0) ? 1 : 0;

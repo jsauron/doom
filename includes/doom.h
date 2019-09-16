@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/14 23:10:22 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:52:50 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ struct						s_sprite
 	double					distance;
 	int						actif;
 	int					id;
+	int					left_life;
 };
 
 struct						s_player
@@ -189,6 +190,7 @@ struct						s_game
 	SDL_Surface			*wall[4];
 	SDL_Surface			*sky;
 	SDL_Surface			*heart[3];
+	SDL_Surface			*hit_contact;
 	SDL_Surface			*door;
 	SDL_Surface			*gameover;
 	SDL_Surface			*weapon[2];
@@ -223,6 +225,7 @@ struct						s_game
 	SDL_Surface			*exit_s;
 	SDL_Surface			*key_s;
 	SDL_Surface			*mean_s;
+	int					touch;
 };
 
  struct					s_win

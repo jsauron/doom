@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/14 23:11:44 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:47:53 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,28 @@ int gameover(t_win *wn)
 int render_life(t_win *wn, int life)
 {
 	SDL_Rect pos;
+	SDL_Rect pos_alert;
 	int i;
+	static int k;
 
 	i = 0;
 	pos.x = 0;
 	pos.y = 20;
-	while (life && i < life)
+	pos_alert.x = 0;
+	pos_alert.y = 0;
+	while (life > 0 && i < life)
 	{
 		SDL_BlitSurface(wn->game.heart[i++], NULL, wn->screen, &pos);
+		if (life == 1)
+		{
+			if (wn->game.time.current_time - wn->game.time.old_time > 170)
+			{
+				k++;
+				wn->game.time.old_time = wn->game.time.current_time;
+			}
+			if (k % 2 == 0)
+				SDL_BlitSurface(wn->game.hit_contact, NULL, wn->screen, &pos);
+		}
 		pos.x += 55;
 	}
 	if (life == 0)
@@ -199,7 +213,7 @@ int	render_sprite(t_win *wn)
 	//range_sprite(wn->game.sprite, wn->game.n);
 	while (n < wn->game.n)
 	{
-		if (wn->game.sprite[n].actif == 1)	
+		if (wn->game.sprite[n].actif == 1 && wn->game.sprite[n].left_life > 0)	
 			SDL_BlitSurface(wn->game.sprite[n].sprite, NULL, wn->screen, &(wn->game.sprite[n].pos));
 		n++;
 	}

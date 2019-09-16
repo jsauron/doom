@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/15 00:19:58 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:48:19 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	set_key_sprite(t_game *game, int x, int y)
 	game->map[y][x] = 100 + c;
 	game->sprite[game->n].pos_map.x = x;	
 	game->sprite[game->n].pos_map.y = y;	
+	game->sprite[game->n].left_life = 1;
 	game->n++;
 	return (0);
 }
@@ -104,6 +105,7 @@ int	set_exit_sprite(t_game *game, int x, int y)
 	game->sprite[game->n].id = 3;
 	game->sprite[game->n].pos_map.x = x;	
 	game->sprite[game->n].pos_map.y = y;	
+	game->sprite[game->n].left_life = 1;
 	game->n++;
 	return (0);
 }
@@ -118,6 +120,7 @@ int	set_mean_sprite(t_game *game, int x, int y)
 	game->map[y][x] = 200 + c;
 	game->sprite[game->n].pos_map.x = x;	
 	game->sprite[game->n].pos_map.y = y;	
+	game->sprite[game->n].left_life = 3;
 	game->n++;
 	return (0);
 }
