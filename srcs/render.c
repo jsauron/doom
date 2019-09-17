@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:01:32 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 17:06:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,27 @@ int render_life(t_win *wn, int life)
 	SDL_Rect pos_alert;
 	int i;
 	static int k;
+	static int old_time;
 
 	i = 0;
 	pos.x = 0;
 	pos.y = 20;
 	pos_alert.x = 0;
 	pos_alert.y = 0;
+	if (life == 1)
+	{
+		if (wn->game.time.current_time - old_time > 170)
+		{
+			k++;
+			old_time = wn->game.time.current_time;
+		}
+		if (k % 2 == 0)
+			SDL_BlitSurface(wn->game.hit_contact, NULL, wn->screen, &pos_alert);
+	}
 	while (life > 0 && i < life)
 	{
+
 		SDL_BlitSurface(wn->game.heart[i++], NULL, wn->screen, &pos);
-		if (life == 1)
-		{
-			if (wn->game.time.current_time - wn->game.time.old_time > 170)
-			{
-				k++;
-				wn->game.time.old_time = wn->game.time.current_time;
-			}
-			if (k % 2 == 0)
-				SDL_BlitSurface(wn->game.hit_contact, NULL, wn->screen, &pos);
-		}
 		pos.x += 55;
 	}
 	if (life == 0)
@@ -87,7 +89,7 @@ int you_win(t_win *wn)
 	if (wn->game.time.current_time - wn->game.time.old_time > 100)
 	{
 		i++;
-		wn->game.time.old_time = wn->game.time.current_time;
+		//wn->game.time.old_time = wn->game.time.current_time;
 	}
 	if (i == 12)
 		i = 0;
@@ -100,15 +102,16 @@ int shot(t_win *wn)
 {
 	SDL_Rect pos;
 	static int i;
+	static int old_time;
 
 	pos.x = 0;
 	pos.y = 0;
 	if (wn->game.shot == 1 && wn->game.target == 0)
 	{
-		if (wn->game.time.current_time - wn->game.time.old_time > 100)
+		if (wn->game.time.current_time - old_time > 100)
 		{
 			i++;
-			wn->game.time.old_time = wn->game.time.current_time;
+			old_time = wn->game.time.current_time;
 		}
 		if (i == 2)
 			i = 0;
@@ -117,10 +120,10 @@ int shot(t_win *wn)
 	}
 	else if (wn->game.shot == 1 && wn->game.target == 1)
 	{
-		if (wn->game.time.current_time - wn->game.time.old_time > 100)
+		if (wn->game.time.current_time - old_time > 100)
 		{
 			i++;
-			wn->game.time.old_time = wn->game.time.current_time;
+			old_time = wn->game.time.current_time;
 		}
 		if (i == 2)
 			i = 0;
@@ -140,14 +143,15 @@ int display_key(t_win *wn)
 	SDL_Rect pos;
 	static int i;
 	int k;
+	static int old_time;
 
 	k = 0;
 	pos.x = 0;
 	pos.y = 0;
-	if (wn->game.time.current_time - wn->game.time.old_time > 170)
+	if (wn->game.time.current_time - old_time > 170)
 	{
 		i++;
-		wn->game.time.old_time = wn->game.time.current_time;
+		old_time = wn->game.time.current_time;
 	}
 	if (i == 6)
 		i = 0;
@@ -184,9 +188,7 @@ int render_editor(t_win *wn)
 	return (0);
 }
 
-
-
-int	display_mission(t_win *wn)
+int display_mission(t_win *wn)
 {
 	int i;
 
@@ -194,16 +196,16 @@ int	display_mission(t_win *wn)
 	wn->game.state = (Uint8 *)SDL_GetKeyboardState(NULL);
 	while (i)
 	{
-		SDL_BlitSurface(wn->game.mission_s, NULL, wn->screen, &(wn->pos_game));	
+		SDL_BlitSurface(wn->game.mission_s, NULL, wn->screen, &(wn->pos_game));
 		render(wn);
 		if (wn->game.state[SDL_SCANCODE_ESCAPE])
-			i = 0;	
+			i = 0;
 	}
-	wn->game.mission = 0;	
+	wn->game.mission = 0;
 	return (0);
 }
 
-int	render_sprite(t_win *wn)
+int render_sprite(t_win *wn)
 {
 	SDL_Texture *texture;
 	int n;
@@ -213,7 +215,7 @@ int	render_sprite(t_win *wn)
 	//range_sprite(wn->game.sprite, wn->game.n);
 	while (n < wn->game.n)
 	{
-		if (wn->game.sprite[n].actif == 1 && wn->game.sprite[n].left_life > 0)	
+		if (wn->game.sprite[n].actif == 1 && wn->game.sprite[n].left_life > 0)
 			SDL_BlitSurface(wn->game.sprite[n].sprite, NULL, wn->screen, &(wn->game.sprite[n].pos));
 		n++;
 	}
@@ -230,20 +232,23 @@ int render_game(t_win *wn)
 	{
 		SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
 		render_sprite(wn);
-		set_interface(wn, &wn->game);
-		set_infos(wn, &wn->game);
-		render_life(wn, wn->game.player.life);
 		//	weapon(wn);
 		shot(wn);
 		//	target(wn);
+		render_life(wn, wn->game.player.life);
 		if (wn->game.key > 0)
 			display_key(wn);
+		set_interface(wn, &wn->game);
+		set_infos(wn, &wn->game);
+		//if (wn->game.time.current_time - wn->game.time.old_time > 1000)
+		//wn->game.time.current_time = wn->game.time.old_time;
 	}
 	render(wn);
+
 	return (0);
 }
 
-int	render(t_win *wn)
+int render(t_win *wn)
 {
 	SDL_UpdateTexture(wn->texture, NULL, wn->screen->pixels, wn->screen->pitch);
 	SDL_RenderClear(wn->render);

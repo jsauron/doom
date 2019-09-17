@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:39:21 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 17:28:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void calc__walls(int i, int x, t_thread *thread)
 	if (thread->ray[i].distance >= 0)
 		height = (BLOC_SIZE / thread->ray[i].distance) * DIST_SCREEN;
 
-	thread->ray[i].wall_top = (WIN_H - height) / 2;
-	thread->ray[i].wall_bot = WIN_H - ((WIN_H - height) / 2);
+	thread->ray[i].wall_top = ((WIN_H - height) / 2) + thread->game->visu;
+	thread->ray[i].wall_bot = (WIN_H - ((WIN_H - height) / 2) + thread->game->visu);
 	thread->ray[i].wall_top -= thread->game->crouch;
 	thread->ray[i].wall_bot -= thread->game->crouch;
 	thread->ray[i].wall_top += thread->game->jump;

@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:32:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 17:18:29 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ struct						s_game
 	int					n;
 	int					jump;
 	int					crouch;
+	int					visu;
 	t_time				time;
 	t_sprite			*sprite;
 	SDL_Surface			*wall[4];

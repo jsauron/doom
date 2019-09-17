@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:42:29 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 17:42:54 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ alpha_r = (fabs(game->player.direction
 	//game->sprite[n].sprite = game->mean_s;
 	game->sprite[n].pos.x = x;
 	game->touch = 0;
+	game->sprite[n].pos.y =
+		((WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2) - game->crouch + game->jump + game->visu;
 	if ((WIN_W / 2 >= x && WIN_W / 2 <= x + game->sprite[n].sprite->w)
+		&& (WIN_H / 2 >= game->sprite[n].pos.y && WIN_H / 2 <= game->sprite[n].pos.y + game->sprite[n].sprite->h)
 	&& game->sprite[n].id > 200)
 		game->touch = game->sprite[n].id;
-	game->sprite[n].pos.y =
-		((WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2) - game->crouch + game->jump;
 	game->sprite[n].actif = 1;
 /*	color = calc__col(thread->wn, (WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2, i, thread);
 	if (thread->game->lightshade == 1)

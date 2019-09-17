@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:41 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/16 16:43:46 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 17:02:13 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	hud_impact(t_game *game, t_pos move, t_pos pos)
 	SDL_Rect pos_contour;
 	int x;
 	int y;
+	static int old_time;
 
 	pos_contour.x = 0;
 	pos_contour.y = 0;
@@ -42,7 +43,11 @@ void	hud_impact(t_game *game, t_pos move, t_pos pos)
 	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 2))
 			&& game->player.life > 0)
 		{
-			game->player.life--;
+			if (game->time.current_time - old_time > 100)
+				{
+					game->player.life--;
+					old_time =  game->time.current_time;
+				}
 		}
 	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 3)))
 		game->exit = 1;

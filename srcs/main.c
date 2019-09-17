@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:02:01 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 17:04:19 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void		game_loop(t_win *wn, t_game *game)
 		if (play > 0)
 		{
 			game->time.current_time = SDL_GetTicks();
+			
 			if ((SDL_RenderClear(wn->render)) != 0)
 				ft_err_exit("doom: error: RenderClear failure", game);
 			make_frame(wn, game);

@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:40:45 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 17:44:17 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,15 @@ static int	ft_keyboard2(Uint8 *state, t_game *game)
 
 static int	ft_mouse_motion(t_game *game)
 {
+	int ret;
+
+	ret = 0;
 	if (game->mouse.x > 0.0)
 	{
 		game->player.direction =
 			(int)(game->player.direction + abs(game->mouse.x)
 					/ game->player.sensibility) % 360;
-		return (1);
+		ret = (1);
 	}
 	else if (game->mouse.x < 0.0)
 	{
@@ -76,9 +79,18 @@ static int	ft_mouse_motion(t_game *game)
 					game->player.sensibility) % 360;
 		if (game->player.direction < 0)
 			game->player.direction = 360 + game->player.direction;
-		return (1);
+		ret = 1;
 	}
-	return (0);
+	if (game->mouse.y > 0.0 || game->mouse.y < 0.0)
+	{
+		game->visu -= game->mouse.y;
+		if (game->visu < -(WIN_H / 4))
+			game->visu = -(WIN_H / 4); 
+		else if (game->visu > WIN_H / 4)
+			game->visu = WIN_H / 4; 
+		ret = 1;
+	}
+	return (ret);
 }
 
 void		get_target_shot(t_game *game)
@@ -163,6 +175,10 @@ int		get_events(t_game *game)
 	{
 		game->jump -= 20;
 	}
+	if (game->state[SDL_SCANCODE_LSHIFT])
+		game->player.speed = 0.18;
+	else
+		game->player.speed = 0.12;
 	
 	return (1);
 }
