@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:36:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/16 16:58:21 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 15:21:46 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void		set_cursor(t_win *wn)
 	if (wn->game.touch == 0)
 		draw_line(wn, vec, 0xFF5BE50B, 0);
 	else	
-		draw_line(wn, vec, 0xFF0000FF, 0);
+		draw_line(wn, vec, 0x00FF00FF, 0);
 	vec = (t_vec){(t_pos){WIN_W / 2, WIN_H / 2 - 10},
 	(t_pos){WIN_W / 2, WIN_H / 2 + 10}};
 	if (wn->game.touch == 0)
 		draw_line(wn, vec, 0xFF5BE50B, 0);
 	else	
-		draw_line(wn, vec, 0xFF0000FF, 0);
+		draw_line(wn, vec, 0x00FF00FF, 0);
 }
 
 static void	ft_remove_light(Uint8 *component, double delta, int arg)

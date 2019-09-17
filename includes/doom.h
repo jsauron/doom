@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/16 16:52:50 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 14:59:09 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ struct						s_ray
 	int					the_exit;
 	int					x;
 	int					y;
+	int					a;
 	int					axis;
 	double				angle_d;
 	double				distance;

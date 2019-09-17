@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/13 17:10:57 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 15:02:01 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ static void		make_frame(t_win *wn, t_game *game)
 	SDL_BlitSurface(wn->game.sky, NULL, wn->screen, &(pos));
 	rc_wolfcalc(game);
 	check_sprite(game);
-	set_interface(wn, game);
 	if (clock() != 0 && (1000 - game->time_last / 10000) != 0
 			&& (clock() / 10000 - game->time_last / 10000))
 		game->fps = 1000 / (clock() / 10000 - game->time_last / 10000);
-	set_infos(wn, game);
 	render_game(wn);
 }
 

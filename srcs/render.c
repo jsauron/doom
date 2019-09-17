@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/16 16:47:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 15:01:32 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,8 @@ int render_game(t_win *wn)
 	{
 		SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
 		render_sprite(wn);
+		set_interface(wn, &wn->game);
+		set_infos(wn, &wn->game);
 		render_life(wn, wn->game.player.life);
 		//	weapon(wn);
 		shot(wn);

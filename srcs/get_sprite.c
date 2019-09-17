@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/16 16:48:19 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 15:16:15 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ alpha_r = (fabs(game->player.direction
 	//game->mean_s->h = 500/* game->mean_s->h / game->sprite[n].distance*/;
 	//game->sprite[n].sprite = game->mean_s;
 	game->sprite[n].pos.x = x;
+	game->touch = 0;
+	if ((WIN_W / 2 >= x && WIN_W / 2 <= x + game->sprite[n].sprite->w)
+	&& game->sprite[n].id > 200)
+		game->touch = game->sprite[n].id;
 	game->sprite[n].pos.y =
 		(WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2;
 	game->sprite[n].actif = 1;

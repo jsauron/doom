@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:01 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/13 16:56:17 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 15:20:22 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void minimap(t_win *wn, t_game *game)
 			j = 0;
 			while (j < MAP_SIZE)
 			{
+				if (game->map[i][j] > 200 && game->sprite[search_sprite(game, game->map[i][j])].left_life == 0)
+					game->map[i][j] = 0;
 				rect = (SDL_Rect){game->minimap.diff.x + (j * game->minimap.mnp_size),
 					game->minimap.diff.y + (i * game->minimap.mnp_size),
 					game->minimap.mnp_size, game->minimap.mnp_size};

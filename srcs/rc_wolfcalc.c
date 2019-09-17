@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/13 19:50:50 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 14:59:05 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void *calc__frame(void *arg)
 	{
 		y = 0;
 		++i;
+		thread->ray[i].a = thread->x_start + x;
 		calc__walls(i, x, thread);
 		while (y < WIN_H)
 		{
