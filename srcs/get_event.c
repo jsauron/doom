@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 17:44:17 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 21:28:02 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,16 @@ void		get_target_shot(t_game *game)
 	static int	c;
 	int			n;
 
-	n = 0;
 	if (game->event.button.button == SDL_BUTTON_LEFT)
 	{
 		game->shot = 1;
+		Mix_PlayChannel(-1, game->music.shot, 0);
 		if (game->touch > 0)
 		{
 			n = search_sprite(game, game->touch);
 			game->sprite[n].left_life--;
+			if (game->sprite[n].left_life == 0) 
+				Mix_PlayChannel(-1, game->music.dead, 0);
 		}	
 	}
 	if (game->event.button.button == SDL_BUTTON_RIGHT)
@@ -154,6 +156,8 @@ int		get_events(t_game *game)
 	SDL_GetRelativeMouseState(&(game->mouse.x), &(game->mouse.y));
 	if (game->player.life == 0)
 	{
+
+		Mix_PlayChannel(-1, game->music.gameover, 0);
 		if (game->state[SDL_SCANCODE_ESCAPE])
 			return (0);
 	}

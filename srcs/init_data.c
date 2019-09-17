@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:45:21 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 21:14:34 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,19 @@ void	sdl_err_exit(char *msg, t_game *game)
 
 void	init_sdl_game(t_game *game)
 {
-	if (TTF_Init() < 0)
+	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 		sdl_err_exit(0, game);
+	Mix_AllocateChannels(5);
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1 )
+		sdl_err_exit(0, game);
+	if (TTF_Init() < 0)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 void	init_fonts(t_game *game)
 {
 	if (!(game->font = TTF_OpenFont("ressources/fonts/Arial.ttf", 100)))
-		ft_err_exit("wolf3d: error: font failure", game);
+		ft_err_exit("Doom: error: font failure", game);
 }
 
 void	init_surface_game(t_game *game)
@@ -51,6 +55,26 @@ void	init_surface_game(t_game *game)
 	init_sprite(game);
 	init_graphic(game);
 }
+
+void	init_music(t_game *game)
+{
+	 if (!(game->music.mood = Mix_LoadMUS("ressources/music/makeba.wav")))
+		ft_err_exit("Doom: error: mood music fail", game);
+
+//	if (!( game->music.youwin =  Mix_LoadMUS("musique.wav")))
+		//ft_err_exit("Doom: error: mood music fail", game);
+	if (!( game->music.shot = Mix_LoadWAV("ressources/music/shot.wav")))
+		ft_err_exit("Doom: error: mood music fail", game);
+	if (!( game->music.dead = Mix_LoadWAV("ressources/music/dead.wav")))
+		ft_err_exit("Doom: error: mood music fail", game);
+	if (!( game->music.gameover = Mix_LoadWAV("ressources/music/gameover.wav")))
+		ft_err_exit("Doom: error: mood music fail", game);
+	if (!( game->music.key = Mix_LoadWAV("ressources/music/coins.wav")))
+		ft_err_exit("Doom: error: mood music fail", game);
+	if (!( game->music.open_door = Mix_LoadWAV("ressources/music/door.wav")))
+		ft_err_exit("Doom: error: mood music fail", game);
+}
+
 
 void	init_wall(t_game *game)
 {
@@ -207,6 +231,7 @@ void	init_game(t_win *wn, t_game *game, char *map)
 		game->map[i++] = malloc(sizeof(int) * YBLOC);
 	get_map(map, game);
 	init_sdl_game(game);
+	init_music(game);
 	init_fonts(game);
 	init_wall(game);
 	game->endinitsdl = 1;

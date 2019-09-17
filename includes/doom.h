@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 17:18:29 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 20:47:50 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
 # include <SDL2/SDL_image.h>
+# include <SDL2/SDL_mixer.h>
 # include <pthread.h>
 # include <time.h>
 # include "editor.h"
@@ -49,6 +50,7 @@
 
 
 typedef enum   e_entity		t_entity;
+typedef struct s_music		t_music;
 typedef struct s_limit		t_limit;
 typedef struct s_time		t_time;
 typedef struct s_pos		t_pos;
@@ -182,9 +184,20 @@ struct						s_time
 
 };
 
+struct 					s_music
+{
+	Mix_Music 			*mood;
+	Mix_Chunk 			*shot;
+	Mix_Chunk 			*dead;
+	Mix_Chunk 			*gameover;
+	Mix_Chunk 			*key;
+	Mix_Chunk 			*open_door;
+	Mix_Music 			*youwin;
+};
 
 struct						s_game
 {
+	t_music				music;
 	int					n;
 	int					jump;
 	int					crouch;
@@ -231,6 +244,9 @@ struct						s_game
 	SDL_Surface			*mean_s;
 	int					touch;
 };
+
+
+
 
  struct					s_win
 {

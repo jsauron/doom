@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:41 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 17:02:13 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 21:20:04 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ void	hud_impact(t_game *game, t_pos move, t_pos pos)
 		&& (is_inwall(&pos, game, NULL) == 6) && game->key > 0))
 	{
 		game->key--;
+		Mix_PlayChannel(-1, game->music.open_door, 0);
 		game->map[y][x] = 0;
 	}
 	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 5)))
 	{
 		game->key++;
+		Mix_PlayChannel(-1, game->music.key, 0);
 		game->map[y][x] = 0;
 	}
 	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 2))
