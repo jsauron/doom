@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/16 16:23:19 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 15:45:21 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void	init_game(t_win *wn, t_game *game, char *map)
 	init_player(&game->player);
 	init_surface_game(game);
 	game->minimap.mnp_size = 20;
-	game->key = 3;
+	game->key = 0;
 	game->mission = 1;
 	if (!(game->map = malloc(sizeof(int *) * XBLOC)))
 		exit(1);

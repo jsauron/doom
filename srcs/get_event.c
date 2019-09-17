@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/16 16:55:32 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/17 15:40:45 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		get_target_shot(t_game *game)
 		{
 			n = search_sprite(game, game->touch);
 			game->sprite[n].left_life--;
-		}			
+		}	
 	}
 	if (game->event.button.button == SDL_BUTTON_RIGHT)
 	{
@@ -153,5 +153,16 @@ int		get_events(t_game *game)
 		move = (ft_keyboard1(game->state, game)
 				|| ft_keyboard2(game->state, game)) ? 1 : move;
 	move = (move) ? 1 : move_events(game->state, game);
+	if (game->state[SDL_SCANCODE_C])
+		game->crouch = 200;
+	else
+		game->crouch = 0;
+	if (game->state[SDL_SCANCODE_SPACE])
+		game->jump = 200;
+	else if (game->jump > 0)
+	{
+		game->jump -= 20;
+	}
+	
 	return (1);
 }
