@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 17:42:54 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 13:55:59 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,17 @@ alpha_r = (fabs(game->player.direction
 //	x = pos.x * 8;
 //	y =pos.y * 8;
 */
+	static int distance;
+
 	if (game->sprite[n].actif == 1)
 		return (0);
 	game->sprite[n].distance = ray->distance;
-				//	game->key_s->w / game->sprite[n].distance,
+	if (distance < ray->distance)
+		{
+		game->sprite[n].sprite = 
+			rotozoomSurface(game->sprite[n].sprite, 0, 1.1, 1);
+			distance = ray->distance;
+	}			//	game->key_s->w / game->sprite[n].distance,
 					//game->key_s->h / game->sprite[n].distance);
 	//game->mean_s->w = 500/*game->mean_s->w / game->sprite[n].distance*/;
 	//game->sprite[n].sprite->h =

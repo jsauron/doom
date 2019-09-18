@@ -51,6 +51,7 @@ SRC_NAME = main.c \
 			tga_reader_main.c \
 			get_sprite.c \
 			get_event_editor.c \
+			SDL2_rotozoom.c \
 			files.c  
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

@@ -6,13 +6,14 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 20:47:50 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 13:47:57 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOOM_H
 # define DOOM_H
 
+# include "SDL2_rotozoom.h"
 # include "libft.h"
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
