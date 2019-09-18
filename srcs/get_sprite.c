@@ -6,13 +6,13 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 13:55:59 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 19:40:57 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int range_sprite(t_sprite *sprite, int n)
+/*int range_sprite(t_sprite *sprite, int n)
 {
 	int i;
 	t_sprite *tmp;
@@ -32,65 +32,63 @@ int range_sprite(t_sprite *sprite, int n)
 	}
 	return (0);
 }
-
+*/
 int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 {
-	/*t_pos	player_pos;
+	t_pos	player_pos;
 	t_pos	pos;
-	double	distance_x;
-	double	distance_y;
-	double	distance;
-alpha_r = (fabs(game->player.direction
-				- ray->angle_d)) * M_PI / 180;
-	angle_r = ray->angle_d * M_PI / 180;
+	double	A;
+	double	B;
+	double zoomY = 1.0;
+//	int	distance;
+//	alpha_r = (fabs(game->player.direction
+		//		- ray->angle_d)) * M_PI / 180;
+//	angle_r = ray->angle_d * M_PI / 180;
 
-	pos.x += -cos(angle_r) * 1;
-	pos.y += -sin(angle_r) * 1;
-
-	player_pos.x = game->player.position.x * BLOC_SIZE;
-	player_pos.y = game->player.position.y * BLOC_SIZE;
-	pos.x = game->sprite[n].pos.x * BLOC_SIZE;
-	pos.y = game->sprite[n].pos.y * BLOC_SIZE;
-
-	distance_x = (ray->axis == 1)
-		? pos.x - player_pos.x : (int)pos.x - player_pos.x;
-	distance_y = (ray->axis == 1)
-		? (int)pos.y - player_pos.y : pos.y - player_pos.y;
-	distance = pythagore(distance_x, distance_y);
-//	distance = thread->ray[i].dist_minimap * cos(alpha_r);
-//	x = pos.x * 8;
-//	y =pos.y * 8;
-*/
-	static int distance;
-
+//	pos.x += -cos(angle_r) * 1;
+	//pos.y += -sin(angle_r) * 1;
 	if (game->sprite[n].actif == 1)
 		return (0);
-	game->sprite[n].distance = ray->distance;
-	if (distance < ray->distance)
+
+	player_pos.x = game->player.position.x;
+	player_pos.y = game->player.position.y;
+	pos.x = game->sprite[n].pos_map.x;
+	pos.y = game->sprite[n].pos_map.y;
+
+	A = (ray->axis == 1)
+		? pos.x - player_pos.x : (int)pos.x - player_pos.x;
+	B = (ray->axis == 1)
+		? (int)pos.y - player_pos.y : pos.y - player_pos.y;
+	game->sprite[n].new_distance = pythagore(A, B);
+
+			printf("pos_sprite =%f     %f\n", pos.y ,pos.x );
+			printf("plyer_pos =%f     %f\n", player_pos.y ,player_pos.x );
+			printf("pyhtag =%f\n", pythagore(A, B) );
+//	x = pos.x * 8;
+//	y =pos.y * 8;
+			zoomY = (game->sprite[n].new_distance /game->sprite[n].old_distance );
+			printf("raydistance =%f     %f\n", game->sprite[n].new_distance ,game->sprite[n].old_distance);
+			printf("zoomy =%f\n", zoomY);
+			printf("id sprite =%d\n",game->sprite[n].id );
+	//	rotozoomSurfaceXY(game->sprite[n].sprite, 0, zoomX, zoomY, 1); 
+		if (zoomY != 1.0)
 		{
-		game->sprite[n].sprite = 
-			rotozoomSurface(game->sprite[n].sprite, 0, 1.1, 1);
-			distance = ray->distance;
-	}			//	game->key_s->w / game->sprite[n].distance,
-					//game->key_s->h / game->sprite[n].distance);
-	//game->mean_s->w = 500/*game->mean_s->w / game->sprite[n].distance*/;
-	//game->sprite[n].sprite->h =
-	//game->mean_s->h = 500/* game->mean_s->h / game->sprite[n].distance*/;
-	//game->sprite[n].sprite = game->mean_s;
+			game->sprite[n].sprite =
+			rotozoomSurface(game->sprite[n].sprite, 0.0, zoomY, 1);
+		}
+		
+			game->sprite[n].old_distance = game->sprite[n].new_distance;
 	game->sprite[n].pos.x = x;
 	game->touch = 0;
 	game->sprite[n].pos.y =
-		((WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2) - game->crouch + game->jump + game->visu;
+		((WIN_H - ((BLOC_SIZE / (game->sprite[n].new_distance* BLOC_SIZE) ) * DIST_SCREEN)) / 2) - game->crouch + game->jump + game->visu;
+	printf("pos_sprite_final =%d    %d\n", game->sprite[n].pos.y ,game->sprite[n].pos.x );
 	if ((WIN_W / 2 >= x && WIN_W / 2 <= x + game->sprite[n].sprite->w)
 		&& (WIN_H / 2 >= game->sprite[n].pos.y && WIN_H / 2 <= game->sprite[n].pos.y + game->sprite[n].sprite->h)
 	&& game->sprite[n].id > 200)
 		game->touch = game->sprite[n].id;
 	game->sprite[n].actif = 1;
-/*	color = calc__col(thread->wn, (WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2, i, thread);
-	if (thread->game->lightshade == 1)
-		color = light_shade(ray->distance, color);
-	setpixel(thread->wn->screen, x, (WIN_H - ((BLOC_SIZE / ray->distance) * DIST_SCREEN)) / 2, color);
-*/	return (0);
+	return (0);
 }
 
 int	set_key_sprite(t_game *game, int x, int y)
@@ -104,6 +102,8 @@ int	set_key_sprite(t_game *game, int x, int y)
 	game->sprite[game->n].pos_map.x = x;	
 	game->sprite[game->n].pos_map.y = y;	
 	game->sprite[game->n].left_life = 1;
+	game->sprite[game->n].old_distance = 0;
+	game->sprite[game->n].new_distance = 0;
 	game->n++;
 	return (0);
 }
@@ -118,6 +118,8 @@ int	set_exit_sprite(t_game *game, int x, int y)
 	game->sprite[game->n].pos_map.x = x;	
 	game->sprite[game->n].pos_map.y = y;	
 	game->sprite[game->n].left_life = 1;
+		game->sprite[game->n].old_distance = 0;
+	game->sprite[game->n].new_distance = 0;
 	game->n++;
 	return (0);
 }
@@ -133,6 +135,8 @@ int	set_mean_sprite(t_game *game, int x, int y)
 	game->sprite[game->n].pos_map.x = x;	
 	game->sprite[game->n].pos_map.y = y;	
 	game->sprite[game->n].left_life = 3;
+		game->sprite[game->n].old_distance = 0;
+	game->sprite[game->n].new_distance = 0;
 	game->n++;
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:36:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:21:46 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 18:53:38 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-double		pythagore(int a, int b)
+double		pythagore(double a, double b)
 {
 	return (sqrt(a * a + b * b));
 }

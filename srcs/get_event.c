@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 21:28:02 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 16:59:02 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ static int	ft_mouse_motion(t_game *game)
 
 void		get_target_shot(t_game *game)
 {
-	static int	c;
 	int			n;
 
 	if (game->event.button.button == SDL_BUTTON_LEFT)
@@ -111,10 +110,7 @@ void		get_target_shot(t_game *game)
 		}	
 	}
 	if (game->event.button.button == SDL_BUTTON_RIGHT)
-	{
-		game->target = (c % 2 == 0) ? 1 : 0;
-		c++;
-	}
+		game->target = (game->target % 2 == 0) ? 1 : 0;
 }
 
 static int	move_events(const Uint8 *state, t_game *game)
@@ -154,12 +150,17 @@ int		get_events(t_game *game)
 	SDL_PollEvent(&(game->event));
 	game->state = (Uint8 *)SDL_GetKeyboardState(NULL);
 	SDL_GetRelativeMouseState(&(game->mouse.x), &(game->mouse.y));
-	if (game->player.life == 0)
+	if (game->mission == 1 && game->state[SDL_SCANCODE_SPACE])
+		game->mission = 0;
+	else if (game->player.life == 0)
 	{
-
 		Mix_PlayChannel(-1, game->music.gameover, 0);
-		if (game->state[SDL_SCANCODE_ESCAPE])
-			return (0);
+			SDL_WaitEvent(&(game->event));
+		/*	if (game->state[SDL_SCANCODE_ESCAPE])
+			{
+				//free
+				return (0);
+			}*/
 	}
 	if (game->state[SDL_SCANCODE_ESCAPE])
 		return (0);

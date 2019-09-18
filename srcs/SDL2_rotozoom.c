@@ -1506,6 +1506,8 @@ The input surface is not modified. The output surface is newly allocated.
 \return The new, shrunken surface.
 */
 /*@null@*/ 
+
+
 SDL_Surface *shrinkSurface(SDL_Surface *src, int factorx, int factory)
 {
 	int result;

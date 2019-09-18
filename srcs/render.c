@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 17:06:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 19:41:11 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,9 @@ int you_win(t_win *wn)
 	pos.x = 0;
 	pos.y = 0;
 	if (wn->game.time.current_time - wn->game.time.old_time > 100)
-	{
 		i++;
-		//wn->game.time.old_time = wn->game.time.current_time;
-	}
 	if (i == 12)
 		i = 0;
-
 	SDL_BlitSurface(wn->game.win[i], NULL, wn->screen, &pos);
 	return (0);
 }
@@ -114,7 +110,7 @@ int shot(t_win *wn)
 			old_time = wn->game.time.current_time;
 		}
 		if (i == 2)
-			i = 0;
+			i = 1;
 
 		SDL_BlitSurface(wn->game.weapon[i], NULL, wn->screen, &pos);
 	}
@@ -126,7 +122,7 @@ int shot(t_win *wn)
 			old_time = wn->game.time.current_time;
 		}
 		if (i == 2)
-			i = 0;
+			i = 1;
 
 		SDL_BlitSurface(wn->game.lunette[i], NULL, wn->screen, &pos);
 	}
@@ -134,7 +130,6 @@ int shot(t_win *wn)
 		SDL_BlitSurface(wn->game.weapon[0], NULL, wn->screen, &pos);
 	else if (wn->game.shot == 0 && wn->game.target == 1)
 		SDL_BlitSurface(wn->game.lunette[0], NULL, wn->screen, &pos);
-
 	return (0);
 }
 
@@ -188,22 +183,6 @@ int render_editor(t_win *wn)
 	return (0);
 }
 
-int display_mission(t_win *wn)
-{
-	int i;
-
-	i = 1;
-	wn->game.state = (Uint8 *)SDL_GetKeyboardState(NULL);
-	while (i)
-	{
-		SDL_BlitSurface(wn->game.mission_s, NULL, wn->screen, &(wn->pos_game));
-		render(wn);
-		if (wn->game.state[SDL_SCANCODE_ESCAPE])
-			i = 0;
-	}
-	wn->game.mission = 0;
-	return (0);
-}
 
 int render_sprite(t_win *wn)
 {
@@ -226,8 +205,8 @@ int render_game(t_win *wn)
 {
 	if (wn->game.exit == 1)
 		you_win(wn);
-	//else if (wn->game.mission == 1)
-	//display_mission(wn);
+	else if (wn->game.mission == 1)
+		SDL_BlitSurface(wn->game.mission_s, NULL, wn->screen, &(wn->pos_game));
 	else
 	{
 		SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
@@ -240,11 +219,8 @@ int render_game(t_win *wn)
 			display_key(wn);
 		set_interface(wn, &wn->game);
 		set_infos(wn, &wn->game);
-		//if (wn->game.time.current_time - wn->game.time.old_time > 1000)
-		//wn->game.time.current_time = wn->game.time.old_time;
 	}
 	render(wn);
-
 	return (0);
 }
 

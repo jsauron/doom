@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:43 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/13 17:07:47 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 16:35:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void		assign_sprite_map(t_game *game, int x, int y)
 	else if (game->map[y][x] == GOAL)
 		set_exit_sprite(game, x , y);
 }
+
 static void		parse_sprite_map(t_game *game, int size)
 {
 	int		y;

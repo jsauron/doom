@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 21:14:34 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 17:04:09 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	sdl_err_exit(char *msg, t_game *game)
 
 void	init_sdl_game(t_game *game)
 {
-	if (SDL_Init(SDL_INIT_AUDIO) < 0)
-		sdl_err_exit(0, game);
-	Mix_AllocateChannels(5);
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1 )
-		sdl_err_exit(0, game);
+	(void)game;	
 	if (TTF_Init() < 0)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
@@ -64,17 +60,16 @@ void	init_music(t_game *game)
 //	if (!( game->music.youwin =  Mix_LoadMUS("musique.wav")))
 		//ft_err_exit("Doom: error: mood music fail", game);
 	if (!( game->music.shot = Mix_LoadWAV("ressources/music/shot.wav")))
-		ft_err_exit("Doom: error: mood music fail", game);
+		ft_err_exit("Doom: error: shot music fail", game);
 	if (!( game->music.dead = Mix_LoadWAV("ressources/music/dead.wav")))
-		ft_err_exit("Doom: error: mood music fail", game);
+		ft_err_exit("Doom: error: dead music fail", game);
 	if (!( game->music.gameover = Mix_LoadWAV("ressources/music/gameover.wav")))
-		ft_err_exit("Doom: error: mood music fail", game);
+		ft_err_exit("Doom: error: gameover music fail", game);
 	if (!( game->music.key = Mix_LoadWAV("ressources/music/coins.wav")))
-		ft_err_exit("Doom: error: mood music fail", game);
+		ft_err_exit("Doom: error: key music fail", game);
 	if (!( game->music.open_door = Mix_LoadWAV("ressources/music/door.wav")))
-		ft_err_exit("Doom: error: mood music fail", game);
+		ft_err_exit("Doom: error: open_door music fail", game);
 }
-
 
 void	init_wall(t_game *game)
 {

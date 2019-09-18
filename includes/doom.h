@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 13:47:57 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 18:54:04 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,8 @@ struct						s_sprite
 	SDL_Rect				pos;
 	SDL_Rect				pos_map;
 	SDL_Rect				size;
-	double					distance;
+	double					old_distance;
+	double					new_distance;
 	int						actif;
 	int					id;
 	int					left_life;
@@ -246,9 +247,6 @@ struct						s_game
 	int					touch;
 };
 
-
-
-
  struct					s_win
 {
 	t_game				game;
@@ -298,7 +296,7 @@ void						set_infos(t_win *wn, t_game *game);
 void						set_interface(t_win *wn, t_game *game);
 void						minimap(t_win *wn, t_game *game);
 
-double						pythagore(int a, int b);
+double						pythagore(double a, double b);
 void						set_cursor(t_win *wn);
 Uint32						light_shade(double distance, Uint32 color);
 void						srfdel(void **ap);

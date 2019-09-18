@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 20:33:57 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/18 17:36:51 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void		game_loop(t_win *wn, t_game *game)
 	make_frame(wn, game);
 	while (play)
 	{
-		//Mix_PlayChannel(-1, game->music.mood, 0);
 		play = get_events(game);
 		if (play > 0)
 		{
@@ -83,6 +82,7 @@ int			start(t_win *wn, char **argv)
 	int				play;
 
 	play = 1;
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
 	while (play)
 	{
