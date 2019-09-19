@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:29:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 14:57:49 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 23:19:04 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,16 @@ static Uint32		calc__col(t_win *wn, int y, int i, t_thread *thread)
 	double				h_wall;
 	t_mouse				textr;
 	double				ywall;
-	double				h_txtr;
-	double				w_txtr;
 
 	ywall = (y - thread->ray[i].wall_top);
-	w_txtr = surface->w;
-	h_txtr = surface->h;
 	h_wall = thread->ray[i].wall_bot - thread->ray[i].wall_top;
 	if (thread->ray[i].axis == VERTICAL_HIT)
 		textr.x = ((int)(thread->ray[i].x / 8) % BLOC_SIZE)
-		* w_txtr / BLOC_SIZE;
+		* surface->w / BLOC_SIZE;
 	else if (thread->ray[i].axis == HORIZONTAL_HIT)
 		textr.x = ((int)(thread->ray[i].y / 8) % BLOC_SIZE)
-		* w_txtr / BLOC_SIZE;
-	textr.y = h_txtr * ywall / h_wall;
+		* surface->w / BLOC_SIZE;
+	textr.y = surface->h * ywall / h_wall;
 	return (ft_getpixel(wn, (SDL_Surface *)surface,
 						(int)textr.x % (int)surface->w,
 						(int)textr.y % (int)surface->w));

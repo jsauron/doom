@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 22:10:42 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 23:37:15 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define N_KEY '5'
 # define N_DOOR '6'
 # define N_POSTER '7'
+
+#define GUARD_ROWS 2
+#define VALUE_LIMIT	0.001
 
 
 # define H_GREEN 0x00FF00FF
@@ -65,9 +68,23 @@ typedef struct s_win			t_win;
 typedef struct s_game		t_game;
 typedef struct s_rgb		t_rgb;
 typedef struct s_sprite	t_sprite;
+typedef struct s_colorRGBA	t_colorRGBA;
+typedef struct s_colory	t_colory;
 typedef union  u_color		t_color;
 
-enum  e_entity {SP_KEY, SP_MEAN, SP_EXIT};
+
+struct			s_colorRGBA
+{
+	Uint8 r;
+	Uint8 g;
+	Uint8 b;
+	Uint8 a;
+};
+
+struct 			s_colory
+{
+	Uint8 y;
+};
 
 struct        				s_rgb
 {
@@ -315,7 +332,7 @@ int     render_game(t_win *wn);
 int     render_editor(t_win *wn);
 int		check_sprite(t_game *game);
 int	set_key_sprite(t_game *game, int x, int y);
-int	set_exit_sprite(t_game *game, int x, int y);
+int	set_exit_sprite(t_game *game, int x, int yi);
 int	set_mean_sprite(t_game *game, int x, int y);
 /* init_data.c */
 void	sdl_err_exit(char *msg, t_game *game);

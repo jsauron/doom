@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:30:17 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:30:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 23:15:02 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,3 @@ void	play_editor(t_win *wn, t_editor *editor, char *map)
 		render_editor(wn);
 	}
 }
-

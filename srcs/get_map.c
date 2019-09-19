@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:43 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 16:35:03 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 23:21:13 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ static int		map_is_digit(char *line)
 
 static void		assign_sprite_map(t_game *game, int x, int y)
 {
-
 	if (game->map[y][x] == KEY)
 		set_key_sprite(game, x, y);
 	else if (game->map[y][x] == MEAN)
 		set_mean_sprite(game, x, y);
 	else if (game->map[y][x] == GOAL)
-		set_exit_sprite(game, x , y);
+		set_exit_sprite(game, x, y);
 }
 
 static void		parse_sprite_map(t_game *game, int size)
@@ -51,7 +50,7 @@ static void		parse_sprite_map(t_game *game, int size)
 
 	y = 0;
 	if (!(game->sprite = malloc(sizeof(t_sprite) * size)))
-			ft_err_exit("Doom: Error malloc t_sprite failed", game);
+		ft_err_exit("Doom: Error malloc t_sprite failed", game);
 	ft_bzero(game->sprite, size);
 	while (y < MAP_SIZE)
 	{
@@ -98,7 +97,7 @@ int		parse_map_game(char *map, t_game *game)
 {
 	int		j;
 	int		i;
-	int 	c;
+	int		c;
 
 	i = 0;
 	c = 0;

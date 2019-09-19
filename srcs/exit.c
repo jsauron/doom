@@ -6,19 +6,16 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:30:38 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 18:59:11 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 23:10:38 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
 void	sdl_err_exit(char *msg, t_game *game)
 {
 	ft_putendl(SDL_GetError());
 	ft_putendl(TTF_GetError());
-	//if (game->renderer)
-	//SDL_DestroyRenderer(game->renderer);
-	//if (game->window)
-	//SDL_DestroyWindow(game->window);
 	if (game->font)
 		TTF_CloseFont(game->font);
 	TTF_Quit();
@@ -28,8 +25,6 @@ void	sdl_err_exit(char *msg, t_game *game)
 
 static void		ft_sdl_quit(t_game *game)
 {
-//	SDL_DestroyRenderer(game->renderer);
-//	SDL_DestroyWindow(game->window);
 	TTF_CloseFont(game->font);
 	TTF_Quit();
 	SDL_Quit();

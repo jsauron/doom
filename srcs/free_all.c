@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 18:57:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 22:08:47 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 23:21:27 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		free_structure(t_win *wn, t_editor *editor)
 	free_sdl(wn);
 }
 
-int free_surface_editor(t_editor *editor)
+int		free_surface_editor(t_editor *editor)
 {
 	int i;
 
@@ -75,7 +75,6 @@ void	free_game(t_game *game)
 	int i;
 
 	i = 0;
-
 	free_fonts(game);
 	while (i < XBLOC)
 		free(game->map[i++]);
@@ -87,6 +86,7 @@ void	free_fonts(t_game *game)
 {
 	TTF_CloseFont(game->font);
 }
+
 void	free_surface_game(t_game *game)
 {
 	free_graphic(game);
@@ -116,7 +116,6 @@ void	free_keys(t_game *game)
 	SDL_FreeSurface(game->keys[3]);
 	SDL_FreeSurface(game->keys[4]);
 	SDL_FreeSurface(game->keys[5]);
-
 }
 
 void	free_hud(t_game *game)
