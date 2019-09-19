@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 19:40:57 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 18:47:49 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,7 @@ int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 	double	A;
 	double	B;
 	double zoomY = 1.0;
-//	int	distance;
-//	alpha_r = (fabs(game->player.direction
-		//		- ray->angle_d)) * M_PI / 180;
-//	angle_r = ray->angle_d * M_PI / 180;
 
-//	pos.x += -cos(angle_r) * 1;
-	//pos.y += -sin(angle_r) * 1;
 	if (game->sprite[n].actif == 1)
 		return (0);
 
@@ -59,22 +53,35 @@ int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 		? pos.x - player_pos.x : (int)pos.x - player_pos.x;
 	B = (ray->axis == 1)
 		? (int)pos.y - player_pos.y : pos.y - player_pos.y;
-	game->sprite[n].new_distance = pythagore(A, B);
+	game->sprite[n].new_distance = fabs(pythagore(A, B));
 
-			printf("pos_sprite =%f     %f\n", pos.y ,pos.x );
-			printf("plyer_pos =%f     %f\n", player_pos.y ,player_pos.x );
-			printf("pyhtag =%f\n", pythagore(A, B) );
-//	x = pos.x * 8;
-//	y =pos.y * 8;
-			zoomY = (game->sprite[n].new_distance /game->sprite[n].old_distance );
-			printf("raydistance =%f     %f\n", game->sprite[n].new_distance ,game->sprite[n].old_distance);
-			printf("zoomy =%f\n", zoomY);
-			printf("id sprite =%d\n",game->sprite[n].id );
-	//	rotozoomSurfaceXY(game->sprite[n].sprite, 0, zoomX, zoomY, 1); 
+		//	printf("pos_sprite =%f     %f\n", pos.y ,pos.x );
+		//	printf("plyer_pos =%f     %f\n", player_pos.y ,player_pos.x );
+		//	printf("pyhtag =%f\n", pythagore(A, B) );
+		if (game->sprite[n].new_distance != 0)
+			zoomY = (5 /game->sprite[n].new_distance);
+		//	printf("id sprite =%d\n",game->sprite[n].id );
 		if (zoomY != 1.0)
-		{
-			game->sprite[n].sprite =
-			rotozoomSurface(game->sprite[n].sprite, 0.0, zoomY, 1);
+		{ 
+			printf("new =%f   old=  %f\n", game->sprite[n].new_distance ,game->sprite[n].old_distance);
+			printf("zoomy =%f\n", zoomY);
+	printf(" avant w et h =%d    %d\n", game->sprite[n].sprite->w ,game->sprite[n].sprite->h );
+			if (game->sprite[n].id > 200)
+			{
+				game->sprite[n].sprite =
+				rotozoomSurface(game->mean_s, 0.0, zoomY, 1);
+			}
+			else if (game->sprite[n].id > 100)
+			{
+				game->sprite[n].sprite =
+				rotozoomSurface(game->key_s, 0.0, zoomY, 1);
+			}
+			else if (game->sprite[n].id == 3)
+			{
+				game->sprite[n].sprite =
+				rotozoomSurface(game->exit_s, 0.0, zoomY, 1);
+			}
+	printf(" apres w et h =%d    %d\n", game->sprite[n].sprite->w ,game->sprite[n].sprite->h );
 		}
 		
 			game->sprite[n].old_distance = game->sprite[n].new_distance;
@@ -82,7 +89,7 @@ int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 	game->touch = 0;
 	game->sprite[n].pos.y =
 		((WIN_H - ((BLOC_SIZE / (game->sprite[n].new_distance* BLOC_SIZE) ) * DIST_SCREEN)) / 2) - game->crouch + game->jump + game->visu;
-	printf("pos_sprite_final =%d    %d\n", game->sprite[n].pos.y ,game->sprite[n].pos.x );
+	//printf("pos_sprite_final =%d    %d\n", game->sprite[n].pos.y ,game->sprite[n].pos.x );
 	if ((WIN_W / 2 >= x && WIN_W / 2 <= x + game->sprite[n].sprite->w)
 		&& (WIN_H / 2 >= game->sprite[n].pos.y && WIN_H / 2 <= game->sprite[n].pos.y + game->sprite[n].sprite->h)
 	&& game->sprite[n].id > 200)
