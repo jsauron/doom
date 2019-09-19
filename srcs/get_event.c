@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 23:23:41 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/20 00:17:14 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,11 @@ static int	ft_keyboard2(Uint8 *state, t_game *game)
 
 static int	ft_mouse_motion(t_game *game)
 {
-	int ret;
-
-	ret = 0;
 	if (game->mouse.x > 0.0)
 	{
 		game->player.direction =
 			(int)(game->player.direction + abs(game->mouse.x)
 					/ game->player.sensibility) % 360;
-		ret = (1);
 	}
 	else if (game->mouse.x < 0.0)
 	{
@@ -79,7 +75,6 @@ static int	ft_mouse_motion(t_game *game)
 					game->player.sensibility) % 360;
 		if (game->player.direction < 0)
 			game->player.direction = 360 + game->player.direction;
-		ret = 1;
 	}
 	if (game->mouse.y > 0.0 || game->mouse.y < 0.0)
 	{
@@ -88,9 +83,11 @@ static int	ft_mouse_motion(t_game *game)
 			game->visu = -(WIN_H / 4);
 		else if (game->visu > WIN_H / 4)
 			game->visu = WIN_H / 4;
-		ret = 1;
 	}
-	return (ret);
+	if (game->mouse.x > 0.0 || game->mouse.x < 0.0 || (game->mouse.y > 0.0
+	|| game->mouse.y < 0.0) )
+		return (1);
+	return (0);
 }
 
 void		get_target_shot(t_game *game)
