@@ -61,7 +61,7 @@ struct		s_editor
 /* render.c*/
 int     fill_screen(t_win *wn, t_editor *editor, SDL_Rect *pos, SDL_Rect *pos_player,int **map);
 int     render(t_win *wn);
-int     free_surface_editor(t_win *wn, t_editor *editor);  
+int     free_surface_editor(t_editor *editor);  
 
 /* get_event_editor.c */
 void button_up(t_win *wn, t_editor *editor);

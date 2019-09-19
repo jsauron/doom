@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 19:17:19 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 22:05:35 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,12 +203,12 @@ void	init_game(t_win *wn, t_game *game, char *map)
 	int		i;
 
 	i = 0;
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	ft_bzero(game, sizeof(t_game));
 	init_thread(wn, game);
 	init_player(&game->player);
 	init_surface_game(game);
 	game->minimap.mnp_size = 20;
-	game->key = 0;
 	game->mission = 1;
 	if (!(game->map = malloc(sizeof(int *) * XBLOC)))
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 19:13:56 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 22:04:37 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ t_win	*init(t_win *wn)
 	int i;
 
 	i = 0;
-	//if (!(wn = malloc(sizeof(t_win ))))
-		//exit(1);
 	if (!(wn->editor = malloc(sizeof(t_editor ))))
 		exit(1);
 	if (!(wn->editor->map = malloc(sizeof(int *) * XBLOC)))

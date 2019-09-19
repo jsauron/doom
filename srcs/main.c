@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 19:09:03 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 20:45:47 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ int			start(t_win *wn, char **argv)
 		display_anim_menu(wn);
 		render_editor(wn);
 	}
-	free_surface_editor(wn, wn->editor);
-	SDL_Quit();
 	return (0);
 }
 
@@ -122,6 +120,7 @@ int				main(int argc, char **argv)
 	{
 		wn = *init(&wn);
 		start(&wn, argv);
+		free_all(&wn);
 	}
 	return (0);
 }

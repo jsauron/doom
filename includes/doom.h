@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 19:19:55 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 22:10:42 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@
 # define HORIZONTAL_HIT 2
 
 
-typedef enum   e_entity		t_entity;
 typedef struct s_music		t_music;
 typedef struct s_limit		t_limit;
 typedef struct s_time		t_time;
@@ -144,7 +143,6 @@ struct						s_thread
 
 struct						s_sprite
 {
-	t_entity			entity;
 	SDL_Surface				*sprite;
 	SDL_Rect				pos;
 	SDL_Rect				pos_map;
@@ -340,8 +338,23 @@ int		range_sprite(t_sprite *sprite, int n);
 int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x);
 
 /*free_all.c*/
-void	free_editor(t_win *wn, t_editor editor);
-void	free_menu(t_win *wn);
-void	free_game(t_win *wn, t_game *game);
+void	free_editor(t_win *wn);
 void	free_music(t_music *music);
+void	free_surface_menu(t_editor *editor);
+void	free_structure_obj(t_editor *editor);
+void	free_structure(t_win *wn, t_editor *editor);
+void	free_sdl(t_win *wn);
+void	free_thread(t_game *game);
+void	free_graphic(t_game *game);
+void	free_sprite(t_game *game);
+void	free_weapon(t_game *game);
+void	free_poster(t_game *game);
+void	free_win_menu(t_game *game);
+void	free_hud(t_game *game);
+void	free_keys(t_game *game);
+void	free_wall(t_game *game);
+void	free_surface_game(t_game *game);
+void	free_fonts(t_game *game);
+void	free_all(t_win *wn);
+void    free_game(t_game *game);
 #endif
