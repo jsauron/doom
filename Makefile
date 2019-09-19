@@ -53,6 +53,7 @@ SRC_NAME = main.c \
 			get_sprite.c \
 			get_event_editor.c \
 			SDL2_rotozoom.c \
+			free_all.c \
 			files.c  
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

@@ -6,26 +6,13 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 17:04:09 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:17:19 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	sdl_err_exit(char *msg, t_game *game)
-{
-	ft_putendl(SDL_GetError());
-	ft_putendl(TTF_GetError());
-	//if (game->renderer)
-	//SDL_DestroyRenderer(game->renderer);
-	//if (game->window)
-	//SDL_DestroyWindow(game->window);
-	if (game->font)
-		TTF_CloseFont(game->font);
-	TTF_Quit();
-	SDL_Quit();
-	ft_err_exit(msg, game);
-}
+
 
 void	init_sdl_game(t_game *game)
 {
@@ -54,10 +41,13 @@ void	init_surface_game(t_game *game)
 
 void	init_music(t_game *game)
 {
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1 )
+		sdl_err_exit(0, NULL);
+	Mix_AllocateChannels(5);
 	 if (!(game->music.mood = Mix_LoadMUS("ressources/music/makeba.wav")))
 		ft_err_exit("Doom: error: mood music fail", game);
 
-//	if (!( game->music.youwin =  Mix_LoadMUS("musique.wav")))
+	//	if (!( game->music.youwin =  Mix_LoadMUS("musique.wav")))
 		//ft_err_exit("Doom: error: mood music fail", game);
 	if (!( game->music.shot = Mix_LoadWAV("ressources/music/shot.wav")))
 		ft_err_exit("Doom: error: shot music fail", game);

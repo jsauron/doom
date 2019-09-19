@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 16:02:10 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:13:56 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ t_win	*init(t_win *wn)
 	init_sdl(wn);
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 		sdl_err_exit(0, NULL);
-	Mix_AllocateChannels(5);
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1 )
-		sdl_err_exit(0, NULL);
+	
 	return (wn);
 }
 

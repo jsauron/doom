@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 17:36:51 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:09:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		game_loop(t_win *wn, t_game *game)
 		}
 		SDL_FlushEvent(SDL_KEYDOWN | SDL_MOUSEMOTION);
 	}
-	Mix_CloseAudio();
+	free_music(&game->music);
 }
 
 void		display_anim_menu(t_win *wn)

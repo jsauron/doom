@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:36:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 18:53:38 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 18:58:36 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,3 @@ Uint32		light_shade(double distance, Uint32 hexa)
 	//return (hexa);
 }
 
-void		srfdel(void **ap)
-{
-	SDL_Surface		*surface;
-
-	surface = (SDL_Surface *)(*ap);
-	if (ap && *ap)
-	{
-		SDL_FreeSurface(surface);
-		surface = 0;
-	}
-}

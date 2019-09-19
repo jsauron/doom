@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/18 18:54:04 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:19:55 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ struct						s_sprite
 	SDL_Rect				pos;
 	SDL_Rect				pos_map;
 	SDL_Rect				size;
-	double					old_distance;
 	double					new_distance;
 	int						actif;
 	int					id;
@@ -339,4 +338,10 @@ void	init_game(t_win *wn,  t_game *game , char *map);
 int		search_sprite(t_game *game, int id);
 int		range_sprite(t_sprite *sprite, int n);
 int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x);
+
+/*free_all.c*/
+void	free_editor(t_win *wn, t_editor editor);
+void	free_menu(t_win *wn);
+void	free_game(t_win *wn, t_game *game);
+void	free_music(t_music *music);
 #endif
