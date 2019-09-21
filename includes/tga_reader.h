@@ -6,16 +6,16 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 10:12:57 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:01:26 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 17:13:32 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TGA_READER_H
 # define TGA_READER_H
 
-#include "doom.h"
+# include "doom.h"
 
-typedef struct		s_tga
+typedef struct	s_tga
 {
 	unsigned char	*cm;
 	unsigned char	*data;
@@ -38,12 +38,13 @@ typedef struct		s_tga
 	int				data_i;
 	int				new_i;
 
-}					t_tga;
+}				t_tga;
 
 void			sym_vert(t_tga *tga);
 void			rotatepxl(t_tga *tga);
-void			fill(t_tga *tga, unsigned char *base, unsigned char *tofill, int bpp);
-unsigned char 	*pxlbasecm(t_tga *tga, unsigned char *newstr);
+void			fill(t_tga *tga, unsigned char *base, unsigned char *tofill,
+																	int bpp);
+unsigned char	*pxlbasecm(t_tga *tga, unsigned char *newstr);
 unsigned char	*pxlbase(t_tga *tga, unsigned char *newstr);
 int				createpxl(t_tga *tga);
 int				uncompress(t_tga *tga);
