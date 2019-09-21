@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:36:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:12:19 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/22 00:21:09 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,42 @@ void		set_cursor(t_win *wn)
 		draw_line(wn, vec, 0x00FF00FF, 0);
 }
 
-static void	ft_remove_light(Uint8 *component, double delta, int arg)
+void	ft_remove_light(Uint8 *component, double delta, int arg)
 {
 	if (*component > 0)
 		*component = (*component * (1 - delta) + ((0x0 >> arg) * delta));
 }
 
-Uint32		light_shade(double distance, Uint32 hexa)
+int		range_sprite(t_sprite *sprite, int n)
 {
-	SDL_Color	color;
-	double		delta;
+	int			i;
+	t_sprite	tmp;
 
-	delta = distance / 300;
-	delta > 0.9 ? delta = 0.9 : 0;
-	delta /= 1.50;
-	hexa |= 0xFF000000;
-	color = (SDL_Color){hexa >> 24, hexa >> 16, hexa >> 8, hexa};
-	ft_remove_light(&color.r, delta, 24);
-	ft_remove_light(&color.g, delta, 16);
-	ft_remove_light(&color.b, delta, 8);
-	ft_remove_light(&color.a, delta, 0);
-	return ((color.r << 24) + (color.g << 16) + (color.b << 8) + (color.a));
+	i = 0;
+	while (i + 1 < n)
+	{
+		if (sprite[i].new_distance < sprite[i + 1].new_distance)
+		{
+			tmp = sprite[i];
+			sprite[i] = sprite[i + 1];
+			sprite[i + 1] = tmp;
+			i = 0;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int		search_sprite(t_game *game, int id)
+{
+	int n;
+
+	n = 0;
+	while (n <= game->n)
+	{
+		if (game->sprite[n].id == id)
+			break ;
+		n++;
+	}
+	return (n);
 }

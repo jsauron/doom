@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_sprite2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:56:51 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 18:57:18 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/22 00:15:16 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-int		range_sprite(t_sprite *sprite, int n)
-{
-	int			i;
-	t_sprite	tmp;
-
-	i = 0;
-	while (i + 1 < n)
-	{
-		if (sprite[i].new_distance < sprite[i + 1].new_distance)
-		{
-			tmp = sprite[i];
-			sprite[i] = sprite[i + 1];
-			sprite[i + 1] = tmp;
-			i = 0;
-		}
-		i++;
-	}
-	return (0);
-}
 
 double	calc_dist_sprite(t_game *game, t_ray *ray, int n)
 {
@@ -50,6 +30,30 @@ double	calc_dist_sprite(t_game *game, t_ray *ray, int n)
 	return (fabs(pythagore(a, b)));
 }
 
+void	set_zoom_light(t_game *game, double zoom, int n)
+{
+	if (game->sprite[n].id > 200)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->mean_l, 0.0, zoom, 1);
+	}
+	else if (game->sprite[n].id > 100)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->key_l, 0.0, zoom, 1);
+	}
+	else if (game->sprite[n].id == 3)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->exit_l, 0.0, zoom, 1);
+	}
+	else if (game->sprite[n].id == 8)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->bonus_l, 0.0, zoom, 1);
+	}
+}
+
 void	set_zoom(t_game *game, double zoom, int n)
 {
 	if (game->sprite[n].id > 200)
@@ -67,6 +71,11 @@ void	set_zoom(t_game *game, double zoom, int n)
 		game->sprite[n].sprite =
 		rotozoomSurface(game->exit_s, 0.0, zoom, 1);
 	}
+	else if (game->sprite[n].id == 8)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->bonus_s, 0.0, zoom, 1);
+	}
 }
 
 int		set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
@@ -79,8 +88,10 @@ int		set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 	game->sprite[n].new_distance = calc_dist_sprite(game, ray, n);
 	if (game->sprite[n].new_distance != 0)
 		zoom = (5 / game->sprite[n].new_distance);
-	if (zoom != 1.0)
+	if (game->lightshade == 0)
 		set_zoom(game, zoom, n);
+	if (game->lightshade == 1)
+		set_zoom_light(game, zoom, n);
 	game->sprite[n].pos.x = x;
 	game->touch = 0;
 	game->sprite[n].pos.y =

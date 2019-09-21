@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 19:02:11 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 19:02:36 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 23:59:54 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ void	init_poster(t_game *game)
 	if (!(game->poster[2] = IMG_Load("ressources/wall/poster3.tga")))
 		ft_err_exit("doom: error: bad textures p3", game);
 	if (!(game->poster[3] = IMG_Load("ressources/wall/poster4.tga")))
+		ft_err_exit("doom: error: bad textures p4", game);
+	if (!(game->button[0] = IMG_Load("ressources/wall/blue_button.png")))
+		ft_err_exit("doom: error: bad textures p1", game);
+	if (!(game->button[1] = IMG_Load("ressources/wall/pink_button.png")))
+		ft_err_exit("doom: error: bad textures p2", game);
+	if (!(game->button[2] = IMG_Load("ressources/wall/croco_button.png")))
+		ft_err_exit("doom: error: bad textures p3", game);
+	if (!(game->button[3] = IMG_Load("ressources/wall/blue_button.png")))
 		ft_err_exit("doom: error: bad textures p4", game);
 }
 

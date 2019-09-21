@@ -32,6 +32,7 @@ SRC_NAME = main.c \
 			set_infos2.c \
 			set_interface.c \
 			utils.c \
+			utils_2.c \
 			highlvl_graphics.c \
 			lowlvl_graphics.c \
 			exit.c \

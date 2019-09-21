@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:50:21 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 18:51:51 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 23:53:13 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void		free_sprite(t_game *game)
 	SDL_FreeSurface(game->key_s);
 	SDL_FreeSurface(game->exit_s);
 	SDL_FreeSurface(game->mean_s);
+	SDL_FreeSurface(game->key_l);
+	SDL_FreeSurface(game->exit_l);
+	SDL_FreeSurface(game->mean_l);
+	SDL_FreeSurface(game->bonus_s);
+	SDL_FreeSurface(game->bonus_l);
 }
 
 void		free_graphic(t_game *game)

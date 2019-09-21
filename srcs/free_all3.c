@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:50:11 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 18:51:37 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 23:54:08 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,8 @@ void		free_poster(t_game *game)
 	SDL_FreeSurface(game->poster[1]);
 	SDL_FreeSurface(game->poster[2]);
 	SDL_FreeSurface(game->poster[3]);
+	SDL_FreeSurface(game->button[0]);
+	SDL_FreeSurface(game->button[1]);
+	SDL_FreeSurface(game->button[2]);
+	SDL_FreeSurface(game->button[3]);
 }

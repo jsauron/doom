@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 23:27:52 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 00:21:15 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,7 +372,7 @@ int							range_sprite(t_sprite *sprite, int n);
 int							set_distance_sprite(t_game *game, t_ray *ray,
 																int n, int x);
 void						init_music(t_game *game);
-
+void	set_zoom_light(t_game *game, double zoom, int n);
 /*
 **	free_all.c
 */
@@ -398,4 +398,5 @@ void						free_all(t_win *wn);
 void						free_game(t_game *game);
 void						set_quote_screen(t_win *wn);
 
+void	ft_remove_light(Uint8 *component, double delta, int arg);
 #endif

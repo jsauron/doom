@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:43 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 23:26:32 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 00:01:41 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,56 +57,6 @@ static void		parse_sprite_map(t_game *game, int size)
 		}
 		y++;
 	}
-}
-
-int				assign_elem_map(t_game *game, char *map, int i, int j)
-{
-	int	count_sprite;
-
-	count_sprite = 0;
-	if (map[i * MAP_SIZE + j] == N_PLAYER)
-	{
-		if (game->player.position.x != -1)
-			parsing_exit(2, "Doom: parsing error: bad spawn", game);
-		game->player.position.x = i + 0.5;
-		game->player.position.y = j + 0.5;
-	}
-	else if (map[i * MAP_SIZE + j] == N_KEY || map[i * MAP_SIZE + j] == N_MEAN
-		|| map[i * MAP_SIZE + j] == N_EXIT || map[i * MAP_SIZE + j] == N_BONUS)
-	{
-		if (map[i * MAP_SIZE + j] == N_EXIT)
-			game->map_exit = 1;
-		count_sprite++;
-	}
-	if (map[i * MAP_SIZE + j] >= N_VIDE
-			&& map[i * MAP_SIZE + j] <= N_BUTTON)
-	{
-		game->map[i][j] = map[i * MAP_SIZE + j] - '0';
-	}
-	else if (map[i * MAP_SIZE + j] != ' ')
-		parsing_exit(2, "Doom: parsing error: bad bloc", game);
-	return (count_sprite);
-}
-
-int				parse_map_game(char *map, t_game *game)
-{
-	int		j;
-	int		i;
-	int		c;
-
-	i = 0;
-	c = 0;
-	while (i < MAP_SIZE)
-	{
-		j = 0;
-		while (j < MAP_SIZE)
-		{
-			c += assign_elem_map(game, map, i, j);
-			j++;
-		}
-		i++;
-	}
-	return (c);
 }
 
 void			get_map(char *file, t_game *game)
