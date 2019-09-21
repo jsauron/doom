@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 20:49:02 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:10:25 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int you_win(t_win *wn)
 
 	pos.x = 0;
 	pos.y = 0;
+	Mix_PlayChannel(-1, wn->game.music.youwin, 0);
 	if (wn->game.time.current_time - wn->game.time.old_time > 100)
 		i++;
 	if (i == 12)
@@ -175,9 +176,7 @@ int render_game(t_win *wn)
 	{
 		SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
 		render_sprite(wn);
-		//	weapon(wn);
 		shot(wn);
-		//	target(wn);
 		render_life(wn, wn->game.player.life);
 		if (wn->game.key > 0)
 			display_key(wn);

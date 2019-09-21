@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/20 00:00:12 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 15:36:53 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 	return (0);
 }
 */
+
 double	calc_dist_sprite(t_game *game, t_ray *ray, int n)
 {
 	t_pos	player_pos;

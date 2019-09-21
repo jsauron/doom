@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 23:37:15 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:11:17 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ struct 					s_music
 	Mix_Chunk 			*gameover;
 	Mix_Chunk 			*key;
 	Mix_Chunk 			*open_door;
-	Mix_Music 			*youwin;
+	Mix_Chunk 			*youwin;
 };
 
 struct						s_game

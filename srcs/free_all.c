@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 18:57:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 23:21:27 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:06:45 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,6 @@ void	free_music(t_music *music)
 	Mix_FreeChunk(music->gameover);
 	Mix_FreeChunk(music->key);
 	Mix_FreeChunk(music->open_door);
+	Mix_FreeChunk(music->youwin);
 	Mix_CloseAudio();
-	//Mix_FreeChunk(music->youwin);
 }
