@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:43 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:19:47 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:57:59 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int				assign_elem_map(t_game *game, char *map, int i, int j)
 		count_sprite++;
 	}
 	if (map[i * MAP_SIZE + j] >= N_VIDE
-			&& map[i * MAP_SIZE + j] <= N_POSTER)
+			&& map[i * MAP_SIZE + j] <= N_BONUS)
 	{
 		game->map[i][j] = map[i * MAP_SIZE + j] - '0';
 	}

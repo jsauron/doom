@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:41 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:57:37 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 20:44:54 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void		hud_keys_life(t_game *game, t_pos pos, int old_time)
 		game->key--;
 		game->count_frame_open = 75;
 		Mix_PlayChannel(-1, game->music.open_door, 0);
+		game->map[(int)pos.y / BLOC_SIZE][(int)pos.x / BLOC_SIZE] = 0;
+	}
+	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 8)))
+	{
+		game->key = 5;
 		game->map[(int)pos.y / BLOC_SIZE][(int)pos.x / BLOC_SIZE] = 0;
 	}
 	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 5)))

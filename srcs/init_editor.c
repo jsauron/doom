@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_editor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:36:00 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 20:03:02 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	init_surface_menu(t_editor *editor)
 void	init_structure_obj(t_editor *editor)
 {
 	if (!(editor->editor_surface =
-							IMG_Load("ressources/editor/editor_back.tga")))
+							IMG_Load("ressources/editor/editor_back.png")))
 		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
 	if (!(editor->obj.wall = IMG_Load("ressources/editor/wall3.tga")))
 		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
@@ -104,6 +104,8 @@ void	init_structure_obj(t_editor *editor)
 	if (!(editor->obj.door = IMG_Load("ressources/editor/door_t.tga")))
 		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
 	if (!(editor->obj.poster = IMG_Load("ressources/editor/poster.tga")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.bonus = IMG_Load("ressources/editor/bonus.png")))
 		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
 }
 

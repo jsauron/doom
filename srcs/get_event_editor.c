@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 14:38:58 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 19:35:49 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		key_down(t_win *wn, t_editor *editor, char *map)
 		editor->current_obj = DOOR;
 	else if (wn->state[SDL_SCANCODE_7])
 		editor->current_obj = POSTER;
+	else if (wn->state[SDL_SCANCODE_8])
+		editor->current_obj = BONUS;
 	else if (wn->state[SDL_SCANCODE_S])
 		save_map(editor->map, map);
 	else if (wn->state[SDL_SCANCODE_C])

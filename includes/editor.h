@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 17:08:32 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 18:09:27 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:32:08 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define YSCREEN		SIZE_BLOC * YBLOC
 
 enum {UP, DOWN, LEFT, RIGHT};
-enum {VIDE, WALL, MEAN, GOAL, PLAYER, KEY, DOOR, POSTER};
+enum {VIDE, WALL, MEAN, GOAL, PLAYER, KEY, DOOR, POSTER, BONUS};
 
 typedef struct s_win	t_win;
 typedef	struct s_mouse	t_mouse;
@@ -52,6 +52,7 @@ struct					s_obj
 	SDL_Surface		*mean;
 	SDL_Surface		*goal;
 	SDL_Surface		*poster;
+	SDL_Surface		*bonus;
 	int				nb_goal;
 };
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:01 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:32:56 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 20:09:16 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void
 		draw_rect(wn, rect, 0xFFFFD700, &(game->minimap.limit));
 	else if (game->map[i][j] == 6)
 		draw_rect(wn, rect, 0xFF00BFFF, &(game->minimap.limit));
+	else if (game->map[i][j] == 8)
+		draw_rect(wn, rect, 0xFF0BBFFF, &(game->minimap.limit));
 }
 
 void

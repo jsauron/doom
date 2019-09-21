@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:12 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:39:46 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 20:11:25 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int		is_inwall_ret(int x, int y, t_game *game)
 		return (6);
 	if (game->map[y][x] == 7)
 		return (7);
+	if (game->map[y][x] == 8)
+		return (8);
 	return (0);
 }
 
@@ -50,6 +52,8 @@ int				is_inwall(t_pos *pos, t_game *game, t_ray *ray)
 		ray->the_key = game->map[y2][x2];
 	if (ray != NULL && game->map[y2][x2] == 7)
 		ray->the_poster = 1;
+	if (ray != NULL && game->map[y2][x2] == 8)
+		ray->the_bonus = 1;
 	return (is_inwall_ret(x2, y2, game));
 }
 

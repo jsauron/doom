@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:29:35 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:12:47 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:53:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	set_elem(int **map, char elem, int i, int j)
 		map[i][j] = 6;
 	if (elem == '7')
 		map[i][j] = 7;
+	if (elem == '8')
+		map[i][j] = 8;
 }
 
 void	parse_map_file(char line_file[], int **map)
