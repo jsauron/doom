@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:41 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:20:06 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 18:57:37 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		hud_keys_life(t_game *game, t_pos pos, int old_time)
 		&& (is_inwall(&pos, game, NULL) == 6) && game->key > 0))
 	{
 		game->key--;
+		game->count_frame_open = 75;
 		Mix_PlayChannel(-1, game->music.open_door, 0);
 		game->map[(int)pos.y / BLOC_SIZE][(int)pos.x / BLOC_SIZE] = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 16:53:14 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 19:11:47 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:14:36 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,8 @@ struct						s_game
 	SDL_Surface			*key_s;
 	SDL_Surface			*mean_s;
 	int					touch;
+	int					count_frame_dead;
+	int					count_frame_open;
 };
 
 struct						s_win
@@ -382,6 +384,6 @@ void						free_surface_game(t_game *game);
 void						free_fonts(t_game *game);
 void						free_all(t_win *wn);
 void						free_game(t_game *game);
-void						set_quote_screen(t_win *wn, int i);
+void						set_quote_screen(t_win *wn);
 
 #endif

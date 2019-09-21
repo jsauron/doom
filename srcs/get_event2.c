@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:53:52 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 18:55:53 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:15:33 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		get_target_shot(t_game *game)
 			game->sprite[n].left_life--;
 			if (game->sprite[n].left_life == 0)
 			{
-				set_quote_screen(game->thread->wn, 2);
+				game->count_frame_dead = 75;
 				Mix_PlayChannel(-1, game->music.dead, 0);
 			}
 		}
