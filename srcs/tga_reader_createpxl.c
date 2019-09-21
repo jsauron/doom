@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tga_reader_createpxl.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:35:06 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:35:08 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:14:41 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int				createpxl(t_tga *tga)
 		ret = pxlbase(tga, ret);
 	else
 		ret = pxlbasecm(tga, ret);
-
 	free(tga->data);
 	tga->data = &(ret[0]);
 	return (0);

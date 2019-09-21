@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:01 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/20 00:14:56 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:32:56 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	init_minimap(t_game *game)
+static void
+	init_minimap(t_game *game)
 {
 	game->minimap.origin.x = 10;
 	game->minimap.origin.y = WIN_H - (WIN_H / 4) - 10;
@@ -30,7 +31,8 @@ static void	init_minimap(t_game *game)
 	game->minimap.limit.b = WIN_H - 10;
 }
 
-static void	draw_background(t_win *wn, t_game *game)
+static void
+	draw_background(t_win *wn, t_game *game)
 {
 	SDL_Rect	rect;
 
@@ -40,7 +42,8 @@ static void	draw_background(t_win *wn, t_game *game)
 	draw_rect(wn, rect, 0xFF000000, &(game->minimap.limit));
 }
 
-static void	draw_ray(t_win *wn, t_game *game, int i, int j)
+static void
+	draw_ray(t_win *wn, t_game *game, int i, int j)
 {
 	double	angle_r;
 	t_pos	step;
@@ -67,7 +70,8 @@ static void	draw_ray(t_win *wn, t_game *game, int i, int j)
 		draw_line(wn, vec, 0xFFFFFFFF, &(game->minimap.limit));
 }
 
-static void	draw_player(t_win *wn, t_game *game)
+static void
+	draw_player(t_win *wn, t_game *game)
 {
 	SDL_Rect	player;
 	int			i;
@@ -89,7 +93,8 @@ static void	draw_player(t_win *wn, t_game *game)
 	draw_rect(wn, player, 0x0, 0);
 }
 
-void	draw_minimap(t_win *wn, t_game *game, SDL_Rect rect, SDL_Rect index)
+void
+	draw_minimap(t_win *wn, t_game *game, SDL_Rect rect, SDL_Rect index)
 {
 	int	i;
 	int	j;
@@ -110,34 +115,31 @@ void	draw_minimap(t_win *wn, t_game *game, SDL_Rect rect, SDL_Rect index)
 		draw_rect(wn, rect, 0xFF00BFFF, &(game->minimap.limit));
 }
 
-void	minimap(t_win *wn, t_game *game)
+void
+	minimap(t_win *wn, t_game *game)
 {
 	SDL_Rect	rect;
 	SDL_Rect	index;
 
-	if (game->target == 0)
+	if (game->target != 0)
+		return ;
+	init_minimap(game);
+	draw_background(wn, game);
+	index.x = -1;
+	while (++index.x < MAP_SIZE)
 	{
-		init_minimap(game);
-		draw_background(wn, game);
-		index.x = 0;
-		while (index.x < MAP_SIZE)
+		index.y = -1;
+		while (++index.y < MAP_SIZE)
 		{
-			index.y = 0;
-			while (index.y < MAP_SIZE)
-			{
-				if (game->map[index.x][index.y] > 200
-				&& game->sprite[search_sprite(game,
-				game->map[index.x][index.y])].left_life == 0)
-					game->map[index.x][index.y] = 0;
-				rect = (SDL_Rect){game->minimap.diff.x
+			if (game->map[index.x][index.y] > 200 && !game->sprite[
+				search_sprite(game, game->map[index.x][index.y])].left_life)
+				game->map[index.x][index.y] = 0;
+			rect = (SDL_Rect){game->minimap.diff.x
 				+ (index.y * game->minimap.mnp_size),
-					game->minimap.diff.y + (index.x * game->minimap.mnp_size),
-					game->minimap.mnp_size, game->minimap.mnp_size};
-				draw_minimap(wn, game, rect, index);
-				index.y++;
-			}
-			index.x++;
+				game->minimap.diff.y + (index.x * game->minimap.mnp_size),
+				game->minimap.mnp_size, game->minimap.mnp_size};
+			draw_minimap(wn, game, rect, index);
 		}
-		draw_player(wn, game);
 	}
+	draw_player(wn, game);
 }

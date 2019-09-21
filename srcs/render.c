@@ -3,33 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 20:49:02 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:20:49 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int gameover(t_win *wn)
+int		gameover(t_win *wn)
 {
 	SDL_Rect pos;
 
 	pos.x = 0;
 	pos.y = 0;
 	SDL_BlitSurface(wn->game.gameover, NULL, wn->screen, &pos);
-
 	return (0);
 }
 
-int render_life(t_win *wn, int life)
+int		render_life(t_win *wn, int life)
 {
-	SDL_Rect pos;
-	SDL_Rect pos_alert;
-	int i;
-	static int k;
-	static int old_time;
+	SDL_Rect	pos;
+	SDL_Rect	pos_alert;
+	int			i;
+	static int	k;
+	static int	old_time; // init ces valeurs ?
 
 	i = 0;
 	pos.x = 0;
@@ -48,7 +47,6 @@ int render_life(t_win *wn, int life)
 	}
 	while (life > 0 && i < life)
 	{
-
 		SDL_BlitSurface(wn->game.heart[i++], NULL, wn->screen, &pos);
 		pos.x += 55;
 	}
@@ -57,10 +55,10 @@ int render_life(t_win *wn, int life)
 	return (0);
 }
 
-int you_win(t_win *wn)
+int		you_win(t_win *wn)
 {
-	SDL_Rect pos;
-	static int i;
+	SDL_Rect	pos;
+	static int	i;
 
 	pos.x = 0;
 	pos.y = 0;
@@ -72,11 +70,11 @@ int you_win(t_win *wn)
 	return (0);
 }
 
-int shot(t_win *wn)
+int		shot(t_win *wn)
 {
-	SDL_Rect pos;
-	static int i;
-	static int old_time;
+	SDL_Rect	pos;
+	static int	i;
+	static int	old_time;	// init ces valeurs ?
 
 	pos.x = 0;
 	pos.y = 0;
@@ -89,7 +87,6 @@ int shot(t_win *wn)
 		}
 		if (i == 2)
 			i = 1;
-
 		SDL_BlitSurface(wn->game.weapon[i], NULL, wn->screen, &pos);
 	}
 	else if (wn->game.shot == 1 && wn->game.target == 1)
@@ -114,8 +111,8 @@ int shot(t_win *wn)
 int display_key(t_win *wn)
 {
 	SDL_Rect pos;
-	static int i;
 	int k;
+	static int i;
 	static int old_time;
 
 	k = 0;
@@ -155,11 +152,11 @@ int render_sprite(t_win *wn)
 
 	n = 0;
 	texture = NULL;
-	//range_sprite(wn->game.sprite, wn->game.n);
 	while (n < wn->game.n)
 	{
 		if (wn->game.sprite[n].actif == 1 && wn->game.sprite[n].left_life > 0)
-			SDL_BlitSurface(wn->game.sprite[n].sprite, NULL, wn->screen, &(wn->game.sprite[n].pos));
+			SDL_BlitSurface(wn->game.sprite[n].sprite, NULL,
+											wn->screen, &(wn->game.sprite[n].pos));
 		n++;
 	}
 	return (0);
@@ -175,9 +172,7 @@ int render_game(t_win *wn)
 	{
 		SDL_BlitSurface(wn->screen, NULL, wn->screen, &(wn->pos_game));
 		render_sprite(wn);
-		//	weapon(wn);
 		shot(wn);
-		//	target(wn);
 		render_life(wn, wn->game.player.life);
 		if (wn->game.key > 0)
 			display_key(wn);

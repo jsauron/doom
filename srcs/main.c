@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 15:25:18 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:35:07 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		game_loop(t_win *wn, t_game *game)
 	int play;
 
 	play = 1;
-	Mix_PlayMusic( game->music.mood, -1);
+	Mix_PlayMusic(game->music.mood, -1);
 	make_frame(wn, game);
 	while (play)
 	{
@@ -44,7 +44,6 @@ static void		game_loop(t_win *wn, t_game *game)
 		if (play > 0)
 		{
 			game->time.current_time = SDL_GetTicks();
-			
 			if ((SDL_RenderClear(wn->render)) != 0)
 				ft_err_exit("doom: error: RenderClear failure", game);
 			make_frame(wn, game);
@@ -54,12 +53,12 @@ static void		game_loop(t_win *wn, t_game *game)
 	free_music(&game->music);
 }
 
-void		display_anim_menu(t_win *wn)
+void			display_anim_menu(t_win *wn)
 {
-	int				current_time;
-	static int				old_time;
-	static int				c;
-	static int				i;
+	int			current_time;
+	static int	old_time;
+	static int	c;
+	static int	i;
 
 	current_time = SDL_GetTicks();
 	if (current_time - old_time > 200)
@@ -77,18 +76,15 @@ void		display_anim_menu(t_win *wn)
 			wn->screen, &(wn->pos_menu_mov));
 }
 
-int			start(t_win *wn, char **argv)
+int				start(t_win *wn, char **argv)
 {
-	int				play;
-
-	play = 1;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
-	while (play)
+	while (1)
 	{
 		SDL_PollEvent(&(wn->event));
 		if (wn->event.type == SDL_QUIT || wn->state[SDL_SCANCODE_ESCAPE])
-			play = 0;
+			break ;
 		else if (wn->state[SDL_SCANCODE_1] && argv[1])
 		{
 			init_game(wn, &wn->game, argv[1]);

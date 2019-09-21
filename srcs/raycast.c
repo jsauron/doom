@@ -3,40 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:12 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 15:13:03 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:25:24 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int				is_inwall(t_pos *pos, t_game*game, t_ray *ray)
+static int		is_inwall_ret(t_game *game)
 {
-	int		x2;
-	int		y2;
-	int n;
-
-	n = 0;
-	x2 = pos->x / BLOC_SIZE;
-	y2 = pos->y / BLOC_SIZE;
-
-	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
-		return (0);
-	if (ray != NULL && game->map[y2][x2] == 3)
-		ray->the_exit = 3;
-	if (ray != NULL && game->map[y2][x2] > 200)
-		ray->the_mean = game->map[y2][x2];
-	if (ray != NULL && game->map[y2][x2] == 6)
-		ray->the_door = 1;
-	if (ray != NULL && game->map[y2][x2] > 100)
-		ray->the_key = game->map[y2][x2];
-	if (ray != NULL && game->map[y2][x2] == 7)
-		ray->the_poster = 1;
-	if (game->map[y2][x2] == 1) 
+	if (game->map[y2][x2] == 1)
 		return (1);
-	if (game->map[y2][x2] > 200) 
+	if (game->map[y2][x2] > 200)
 		return (2);
 	if (game->map[y2][x2] == 3)
 		return (3);
@@ -49,6 +29,30 @@ int				is_inwall(t_pos *pos, t_game*game, t_ray *ray)
 	return (0);
 }
 
+int				is_inwall(t_pos *pos, t_game *game, t_ray *ray)
+{
+	int		x2;
+	int		y2;
+	int		n;
+
+	n = 0;
+	x2 = pos->x / BLOC_SIZE;
+	y2 = pos->y / BLOC_SIZE;
+	if (x2 < 0 || x2 >= MAP_SIZE || y2 < 0 || y2 >= MAP_SIZE)
+		return (0);
+	if (ray != NULL && game->map[y2][x2] == 3)
+		ray->the_exit = 3;
+	if (ray != NULL && game->map[y2][x2] > 200)
+		ray->the_mean = game->map[y2][x2];
+	if (ray != NULL && game->map[y2][x2] == 6)
+		ray->the_door = 1;
+	if (ray != NULL && game->map[y2][x2] > 100)
+		ray->the_key = game->map[y2][x2];
+	if (ray != NULL && game->map[y2][x2] == 7)
+		ray->the_poster = 1;
+	return (is_inwall_ret(game));
+}
+
 static void		get_raygame(t_pos pos,
 		double alpha_r, int i, t_thread *thread)
 {
@@ -58,7 +62,6 @@ static void		get_raygame(t_pos pos,
 
 	player_pos.x = thread->game->player.position.x * BLOC_SIZE;
 	player_pos.y = thread->game->player.position.y * BLOC_SIZE;
-
 	distance_x = (thread->ray[i].axis == 1)
 		? pos.x - player_pos.x : (int)pos.x - player_pos.x;
 	distance_y = (thread->ray[i].axis == 1)
