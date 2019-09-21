@@ -1,7 +1,6 @@
 NAME 		= doom
 CC 			= gcc
-CFLAGS 		= -Wall -Wextra -Werror -g -O3 #-fsanitize=address
--fsanitize=address
+CFLAGS 		= -Wall -Wextra -Werror -MMD -O3 -g #-fsanitize=address
 
 ID_UN 		= $(shell id -un)
 SRC_PATH 	= srcs/
@@ -52,6 +51,7 @@ ISDL2		= -I ~/.brew/include/ -D_THREAD_SAFE
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 INC = $(addprefix -I, $(INC_PATH))
+DPD = $(addprefix $(OBJ_PATH), $(SRC_NAME:.c=.d))
 
 all: $(NAME)
 
@@ -66,7 +66,7 @@ $(OBJ) : | $(OBJ_PATH)
 $(OBJ_PATH) :
 	@mkdir objs
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC_PATH) Makefile
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c Makefile
 	@printf "$(CYAN)[WAIT]$(WHITE) Compiling into .o %-50s\r" $@
 	@$(CC) $(CFLAGS) $(INC) $(ISDL2) -o $@ -c $<
 
@@ -83,3 +83,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all re clean fclean
+-include $(DPD)
