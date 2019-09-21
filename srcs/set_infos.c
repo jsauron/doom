@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:47 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 19:01:17 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 19:03:55 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,35 +23,37 @@ static SDL_Color	set_color(t_game *game, int i)
 static void			set_nbrstring(t_win *wn, int value, SDL_Rect rect,
 																Uint32 color)
 {
-	char	*str;
+	char			*str;
 
 	if (!(str = ft_itoa(value)))
 		ft_err_exit("doom: error: itoa, out of memory", &wn->game);
 	set_string(wn, rect, str, hex_to_rgb(color));
 }
 
-void		set_quote_screen(t_win *wn)
+void				set_quote_screen(t_win *wn)
 {
-	SDL_Rect	rect_dead;
-	SDL_Rect	rect_open;
+	SDL_Rect		rect_dead;
+	SDL_Rect		rect_open;
 
 	rect_dead = (SDL_Rect){400, 10, 500, 35};
 	rect_open = (SDL_Rect){400, 33, 500, 35};
 	if (wn->game.count_frame_dead > 0)
 	{
-		set_string(wn, rect_dead, "You killed an enemy", hex_to_rgb(0xFFFFFFFF));	
+		set_string(wn, rect_dead,
+		"You killed an enemy", hex_to_rgb(0xFFFFFFFF));
 		wn->game.count_frame_dead--;
 	}
-	if (wn->game.count_frame_open> 0)
+	if (wn->game.count_frame_open > 0)
 	{
-		set_string(wn, rect_open, "You opened a door", hex_to_rgb(0xFFFFFFFF));
+		set_string(wn, rect_open,
+		"You opened a door", hex_to_rgb(0xFFFFFFFF));
 		wn->game.count_frame_open--;
 	}
 }
 
 static void			set_menu_config(t_win *wn, t_game *game)
 {
-	SDL_Rect	rect;
+	SDL_Rect		rect;
 
 	rect = (SDL_Rect){230, 240, 500, 35};
 	set_string(wn, rect, "SETTINGS", hex_to_rgb(H_GREEN));
@@ -75,7 +77,7 @@ static void			set_menu_config(t_win *wn, t_game *game)
 
 static void			ft_dev_mode(t_win *wn, t_game *game)
 {
-	SDL_Rect rect;
+	SDL_Rect		rect;
 
 	rect = (SDL_Rect){375, 30, 150, 30};
 	set_string(wn, rect, "fps : ", hex_to_rgb(H_GREEN));
@@ -101,7 +103,7 @@ static void			ft_dev_mode(t_win *wn, t_game *game)
 
 void				set_infos(t_win *wn, t_game *game)
 {
-	SDL_Rect rect;
+	SDL_Rect		rect;
 
 	rect = (SDL_Rect){20, 18, 150, 15};
 	set_string(wn, rect, "1 normal", set_color(game, 0));
