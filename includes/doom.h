@@ -6,19 +6,19 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:11:17 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:26:35 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOOM_H
 # define DOOM_H
 
-# include "SDL2_rotozoom.h"
 # include "libft.h"
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
 # include <SDL2/SDL_image.h>
 # include <SDL2/SDL_mixer.h>
+# include <SDL2/SDL2_rotozoom.h>
 # include <pthread.h>
 # include <time.h>
 # include "editor.h"
