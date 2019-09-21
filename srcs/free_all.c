@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 18:57:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:06:45 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:18:31 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ void	free_all(t_win *wn)
 		free_game(&wn->game);
 	if (wn->editor)
 		free_structure(wn, wn->editor);
+	free_sdl(wn);
+
 }
 
 void		free_structure(t_win *wn, t_editor *editor)
 {
 	free_surface_editor(editor);
 	free_editor(wn);
-	free_sdl(wn);
 }
 
 int		free_surface_editor(t_editor *editor)
