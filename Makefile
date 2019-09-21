@@ -22,7 +22,7 @@ SRC_NAME = main.c \
 			handle_movement.c \
 			color.c \
 			raycast.c \
-			rc_wolfcalc.c \
+			rc_doomcalc.c \
 			minimap.c \
 			set_infos.c \
 			set_interface.c \

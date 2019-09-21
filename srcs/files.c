@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:29:35 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 14:41:00 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:12:47 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	parse_map_file(char line_file[], int **map)
 int		upload_map(int **map, char *input_map)
 {
 	FILE	*file;
-	char	line_file[XBLOC * YBLOC + 1] = {0};
+	char	line_file[XBLOC * YBLOC + 1];
 
-	file = NULL;
+	ft_bzero(&line_file, sizeof(char) * (XBLOC * YBLOC + 1));
 	file = fopen(input_map, "r");
 	if (file == NULL)
 		return (0);

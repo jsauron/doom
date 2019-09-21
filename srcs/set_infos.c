@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:47 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:15:38 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 18:13:34 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ static void			set_nbrstring(t_win *wn, int value, SDL_Rect rect,
 	if (!(str = ft_itoa(value)))
 		ft_err_exit("doom: error: itoa, out of memory", &wn->game);
 	set_string(wn, rect, str, hex_to_rgb(color));
+}
+
+void				set_quote_screen(t_win *wn, int i)
+{
+	SDL_Rect	rect;
+
+	rect = (SDL_Rect){230, 240, 500, 35};
+	if (i == 1)
+		set_string(wn, rect, "You opened a door", hex_to_rgb(0xFFFFFFFF));
+	else if (i == 2)
+		set_string(wn, rect, "You killed an enemy", hex_to_rgb(0xFFFFFFFF));
 }
 
 static void			set_menu_config(t_win *wn, t_game *game)

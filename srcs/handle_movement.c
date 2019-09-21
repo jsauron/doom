@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   handle_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:41 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 15:45:42 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:20:06 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static int		is_inmap(t_pos *pos)
+static int	is_inmap(t_pos *pos)
 {
 	return (pos->x > 0 && pos->x < MAP_SIZE * BLOC_SIZE
 			&& pos->y > 0 && pos->y < MAP_SIZE * BLOC_SIZE);
 }
 
-void	hud_keys_life(t_game *game, t_pos pos, int old_time)
+void		hud_keys_life(t_game *game, t_pos pos, int old_time)
 {
 	if ((is_inmap(&pos)
 		&& (is_inwall(&pos, game, NULL) == 6) && game->key > 0))
@@ -46,7 +46,7 @@ void	hud_keys_life(t_game *game, t_pos pos, int old_time)
 		game->exit = 1;
 }
 
-void	hud_impact(t_game *game, t_pos move, t_pos pos)
+void		hud_impact(t_game *game, t_pos move, t_pos pos)
 {
 	SDL_Rect	pos_contour;
 	int			x;

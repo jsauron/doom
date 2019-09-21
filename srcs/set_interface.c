@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_interface.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:57 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:35:00 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:15:16 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	set_config(t_win *wn, t_game *game)
 {
-	(void)game;
 	SDL_Rect	rect;
+
+	if (game)
+		;
 	rect = (SDL_Rect){200, 200, 560, 372};
 	draw_rect(wn, rect, 0x10000000, 0);
 	draw_border(wn, rect, 0xFFFFFFFF);
@@ -24,7 +26,9 @@ static void	set_config(t_win *wn, t_game *game)
 static void	ft_bloc_devmode(t_win *wn, t_game *game)
 {
 	SDL_Rect	rect;
-	(void)game;
+
+	if (game)
+		;
 	rect = (SDL_Rect){370, 28, 220, 35};
 	draw_rect(wn, rect, 0x10000000, 0);
 	rect = (SDL_Rect){370, 78, 220, 35};

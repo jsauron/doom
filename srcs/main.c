@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:35:07 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 18:08:49 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		make_frame(t_win *wn, t_game *game)
 	game->nb_frame++;
 	game->time_last = clock();
 	SDL_BlitSurface(wn->game.sky, NULL, wn->screen, &(pos));
-	rc_wolfcalc(game);
+	rc_doomcalc(game);
 	check_sprite(game);
 	if (clock() != 0 && (1000 - game->time_last / 10000) != 0
 			&& (clock() / 10000 - game->time_last / 10000))

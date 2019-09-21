@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_event.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 15:31:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:20:20 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_keyboard2(Uint8 *state, t_game *game)
 	return (1);
 }
 
-void	mouse_motion_x(t_game *game)
+void		mouse_motion_x(t_game *game)
 {
 	if (game->mouse.x > 0.0)
 	{
@@ -78,7 +78,7 @@ void	mouse_motion_x(t_game *game)
 	}
 }
 
-void	mouse_motion_y(t_game *game)
+void		mouse_motion_y(t_game *game)
 {
 	if (game->mouse.y > 0.0 || game->mouse.y < 0.0)
 	{
@@ -113,7 +113,10 @@ void		get_target_shot(t_game *game)
 			n = search_sprite(game, game->touch);
 			game->sprite[n].left_life--;
 			if (game->sprite[n].left_life == 0)
+			{
+				set_quote_screen(game->thread->wn, 2);
 				Mix_PlayChannel(-1, game->music.dead, 0);
+			}
 		}
 	}
 	if (game->event.button.button == SDL_BUTTON_RIGHT)
@@ -149,7 +152,7 @@ static int	move_events(const Uint8 *state, t_game *game)
 	return (move);
 }
 
-void	event_with_life(t_game *game)
+void		event_with_life(t_game *game)
 {
 	int move;
 
@@ -172,7 +175,7 @@ void	event_with_life(t_game *game)
 		game->player.speed = 0.12;
 }
 
-int		get_events(t_game *game)
+int			get_events(t_game *game)
 {
 	SDL_PollEvent(&(game->event));
 	game->state = (Uint8 *)SDL_GetKeyboardState(NULL);

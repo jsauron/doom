@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rc_wolfcalc.c                                      :+:      :+:    :+:   */
+/*   rc_doomcalc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:22:07 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 18:08:40 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		*calc__frame(void *arg)
 	pthread_exit(0);
 }
 
-void			rc_wolfcalc(t_game *game)
+void			rc_doomcalc(t_game *game)
 {
 	int i;
 
