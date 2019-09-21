@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:41 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 21:20:04 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 15:45:42 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,46 @@ static int		is_inmap(t_pos *pos)
 			&& pos->y > 0 && pos->y < MAP_SIZE * BLOC_SIZE);
 }
 
-void	hud_impact(t_game *game, t_pos move, t_pos pos)
+void	hud_keys_life(t_game *game, t_pos pos, int old_time)
 {
-	SDL_Rect pos_contour;
-	int x;
-	int y;
-	static int old_time;
-
-	pos_contour.x = 0;
-	pos_contour.y = 0;
-	y = (int)pos.y / BLOC_SIZE;
-	x = (int)pos.x / BLOC_SIZE;
 	if ((is_inmap(&pos)
 		&& (is_inwall(&pos, game, NULL) == 6) && game->key > 0))
 	{
 		game->key--;
 		Mix_PlayChannel(-1, game->music.open_door, 0);
-		game->map[y][x] = 0;
+		game->map[(int)pos.y / BLOC_SIZE][(int)pos.x / BLOC_SIZE] = 0;
 	}
 	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 5)))
 	{
 		game->key++;
 		Mix_PlayChannel(-1, game->music.key, 0);
-		game->map[y][x] = 0;
+		game->map[(int)pos.y / BLOC_SIZE][(int)pos.x / BLOC_SIZE] = 0;
 	}
 	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 2))
-			&& game->player.life > 0)
+		&& game->player.life > 0)
+	{
+		if (game->time.current_time - old_time > 100)
 		{
-			if (game->time.current_time - old_time > 100)
-				{
-					game->player.life--;
-					old_time =  game->time.current_time;
-				}
+			game->player.life--;
+			old_time = game->time.current_time;
 		}
+	}
 	else if ((is_inmap(&pos) && (is_inwall(&pos, game, NULL) == 3)))
 		game->exit = 1;
+}
+
+void	hud_impact(t_game *game, t_pos move, t_pos pos)
+{
+	SDL_Rect	pos_contour;
+	int			x;
+	int			y;
+	static int	old_time;
+
+	pos_contour.x = 0;
+	pos_contour.y = 0;
+	y = (int)pos.y / BLOC_SIZE;
+	x = (int)pos.x / BLOC_SIZE;
+	hud_keys_life(game, pos, old_time);
 	if (is_inmap(&pos) && !(is_inwall(&pos, game, NULL)))
 		game->player.position.y += move.y;
 	if (is_inmap(&pos) && !(is_inwall(&pos, game, NULL)))

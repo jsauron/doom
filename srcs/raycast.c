@@ -6,25 +6,25 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:12 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:25:24 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 16:39:46 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static int		is_inwall_ret(t_game *game)
+static int		is_inwall_ret(int x, int y, t_game *game)
 {
-	if (game->map[y2][x2] == 1)
+	if (game->map[y][x] == 1)
 		return (1);
-	if (game->map[y2][x2] > 200)
+	if (game->map[y][x] > 200)
 		return (2);
-	if (game->map[y2][x2] == 3)
+	if (game->map[y][x] == 3)
 		return (3);
-	if (game->map[y2][x2] > 100)
+	if (game->map[y][x] > 100)
 		return (5);
-	if (game->map[y2][x2] == 6)
+	if (game->map[y][x] == 6)
 		return (6);
-	if (game->map[y2][x2] == 7)
+	if (game->map[y][x] == 7)
 		return (7);
 	return (0);
 }
@@ -50,7 +50,7 @@ int				is_inwall(t_pos *pos, t_game *game, t_ray *ray)
 		ray->the_key = game->map[y2][x2];
 	if (ray != NULL && game->map[y2][x2] == 7)
 		ray->the_poster = 1;
-	return (is_inwall_ret(game));
+	return (is_inwall_ret(x2, y2, game));
 }
 
 static void		get_raygame(t_pos pos,

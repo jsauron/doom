@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:20:49 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 16:45:30 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		you_win(t_win *wn)
 
 	pos.x = 0;
 	pos.y = 0;
+	Mix_PlayChannel(-1, wn->game.music.youwin, 0);
 	if (wn->game.time.current_time - wn->game.time.old_time > 100)
 		i++;
 	if (i == 12)
@@ -74,7 +75,7 @@ int		shot(t_win *wn)
 {
 	SDL_Rect	pos;
 	static int	i;
-	static int	old_time;	// init ces valeurs ?
+	static int	old_time; // init ces valeurs ?
 
 	pos.x = 0;
 	pos.y = 0;
@@ -98,7 +99,6 @@ int		shot(t_win *wn)
 		}
 		if (i == 2)
 			i = 1;
-
 		SDL_BlitSurface(wn->game.lunette[i], NULL, wn->screen, &pos);
 	}
 	else if (wn->game.shot == 0 && wn->game.target == 0)
@@ -108,12 +108,12 @@ int		shot(t_win *wn)
 	return (0);
 }
 
-int display_key(t_win *wn)
+int		display_key(t_win *wn)
 {
-	SDL_Rect pos;
-	int k;
-	static int i;
-	static int old_time;
+	SDL_Rect	pos;
+	int			k;
+	static int	i;
+	static int	old_time;
 
 	k = 0;
 	pos.x = 0;
@@ -134,8 +134,7 @@ int display_key(t_win *wn)
 	return (0);
 }
 
-
-int render_editor(t_win *wn)
+int		render_editor(t_win *wn)
 {
 	SDL_UpdateTexture(wn->texture, NULL, wn->screen->pixels, wn->screen->pitch);
 	SDL_RenderClear(wn->render);
@@ -144,11 +143,10 @@ int render_editor(t_win *wn)
 	return (0);
 }
 
-
-int render_sprite(t_win *wn)
+int		render_sprite(t_win *wn)
 {
-	SDL_Texture *texture;
-	int n;
+	SDL_Texture	*texture;
+	int			n;
 
 	n = 0;
 	texture = NULL;
@@ -156,13 +154,13 @@ int render_sprite(t_win *wn)
 	{
 		if (wn->game.sprite[n].actif == 1 && wn->game.sprite[n].left_life > 0)
 			SDL_BlitSurface(wn->game.sprite[n].sprite, NULL,
-											wn->screen, &(wn->game.sprite[n].pos));
+										wn->screen, &(wn->game.sprite[n].pos));
 		n++;
 	}
 	return (0);
 }
 
-int render_game(t_win *wn)
+int		render_game(t_win *wn)
 {
 	if (wn->game.exit == 1)
 		you_win(wn);
@@ -183,7 +181,7 @@ int render_game(t_win *wn)
 	return (0);
 }
 
-int render(t_win *wn)
+int		render(t_win *wn)
 {
 	SDL_UpdateTexture(wn->texture, NULL, wn->screen->pixels, wn->screen->pitch);
 	SDL_RenderClear(wn->render);
