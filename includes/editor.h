@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 17:08:32 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 17:12:56 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 17:17:28 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,5 @@ t_win					*init(t_win *wn);
 int						malloc_structure(t_win *wn);
 int						init_sdl(t_win *win);
 int						init_structure(t_win *wn, t_editor *editor);
-
-/*
-**	main.c
-*/
-
-int						main(void);
 
 #endif
