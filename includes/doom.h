@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:59:07 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 19:00:11 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,57 +317,6 @@ void						set_string(t_win *wn, SDL_Rect rect, char *text,
 void						setpixel(SDL_Surface *surface, int x, int y,
 																Uint32 pixel);
 Uint32						ft_getpixel(t_win *wn, SDL_Surface *surface,
-<<<<<<< HEAD
-		int x, int y);
-int     render_game(t_win *wn);
-int     render_editor(t_win *wn);
-int		check_sprite(t_game *game);
-int	set_key_sprite(t_game *game, int x, int y);
-int	set_exit_sprite(t_game *game, int x, int yi);
-int	set_mean_sprite(t_game *game, int x, int y);
-/* init_data.c */
-void	sdl_err_exit(char *msg, t_game *game);
-void	init_sdl_game(t_game *game);
-void	init_fonts(t_game *game);
-void	init_surface_game(t_game *game);
-void	init_wall(t_game *game);
-void	init_keys(t_game *game);
-void	init_hud(t_game *game);
-void	init_win_menu(t_game *game);
-void	init_poster(t_game *game);
-void	init_weapon(t_game *game);
-void	init_sprite(t_game *game);
-void	init_graphic(t_game *game);
-void	init_thread(t_win *wn, t_game *game);
-void	init_player(t_player *player);
-void	init_game(t_win *wn,  t_game *game , char *map);
-int		search_sprite(t_game *game, int id);
-int		range_sprite(t_sprite *sprite, int n);
-int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x);
-
-/*free_all.c*/
-void	free_editor(t_win *wn);
-void	free_music(t_music *music);
-void	free_surface_menu(t_editor *editor);
-void	free_structure_obj(t_editor *editor);
-void	free_structure(t_win *wn, t_editor *editor);
-void	free_sdl(t_win *wn);
-void	free_thread(t_game *game);
-void	free_graphic(t_game *game);
-void	free_sprite(t_game *game);
-void	free_weapon(t_game *game);
-void	free_poster(t_game *game);
-void	free_win_menu(t_game *game);
-void	free_hud(t_game *game);
-void	free_keys(t_game *game);
-void	free_wall(t_game *game);
-void	free_surface_game(t_game *game);
-void	free_fonts(t_game *game);
-void	free_all(t_win *wn);
-void    free_game(t_game *game);
-
-void		set_quote_screen(t_win *wn);
-=======
 																int x, int y);
 int							render_game(t_win *wn);
 int							render_editor(t_win *wn);
@@ -423,7 +372,6 @@ void						free_surface_game(t_game *game);
 void						free_fonts(t_game *game);
 void						free_all(t_win *wn);
 void						free_game(t_game *game);
-void						set_quote_screen(t_win *wn, int i);
+void						set_quote_screen(t_win *wn);
 
->>>>>>> 60dff4789abc3dc2c21c15ebf908f7252bc1164a
 #endif
