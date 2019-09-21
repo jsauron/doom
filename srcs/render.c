@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 17:16:55 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 18:03:48 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		render_life(t_win *wn, int life)
 	SDL_Rect	pos_alert;
 	int			i;
 	static int	k;
-	static int	old_time; // init ces valeurs ?
+	static int	old_time;
 
 	i = 0;
 	pos.x = 0;
@@ -75,7 +75,7 @@ int		shot(t_win *wn)
 {
 	SDL_Rect	pos;
 	static int	i;
-	static int	old_time; // init ces valeurs ?
+	static int	old_time;
 
 	pos.x = 0;
 	pos.y = 0;
