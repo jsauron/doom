@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 17:03:10 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:01:43 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,7 @@ Uint32						get_color(int axis, int angle_d);
 void						assign_color(t_thread *thread, int x, int y,
 		int i);
 void						calc__distance(int i, int x, t_thread *thread);
-void						rc_wolfcalc(t_game *game);
+void						rc_doomcalc(t_game *game);
 
 void						set_infos(t_win *wn, t_game *game);
 void						set_interface(t_win *wn, t_game *game);
@@ -374,4 +374,6 @@ void	free_surface_game(t_game *game);
 void	free_fonts(t_game *game);
 void	free_all(t_win *wn);
 void    free_game(t_game *game);
+
+void		set_quote_screen(t_win *wn, int i);
 #endif

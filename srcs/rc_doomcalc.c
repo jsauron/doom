@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/17 17:28:03 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:00:48 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void *calc__frame(void *arg)
 	pthread_exit(0);
 }
 
-void rc_wolfcalc(t_game *game)
+void rc_doomcalc(t_game *game)
 {
 	int i;
 
