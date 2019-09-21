@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:57:32 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 19:00:07 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:19:44 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ int		gameover(t_win *wn)
 	pos.y = 0;
 	SDL_BlitSurface(wn->game.gameover, NULL, wn->screen, &pos);
 	return (0);
+}
+
+int		hit_contact(t_win *wn, SDL_Rect pos_alert, int old_time, int k)
+{
+	if (wn->game.time.current_time - old_time > 170)
+	{
+		k++;
+		old_time = wn->game.time.current_time;
+	}
+	if (k % 2 == 0)
+		SDL_BlitSurface(wn->game.hit_contact, NULL, wn->screen, &pos_alert);
+	return (old_time);
 }
 
 int		render_life(t_win *wn, int life)
@@ -36,15 +48,7 @@ int		render_life(t_win *wn, int life)
 	pos_alert.x = 0;
 	pos_alert.y = 0;
 	if (life == 1)
-	{
-		if (wn->game.time.current_time - old_time > 170)
-		{
-			k++;
-			old_time = wn->game.time.current_time;
-		}
-		if (k % 2 == 0)
-			SDL_BlitSurface(wn->game.hit_contact, NULL, wn->screen, &pos_alert);
-	}
+		old_time = hit_contact(wn, pos_alert, old_time, k);
 	while (life > 0 && i < life)
 	{
 		SDL_BlitSurface(wn->game.heart[i++], NULL, wn->screen, &pos);
@@ -71,6 +75,19 @@ int		you_win(t_win *wn)
 	return (0);
 }
 
+int		simple_shot(t_win *wn, SDL_Rect pos, int old_time, int i)
+{
+	if (wn->game.time.current_time - old_time > 100)
+	{
+		i++;
+		old_time = wn->game.time.current_time;
+	}
+	if (i == 2)
+		i = 1;
+	SDL_BlitSurface(wn->game.weapon[i], NULL, wn->screen, &pos);
+	return (old_time);
+}
+
 int		shot(t_win *wn)
 {
 	SDL_Rect	pos;
@@ -80,16 +97,7 @@ int		shot(t_win *wn)
 	pos.x = 0;
 	pos.y = 0;
 	if (wn->game.shot == 1 && wn->game.target == 0)
-	{
-		if (wn->game.time.current_time - old_time > 100)
-		{
-			i++;
-			old_time = wn->game.time.current_time;
-		}
-		if (i == 2)
-			i = 1;
-		SDL_BlitSurface(wn->game.weapon[i], NULL, wn->screen, &pos);
-	}
+		old_time = simple_shot(wn, pos, old_time, i);
 	else if (wn->game.shot == 1 && wn->game.target == 1)
 	{
 		if (wn->game.time.current_time - old_time > 100)

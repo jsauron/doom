@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:47 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 19:16:10 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:20:08 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static SDL_Color	set_color(t_game *game, int i)
 static void			set_nbrstring(t_win *wn, int value, SDL_Rect rect,
 																Uint32 color)
 {
-	char	*str;
+	char			*str;
 
 	if (!(str = ft_itoa(value)))
 		ft_err_exit("doom: error: itoa, out of memory", &wn->game);
@@ -32,7 +32,7 @@ static void			set_nbrstring(t_win *wn, int value, SDL_Rect rect,
 
 static void			set_menu_config(t_win *wn, t_game *game)
 {
-	SDL_Rect	rect;
+	SDL_Rect		rect;
 
 	rect = (SDL_Rect){230, 240, 500, 35};
 	set_string(wn, rect, "SETTINGS", hex_to_rgb(H_GREEN));
@@ -56,7 +56,7 @@ static void			set_menu_config(t_win *wn, t_game *game)
 
 static void			ft_dev_mode(t_win *wn, t_game *game)
 {
-	SDL_Rect rect;
+	SDL_Rect		rect;
 
 	rect = (SDL_Rect){375, 30, 150, 30};
 	set_string(wn, rect, "fps : ", hex_to_rgb(H_GREEN));
@@ -82,7 +82,7 @@ static void			ft_dev_mode(t_win *wn, t_game *game)
 
 void				set_infos(t_win *wn, t_game *game)
 {
-	SDL_Rect rect;
+	SDL_Rect		rect;
 
 	rect = (SDL_Rect){20, 18, 150, 15};
 	set_string(wn, rect, "1 normal", set_color(game, 0));
