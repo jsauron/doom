@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:29:35 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 23:18:49 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 14:41:00 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		upload_map(int **map, char *input_map)
 {
 	FILE	*file;
 	char	line_file[XBLOC * YBLOC + 1] = {0};
-	
+
 	file = NULL;
 	file = fopen(input_map, "r");
 	if (file == NULL)

@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:30:17 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 23:15:02 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 14:38:37 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	set_obj(t_win *wn, SDL_Rect pos, int x, int y)
 	else if (wn->editor->map[y][x] == PLAYER)
 	{
 		SDL_BlitSurface(wn->editor->obj.player, NULL, wn->screen, &pos);
+		wn->editor->player_placed = 1;
 	}
 }
 
