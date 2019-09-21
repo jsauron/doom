@@ -6,33 +6,31 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 15:36:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:48:08 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-/*int range_sprite(t_sprite *sprite, int n)
+int range_sprite(t_sprite *sprite, int n)
 {
 	int i;
-	t_sprite *tmp;
+	t_sprite tmp;
 
 	i = 0;
-	tmp = NULL;
 	while (i + 1 < n)
 	{
-		if (sprite[i].distance > sprite[i + 1].distance)
+		if (sprite[i].new_distance < sprite[i + 1].new_distance)
 		{
-			tmp = &sprite[i];
+			tmp = sprite[i];
 			sprite[i] = sprite[i + 1];
-			sprite[i + 1] = *tmp;
+			sprite[i + 1] = tmp;
 			i = 0;
 		}
 		i++;
 	}
 	return (0);
 }
-*/
 
 double	calc_dist_sprite(t_game *game, t_ray *ray, int n)
 {

@@ -1,5 +1,5 @@
-## Wolf3d
-* *A wolf3d like game, made with raycasting*
+## Doom
+* *A Doom like game, made with raycasting*
 
 ## demo
 
@@ -11,23 +11,27 @@ C language, SDL2 library, Raycasting method
 * Compile it with `make`
 
 ## Make it work
-Run `./wolf3d [map]`
+Run `./Doom [map]`
 
 ## Make a map
 First line : width height</br>
-Bloc 1 : wall</br>
 Bloc 0 : void</br>
-Bloc 2 : spawn
+Bloc 1 : wall</br>
+Bloc 2 : Mean</br>
+Bloc 3 : Goal</br>
+Bloc 4 : Player</br>
+Bloc 5 : Key</br>
+Bloc 6 : Door</br>
+Bloc 7 : Poster</br>
+
 
 ## Map Exemple
 
 ```
-4 4
-1 1 1 1
-1 0 0 1
-1 2 0 1
-1 1 1 1
+111111111111111100000510000001102000010000001100000011711101100161110000101111100000020101120000040000101100005000000701700000000000101100200000000101100000000001101111611111611001150000150000001100000100000031111111111111111
 ```
 
 ## Author
 Jeanne Sauron
+jfortin
+Hben-hyah
