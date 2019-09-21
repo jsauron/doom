@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:01:43 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:21:57 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,8 @@ struct						s_game
 	SDL_Surface			*key_s;
 	SDL_Surface			*mean_s;
 	int					touch;
+	int					count_frame_dead;
+	int					count_frame_open;
 };
 
  struct					s_win
@@ -375,5 +377,5 @@ void	free_fonts(t_game *game);
 void	free_all(t_win *wn);
 void    free_game(t_game *game);
 
-void		set_quote_screen(t_win *wn, int i);
+void		set_quote_screen(t_win *wn);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:46:00 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:21:18 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ int render_game(t_win *wn)
 			display_key(wn);
 		set_interface(wn, &wn->game);
 		set_infos(wn, &wn->game);
+		set_quote_screen(wn);
 	}
 	render(wn);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:02:14 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:25:41 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void		get_target_shot(t_game *game)
 			game->sprite[n].left_life--;
 			if (game->sprite[n].left_life == 0)
 			{
-				set_quote_screen(game->thread->wn, 2);
+				game->count_frame_dead = 75;
 				Mix_PlayChannel(-1, game->music.dead, 0);
 			}
 		}
