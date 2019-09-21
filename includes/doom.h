@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 16:53:14 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 19:14:36 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:23:25 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,7 @@ void						draw_minimap(t_win *wn, t_game *game,
 int							render_life(t_win *wn, int life);
 int							you_win(t_win *wn);
 int							shot(t_win *wn);
+int							gameover(t_win *wn);
 
 /*
 **	init_data.c

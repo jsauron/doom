@@ -40,6 +40,7 @@ SRC_NAME = main.c \
 			init_editor2.c \
 			render.c \
 			render2.c \
+			render3.c \
 			tga_reader_data.c \
 			tga_reader_fill_data.c \
 			tga_reader_createpxl.c \

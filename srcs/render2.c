@@ -6,21 +6,11 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:57:32 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 19:19:44 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:22:20 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-int		gameover(t_win *wn)
-{
-	SDL_Rect pos;
-
-	pos.x = 0;
-	pos.y = 0;
-	SDL_BlitSurface(wn->game.gameover, NULL, wn->screen, &pos);
-	return (0);
-}
 
 int		hit_contact(t_win *wn, SDL_Rect pos_alert, int old_time, int k)
 {
