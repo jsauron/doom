@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 16:53:14 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 18:10:07 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:11:47 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,9 @@ void						ft_err_exit(char *msg, t_game *game);
 void						ft_sdl_err_exit(char *msg, t_game *game);
 
 void						get_map(char *map, t_game *game);
+void						parsing_exit(int fd, char *msg, t_game *game);
 void						init_game(t_win *wn, t_game *game, char *map);
+int							parse_map_game(char *map, t_game *game);
 
 int							movement(double angle_r, int dir, t_game *game);
 int							movement_gaming(const Uint8 *state, t_game *game);
@@ -322,6 +324,15 @@ int							check_sprite(t_game *game);
 int							set_key_sprite(t_game *game, int x, int y);
 int							set_exit_sprite(t_game *game, int x, int yi);
 int							set_mean_sprite(t_game *game, int x, int y);
+void						mouse_motion_x(t_game *game);
+void						mouse_motion_y(t_game *game);
+void						get_target_shot(t_game *game);
+void						event_with_life(t_game *game);
+void						draw_minimap(t_win *wn, t_game *game,
+											SDL_Rect rect, SDL_Rect index);
+int							render_life(t_win *wn, int life);
+int							you_win(t_win *wn);
+int							shot(t_win *wn);
 
 /*
 **	init_data.c
@@ -346,6 +357,7 @@ int							search_sprite(t_game *game, int id);
 int							range_sprite(t_sprite *sprite, int n);
 int							set_distance_sprite(t_game *game, t_ray *ray,
 																int n, int x);
+void						init_music(t_game *game);
 
 /*
 **	free_all.c

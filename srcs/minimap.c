@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:01 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:32:56 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 19:03:31 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,28 +91,6 @@ static void
 	player = (SDL_Rect){game->minimap.centre.x - 5,
 		game->minimap.centre.y - 5, 10, 10};
 	draw_rect(wn, player, 0x0, 0);
-}
-
-void
-	draw_minimap(t_win *wn, t_game *game, SDL_Rect rect, SDL_Rect index)
-{
-	int	i;
-	int	j;
-
-	i = index.x;
-	j = index.y;
-	if (game->map[i][j] == 1 || game->map[i][j] == 7)
-		draw_rect(wn, rect, 0xFF306bb0, &(game->minimap.limit));
-	else if (game->map[i][j] > 200)
-		draw_rect(wn, rect, 0xFFDC143C, &(game->minimap.limit));
-	else if (game->map[i][j] == 0 || game->map[i][j] == 4)
-		draw_rect(wn, rect, 0xFFffabe4, &(game->minimap.limit));
-	else if (game->map[i][j] == 3)
-		draw_rect(wn, rect, 0xFF2E8B57, &(game->minimap.limit));
-	else if (game->map[i][j] > 100)
-		draw_rect(wn, rect, 0xFFFFD700, &(game->minimap.limit));
-	else if (game->map[i][j] == 6)
-		draw_rect(wn, rect, 0xFF00BFFF, &(game->minimap.limit));
 }
 
 void
