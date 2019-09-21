@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:37 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:10:25 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:46:00 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int render_sprite(t_win *wn)
 
 	n = 0;
 	texture = NULL;
-	//range_sprite(wn->game.sprite, wn->game.n);
+	range_sprite(wn->game.sprite, wn->game.n);
 	while (n < wn->game.n)
 	{
 		if (wn->game.sprite[n].actif == 1 && wn->game.sprite[n].left_life > 0)
