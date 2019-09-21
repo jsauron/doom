@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_editor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 22:04:37 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:36:00 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_win	*init(t_win *wn)
 	init_sdl(wn);
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 		sdl_err_exit(0, NULL);
-	
 	return (wn);
 }
 
@@ -89,7 +88,8 @@ void	init_surface_menu(t_editor *editor)
 
 void	init_structure_obj(t_editor *editor)
 {
-	if (!(editor->editor_surface = IMG_Load("ressources/editor/editor_back.tga")))
+	if (!(editor->editor_surface =
+							IMG_Load("ressources/editor/editor_back.tga")))
 		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
 	if (!(editor->obj.wall = IMG_Load("ressources/editor/wall3.tga")))
 		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);

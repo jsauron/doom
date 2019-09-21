@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:36:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 18:58:36 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:12:19 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void		set_cursor(t_win *wn)
 	(t_pos){WIN_W / 2 + 10, WIN_H / 2}};
 	if (wn->game.touch == 0)
 		draw_line(wn, vec, 0xFF5BE50B, 0);
-	else	
+	else
 		draw_line(wn, vec, 0x00FF00FF, 0);
 	vec = (t_vec){(t_pos){WIN_W / 2, WIN_H / 2 - 10},
 	(t_pos){WIN_W / 2, WIN_H / 2 + 10}};
 	if (wn->game.touch == 0)
 		draw_line(wn, vec, 0xFF5BE50B, 0);
-	else	
+	else
 		draw_line(wn, vec, 0x00FF00FF, 0);
 }
 
@@ -56,6 +56,4 @@ Uint32		light_shade(double distance, Uint32 hexa)
 	ft_remove_light(&color.b, delta, 8);
 	ft_remove_light(&color.a, delta, 0);
 	return ((color.r << 24) + (color.g << 16) + (color.b << 8) + (color.a));
-	//return (hexa);
 }
-

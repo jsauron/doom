@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tga_reader_main.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:35:32 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:35:35 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:14:28 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ int			inittga(t_tga *tga)
 	return (0);
 }
 
-SDL_Surface		*load_tga(const char *path)
+SDL_Surface	*load_tga(const char *path)
 {
 	t_tga	*tga;
 
-	tga = NULL;
 	if ((tga = (t_tga*)malloc(sizeof(t_tga))) == NULL)
 		return (NULL);
 	if (inittga(tga) == 1)
@@ -56,12 +55,11 @@ SDL_Surface		*load_tga(const char *path)
 			return (free_tga(tga));
 	}
 	else if (createpxl(tga) == 1)
-	{
 		return (free_tga(tga));
-	}
 	if (tga->xorigin == 0)
 		rotatepxl(tga);
 	if (tga->yorigin == 0 && tga->new_i == (tga->w * tga->h * 4))
 		sym_vert(tga);
-	return (SDL_CreateRGBSurfaceWithFormatFrom(tga->data, tga->w, tga->h, 32, tga->w * 4, SDL_PIXELFORMAT_ARGB32));
+	return (SDL_CreateRGBSurfaceWithFormatFrom(tga->data, tga->w, tga->h,
+									32, tga->w * 4, SDL_PIXELFORMAT_ARGB32));
 }

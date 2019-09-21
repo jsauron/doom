@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_infos.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:47 by jsauron           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/09/21 18:46:25 by jsauron          ###   ########.fr       */
+=======
+/*   Updated: 2019/09/21 18:13:34 by hben-yah         ###   ########.fr       */
+>>>>>>> 60dff4789abc3dc2c21c15ebf908f7252bc1164a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +24,8 @@ static SDL_Color	set_color(t_game *game, int i)
 	return (hex_to_rgb(H_GREEN));
 }
 
-static void	set_nbrstring(t_win *wn, int value, SDL_Rect rect,
-						Uint32 color)
+static void			set_nbrstring(t_win *wn, int value, SDL_Rect rect,
+																Uint32 color)
 {
 	char	*str;
 
@@ -49,7 +53,7 @@ void		set_quote_screen(t_win *wn)
 	}
 }
 
-static void	set_menu_config(t_win *wn, t_game *game)
+static void			set_menu_config(t_win *wn, t_game *game)
 {
 	SDL_Rect	rect;
 
@@ -73,7 +77,7 @@ static void	set_menu_config(t_win *wn, t_game *game)
 	set_nbrstring(wn, game->minimap.mnp_size, rect, H_GREEN);
 }
 
-static void	ft_dev_mode(t_win *wn, t_game *game)
+static void			ft_dev_mode(t_win *wn, t_game *game)
 {
 	SDL_Rect rect;
 
@@ -99,7 +103,7 @@ static void	ft_dev_mode(t_win *wn, t_game *game)
 	set_nbrstring(wn, game->player.direction, rect, H_GREEN);
 }
 
-void	set_infos(t_win *wn, t_game *game)
+void				set_infos(t_win *wn, t_game *game)
 {
 	SDL_Rect rect;
 

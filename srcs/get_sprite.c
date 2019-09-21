@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_sprite.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:48:08 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:17:46 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int range_sprite(t_sprite *sprite, int n)
+int		range_sprite(t_sprite *sprite, int n)
 {
-	int i;
-	t_sprite tmp;
+	int			i;
+	t_sprite	tmp;
 
 	i = 0;
 	while (i + 1 < n)
@@ -69,7 +69,7 @@ void	set_zoom(t_game *game, double zoom, int n)
 	}
 }
 
-int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
+int		set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 {
 	double	zoom;
 
@@ -95,7 +95,7 @@ int	set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 	return (0);
 }
 
-int	set_key_sprite(t_game *game, int x, int y)
+int		set_key_sprite(t_game *game, int x, int y)
 {
 	static int c;
 
@@ -111,7 +111,7 @@ int	set_key_sprite(t_game *game, int x, int y)
 	return (0);
 }
 
-int	set_exit_sprite(t_game *game, int x, int y)
+int		set_exit_sprite(t_game *game, int x, int y)
 {
 	game->sprite[game->n].sprite = game->exit_s;
 	game->sprite[game->n].id = 3;
@@ -123,7 +123,7 @@ int	set_exit_sprite(t_game *game, int x, int y)
 	return (0);
 }
 
-int	set_mean_sprite(t_game *game, int x, int y)
+int		set_mean_sprite(t_game *game, int x, int y)
 {
 	static int c;
 
@@ -175,7 +175,7 @@ void	action_each_sprite(t_game *game, int n, int i, int j)
 	}
 }
 
-int	check_sprite(t_game *game)
+int		check_sprite(t_game *game)
 {
 	int i;
 	int j;

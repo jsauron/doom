@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tga_reader_rot.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:35:43 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/12 15:35:45 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:12:57 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			rotatepxl(t_tga *tga)
 	if ((done = (unsigned char *)malloc(sizeof(unsigned char)
 					* tga->w * tga->h * 4)) == NULL)
 		return ;
-	while (i < (tga->w * tga->h * 4) - 4 )
+	while (i < (tga->w * tga->h * 4) - 4)
 	{
 		done[((tga->w * tga->h * 4) - (i + 0))] = tga->data[i];
 		done[((tga->w * tga->h * 4) - (i + 3))] = tga->data[i + 1];
@@ -68,7 +68,6 @@ void			rotatepxl(t_tga *tga)
 		done[((tga->w * tga->h * 4) - (i + 1))] = tga->data[i + 3];
 		i += 4;
 	}
-	//(i <= tga->w
 	free(tga->data);
 	tga->data = done;
 }

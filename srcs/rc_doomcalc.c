@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rc_wolfcalc.c                                      :+:      :+:    :+:   */
+/*   rc_doomcalc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:22 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:00:48 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:08:40 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void calc__walls(int i, int x, t_thread *thread)
+static void		calc__walls(int i, int x, t_thread *thread)
 {
 	double height;
 
@@ -20,21 +20,21 @@ static void calc__walls(int i, int x, t_thread *thread)
 	calc__distance(i, x, thread);
 	if (thread->ray[i].distance >= 0)
 		height = (BLOC_SIZE / thread->ray[i].distance) * DIST_SCREEN;
-
 	thread->ray[i].wall_top = ((WIN_H - height) / 2) + thread->game->visu;
-	thread->ray[i].wall_bot = (WIN_H - ((WIN_H - height) / 2) + thread->game->visu);
+	thread->ray[i].wall_bot = (WIN_H - ((WIN_H - height) / 2)
+													+ thread->game->visu);
 	thread->ray[i].wall_top -= thread->game->crouch;
 	thread->ray[i].wall_bot -= thread->game->crouch;
 	thread->ray[i].wall_top += thread->game->jump;
 	thread->ray[i].wall_bot += thread->game->jump;
 }
 
-static void *calc__frame(void *arg)
+static void		*calc__frame(void *arg)
 {
-	t_thread *thread;
-	int x;
-	int y;
-	int i;
+	t_thread	*thread;
+	int			x;
+	int			y;
+	int			i;
 
 	i = -1;
 	thread = (t_thread *)arg;
@@ -55,7 +55,7 @@ static void *calc__frame(void *arg)
 	pthread_exit(0);
 }
 
-void rc_doomcalc(t_game *game)
+void			rc_doomcalc(t_game *game)
 {
 	int i;
 

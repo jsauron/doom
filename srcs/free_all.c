@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 18:57:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:18:31 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 18:19:27 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	free_structure_obj(t_editor *editor)
+void		free_structure_obj(t_editor *editor)
 {
 	SDL_FreeSurface(editor->editor_surface);
 	SDL_FreeSurface(editor->obj.wall);
@@ -44,14 +44,13 @@ void		free_sdl(t_win *wn)
 	SDL_Quit();
 }
 
-void	free_all(t_win *wn)
+void		free_all(t_win *wn)
 {
 	if (wn->game.sky)
 		free_game(&wn->game);
 	if (wn->editor)
 		free_structure(wn, wn->editor);
 	free_sdl(wn);
-
 }
 
 void		free_structure(t_win *wn, t_editor *editor)
@@ -60,7 +59,7 @@ void		free_structure(t_win *wn, t_editor *editor)
 	free_editor(wn);
 }
 
-int		free_surface_editor(t_editor *editor)
+int			free_surface_editor(t_editor *editor)
 {
 	int i;
 
@@ -71,7 +70,7 @@ int		free_surface_editor(t_editor *editor)
 	return (1);
 }
 
-void	free_game(t_game *game)
+void		free_game(t_game *game)
 {
 	int i;
 
@@ -83,12 +82,12 @@ void	free_game(t_game *game)
 	free_surface_game(game);
 }
 
-void	free_fonts(t_game *game)
+void		free_fonts(t_game *game)
 {
 	TTF_CloseFont(game->font);
 }
 
-void	free_surface_game(t_game *game)
+void		free_surface_game(t_game *game)
 {
 	free_graphic(game);
 	free_sprite(game);
@@ -100,7 +99,7 @@ void	free_surface_game(t_game *game)
 	free_wall(game);
 }
 
-void	free_wall(t_game *game)
+void		free_wall(t_game *game)
 {
 	SDL_FreeSurface(game->wall[0]);
 	SDL_FreeSurface(game->wall[1]);
@@ -109,7 +108,7 @@ void	free_wall(t_game *game)
 	SDL_FreeSurface(game->door);
 }
 
-void	free_keys(t_game *game)
+void		free_keys(t_game *game)
 {
 	SDL_FreeSurface(game->keys[0]);
 	SDL_FreeSurface(game->keys[1]);
@@ -119,7 +118,7 @@ void	free_keys(t_game *game)
 	SDL_FreeSurface(game->keys[5]);
 }
 
-void	free_hud(t_game *game)
+void		free_hud(t_game *game)
 {
 	SDL_FreeSurface(game->heart[0]);
 	SDL_FreeSurface(game->heart[1]);
@@ -127,7 +126,7 @@ void	free_hud(t_game *game)
 	SDL_FreeSurface(game->hit_contact);
 }
 
-void	free_win_menu(t_game *game)
+void		free_win_menu(t_game *game)
 {
 	SDL_FreeSurface(game->win[0]);
 	SDL_FreeSurface(game->win[1]);
@@ -143,7 +142,7 @@ void	free_win_menu(t_game *game)
 	SDL_FreeSurface(game->win[11]);
 }
 
-void	free_weapon(t_game *game)
+void		free_weapon(t_game *game)
 {
 	SDL_FreeSurface(game->weapon[0]);
 	SDL_FreeSurface(game->weapon[1]);
@@ -151,7 +150,7 @@ void	free_weapon(t_game *game)
 	SDL_FreeSurface(game->lunette[1]);
 }
 
-void	free_poster(t_game *game)
+void		free_poster(t_game *game)
 {
 	SDL_FreeSurface(game->poster[0]);
 	SDL_FreeSurface(game->poster[1]);
@@ -159,21 +158,21 @@ void	free_poster(t_game *game)
 	SDL_FreeSurface(game->poster[3]);
 }
 
-void	free_sprite(t_game *game)
+void		free_sprite(t_game *game)
 {
 	SDL_FreeSurface(game->key_s);
 	SDL_FreeSurface(game->exit_s);
 	SDL_FreeSurface(game->mean_s);
 }
 
-void	free_graphic(t_game *game)
+void		free_graphic(t_game *game)
 {
 	SDL_FreeSurface(game->gameover);
 	SDL_FreeSurface(game->sky);
 	SDL_FreeSurface(game->mission_s);
 }
 
-void	free_music(t_music *music)
+void		free_music(t_music *music)
 {
 	Mix_HaltChannel(-1);
 	Mix_FreeMusic(music->mood);

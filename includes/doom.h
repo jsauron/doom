@@ -3,10 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
 /*   Updated: 2019/09/21 18:21:57 by jsauron          ###   ########.fr       */
+=======
+/*   Created: 2019/09/21 16:53:14 by hben-yah          #+#    #+#             */
+/*   Updated: 2019/09/21 18:10:07 by hben-yah         ###   ########.fr       */
+>>>>>>> 60dff4789abc3dc2c21c15ebf908f7252bc1164a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +38,8 @@
 # define N_DOOR '6'
 # define N_POSTER '7'
 
-#define GUARD_ROWS 2
-#define VALUE_LIMIT	0.001
-
+# define GUARD_ROWS 2
+# define VALUE_LIMIT	0.001
 
 # define H_GREEN 0x00FF00FF
 # define H_RED 0xFF0000FF
@@ -52,7 +56,6 @@
 # define VERTICAL_HIT 1
 # define HORIZONTAL_HIT 2
 
-
 typedef struct s_music		t_music;
 typedef struct s_limit		t_limit;
 typedef struct s_time		t_time;
@@ -64,16 +67,15 @@ typedef struct s_thread		t_thread;
 typedef struct s_object		t_object;
 typedef struct s_player		t_player;
 typedef struct s_minimap	t_minimap;
-typedef struct s_win			t_win;
+typedef struct s_win		t_win;
 typedef struct s_game		t_game;
 typedef struct s_rgb		t_rgb;
-typedef struct s_sprite	t_sprite;
-typedef struct s_colorRGBA	t_colorRGBA;
-typedef struct s_colory	t_colory;
-typedef union  u_color		t_color;
+typedef struct s_sprite		t_sprite;
+typedef struct s_color_rgba	t_color_rgba;
+typedef struct s_colory		t_colory;
+typedef union u_color		t_color;
 
-
-struct			s_colorRGBA
+struct						s_color_rgba
 {
 	Uint8 r;
 	Uint8 g;
@@ -81,27 +83,25 @@ struct			s_colorRGBA
 	Uint8 a;
 };
 
-struct 			s_colory
+struct						s_colory
 {
 	Uint8 y;
 };
 
-struct        				s_rgb
+struct						s_rgb
 {
-    unsigned char 		    a;
-    unsigned char		    r;
-    unsigned char		    g;
-    unsigned char 		    b;
-}; 
+	unsigned char			a;
+	unsigned char			r;
+	unsigned char			g;
+	unsigned char			b;
+};
 
-
-union        				u_color
+union						u_color
 {
-    t_rgb		      		rgb;
+	t_rgb					rgb;
 	int						all;
-	unsigned char 			tab[4];
-}; 
-
+	unsigned char			tab[4];
+};
 
 struct						s_limit
 {
@@ -128,7 +128,6 @@ struct						s_size
 	int					h;
 	int					w;
 };
-
 
 struct						s_ray
 {
@@ -157,15 +156,14 @@ struct						s_thread
 	t_ray				ray[WIN_W / 8];
 };
 
-
 struct						s_sprite
 {
-	SDL_Surface				*sprite;
-	SDL_Rect				pos;
-	SDL_Rect				pos_map;
-	SDL_Rect				size;
-	double					new_distance;
-	int						actif;
+	SDL_Surface			*sprite;
+	SDL_Rect			pos;
+	SDL_Rect			pos_map;
+	SDL_Rect			size;
+	double				new_distance;
+	int					actif;
 	int					id;
 	int					left_life;
 };
@@ -200,15 +198,15 @@ struct						s_time
 
 };
 
-struct 					s_music
+struct						s_music
 {
-	Mix_Music 			*mood;
-	Mix_Chunk 			*shot;
-	Mix_Chunk 			*dead;
-	Mix_Chunk 			*gameover;
-	Mix_Chunk 			*key;
-	Mix_Chunk 			*open_door;
-	Mix_Chunk 			*youwin;
+	Mix_Music			*mood;
+	Mix_Chunk			*shot;
+	Mix_Chunk			*dead;
+	Mix_Chunk			*gameover;
+	Mix_Chunk			*key;
+	Mix_Chunk			*open_door;
+	Mix_Chunk			*youwin;
 };
 
 struct						s_game
@@ -263,7 +261,7 @@ struct						s_game
 	int					count_frame_open;
 };
 
- struct					s_win
+struct						s_win
 {
 	t_game				game;
 	SDL_Window			*window;
@@ -290,21 +288,17 @@ void						ft_sdl_err_exit(char *msg, t_game *game);
 void						get_map(char *map, t_game *game);
 void						init_game(t_win *wn, t_game *game, char *map);
 
-int							movement(double angle_r, int dir,t_game *game);
-int							movement_gaming(const Uint8 *state,
-	t_game *game);
-int							lateral_gaming(const Uint8 *state,
-		t_game *game);
-int							movement_normal(const Uint8 *state,
-		t_game *game);
+int							movement(double angle_r, int dir, t_game *game);
+int							movement_gaming(const Uint8 *state, t_game *game);
+int							lateral_gaming(const Uint8 *state, t_game *game);
+int							movement_normal(const Uint8 *state, t_game *game);
 int							ft_rotation_normal(const Uint8 *state,
-		t_game *game);
+																t_game *game);
 int							get_events(t_game *game);
 
 int							is_inwall(t_pos *pos, t_game *game, t_ray *ray);
 Uint32						get_color(int axis, int angle_d);
-void						assign_color(t_thread *thread, int x, int y,
-		int i);
+void						assign_color(t_thread *thread, int x, int y, int i);
 void						calc__distance(int i, int x, t_thread *thread);
 void						rc_doomcalc(t_game *game);
 
@@ -317,18 +311,18 @@ void						set_cursor(t_win *wn);
 Uint32						light_shade(double distance, Uint32 color);
 void						srfdel(void **ap);
 SDL_Color					hex_to_rgb(int hexa);
-void						draw_line(t_win *wn, t_vec vec,
-		Uint32 color, t_limit *limit);
+void						draw_line(t_win *wn, t_vec vec, Uint32 color,
+																t_limit *limit);
 void						draw_rect(t_win *wn, SDL_Rect rect, Uint32 color,
-		t_limit *limit);
-void						draw_border(t_win *wn,  SDL_Rect rect, Uint32 color);
-SDL_Surface					*ft_new_surface(int height,
-		int width, t_win *wn);
+																t_limit *limit);
+void						draw_border(t_win *wn, SDL_Rect rect, Uint32 color);
+SDL_Surface					*ft_new_surface(int height, int width, t_win *wn);
 void						set_string(t_win *wn, SDL_Rect rect, char *text,
-		SDL_Color color);
-void						setpixel(SDL_Surface *surface,
-		int x, int y, Uint32 pixel);
+															SDL_Color color);
+void						setpixel(SDL_Surface *surface, int x, int y,
+																Uint32 pixel);
 Uint32						ft_getpixel(t_win *wn, SDL_Surface *surface,
+<<<<<<< HEAD
 		int x, int y);
 int     render_game(t_win *wn);
 int     render_editor(t_win *wn);
@@ -378,4 +372,63 @@ void	free_all(t_win *wn);
 void    free_game(t_game *game);
 
 void		set_quote_screen(t_win *wn);
+=======
+																int x, int y);
+int							render_game(t_win *wn);
+int							render_editor(t_win *wn);
+int							check_sprite(t_game *game);
+int							set_key_sprite(t_game *game, int x, int y);
+int							set_exit_sprite(t_game *game, int x, int yi);
+int							set_mean_sprite(t_game *game, int x, int y);
+
+/*
+**	init_data.c
+*/
+
+void						sdl_err_exit(char *msg, t_game *game);
+void						init_sdl_game(t_game *game);
+void						init_fonts(t_game *game);
+void						init_surface_game(t_game *game);
+void						init_wall(t_game *game);
+void						init_keys(t_game *game);
+void						init_hud(t_game *game);
+void						init_win_menu(t_game *game);
+void						init_poster(t_game *game);
+void						init_weapon(t_game *game);
+void						init_sprite(t_game *game);
+void						init_graphic(t_game *game);
+void						init_thread(t_win *wn, t_game *game);
+void						init_player(t_player *player);
+void						init_game(t_win *wn, t_game *game, char *map);
+int							search_sprite(t_game *game, int id);
+int							range_sprite(t_sprite *sprite, int n);
+int							set_distance_sprite(t_game *game, t_ray *ray,
+																int n, int x);
+
+/*
+**	free_all.c
+*/
+
+void						free_editor(t_win *wn);
+void						free_music(t_music *music);
+void						free_surface_menu(t_editor *editor);
+void						free_structure_obj(t_editor *editor);
+void						free_structure(t_win *wn, t_editor *editor);
+void						free_sdl(t_win *wn);
+void						free_thread(t_game *game);
+void						free_graphic(t_game *game);
+void						free_sprite(t_game *game);
+void						free_weapon(t_game *game);
+void						free_poster(t_game *game);
+void						free_win_menu(t_game *game);
+void						free_hud(t_game *game);
+void						free_keys(t_game *game);
+void						free_wall(t_game *game);
+void						free_surface_game(t_game *game);
+void						free_fonts(t_game *game);
+void						free_all(t_win *wn);
+void						free_game(t_game *game);
+void						set_quote_screen(t_win *wn, int i);
+
+>>>>>>> 60dff4789abc3dc2c21c15ebf908f7252bc1164a
 #endif
