@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tga_reader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 10:12:57 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/25 14:02:50 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 16:01:26 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ int				getfile(t_tga *tga, const char *path);
 void			*cleartga(t_tga *tga);
 int				inittga(t_tga *tga);
 void			*free_tga(t_tga *tga);
-SDL_Surface			*load_tga(const char *path);
+SDL_Surface		*load_tga(const char *path);
 
 #endif

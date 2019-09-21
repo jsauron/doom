@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/19 23:37:15 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 15:32:34 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOOM_H
 # define DOOM_H
 
-# include "SDL2_rotozoom.h"
 # include "libft.h"
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
 # include <SDL2/SDL_image.h>
 # include <SDL2/SDL_mixer.h>
+//# include <SDL2/SDL_gfx.h>
+# include <SDL2/SDL2_rotozoom.h>
 # include <pthread.h>
 # include <time.h>
 # include "editor.h"
