@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:12 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 20:11:25 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 23:24:35 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int		is_inwall_ret(int x, int y, t_game *game)
 		return (7);
 	if (game->map[y][x] == 8)
 		return (8);
+	if (game->map[y][x] == 9)
+		return (9);
 	return (0);
 }
 
@@ -53,7 +55,9 @@ int				is_inwall(t_pos *pos, t_game *game, t_ray *ray)
 	if (ray != NULL && game->map[y2][x2] == 7)
 		ray->the_poster = 1;
 	if (ray != NULL && game->map[y2][x2] == 8)
-		ray->the_bonus = 1;
+		ray->the_bonus = 8;
+	if (ray != NULL && game->map[y2][x2] == 9)
+		ray->the_button = 1;
 	return (is_inwall_ret(x2, y2, game));
 }
 
@@ -76,6 +80,26 @@ static void		get_raygame(t_pos pos,
 	thread->ray[i].y = pos.y * 8;
 }
 
+static int		ft_iterate_ray_2(int i, t_pos *pos, t_thread *thread)
+{
+	double	angle_r;
+	double	alpha_r;
+
+	alpha_r = (fabs(thread->game->player.direction
+				- thread->ray[i].angle_d)) * M_PI / 180;
+	angle_r = thread->ray[i].angle_d * M_PI / 180;
+	if ((is_inwall(pos, thread->game, &thread->ray[i])) == 1
+			|| is_inwall(pos, thread->game, &thread->ray[i]) == 6
+			|| is_inwall(pos, thread->game, &thread->ray[i]) == 9
+			|| is_inwall(pos, thread->game, &thread->ray[i]) == 7)
+	{
+		thread->ray[i].axis = 2;
+		get_raygame(*pos, alpha_r, i, thread);
+		return (0);
+	}
+	return (1);
+}
+
 static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 {
 	double	angle_r;
@@ -86,6 +110,7 @@ static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 	angle_r = thread->ray[i].angle_d * M_PI / 180;
 	if ((is_inwall(pos, thread->game, &thread->ray[i])) == 1
 			|| is_inwall(pos, thread->game, &thread->ray[i]) == 6
+			|| is_inwall(pos, thread->game, &thread->ray[i]) == 9
 			|| is_inwall(pos, thread->game, &thread->ray[i]) == 7)
 	{
 		thread->ray[i].axis = 1;
@@ -93,14 +118,8 @@ static int		ft_iterate_ray(int i, t_pos *pos, t_thread *thread)
 		return (0);
 	}
 	pos->x += -cos(angle_r) * 1;
-	if ((is_inwall(pos, thread->game, &thread->ray[i])) == 1
-			|| is_inwall(pos, thread->game, &thread->ray[i]) == 6
-			|| is_inwall(pos, thread->game, &thread->ray[i]) == 7)
-	{
-		thread->ray[i].axis = 2;
-		get_raygame(*pos, alpha_r, i, thread);
+	if (ft_iterate_ray_2(i, pos, thread) == 0)
 		return (0);
-	}
 	pos->y += -sin(angle_r) * 1;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 19:31:59 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 23:17:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int				main(int argc, char **argv)
 	}
 	else
 	{
-		
 		wn = *init(&wn);
 		start(&wn, argv);
 		free_all(&wn);

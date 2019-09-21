@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:43 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 19:57:59 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 22:46:02 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void		assign_sprite_map(t_game *game, int x, int y)
 		set_mean_sprite(game, x, y);
 	else if (game->map[y][x] == GOAL)
 		set_exit_sprite(game, x, y);
+	else if (game->map[y][x] == BONUS)
+		set_bonus_sprite(game, x, y);
 }
 
 static void		parse_sprite_map(t_game *game, int size)
@@ -77,14 +79,14 @@ int				assign_elem_map(t_game *game, char *map, int i, int j)
 		game->player.position.y = j + 0.5;
 	}
 	else if (map[i * MAP_SIZE + j] == N_KEY || map[i * MAP_SIZE + j] == N_MEAN
-		|| map[i * MAP_SIZE + j] == N_EXIT)
+		|| map[i * MAP_SIZE + j] == N_EXIT || map[i * MAP_SIZE + j] == N_BONUS)
 	{
 		if (map[i * MAP_SIZE + j] == N_EXIT)
 			game->map_exit = 1;
 		count_sprite++;
 	}
 	if (map[i * MAP_SIZE + j] >= N_VIDE
-			&& map[i * MAP_SIZE + j] <= N_BONUS)
+			&& map[i * MAP_SIZE + j] <= N_BUTTON)
 	{
 		game->map[i][j] = map[i * MAP_SIZE + j] - '0';
 	}

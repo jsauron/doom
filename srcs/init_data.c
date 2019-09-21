@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 16:15:47 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 22:52:23 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,14 @@ void	init_poster(t_game *game)
 		ft_err_exit("doom: error: bad textures p3", game);
 	if (!(game->poster[3] = IMG_Load("ressources/wall/poster4.tga")))
 		ft_err_exit("doom: error: bad textures p4", game);
+	if (!(game->button[0] = IMG_Load("ressources/wall/blue_button.png")))
+		ft_err_exit("doom: error: bad textures p1", game);
+	if (!(game->button[1] = IMG_Load("ressources/wall/pink_button.png")))
+		ft_err_exit("doom: error: bad textures p2", game);
+	if (!(game->button[2] = IMG_Load("ressources/wall/croco_button.png")))
+		ft_err_exit("doom: error: bad textures p3", game);
+	if (!(game->button[3] = IMG_Load("ressources/wall/blue_button.png")))
+		ft_err_exit("doom: error: bad textures p4", game);
 }
 
 void	init_weapon(t_game *game)
@@ -160,6 +168,16 @@ void	init_sprite(t_game *game)
 	if (!(game->exit_s = IMG_Load("ressources/wall/exit_oo.png")))
 		ft_err_exit("doom: error: bad textures", game);
 	if (!(game->mean_s = IMG_Load("ressources/wall/mean_oo.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->key_l = IMG_Load("ressources/wall/key_l.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->exit_l = IMG_Load("ressources/wall/exit_l.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->mean_l = IMG_Load("ressources/wall/mean_l.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->bonus_s = IMG_Load("ressources/wall/bonus_oo.png")))
+		ft_err_exit("doom: error: bad textures", game);
+	if (!(game->bonus_l = IMG_Load("ressources/wall/bonus_l.png")))
 		ft_err_exit("doom: error: bad textures", game);
 }
 

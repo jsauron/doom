@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:30:17 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 19:34:14 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 22:39:33 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,13 @@ void	set_obj(t_win *wn, SDL_Rect pos, int x, int y)
 		SDL_BlitSurface(wn->editor->obj.door, NULL, wn->screen, &pos);
 	else if (wn->editor->map[y][x] == POSTER)
 		SDL_BlitSurface(wn->editor->obj.poster, NULL, wn->screen, &pos);
+	else if (wn->editor->map[y][x] == BUTTON)
+		SDL_BlitSurface(wn->editor->obj.button, NULL, wn->screen, &pos);
 	else if (wn->editor->map[y][x] == BONUS)
-		SDL_BlitSurface(wn->editor->obj.bonus, NULL, wn->screen, &pos);	
+	{
+		SDL_BlitSurface(wn->editor->obj.bonus, NULL, wn->screen, &pos);
+		wn->editor->bonus_placed = 1;
+	}
 	else if (wn->editor->map[y][x] == PLAYER)
 	{
 		SDL_BlitSurface(wn->editor->obj.player, NULL, wn->screen, &pos);

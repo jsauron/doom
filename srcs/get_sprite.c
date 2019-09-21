@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_sprite.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:17:46 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 23:18:00 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,35 @@ void	set_zoom(t_game *game, double zoom, int n)
 		game->sprite[n].sprite =
 		rotozoomSurface(game->exit_s, 0.0, zoom, 1);
 	}
+	else if (game->sprite[n].id == 8)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->bonus_s, 0.0, zoom, 1);
+	}
+}
+
+void	set_zoom_light(t_game *game, double zoom, int n)
+{
+	if (game->sprite[n].id > 200)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->mean_l, 0.0, zoom, 1);
+	}
+	else if (game->sprite[n].id > 100)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->key_l, 0.0, zoom, 1);
+	}
+	else if (game->sprite[n].id == 3)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->exit_l, 0.0, zoom, 1);
+	}
+	else if (game->sprite[n].id == 8)
+	{
+		game->sprite[n].sprite =
+		rotozoomSurface(game->bonus_l, 0.0, zoom, 1);
+	}
 }
 
 int		set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
@@ -79,8 +108,10 @@ int		set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 	game->sprite[n].new_distance = calc_dist_sprite(game, ray, n);
 	if (game->sprite[n].new_distance != 0)
 		zoom = (5 / game->sprite[n].new_distance);
-	if (zoom != 1.0)
+	if (game->lightshade == 0)
 		set_zoom(game, zoom, n);
+	if (game->lightshade == 1)
+		set_zoom_light(game, zoom, n);
 	game->sprite[n].pos.x = x;
 	game->touch = 0;
 	game->sprite[n].pos.y =
@@ -103,6 +134,22 @@ int		set_key_sprite(t_game *game, int x, int y)
 	game->sprite[game->n].sprite = game->key_s;
 	game->sprite[game->n].id = 100 + c;
 	game->map[y][x] = 100 + c;
+	game->sprite[game->n].pos_map.x = x;
+	game->sprite[game->n].pos_map.y = y;
+	game->sprite[game->n].left_life = 1;
+	game->sprite[game->n].new_distance = 0;
+	game->n++;
+	return (0);
+}
+
+int		set_bonus_sprite(t_game *game, int x, int y)
+{
+	static int c;
+
+	c++;
+	game->sprite[game->n].sprite = game->bonus_s;
+	game->sprite[game->n].id = 8;
+	game->map[y][x] = 8;
 	game->sprite[game->n].pos_map.x = x;
 	game->sprite[game->n].pos_map.y = y;
 	game->sprite[game->n].left_life = 1;
@@ -170,6 +217,12 @@ void	action_each_sprite(t_game *game, int n, int i, int j)
 	if (game->thread[i].ray[j].the_exit == 3)
 	{
 		n = search_sprite(game, game->thread[i].ray[j].the_exit);
+		set_distance_sprite(game, &game->thread[i].ray[j], n,
+		i * (WIN_W / 8) + j);
+	}
+	if (game->thread[i].ray[j].the_bonus == 8)
+	{
+		n = search_sprite(game, game->thread[i].ray[j].the_bonus);
 		set_distance_sprite(game, &game->thread[i].ray[j], n,
 		i * (WIN_W / 8) + j);
 	}

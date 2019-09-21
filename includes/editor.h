@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 17:08:32 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 19:32:08 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 22:36:12 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define YSCREEN		SIZE_BLOC * YBLOC
 
 enum {UP, DOWN, LEFT, RIGHT};
-enum {VIDE, WALL, MEAN, GOAL, PLAYER, KEY, DOOR, POSTER, BONUS};
+enum {VIDE, WALL, MEAN, GOAL, PLAYER, KEY, DOOR, POSTER, BONUS, BUTTON};
 
 typedef struct s_win	t_win;
 typedef	struct s_mouse	t_mouse;
@@ -53,6 +53,7 @@ struct					s_obj
 	SDL_Surface		*goal;
 	SDL_Surface		*poster;
 	SDL_Surface		*bonus;
+	SDL_Surface		*button;
 	int				nb_goal;
 };
 
@@ -70,6 +71,7 @@ struct					s_editor
 	int				left_click;
 	int				current_obj;
 	int				player_placed;
+	int				bonus_placed;
 };
 
 /*

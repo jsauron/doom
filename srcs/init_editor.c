@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 20:03:02 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 22:43:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	init_editor(t_editor *editor)
 	editor->current_obj = WALL;
 	editor->pos.x = 0;
 	editor->pos.y = 0;
+	editor->player_placed = 0;
+	editor->bonus_placed = 0;
 }
 
 t_win	*init(t_win *wn)
@@ -106,6 +108,8 @@ void	init_structure_obj(t_editor *editor)
 	if (!(editor->obj.poster = IMG_Load("ressources/editor/poster.tga")))
 		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
 	if (!(editor->obj.bonus = IMG_Load("ressources/editor/bonus.png")))
+		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
+	if (!(editor->obj.button = IMG_Load("ressources/editor/button.png")))
 		ft_err_exit("doom: error: bad textures init_structure_obj", NULL);
 }
 

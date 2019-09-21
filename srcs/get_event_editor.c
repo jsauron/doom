@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 19:35:49 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 23:14:59 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		key_down(t_win *wn, t_editor *editor, char *map)
 		editor->current_obj = POSTER;
 	else if (wn->state[SDL_SCANCODE_8])
 		editor->current_obj = BONUS;
+	else if (wn->state[SDL_SCANCODE_9])
+		editor->current_obj = BUTTON;
 	else if (wn->state[SDL_SCANCODE_S])
 		save_map(editor->map, map);
 	else if (wn->state[SDL_SCANCODE_C])
@@ -62,7 +64,8 @@ void	button_down(t_win *wn, t_editor *editor)
 	if (wn->event.button.button == SDL_BUTTON_LEFT)
 	{
 		if ((editor->current_obj == PLAYER && editor->player_placed == 0)
-		|| editor->current_obj != PLAYER)
+		|| (editor->current_obj == BONUS && editor->bonus_placed == 0)
+		|| (editor->current_obj != PLAYER && editor->current_obj != BONUS))
 		{
 			editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
 				/ SIZE_BLOC] = editor->current_obj;
@@ -74,6 +77,9 @@ void	button_down(t_win *wn, t_editor *editor)
 		if (editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
 			/ SIZE_BLOC] == PLAYER)
 			editor->player_placed = 0;
+		else if (editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
+			/ SIZE_BLOC] == BONUS)
+			editor->bonus_placed = 0;
 		editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
 			/ SIZE_BLOC] = VIDE;
 		editor->right_click = 1;

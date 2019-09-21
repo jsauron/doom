@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 20:44:19 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 22:51:42 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define N_DOOR '6'
 # define N_POSTER '7'
 # define N_BONUS '8'
+# define N_BUTTON '9'
 
 # define GUARD_ROWS 2
 # define VALUE_LIMIT	0.001
@@ -133,6 +134,7 @@ struct						s_ray
 	int					the_mean;
 	int					the_exit;
 	int					the_bonus;
+	int					the_button;
 	int					x;
 	int					y;
 	int					a;
@@ -227,6 +229,7 @@ struct						s_game
 	SDL_Surface			*win[12];
 	SDL_Surface			*mission_s;
 	SDL_Surface			*poster[4];
+	SDL_Surface			*button[4];
 	int					key;
 	SDL_Event			event;
 	Uint8				*state;
@@ -253,6 +256,11 @@ struct						s_game
 	SDL_Surface			*exit_s;
 	SDL_Surface			*key_s;
 	SDL_Surface			*mean_s;
+	SDL_Surface			*exit_l;
+	SDL_Surface			*key_l;
+	SDL_Surface			*mean_l;
+	SDL_Surface			*bonus_s;
+	SDL_Surface			*bonus_l;
 	int					touch;
 	int					count_frame_dead;
 	int					count_frame_open;
@@ -326,7 +334,7 @@ int							check_sprite(t_game *game);
 int							set_key_sprite(t_game *game, int x, int y);
 int							set_exit_sprite(t_game *game, int x, int yi);
 int							set_mean_sprite(t_game *game, int x, int y);
-
+int							set_bonus_sprite(t_game *game, int x, int y);
 /*
 **	init_data.c
 */

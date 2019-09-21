@@ -3,35 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:29:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:37:32 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 23:13:19 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static SDL_Surface	*choose_texture(int i, t_thread *thread)
+static SDL_Surface	*choose_texture_verti(int i, t_thread *thread)
 {
-	if (thread->ray[i].the_door == 1)
-		return (thread->game->door);
 	if (thread->ray[i].axis == VERTICAL_HIT && thread->ray[i].the_poster == 1)
 	{
 		return (((thread->ray[i].angle_d >= 0 && thread->ray[i].angle_d <= 180)
 		|| thread->ray[i].angle_d >= 360) ? thread->game->poster[0]
 		: thread->game->poster[1]);
 	}
-	if (thread->ray[i].axis == VERTICAL_HIT)
+	else if (thread->ray[i].axis == VERTICAL_HIT
+	&& thread->ray[i].the_button == 1)
+	{
+		return (((thread->ray[i].angle_d >= 0 && thread->ray[i].angle_d <= 180)
+		|| thread->ray[i].angle_d >= 360) ? thread->game->button[0]
+		: thread->game->button[1]);
+	}
+	else if (thread->ray[i].axis == VERTICAL_HIT)
 	{
 		return (((thread->ray[i].angle_d >= 0 && thread->ray[i].angle_d <= 180)
 		|| thread->ray[i].angle_d >= 360) ? thread->game->wall[0]
 		: thread->game->wall[1]);
 	}
+	return (NULL);
+}
+
+static SDL_Surface	*choose_texture(int i, t_thread *thread)
+{
+	if (thread->ray[i].the_door == 1)
+		return (thread->game->door);
+	if (thread->ray[i].axis == VERTICAL_HIT)
+		return (choose_texture_verti(i, thread));
 	if (thread->ray[i].axis == HORIZONTAL_HIT && thread->ray[i].the_poster == 1)
 	{
 		return ((thread->ray[i].angle_d >= 90 && thread->ray[i].angle_d <= 270)
 			? thread->game->poster[2] : thread->game->poster[3]);
+	}
+	else if (thread->ray[i].axis == HORIZONTAL_HIT
+	&& thread->ray[i].the_button == 1)
+	{
+		return ((thread->ray[i].angle_d >= 90 && thread->ray[i].angle_d <= 270)
+			? thread->game->button[2] : thread->game->button[3]);
 	}
 	return ((thread->ray[i].angle_d >= 90 && thread->ray[i].angle_d <= 270)
 				? thread->game->wall[2] : thread->game->wall[3]);
