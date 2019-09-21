@@ -6,7 +6,7 @@
 /*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:29:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 18:18:43 by hben-yah         ###   ########.fr       */
+/*   Updated: 2019/09/21 18:37:32 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,27 @@
 
 static SDL_Surface	*choose_texture(int i, t_thread *thread)
 {
-	const SDL_Surface *surface[8] = {
-		thread->game->wall[0], thread->game->wall[1],
-		thread->game->wall[2], thread->game->wall[3],
-		thread->game->poster[0], thread->game->poster[1],
-		thread->game->poster[2], thread->game->poster[3]};
-
 	if (thread->ray[i].the_door == 1)
 		return (thread->game->door);
 	if (thread->ray[i].axis == VERTICAL_HIT && thread->ray[i].the_poster == 1)
 	{
 		return (((thread->ray[i].angle_d >= 0 && thread->ray[i].angle_d <= 180)
-		|| thread->ray[i].angle_d >= 360) ? surface[4] : surface[5]);
+		|| thread->ray[i].angle_d >= 360) ? thread->game->poster[0]
+		: thread->game->poster[1]);
 	}
 	if (thread->ray[i].axis == VERTICAL_HIT)
 	{
 		return (((thread->ray[i].angle_d >= 0 && thread->ray[i].angle_d <= 180)
-		|| thread->ray[i].angle_d >= 360) ? surface[0] : surface[1]);
+		|| thread->ray[i].angle_d >= 360) ? thread->game->wall[0]
+		: thread->game->wall[1]);
 	}
 	if (thread->ray[i].axis == HORIZONTAL_HIT && thread->ray[i].the_poster == 1)
 	{
 		return ((thread->ray[i].angle_d >= 90 && thread->ray[i].angle_d <= 270)
-			? surface[6] : surface[7]);
+			? thread->game->poster[2] : thread->game->poster[3]);
 	}
 	return ((thread->ray[i].angle_d >= 90 && thread->ray[i].angle_d <= 270)
-				? surface[2] : surface[3]);
+				? thread->game->wall[2] : thread->game->wall[3]);
 }
 
 static Uint32		calc__col(t_win *wn, int y, int i, t_thread *thread)
