@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_infos.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hben-yah <hben-yah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:34:47 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 19:03:55 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 19:20:08 by hben-yah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,6 @@ static void			set_nbrstring(t_win *wn, int value, SDL_Rect rect,
 	if (!(str = ft_itoa(value)))
 		ft_err_exit("doom: error: itoa, out of memory", &wn->game);
 	set_string(wn, rect, str, hex_to_rgb(color));
-}
-
-void				set_quote_screen(t_win *wn)
-{
-	SDL_Rect		rect_dead;
-	SDL_Rect		rect_open;
-
-	rect_dead = (SDL_Rect){400, 10, 500, 35};
-	rect_open = (SDL_Rect){400, 33, 500, 35};
-	if (wn->game.count_frame_dead > 0)
-	{
-		set_string(wn, rect_dead,
-		"You killed an enemy", hex_to_rgb(0xFFFFFFFF));
-		wn->game.count_frame_dead--;
-	}
-	if (wn->game.count_frame_open > 0)
-	{
-		set_string(wn, rect_open,
-		"You opened a door", hex_to_rgb(0xFFFFFFFF));
-		wn->game.count_frame_open--;
-	}
 }
 
 static void			set_menu_config(t_win *wn, t_game *game)

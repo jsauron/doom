@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:18 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 22:43:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 23:26:44 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,6 @@ void	init_editor(t_editor *editor)
 	editor->pos.y = 0;
 	editor->player_placed = 0;
 	editor->bonus_placed = 0;
-}
-
-t_win	*init(t_win *wn)
-{
-	int i;
-
-	i = 0;
-	if (!(wn->editor = malloc(sizeof(t_editor ))))
-		exit(1);
-	if (!(wn->editor->map = malloc(sizeof(int *) * XBLOC)))
-		exit(1);
-	while (i < XBLOC)
-		wn->editor->map[i++] = malloc(sizeof(int) * YBLOC);
-	init_structure(wn, wn->editor);
-	init_sdl(wn);
-	if (SDL_Init(SDL_INIT_AUDIO) < 0)
-		sdl_err_exit(0, NULL);
-	return (wn);
 }
 
 int		init_sdl(t_win *wn)

@@ -6,18 +6,11 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:43 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 22:46:02 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 23:26:32 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-static void		parsing_exit(int fd, char *msg, t_game *game)
-{
-	if (fd > -1)
-		close(fd);
-	ft_err_exit(msg, game);
-}
 
 static int		map_is_digit(char *line)
 {

@@ -15,15 +15,21 @@ GREEN       = "\\033[32m"
 
 SRC_NAME = main.c \
 			get_map.c \
+			get_map2.c \
 			init_data.c \
+			init_data2.c \
+			init_data3.c \
 			get_event.c \
+			get_event2.c \
 			handle_events.c \
 			handle_movement.c \
 			color.c \
 			raycast.c \
 			rc_doomcalc.c \
 			minimap.c \
+			minimap2.c \
 			set_infos.c \
+			set_infos2.c \
 			set_interface.c \
 			utils.c \
 			highlvl_graphics.c \
@@ -31,7 +37,10 @@ SRC_NAME = main.c \
 			exit.c \
 			editor.c \
 			init_editor.c \
+			init_editor2.c \
 			render.c \
+			render2.c \
+			render3.c \
 			tga_reader_data.c \
 			tga_reader_fill_data.c \
 			tga_reader_createpxl.c \
@@ -39,8 +48,12 @@ SRC_NAME = main.c \
 			tga_reader_rot.c \
 			tga_reader_main.c \
 			get_sprite.c \
+			get_sprite2.c \
 			get_event_editor.c \
 			free_all.c \
+			free_all2.c \
+			free_all3.c \
+			free_all4.c \
 			files.c  
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
