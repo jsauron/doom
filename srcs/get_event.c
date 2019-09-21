@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:27 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/20 00:17:14 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/21 15:31:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_keyboard2(Uint8 *state, t_game *game)
 	return (1);
 }
 
-static int	ft_mouse_motion(t_game *game)
+void	mouse_motion_x(t_game *game)
 {
 	if (game->mouse.x > 0.0)
 	{
@@ -76,6 +76,10 @@ static int	ft_mouse_motion(t_game *game)
 		if (game->player.direction < 0)
 			game->player.direction = 360 + game->player.direction;
 	}
+}
+
+void	mouse_motion_y(t_game *game)
+{
 	if (game->mouse.y > 0.0 || game->mouse.y < 0.0)
 	{
 		game->visu -= game->mouse.y;
@@ -84,8 +88,14 @@ static int	ft_mouse_motion(t_game *game)
 		else if (game->visu > WIN_H / 4)
 			game->visu = WIN_H / 4;
 	}
+}
+
+static int	ft_mouse_motion(t_game *game)
+{
+	mouse_motion_x(game);
+	mouse_motion_y(game);
 	if (game->mouse.x > 0.0 || game->mouse.x < 0.0 || (game->mouse.y > 0.0
-	|| game->mouse.y < 0.0) )
+	|| game->mouse.y < 0.0))
 		return (1);
 	return (0);
 }
@@ -139,31 +149,12 @@ static int	move_events(const Uint8 *state, t_game *game)
 	return (move);
 }
 
-int		get_events(t_game *game)
+void	event_with_life(t_game *game)
 {
-	int	move;
+	int move;
 
 	move = 0;
-	SDL_PollEvent(&(game->event));
-	game->state = (Uint8 *)SDL_GetKeyboardState(NULL);
-	SDL_GetRelativeMouseState(&(game->mouse.x), &(game->mouse.y));
-	if (game->mission == 1 && game->state[SDL_SCANCODE_SPACE])
-		game->mission = 0;
-	else if (game->player.life == 0)
-	{
-		Mix_PlayChannel(-1, game->music.gameover, 0);
-			SDL_WaitEvent(&(game->event));
-		/*	if (game->state[SDL_SCANCODE_ESCAPE])
-			{
-				//free
-				return (0);
-			}*/
-	}
-	if (game->state[SDL_SCANCODE_ESCAPE])
-		return (0);
-	else if (game->event.type == SDL_QUIT)
-		ft_exit(game);
-	else if (game->event.type == SDL_KEYDOWN)
+	if (game->event.type == SDL_KEYDOWN)
 		move = (ft_keyboard1(game->state, game)
 				|| ft_keyboard2(game->state, game)) ? 1 : move;
 	move = (move) ? 1 : move_events(game->state, game);
@@ -179,5 +170,22 @@ int		get_events(t_game *game)
 		game->player.speed = 0.18;
 	else
 		game->player.speed = 0.12;
+}
+
+int		get_events(t_game *game)
+{
+	SDL_PollEvent(&(game->event));
+	game->state = (Uint8 *)SDL_GetKeyboardState(NULL);
+	SDL_GetRelativeMouseState(&(game->mouse.x), &(game->mouse.y));
+	if (game->mission == 1 && game->state[SDL_SCANCODE_SPACE])
+		game->mission = 0;
+	else if (game->player.life == 0)
+		Mix_PlayChannel(-1, game->music.gameover, 0);
+	if (game->state[SDL_SCANCODE_ESCAPE])
+		return (0);
+	else if (game->event.type == SDL_QUIT)
+		ft_exit(game);
+	if (game->player.life != 0)
+		event_with_life(game);
 	return (1);
 }

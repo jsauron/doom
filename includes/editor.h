@@ -56,6 +56,7 @@ struct		s_editor
 	int				right_click;
 	int				left_click;
 	int				current_obj;
+	int				player_placed;
 };
 
 /* render.c*/
