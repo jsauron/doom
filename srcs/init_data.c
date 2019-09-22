@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:04 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/22 00:02:04 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 15:42:05 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,14 @@ void	init_game(t_win *wn, t_game *game, char *map)
 	game->minimap.mnp_size = 20;
 	game->mission = 1;
 	if (!(game->map = malloc(sizeof(int *) * XBLOC)))
-		exit(1);
+		ft_exit(game);
 	while (i < XBLOC)
-		game->map[i++] = malloc(sizeof(int) * YBLOC);
+	{
+		if (!(game->map[i++] = malloc(sizeof(int) * YBLOC)))
+			ft_exit(game);
+	}
 	get_map(map, game);
 	init_sdl_game(game);
-	init_music(game);
 	init_fonts(game);
-	init_wall(game);
 	game->endinitsdl = 1;
 }

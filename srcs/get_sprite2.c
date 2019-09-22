@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:56:51 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/22 00:15:16 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 16:13:22 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int		set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 	game->sprite[n].new_distance = calc_dist_sprite(game, ray, n);
 	if (game->sprite[n].new_distance != 0)
 		zoom = (5 / game->sprite[n].new_distance);
+	if (game->sprite[n].sprite != NULL)
+		SDL_FreeSurface(game->sprite[n].sprite);
 	if (game->lightshade == 0)
 		set_zoom(game, zoom, n);
 	if (game->lightshade == 1)
@@ -97,11 +99,7 @@ int		set_distance_sprite(t_game *game, t_ray *ray, int n, int x)
 	game->sprite[n].pos.y =
 		((WIN_H - ((BLOC_SIZE / (game->sprite[n].new_distance * BLOC_SIZE))
 		* DIST_SCREEN)) / 2) - game->crouch + game->jump + game->visu;
-	if ((WIN_W / 2 >= x && WIN_W / 2 <= x + game->sprite[n].sprite->w)
-		&& (WIN_H / 2 >= game->sprite[n].pos.y
-		&& WIN_H / 2 <= game->sprite[n].pos.y + game->sprite[n].sprite->h)
-		&& game->sprite[n].id > 200)
-		game->touch = game->sprite[n].id;
+	set_touch(game, n, x);
 	game->sprite[n].actif = 1;
 	return (0);
 }
@@ -111,7 +109,7 @@ int		set_key_sprite(t_game *game, int x, int y)
 	static int c;
 
 	c++;
-	game->sprite[game->n].sprite = game->key_s;
+	game->sprite[game->n].sprite = NULL;
 	game->sprite[game->n].id = 100 + c;
 	game->map[y][x] = 100 + c;
 	game->sprite[game->n].pos_map.x = x;

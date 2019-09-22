@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:33:44 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 23:17:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 16:09:55 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void		game_loop(t_win *wn, t_game *game)
 	int play;
 
 	play = 1;
+	init_music(game);
 	Mix_PlayMusic(game->music.mood, -1);
 	make_frame(wn, game);
 	while (play)
@@ -80,6 +81,7 @@ int				start(t_win *wn, char **argv)
 {
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	wn->state = (Uint8*)SDL_GetKeyboardState(NULL);
+	init_game(wn, &wn->game, argv[1]);
 	while (1)
 	{
 		SDL_PollEvent(&(wn->event));
@@ -87,7 +89,7 @@ int				start(t_win *wn, char **argv)
 			break ;
 		else if (wn->state[SDL_SCANCODE_1] && argv[1])
 		{
-			init_game(wn, &wn->game, argv[1]);
+			SDL_SetRelativeMouseMode(SDL_TRUE);
 			game_loop(wn, &wn->game);
 			SDL_WaitEvent(&(wn->event));
 		}

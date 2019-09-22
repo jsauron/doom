@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 15:13:28 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/22 14:07:49 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 16:13:16 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,4 +399,5 @@ void						set_quote_screen(t_win *wn);
 
 void						ft_remove_light(Uint8 *component,
 							double delta, int arg);
+void						set_touch(t_game *game, int n, int x);
 #endif

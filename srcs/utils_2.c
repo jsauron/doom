@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 00:17:34 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/22 14:06:23 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 16:14:40 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,13 @@ int				is_inwall(t_pos *pos, t_game *game, t_ray *ray)
 	if (ray != NULL && game->map[y2][x2] == 9)
 		ray->the_button = 1;
 	return (is_inwall_ret(x2, y2, game));
+}
+
+void			set_touch(t_game *game, int n, int x)
+{
+	if ((WIN_W / 2 >= x && WIN_W / 2 <= x + game->sprite[n].sprite->w)
+		&& (WIN_H / 2 >= game->sprite[n].pos.y
+		&& WIN_H / 2 <= game->sprite[n].pos.y + game->sprite[n].sprite->h)
+		&& game->sprite[n].id > 200)
+		game->touch = game->sprite[n].id;
 }

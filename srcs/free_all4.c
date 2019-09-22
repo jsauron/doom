@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 18:50:21 by hben-yah          #+#    #+#             */
-/*   Updated: 2019/09/21 23:53:13 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 15:39:34 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		free_sprite(t_game *game)
 	SDL_FreeSurface(game->mean_l);
 	SDL_FreeSurface(game->bonus_s);
 	SDL_FreeSurface(game->bonus_l);
+	free(game->sprite);
 }
 
 void		free_graphic(t_game *game)

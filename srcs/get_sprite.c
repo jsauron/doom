@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:32:07 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/22 00:16:24 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 15:48:46 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		set_bonus_sprite(t_game *game, int x, int y)
 	static int c;
 
 	c++;
-	game->sprite[game->n].sprite = game->bonus_s;
+	game->sprite[game->n].sprite = NULL;
 	game->sprite[game->n].id = 8;
 	game->map[y][x] = 8;
 	game->sprite[game->n].pos_map.x = x;
@@ -30,7 +30,7 @@ int		set_bonus_sprite(t_game *game, int x, int y)
 
 int		set_exit_sprite(t_game *game, int x, int y)
 {
-	game->sprite[game->n].sprite = game->exit_s;
+	game->sprite[game->n].sprite = NULL;
 	game->sprite[game->n].id = 3;
 	game->sprite[game->n].pos_map.x = x;
 	game->sprite[game->n].pos_map.y = y;
@@ -45,7 +45,7 @@ int		set_mean_sprite(t_game *game, int x, int y)
 	static int c;
 
 	c++;
-	game->sprite[game->n].sprite = game->mean_s;
+	game->sprite[game->n].sprite = NULL;
 	game->sprite[game->n].id = 200 + c;
 	game->map[y][x] = 200 + c;
 	game->sprite[game->n].pos_map.x = x;

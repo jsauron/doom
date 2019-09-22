@@ -1,6 +1,6 @@
 NAME 		= doom
 CC 			= gcc
-CFLAGS 		= -Wall -Wextra -Werror -MMD -O3 -g
+CFLAGS 		= -Wall -Wextra -Werror -MMD -Ofast -g
 
 ID_UN 		= $(shell id -un)
 SRC_PATH 	= srcs/
