@@ -8,7 +8,7 @@ C language, SDL2 library, Raycasting method
 
 ## Installing
 * Git clone http://github.com/jsauron/doom.git
-* brew install sdl2 sdl2_ttf sdl2_mixer sdl2_gfx 
+* brew install sdl2 sdl2_ttf sdl2_mixer sdl2_gfx sdl2_image
 * Compile it with `make`
 
 ## Make it work

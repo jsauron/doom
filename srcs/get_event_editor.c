@@ -6,7 +6,7 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:31:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/21 23:14:59 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 14:04:06 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,19 @@ void	button_up(t_win *wn, t_editor *editor)
 		editor->right_click = 0;
 }
 
+void	button_right_down(t_win *wn, t_editor *editor)
+{
+	if (editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
+			/ SIZE_BLOC] == PLAYER)
+		editor->player_placed = 0;
+	else if (editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
+			/ SIZE_BLOC] == BONUS)
+		editor->bonus_placed = 0;
+	editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
+			/ SIZE_BLOC] = VIDE;
+	editor->right_click = 1;
+}
+
 void	button_down(t_win *wn, t_editor *editor)
 {
 	if (wn->event.button.button == SDL_BUTTON_LEFT)
@@ -67,21 +80,17 @@ void	button_down(t_win *wn, t_editor *editor)
 		|| (editor->current_obj == BONUS && editor->bonus_placed == 0)
 		|| (editor->current_obj != PLAYER && editor->current_obj != BONUS))
 		{
+			if (editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
+				/ SIZE_BLOC] == PLAYER)
+				editor->player_placed = 0;
+			if (editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
+				/ SIZE_BLOC] == BONUS)
+				editor->bonus_placed = 0;
 			editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
 				/ SIZE_BLOC] = editor->current_obj;
 			editor->left_click = 1;
 		}
 	}
 	if (wn->event.button.button == SDL_BUTTON_RIGHT)
-	{
-		if (editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
-			/ SIZE_BLOC] == PLAYER)
-			editor->player_placed = 0;
-		else if (editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
-			/ SIZE_BLOC] == BONUS)
-			editor->bonus_placed = 0;
-		editor->map[wn->event.button.y / SIZE_BLOC][wn->event.button.x
-			/ SIZE_BLOC] = VIDE;
-		editor->right_click = 1;
-	}
+		button_right_down(wn, editor);
 }

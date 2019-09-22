@@ -6,20 +6,20 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:36:00 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/22 00:21:09 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 14:05:04 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-double		pythagore(double a, double b)
+double			pythagore(double a, double b)
 {
 	return (sqrt(a * a + b * b));
 }
 
-void		set_cursor(t_win *wn)
+void			set_cursor(t_win *wn)
 {
-	t_vec	vec;
+	t_vec		vec;
 
 	vec = (t_vec){(t_pos){WIN_W / 2 - 10, WIN_H / 2},
 	(t_pos){WIN_W / 2 + 10, WIN_H / 2}};
@@ -35,13 +35,13 @@ void		set_cursor(t_win *wn)
 		draw_line(wn, vec, 0x00FF00FF, 0);
 }
 
-void	ft_remove_light(Uint8 *component, double delta, int arg)
+void			ft_remove_light(Uint8 *component, double delta, int arg)
 {
 	if (*component > 0)
 		*component = (*component * (1 - delta) + ((0x0 >> arg) * delta));
 }
 
-int		range_sprite(t_sprite *sprite, int n)
+int				range_sprite(t_sprite *sprite, int n)
 {
 	int			i;
 	t_sprite	tmp;
@@ -61,9 +61,9 @@ int		range_sprite(t_sprite *sprite, int n)
 	return (0);
 }
 
-int		search_sprite(t_game *game, int id)
+int				search_sprite(t_game *game, int id)
 {
-	int n;
+	int			n;
 
 	n = 0;
 	while (n <= game->n)

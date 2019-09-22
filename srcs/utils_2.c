@@ -6,13 +6,13 @@
 /*   By: jsauron <jsauron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 00:17:34 by jsauron           #+#    #+#             */
-/*   Updated: 2019/09/22 00:18:58 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/09/22 14:05:28 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-Uint32		light_shade(double distance, Uint32 hexa)
+Uint32			light_shade(double distance, Uint32 hexa)
 {
 	SDL_Color	color;
 	double		delta;
