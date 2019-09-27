@@ -1,6 +1,6 @@
-NAME 		= doom
-CC 			= gcc
-CFLAGS 		= -Wall -Wextra -Werror -MMD -Ofast -g
+NAME			= doom
+CC				= gcc
+override CFLAGS	+= -Wall -Wextra -Werror -MMD
 
 ID_UN 		= $(shell id -un)
 SRC_PATH 	= srcs/
@@ -67,6 +67,9 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 INC = $(addprefix -I, $(INC_PATH))
 DPD = $(addprefix $(OBJ_PATH), $(SRC_NAME:.c=.d))
 
+release:
+	@make all -j CFLAGS:="-Ofast"
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -74,6 +77,7 @@ $(NAME): $(OBJ)
 	@printf "$(CYAN)[WAIT]$(WHITE) Compiling into %-50s\r" $(NAME)
 	@$(CC) $(CFLAGS) $(OBJ) $(FRAMEWORK) -o $(NAME) -L $(LIBFT) -lft $(LSDL2) $(INC) $(ISDL2) 
 	@printf "$(GREEN)[OK]$(WHITE) %s has been well compiled\n" $(NAME)
+	@echo $(NAME) > .gitignore
 
 $(OBJ) : | $(OBJ_PATH)
 
@@ -83,6 +87,9 @@ $(OBJ_PATH) :
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c Makefile
 	@printf "$(CYAN)[WAIT]$(WHITE) Compiling into .o %-50s\r" $@
 	@$(CC) $(CFLAGS) $(INC) $(ISDL2) -o $@ -c $<
+
+debug:
+	@make all -j CFLAGS:="-DDEBUG -g"
 
 clean:
 	@make -C $(LIBFT) clean
@@ -94,7 +101,9 @@ fclean: clean
 	@rm -f $(NAME)
 	@printf "$(GREEN)[OK]$(WHITE) Fclean done\n"
 
-re: fclean all
+re:
+	@make fclean
+	@make all
 
 .PHONY: all re clean fclean
 -include $(DPD)
