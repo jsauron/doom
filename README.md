@@ -34,5 +34,4 @@ Bloc 7 : Poster</br>
 
 ## Author
 Jeanne Sauron
-jfortin
-Hben-hyah
+
